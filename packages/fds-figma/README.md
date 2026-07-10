@@ -1,5 +1,9 @@
 # flexa-fds-figma
 
+[![npm](https://img.shields.io/npm/v/flexa-fds-figma.svg)](https://www.npmjs.com/package/flexa-fds-figma)
+[![downloads](https://img.shields.io/npm/dm/flexa-fds-figma.svg)](https://www.npmjs.com/package/flexa-fds-figma)
+[![license](https://img.shields.io/npm/l/flexa-fds-figma.svg)](LICENSE)
+
 Export the [Flexa Design System](../fds) token registry to **Tokens Studio**
 (the _Figma Tokens_ / Tokens Studio for Figma plugin) JSON — so designers can
 import the design system into Figma and work from the same tokens as code.

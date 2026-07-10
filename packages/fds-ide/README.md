@@ -1,5 +1,9 @@
 # flexa-fds-ide
 
+[![npm](https://img.shields.io/npm/v/flexa-fds-ide.svg)](https://www.npmjs.com/package/flexa-fds-ide)
+[![downloads](https://img.shields.io/npm/dm/flexa-fds-ide.svg)](https://www.npmjs.com/package/flexa-fds-ide)
+[![license](https://img.shields.io/npm/l/flexa-fds-ide.svg)](LICENSE)
+
 Editor/IDE support core for the [Flexa Design System](../fds) tokens — the pure
 functions an editor extension (or your terminal) calls to write token-first
 values with confidence: **completions** for a partial token id, **diagnostics**

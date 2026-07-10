@@ -1,5 +1,9 @@
 # flexa-fds-export
 
+[![npm](https://img.shields.io/npm/v/flexa-fds-export.svg)](https://www.npmjs.com/package/flexa-fds-export)
+[![downloads](https://img.shields.io/npm/dm/flexa-fds-export.svg)](https://www.npmjs.com/package/flexa-fds-export)
+[![license](https://img.shields.io/npm/l/flexa-fds-export.svg)](LICENSE)
+
 Export the [Flexa Design System](../fds) token registry with every alias
 **resolved to a concrete literal** — ready for Style Dictionary, Tailwind, native
 mobile themes, or any JSON-driven build pipeline.

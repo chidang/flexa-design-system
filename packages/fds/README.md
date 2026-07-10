@@ -1,10 +1,14 @@
 # Flexa Design System (FDS)
 
+[![npm](https://img.shields.io/npm/v/flexa-design-system.svg)](https://www.npmjs.com/package/flexa-design-system)
+[![downloads](https://img.shields.io/npm/dm/flexa-design-system.svg)](https://www.npmjs.com/package/flexa-design-system)
+[![minzipped](https://img.shields.io/bundlephobia/minzip/flexa-design-system.svg)](https://bundlephobia.com/package/flexa-design-system)
+[![license](https://img.shields.io/npm/l/flexa-design-system.svg)](./LICENSE)
+
 A **zero-runtime, WCAG-gated design token system**. FDS is the design foundation of
-[Flexa Builder](https://github.com/chidang/flexa-builder), packaged so any project —
-with or without Flexa — can use it: pure data (a DTCG token source) plus pure
-functions (theme emission, token resolution, contrast checking). No framework,
-no runtime, no dependencies.
+Flexa Builder, packaged so any project — with or without Flexa — can use it: pure
+data (a DTCG token source) plus pure functions (theme emission, token resolution,
+contrast checking). No framework, no runtime, no dependencies.
 
 FDS is **not** a utility-class framework (Tailwind) and **not** a component source
 library (shadcn). Its closest relatives are Radix Colors + Open Props + Style

@@ -1,5 +1,9 @@
 # flexa-fds-lint
 
+[![npm](https://img.shields.io/npm/v/flexa-fds-lint.svg)](https://www.npmjs.com/package/flexa-fds-lint)
+[![downloads](https://img.shields.io/npm/dm/flexa-fds-lint.svg)](https://www.npmjs.com/package/flexa-fds-lint)
+[![license](https://img.shields.io/npm/l/flexa-fds-lint.svg)](LICENSE)
+
 Off-system token linter for the [Flexa Design System](../fds). Scan any codebase
 for `--fx-*` custom-property references and prove every one is a real registry
 token — or find the drift.

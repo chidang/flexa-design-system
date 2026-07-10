@@ -14,7 +14,12 @@
  * this file is what lets the engines stay frozen.
  */
 
-import rawTokens from './fds.tokens.json';
+// The DTCG source lives in fds.tokens.json but is imported here as an inlined JS
+// module (generated from that JSON by scripts/gen-tokens.ts) so the emitted ESM
+// carries NO runtime JSON import — no `with { type: 'json' }` attribute needed,
+// which keeps the package importable in raw Node ESM, every bundler, and the
+// browser alike. The two stay byte-in-sync via tests/tokens-generated.spec.ts.
+import { rawTokens } from './tokens.generated.js';
 
 /** DTCG `$type` values used by FDS. Composite types carry an object `$value`. */
 export type TokenType =
@@ -250,7 +255,7 @@ export const TOKEN_IDS: readonly string[] = REGISTRY.entries.map((e) => e.id);
  * neutrals/brand to WCAG-AAA (7:1). Additive behaviour + one new export, NO token
  * id changed — every 2.x pack still loads.
  */
-export const FDS_VERSION = '2.8.0';
+export const FDS_VERSION = '2.8.1';
 
 /** True when `id` is a known token. Basis of the AI/CLI gate (Slice 7). */
 export function hasToken(id: string): boolean {
