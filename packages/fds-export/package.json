@@ -1,0 +1,55 @@
+{
+  "name": "flexa-fds-export",
+  "version": "0.1.0",
+  "description": "Resolved token export for Flexa Design System — turn the FDS registry into Style Dictionary source, flat CSS-variable maps, or plain JSON for any build pipeline.",
+  "license": "MIT",
+  "author": "chidang",
+  "homepage": "https://github.com/chidang/flexa-design-system/tree/main/packages/fds-export",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chidang/flexa-design-system.git",
+    "directory": "packages/fds-export"
+  },
+  "keywords": [
+    "design-tokens",
+    "style-dictionary",
+    "css-variables",
+    "export",
+    "flexa"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "bin": {
+    "fds-export": "./bin/fds-export.js"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "bin": {
+      "fds-export": "./dist/cli.js"
+    },
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "flexa-design-system": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  }
+}

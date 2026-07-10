@@ -1,0 +1,56 @@
+{
+  "name": "flexa-fds-figma",
+  "version": "0.1.0",
+  "description": "Export the Flexa Design System token registry to Tokens Studio (Figma Tokens) JSON, so designers can import the design system into Figma and stay in sync.",
+  "license": "MIT",
+  "author": "chidang",
+  "homepage": "https://github.com/chidang/flexa-design-system/tree/main/packages/fds-figma",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chidang/flexa-design-system.git",
+    "directory": "packages/fds-figma"
+  },
+  "keywords": [
+    "design-tokens",
+    "figma",
+    "tokens-studio",
+    "figma-tokens",
+    "flexa"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "bin": {
+    "fds-figma": "./bin/fds-figma.js"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "bin": {
+      "fds-figma": "./dist/cli.js"
+    },
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "flexa-fds-export": "workspace:*",
+    "flexa-design-system": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  }
+}

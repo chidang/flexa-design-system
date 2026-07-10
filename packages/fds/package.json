@@ -1,0 +1,57 @@
+{
+  "name": "flexa-design-system",
+  "version": "2.8.0",
+  "description": "Flexa Design System (FDS) — a zero-runtime, WCAG-gated design token system: DTCG token source, 3-tier token contract (ref → semantic → component), theme model with light/dark modes, contrast gate, and a pure token->var() CSS pipeline. Pure data + pure functions; no dependencies.",
+  "license": "MIT",
+  "author": "chidang",
+  "homepage": "https://github.com/chidang/flexa-design-system/tree/main/packages/fds",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chidang/flexa-design-system.git",
+    "directory": "packages/fds"
+  },
+  "keywords": [
+    "design-system",
+    "design-tokens",
+    "dtcg",
+    "css-variables",
+    "theme",
+    "dark-mode",
+    "wcag",
+    "contrast",
+    "zero-runtime",
+    "flexa"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./fds.tokens.json": "./src/fds.tokens.json",
+    "./theme.css": "./dist/theme.css",
+    "./base-typography.css": "./dist/base-typography.css"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "./fds.tokens.json": "./src/fds.tokens.json",
+      "./theme.css": "./dist/theme.css",
+      "./base-typography.css": "./dist/base-typography.css"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && tsx scripts/build-css.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  }
+}

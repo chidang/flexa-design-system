@@ -1,0 +1,57 @@
+{
+  "name": "flexa-fds-ide",
+  "version": "0.1.0",
+  "description": "Editor/IDE support core for the Flexa Design System tokens — completions, off-system diagnostics and hover facts an extension can call, plus a terminal CLI to look tokens up.",
+  "license": "MIT",
+  "author": "chidang",
+  "homepage": "https://github.com/chidang/flexa-design-system/tree/main/packages/fds-ide",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chidang/flexa-design-system.git",
+    "directory": "packages/fds-ide"
+  },
+  "keywords": [
+    "design-tokens",
+    "ide",
+    "editor",
+    "completion",
+    "diagnostics",
+    "flexa"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "bin": {
+    "fds-ide": "./bin/fds-ide.js"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "bin": {
+      "fds-ide": "./dist/cli.js"
+    },
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "flexa-fds-export": "workspace:*",
+    "flexa-design-system": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  }
+}

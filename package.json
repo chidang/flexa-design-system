@@ -1,0 +1,16 @@
+{
+  "name": "flexa-design-system-workspace",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.13.1",
+  "scripts": {
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "vitest run",
+    "build": "pnpm -r --if-present build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.1.9"
+  }
+}

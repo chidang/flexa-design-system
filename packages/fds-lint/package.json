@@ -1,0 +1,55 @@
+{
+  "name": "flexa-fds-lint",
+  "version": "0.1.0",
+  "description": "Off-system token linter for Flexa Design System — scan any codebase's --fx-* references against the FDS registry.",
+  "license": "MIT",
+  "author": "chidang",
+  "homepage": "https://github.com/chidang/flexa-design-system/tree/main/packages/fds-lint",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chidang/flexa-design-system.git",
+    "directory": "packages/fds-lint"
+  },
+  "keywords": [
+    "design-tokens",
+    "lint",
+    "css-variables",
+    "off-system",
+    "flexa"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "bin": {
+    "fds-lint": "./bin/fds-lint.js"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "bin": {
+      "fds-lint": "./dist/cli.js"
+    },
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "flexa-design-system": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  }
+}
