@@ -1,0 +1,44 @@
+{
+  "title": "Accessibility",
+  "description": "FDS proves accessibility on four standards, not one: WCAG 2 text and non-text contrast, the APCA (WCAG 3 candidate) perceptual method, and a colour-vision-deficiency axis. Every number on this page is measured live from the default theme by the same gates CI runs.",
+  "intro": "Contrast is a gate, never advice. A theme that fails any of these standards fails the build. This page runs the design system's own accessibility engine over the default theme at build time — so what you read here is exactly what `flexa validate`, the Design Studio and CI see.",
+  "standards": {
+    "title": "The standards the engine gates on",
+    "blurb": "Each standard answers a question the others cannot. Adding one never loosens another (PR-4): more gates, not weaker ones. The minimums below are read from the package constants, so they cannot drift from the code.",
+    "items": [
+      {
+        "name": "WCAG 2 — text contrast",
+        "spec": "§1.4.3",
+        "blurb": "The classic 1–21 luminance ratio for readable glyphs. Every guaranteed text pair clears its floor in both schemes (see the contrast matrix on the Tokens page)."
+      },
+      {
+        "name": "WCAG 2 — non-text contrast",
+        "spec": "§1.4.11",
+        "blurb": "The focus ring and every solid UI fill must stand out from the page even though they carry no text. A hairline border is exempt (it reads like subtle text, not a component)."
+      },
+      {
+        "name": "APCA — perceptual lightness contrast",
+        "spec": "WCAG 3 candidate",
+        "blurb": "A signed Lc (≈ −108…+106) that weighs bright fills more harshly than WCAG 2. Added alongside the ratio, never in place of it. Body text needs Lc ≥ its floor; UI-label text on a fill needs a lower one."
+      },
+      {
+        "name": "Colour-vision deficiency",
+        "spec": "Machado 2009",
+        "blurb": "A contrast ratio cannot see two hues collapsing into one colour for a red-green or blue-yellow viewer. The brand primary and secondary are simulated for each deficiency and must stay clearly apart by CIE76 ΔE."
+      }
+    ]
+  },
+  "diagnostics": {
+    "title": "Live diagnostics — the default theme",
+    "clearBlurb": "The default theme clears every standard in every scheme. Nothing to report — which is the point of gating.",
+    "findingsBlurb": "The engine normalises all four gates into one actionable list: what failed, in which scheme, by how much (in that standard's own unit), and the direction of the fix. These are the honest findings for the shipped default theme — surfaced here rather than hidden, and tracked as a design decision."
+  },
+  "cvd": {
+    "title": "Colour-vision-deficiency simulation",
+    "blurb": "The brand primary and secondary as they appear to viewers with each deficiency (Machado severity-1.0 matrices, the same Chrome DevTools uses). The two roles must read as clearly different colours — separated by lightness, not hue, because a hue rotation alone is invisible to a dichromat."
+  },
+  "highContrast": {
+    "title": "High-contrast mode",
+    "blurb": "When a viewer asks for more contrast, the theme answers. `emitTheme` auto-applies a high-contrast override under `@media (prefers-contrast: more)` — scoped to the light scheme so a dark viewer keeps dark — re-pointing the neutral and brand roles up to WCAG AAA (7:1). It is also available explicitly as the `hc` scheme."
+  }
+}

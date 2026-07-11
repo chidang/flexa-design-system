@@ -1,0 +1,19 @@
+{
+  "slug": "style-pipeline",
+  "title": "The style pipeline & recipes",
+  "description": "How token ids inside a style spec become var() strings, and how the data-only recipe layer expresses variants without a runtime.",
+  "order": 5,
+  "blocks": [
+    { "type": "p", "text": "FDS keeps CSS compilers token-agnostic: authors write bare token ids as values, and a resolution pass rewrites them into `var()` strings before any CSS is generated. The compiler never learns what a token is." },
+    { "type": "code", "lang": "ts", "code": "import { resolveStyleTokens, hasToken } from 'flexa-design-system';\n\nresolveStyleTokens(\n  {\n    '.btn': {\n      background: 'color.primary',\n      padding: 'space.3 space.6',   // multi-value works too\n      'border-radius': 'c.button.radius',\n    },\n  },\n  hasToken,\n);\n// → { '.btn': { background: 'var(--fx-color-primary)', … } }" },
+    { "type": "p", "text": "Values that aren't token ids (`#fff`, `1.5rem`, `url(img.png)`) pass through untouched. The gate for typos is separate:" },
+    { "type": "code", "lang": "ts", "code": "import { findUnknownStyleTokens } from 'flexa-design-system';\n\nfindUnknownStyleTokens({ '.x': { color: 'color.primry' } });\n// → ['.x.color: color.primry'] — reserved namespace, unknown token → reject" },
+    { "type": "p", "text": "This is the machine gate that makes the system safe for generated styles: an AI (or a marketplace vendor) can only reference tokens that exist. Off-system ids are rejected at validate time, not discovered in production." },
+    { "type": "h2", "text": "Recipes: variants as data" },
+    { "type": "p", "text": "A recipe is a data-only variant model (think CVA/vanilla-extract, minus the runtime): a `base` style fragment, per-option `variants`, optional `compound` fragments for option combinations, and `default` selections. A pure function merges the fragments for a node's chosen props into one style spec, which then flows through the same token resolution above." },
+    { "type": "code", "lang": "json", "code": "{\n  \"base\":     { \".btn\": { \"border-radius\": \"c.button.radius\" } },\n  \"variants\": {\n    \"tone\": {\n      \"primary\": { \".btn\": { \"background\": \"color.primary\" } },\n      \"danger\":  { \".btn\": { \"background\": \"color.danger\" } }\n    },\n    \"kind\": {\n      \"solid\":   {},\n      \"outline\": { \".btn\": { \"background\": \"transparent\" } }\n    }\n  },\n  \"compound\": [{\n    \"when\":  { \"kind\": \"outline\", \"tone\": \"danger\" },\n    \"style\": { \".btn\": { \"color\": \"color.danger\" } }\n  }],\n  \"default\": { \"tone\": \"primary\", \"kind\": \"solid\" }\n}" },
+    { "type": "h2", "text": "The layering model" },
+    { "type": "p", "text": "In Flexa Builder the final CSS for a node is a deterministic cascade of specs, each resolved through the same pipeline: manifest style < recipe < global component styles < per-node overrides. Every layer speaks tokens, so a theme swap restyles all four at once." },
+    { "type": "note", "text": "There are deliberately NO utility classes and no free-form CSS surface for generators — the token vocabulary plus recipes is the whole authoring surface. That constraint is what keeps output auditable and re-themeable." }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "slug": "versioning-packs",
+  "title": "Versioning & distribution packs",
+  "description": "The FDS_VERSION semver contract, and how themes/brands travel between sites as validated pack files.",
+  "order": 7,
+  "blocks": [
+    { "type": "p", "text": "The npm package version IS the token-contract version: `FDS_VERSION`. That makes compatibility checkable by machines, which matters once themes and packs are shared between sites, vendors and AI generators." },
+    { "type": "h2", "text": "Semver rules" },
+    { "type": "list", "items": [
+      "Adding a token = minor bump. A 2.0 consumer keeps working on a 2.1 host (it just doesn't use the new tokens).",
+      "Renaming or removing a semantic token = major bump. Ids are public API — components and packs reference them by name.",
+      "A pack declaring `fdsVersion: 2.x` is compatible with any host whose major matches and whose version is >= the pack's."
+    ] },
+    { "type": "code", "lang": "ts", "code": "import { FDS_VERSION } from 'flexa-design-system';\n// '2.1.0' — 2.1 added the color.secondary family (additive → minor)" },
+    { "type": "h2", "text": "Packs: design as a portable file" },
+    { "type": "p", "text": "In the Flexa ecosystem a site's look travels as a JSON pack: a theme (token document), optionally a `Brand` and per-component style specs. Because everything is data referencing the token vocabulary, a pack can be validated completely before it touches a site:" },
+    { "type": "list", "items": [
+      "envelope check — vendor name, kind, `fdsVersion` semver compatibility;",
+      "on-system check — every CSS variable and token id the pack references must exist in the registry (`hasToken` / `findUnknownStyleTokens`);",
+      "contrast check — `checkThemeContrast` runs on the pack's theme, so an inaccessible pack is flagged before install."
+    ] },
+    { "type": "p", "text": "A pack that fails any gate is rejected whole — there is no partial install and no way to smuggle arbitrary CSS through a pack. This is the same gate AI-generated design passes through: the model proposes a pack, the validator disposes." },
+    { "type": "h2", "text": "Consuming the DTCG source directly" },
+    { "type": "p", "text": "If you have your own pipeline (Style Dictionary, Terrazzo, custom codegen), skip the JS API and consume the source of truth:" },
+    { "type": "code", "lang": "ts", "code": "import tokens from 'flexa-design-system/fds.tokens.json';\n// W3C DTCG format — $type/$value, {alias} references, 3 tiers" },
+    { "type": "note", "text": "Every TS constant, CSS artifact and the PHP mirror inside Flexa Builder is generated from this one file — outputs never drift from the source, and neither will yours." }
+  ]
+}

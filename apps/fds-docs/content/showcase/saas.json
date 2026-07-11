@@ -1,0 +1,238 @@
+{
+  "brand": "◆ Nimbus",
+  "nav": ["Home", "Features", "Workflow", "Integrations", "Pricing", "Resources"],
+  "signIn": "Sign in",
+  "getStarted": "Get started",
+  "hero": {
+    "badgeTag": "NEW",
+    "badgeText": "Ship together, without the chaos",
+    "titleA": "One Connected",
+    "titleHi": "Workspace",
+    "titleB": "for Fast-Moving Teams",
+    "sub": "Give your team a single home to plan projects, track progress, and hit every deadline — no more juggling a dozen disconnected apps.",
+    "ctaPrimary": "Start free trial",
+    "ctaSecondary": "Watch the demo ›",
+    "panelLabel": "This week",
+    "panelRows": [
+      { "label": "Redesign onboarding", "value": "82%", "done": true },
+      { "label": "Draft launch brief", "value": "55%" },
+      { "label": "User interviews", "value": "40%" },
+      { "label": "Sprint planning", "value": "Done", "done": true }
+    ],
+    "panelStats": [
+      { "value": "96%", "label": "On track" },
+      { "value": "18h", "label": "Saved" },
+      { "value": "24", "label": "Active" }
+    ]
+  },
+  "trusted": {
+    "label": "Relied on by more than 40,000 builders, operators, and founders",
+    "logos": ["Loopwork", "Cadence", "Northline", "Beacon", "Verta"]
+  },
+  "features": {
+    "eyebrow": "Features",
+    "title": "The Foundation for High-Output Teams",
+    "sub": "Everything you need to plan, execute, and measure your work lives in one calm, connected place.",
+    "items": [
+      {
+        "icon": "📋",
+        "title": "Clear task management",
+        "text": "Assign owners, set priorities, and follow every task from idea to done with live updates and flexible boards."
+      },
+      {
+        "icon": "📈",
+        "title": "Insightful reporting",
+        "text": "See how work is moving with automatic dashboards on completion, velocity, and delivery timelines."
+      },
+      {
+        "icon": "👥",
+        "title": "Real-time collaboration",
+        "text": "Comment, share files, and co-edit alongside your teammates — from anywhere, on any device."
+      },
+      {
+        "icon": "⏱️",
+        "title": "Built-in time tracking",
+        "text": "Log hours as you go with lightweight timers, so billing and capacity planning stay effortless."
+      },
+      {
+        "icon": "🔀",
+        "title": "Custom workflows",
+        "text": "Build the exact stages your team follows and automate the busywork between each handoff."
+      },
+      {
+        "icon": "🔒",
+        "title": "Secure by design",
+        "text": "Enterprise-grade encryption, SSO, and granular permissions that scale as your company grows."
+      }
+    ]
+  },
+  "workflow": {
+    "eyebrow": "How it works",
+    "title": "Up and Running in Four Steps",
+    "sub": "Nimbus fits the way your team already works — set it up in an afternoon and feel the difference the same day.",
+    "steps": [
+      { "num": "1", "title": "Create a space", "text": "Spin up a workspace and invite your team with a single shareable link." },
+      { "num": "2", "title": "Map your work", "text": "Import projects or start fresh with a template tuned to your process." },
+      { "num": "3", "title": "Assign and track", "text": "Hand off tasks, set due dates, and watch progress update in real time." },
+      { "num": "4", "title": "Measure and improve", "text": "Review reports each week and refine the workflow with what you learn." }
+    ]
+  },
+  "splits": {
+    "eyebrow": "Deep dive",
+    "title": "Built for the Way You Actually Work",
+    "sub": "Two of the tools teams reach for every single day, designed to stay out of your way.",
+    "rows": [
+      {
+        "art": "📊 Live dashboard",
+        "title": "Turn activity into answers",
+        "text": "Every task, comment, and update rolls up into dashboards that tell you exactly where a project stands — no spreadsheet wrangling required.",
+        "points": [
+          "Real-time progress across every project",
+          "Shareable reports for stakeholders",
+          "Forecasts that flag risk before it lands"
+        ]
+      },
+      {
+        "art": "🗂️ Team board",
+        "title": "Keep everyone in sync",
+        "text": "A shared board gives your whole team one clear view of priorities, owners, and deadlines — so nothing slips through the cracks between tools.",
+        "points": [
+          "Drag-and-drop planning in seconds",
+          "Automatic reminders for what's due",
+          "Threaded discussion right on each task"
+        ]
+      }
+    ]
+  },
+  "metrics": {
+    "title": "Numbers Our Customers See",
+    "sub": "Teams that move to Nimbus consolidate their tools and get hours back every week.",
+    "items": [
+      { "value": "40k+", "label": "Teams onboarded" },
+      { "value": "99.9%", "label": "Uptime SLA" },
+      { "value": "3.5x", "label": "Faster delivery" },
+      { "value": "18h", "label": "Saved per week" },
+      { "value": "120+", "label": "Integrations" },
+      { "value": "4.9/5", "label": "Average rating" }
+    ]
+  },
+  "integrations": {
+    "eyebrow": "Integrations",
+    "title": "Connect the Tools You Already Love",
+    "sub": "Nimbus plugs into your stack in a click, so your data and conversations stay together.",
+    "items": [
+      { "icon": "💬", "name": "Chat" },
+      { "icon": "📅", "name": "Calendar" },
+      { "icon": "📁", "name": "Drive" },
+      { "icon": "📨", "name": "Mail" },
+      { "icon": "🔗", "name": "Webhooks" },
+      { "icon": "🎨", "name": "Design" },
+      { "icon": "🧑‍💻", "name": "Code" },
+      { "icon": "📞", "name": "Video" },
+      { "icon": "📊", "name": "Analytics" },
+      { "icon": "🛎️", "name": "Support" },
+      { "icon": "💳", "name": "Billing" },
+      { "icon": "⚙️", "name": "Automation" }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "title": "Simple Plans. Serious Value.",
+    "sub": "Start free and upgrade only when your team is ready. Every plan includes a 14-day trial.",
+    "tiers": [
+      {
+        "name": "Starter",
+        "price": "$12",
+        "per": "/month",
+        "note": "Great for individuals and small teams finding their rhythm.",
+        "features": [
+          "Up to 5 members",
+          "Core project boards",
+          "5 GB storage",
+          "Email support",
+          "Basic reports"
+        ],
+        "cta": "Get started"
+      },
+      {
+        "name": "Professional",
+        "price": "$29",
+        "per": "/month",
+        "note": "The sweet spot for growing teams that need more power.",
+        "features": [
+          "Up to 20 members",
+          "Advanced project boards",
+          "50 GB storage",
+          "Priority support",
+          "Advanced reports",
+          "Custom workflows"
+        ],
+        "cta": "Get started",
+        "featured": true,
+        "badge": "Most popular"
+      },
+      {
+        "name": "Enterprise",
+        "price": "$99",
+        "per": "/month",
+        "note": "Advanced controls and support for large organizations.",
+        "features": [
+          "Unlimited members",
+          "Custom integrations",
+          "200 GB storage",
+          "24/7 dedicated support",
+          "Advanced security",
+          "Custom reporting"
+        ],
+        "cta": "Contact sales"
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "title": "Trusted by Teams Everywhere",
+    "sub": "Here's what people say after moving their day-to-day work into Nimbus.",
+    "items": [
+      {
+        "name": "James Lee",
+        "role": "CEO at SoftHub",
+        "quote": "Nimbus pulled all our scattered tools into one place. Our team is more focused and shipping noticeably faster."
+      },
+      {
+        "name": "Sarah Johnson",
+        "role": "Head of Marketing",
+        "quote": "The live reports and shared boards mean we make sharper calls, sooner. It has become the hub of how we operate."
+      },
+      {
+        "name": "Thomas Nguyen",
+        "role": "Product Manager",
+        "quote": "Everything from planning to delivery now lives in one view. It genuinely changed how our team gets things done."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Start free and see the difference this week",
+    "sub": "No credit card required. Bring your team on board in minutes.",
+    "button": "Start free"
+  },
+  "footer": {
+    "about": "Nimbus is the connected workspace that helps modern teams plan, collaborate, and deliver — all in one calm place.",
+    "socials": ["🐦", "in", "f", "▶"],
+    "columns": [
+      {
+        "title": "Product",
+        "links": ["Features", "Workflow", "Integrations", "Pricing", "Changelog"]
+      },
+      {
+        "title": "Company",
+        "links": ["About us", "Careers", "Customers", "Blog", "Contact"]
+      },
+      {
+        "title": "Resources",
+        "links": ["Help center", "Documentation", "API", "Community", "Status"]
+      }
+    ],
+    "copyright": "© 2025 ◆ Nimbus. All rights reserved.",
+    "tagline": "Plan · Collaborate · Deliver"
+  }
+}

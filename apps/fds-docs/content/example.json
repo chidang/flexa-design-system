@@ -1,0 +1,27 @@
+{
+  "title": "Built with tokens",
+  "description": "A real analytics dashboard styled entirely from FDS tokens — no utility classes, no copied component CSS.",
+  "intro": "This is the home page's claim made concrete: a working dashboard whose every colour, spacing step, radius and shadow is an FDS token resolved through --fx-* custom properties. Type comes from FDS base typography. There is not one hand-picked hex or pixel gap.",
+  "appName": "Acme Analytics",
+  "appTagline": "Last 30 days",
+  "exportLabel": "Export",
+  "stats": [
+    { "label": "Revenue", "value": "$48,120", "delta": "▲ 12.4%", "trend": "up" },
+    { "label": "Active users", "value": "3,204", "delta": "▲ 4.1%", "trend": "up" },
+    { "label": "Churn", "value": "1.8%", "delta": "▼ 0.3%", "trend": "down" },
+    { "label": "Avg. order", "value": "$62.40", "delta": "▲ 2.2%", "trend": "up" }
+  ],
+  "panelTitle": "Recent orders",
+  "columns": ["Customer", "Status", "Amount", "When"],
+  "statusLabels": { "success": "Paid", "warning": "Pending", "info": "Refunded" },
+  "rows": [
+    { "name": "Nadia Okafor", "status": "success", "amount": "$180.00", "when": "2m ago" },
+    { "name": "Liam Turner", "status": "warning", "amount": "$62.40", "when": "18m ago" },
+    { "name": "Sofia Marín", "status": "success", "amount": "$240.00", "when": "1h ago" },
+    { "name": "Kenji Watanabe", "status": "info", "amount": "$54.00", "when": "3h ago" },
+    { "name": "Amara Singh", "status": "success", "amount": "$96.00", "when": "5h ago" }
+  ],
+  "proofTitle": "How this proves it",
+  "proofBlurb": "The dashboard's stylesheet is scanned at build time against the package registry — the same array of tokens the package exports. Every --fx-* reference is a real token; an off-system value would surface here as a failure, so this page cannot silently drift from the system.",
+  "tokenListTitle": "Every token on this page"
+}

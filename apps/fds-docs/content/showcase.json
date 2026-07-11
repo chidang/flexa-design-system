@@ -1,0 +1,268 @@
+{
+  "title": "Showcase",
+  "description": "Real marketing and app screens — a full travel landing page, pricing, a hero, a sign-in — styled entirely from FDS tokens, no utility classes and no copied component CSS.",
+  "intro": "The Example dashboard proves you can build a working app screen from tokens alone. This gallery widens the claim to the surfaces people judge a design system by first: a complete, pixel-faithful marketing homepage; a pricing table; a landing hero; an auth card. Each screen's stylesheet is scanned at build time, so every colour, space, radius and shadow is a real --fx-* token — none off-system.",
+  "proofTitle": "Every example is scanned",
+  "proofBlurb": "Like the dashboard, each screen's stylesheet is checked against the package registry at build time — the same array of tokens the package exports. An off-system value would surface as a failure on the page rather than drift silently, so the gallery cannot fall out of sync with the system it advertises.",
+  "tokenListTitle": "Tokens on this screen",
+  "items": [
+    {
+      "slug": "tour-booking",
+      "title": "Travel landing page",
+      "blurb": "A complete tour-booking homepage — hero, search, destinations, deals, packages, reviews, footer — rebuilt pixel-for-pixel from tokens. Recolour the whole site live from three brand inputs."
+    },
+    {
+      "slug": "restaurant",
+      "title": "Restaurant landing page",
+      "blurb": "A full restaurant homepage — hero, menu, chef, gallery, reservation, reviews, footer — built entirely from tokens. Reskin the whole brand live from three inputs."
+    },
+    {
+      "slug": "real-estate",
+      "title": "Real estate landing page",
+      "blurb": "A complete property portal — search hero, featured listings, agents, neighbourhoods, CTA, footer — every card and filter drawn from tokens. Recolour the whole brand live."
+    },
+    {
+      "slug": "saas",
+      "title": "SaaS landing page",
+      "blurb": "A modern product homepage — hero, logos, features, workflow, pricing, testimonials, footer — token-built end to end. Change the brand and the whole page re-themes instantly."
+    },
+    {
+      "slug": "spa",
+      "title": "Spa & beauty landing page",
+      "blurb": "A warm spa homepage — hero, services, treatments, team, booking, testimonials, footer — proving FDS handles soft, elegant brands too. Live recolour from three inputs."
+    },
+    {
+      "slug": "pricing",
+      "title": "Pricing",
+      "blurb": "Three tiers, one highlighted — the highest-intent marketing surface, built from token fills, borders and radii."
+    },
+    {
+      "slug": "landing",
+      "title": "Landing hero",
+      "blurb": "A hero with headline, sub, two calls to action and a feature row — the page a first-time visitor lands on."
+    },
+    {
+      "slug": "sign-in",
+      "title": "Sign-in",
+      "blurb": "A centered auth card with real inputs, a focus ring and primary/secondary actions — the app's front door."
+    }
+  ],
+  "pricing": {
+    "heading": "Simple, transparent pricing",
+    "sub": "Every plan includes the full token system. Upgrade for scale.",
+    "tiers": [
+      {
+        "name": "Starter",
+        "amount": "$0",
+        "per": "/mo",
+        "features": ["1 project", "Community support", "Core token set", "MIT license"],
+        "cta": "Start free",
+        "featured": false
+      },
+      {
+        "name": "Team",
+        "amount": "$29",
+        "per": "/mo",
+        "badge": "Most popular",
+        "features": ["Unlimited projects", "Brand derivation", "Contrast gates in CI", "Priority support"],
+        "cta": "Choose Team",
+        "featured": true
+      },
+      {
+        "name": "Enterprise",
+        "amount": "Custom",
+        "per": "",
+        "features": ["SSO & audit log", "Private registry", "Dedicated support", "SLA"],
+        "cta": "Contact sales",
+        "featured": false
+      }
+    ]
+  },
+  "landing": {
+    "eyebrow": "Design tokens, done right",
+    "title": "Ship a consistent brand across every screen",
+    "sub": "One tiny brand derives a complete, contrast-checked theme. No utility classes to memorise, no component source to keep in sync — just tokens your whole stack can read.",
+    "primaryCta": "Get started",
+    "ghostCta": "Read the guides",
+    "features": [
+      {
+        "icon": "◆",
+        "title": "Derived, not configured",
+        "text": "Pick a brand colour; hover, active and on-colours derive automatically — always AA-safe."
+      },
+      {
+        "icon": "◈",
+        "title": "One dependency",
+        "text": "Zero runtime deps. A token registry, pure functions and CSS variables — nothing to bundle."
+      },
+      {
+        "icon": "❖",
+        "title": "Framework-free",
+        "text": "The output is --fx-* custom properties. Use them from React, Vue, WordPress or plain CSS."
+      }
+    ]
+  },
+  "signIn": {
+    "title": "Welcome back",
+    "sub": "Sign in to your workspace",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@company.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "submit": "Sign in",
+    "altLabel": "or",
+    "alt": "Continue with SSO",
+    "footPrompt": "New here?",
+    "footLink": "Create an account"
+  },
+  "tourBooking": {
+    "brand": "✈ Voyaro",
+    "nav": ["Home", "Tours", "Hotels", "Flights", "Activities", "Visa", "Contact"],
+    "lang": "🌐 English · USD",
+    "signIn": "Sign In",
+    "hero": {
+      "titleA": "Explore More,",
+      "titleHi": "Journey",
+      "titleB": " Further",
+      "sub": "Uncover remarkable destinations with members-only savings on flights, stays, and complete tour packages.",
+      "cta": "Start Exploring ›"
+    },
+    "search": {
+      "tabs": ["✈ Flights", "🏨 Hotels", "🗺️ Tours", "🎫 Activities", "📄 Visa"],
+      "trip": ["One Way", "Round Trip", "Multi City"],
+      "fields": [
+        { "label": "From", "value": "New York (NYC)" },
+        { "label": "To", "value": "Paris (PAR)" },
+        { "label": "Depart", "value": "24 May, 2025" },
+        { "label": "Return", "value": "31 May, 2025" },
+        { "label": "Passengers", "value": "1 Passenger" }
+      ],
+      "submit": "Search Flights"
+    },
+    "heroFeats": [
+      { "icon": "🏷️", "title": "Lowest Price Promise", "text": "Grab the best rates for every trip" },
+      { "icon": "🎧", "title": "Round-the-Clock Help", "text": "Our team is ready whenever you need" },
+      { "icon": "🔒", "title": "Safe & Simple Checkout", "text": "Reserve with confidence in minutes" },
+      { "icon": "🛡️", "title": "Loved by Millions", "text": "Join a community of happy explorers" }
+    ],
+    "destinations": {
+      "eyebrow": "Traveler Favorites",
+      "title": "Most-Loved Places on Earth",
+      "sub": "Handpicked spots our travelers adore. Where will your next journey begin?",
+      "items": [
+        { "name": "Bali", "country": "Indonesia" },
+        { "name": "Swiss Alps", "country": "Switzerland" },
+        { "name": "Santorini", "country": "Greece" },
+        { "name": "Dubai", "country": "UAE" },
+        { "name": "Kyoto", "country": "Japan" }
+      ],
+      "cta": "See Every Destination"
+    },
+    "tours": {
+      "eyebrow": "Browse by Vibe",
+      "title": "Find the Trip That Fits You",
+      "sub": "From calm escapes to bold adventures, there's a journey here for everyone.",
+      "items": [
+        { "icon": "🏖️", "title": "Beach Holidays", "text": "Unwind on the planet's finest shores." },
+        { "icon": "⛰️", "title": "Adventure", "text": "Adrenaline and discovery await." },
+        { "icon": "🏛️", "title": "Cultural Tours", "text": "Dive into history and heritage." },
+        { "icon": "👨‍👩‍👧", "title": "Family Friendly", "text": "Made for moments you'll treasure." },
+        { "icon": "💎", "title": "Luxury Escapes", "text": "Savor comfort and refined living." }
+      ],
+      "cta": "Browse Every Trip"
+    },
+    "deals": {
+      "eyebrow": "Limited-Time Deals",
+      "title": "Member Deals Made for You",
+      "sub": "Lock in our best travel prices and save big on your next getaway.",
+      "items": [
+        { "name": "Maldives Escape", "nights": "4 Days / 3 Nights", "price": "$499", "was": "$700", "save": "Save 30%" },
+        { "name": "Europe Delight", "nights": "6 Days / 5 Nights", "price": "$899", "was": "$1199", "save": "Save 25%" },
+        { "name": "Dubai Adventure", "nights": "5 Days / 4 Nights", "price": "$599", "was": "$749", "save": "Save 20%" }
+      ],
+      "cta": "Book Now"
+    },
+    "inbox": {
+      "titleA": "Get Members-Only Travel",
+      "titleB": "Deals in Your Inbox",
+      "sub": "Join our list and be first to hear about every offer.",
+      "placeholder": "Enter your email address",
+      "cta": "Subscribe",
+      "art": "🧳 ✈",
+      "stats": [
+        { "icon": "👥", "value": "500K+", "label": "Delighted Travelers" },
+        { "icon": "📍", "value": "150+", "label": "Destinations" },
+        { "icon": "🎧", "value": "24/7", "label": "Support" },
+        { "icon": "🛡️", "value": "100%", "label": "Secure Checkout" }
+      ]
+    },
+    "packages": {
+      "eyebrow": "Curated for You",
+      "title": "Top Travel Packages",
+      "sub": "Pick from our most-booked packages and make your trip one to remember.",
+      "items": [
+        { "price": "$699", "name": "Thailand Getaway", "nights": "5 Days / 4 Nights", "icons": "✈ Flights · 🏨 Hotel · 🗺️ Tours", "cta": "View Details" },
+        { "price": "$999", "name": "Canada Explorer", "nights": "7 Days / 6 Nights", "icons": "✈ Flights · 🏨 Hotel · 🗺️ Tours", "cta": "View Details" },
+        { "price": "$799", "name": "Singapore City Tour", "nights": "4 Days / 3 Nights", "icons": "✈ Flights · 🏨 Hotel · 🗺️ Tours", "cta": "View Details" }
+      ],
+      "impact": [
+        { "icon": "📈", "value": "10+ Years", "label": "in the business" },
+        { "icon": "🗓️", "value": "1M+", "label": "Trips Arranged" },
+        { "icon": "🧭", "value": "200+", "label": "Travel Advisors" },
+        { "icon": "🎧", "value": "24/7", "label": "Assistance" }
+      ]
+    },
+    "memorable": {
+      "eyebrow": "Why Book With Us",
+      "title": "We Make Every Trip Simple & Memorable",
+      "sub": "Our goal is to keep your travels smooth, affordable, and truly unforgettable.",
+      "feats": [
+        { "icon": "🏷️", "title": "Lowest Price Promise", "text": "Always the best rates." },
+        { "icon": "🏨", "title": "Handpicked Stays", "text": "Comfortable rooms worldwide." },
+        { "icon": "🔒", "title": "Safe & Simple Checkout", "text": "Your security comes first." },
+        { "icon": "🎯", "title": "Tailored Itineraries", "text": "Travel your way, every time." }
+      ],
+      "art": "Traveler"
+    },
+    "reviews": {
+      "eyebrow": "In Their Words",
+      "title": "Loved by Thousands",
+      "sub": "Real stories from travelers who saw the world with us.",
+      "items": [
+        { "name": "Sarah Johnson", "country": "United States", "quote": "Bali was incredible — every detail was handled and completely stress-free." },
+        { "name": "Michael Brown", "country": "Canada", "quote": "Fantastic service at fair prices. I'll absolutely book again." },
+        { "name": "Emma Davis", "country": "Australia", "quote": "Our family trip through Europe was unforgettable. Can't recommend it enough." }
+      ],
+      "cta": "See All Reviews"
+    },
+    "takeoff": {
+      "title": "Ready for Takeoff?",
+      "sub": "Let's turn your dream trip into reality today.",
+      "cta": "Plan Your Trip Now",
+      "art": "✈"
+    },
+    "blog": {
+      "eyebrow": "Tips & Stories",
+      "title": "Stay Inspired",
+      "sub": "The latest travel tips, guides, and stories from across the globe.",
+      "items": [
+        { "date": "May 18, 2025", "title": "10 Beaches Worth the Trip in 2025" },
+        { "date": "May 15, 2025", "title": "Smart Packing Tips for Any Journey" },
+        { "date": "May 12, 2025", "title": "Best Value Destinations for 2025" }
+      ],
+      "cta": "Read All Articles"
+    },
+    "footer": {
+      "about": "Your dependable partner for flights, stays, tours, and standout experiences across the globe.",
+      "socials": ["f", "𝕏", "◎", "in"],
+      "columns": [
+        { "title": "Company", "links": ["About Us", "Careers", "Press", "Blog"] },
+        { "title": "Support", "links": ["Help Center", "Contact Us", "FAQs", "Terms & Conditions"] },
+        { "title": "Services", "links": ["Flights", "Hotels", "Tours", "Visa"] }
+      ],
+      "newsletter": { "title": "Newsletter", "sub": "Sign up for members-only deals and updates.", "placeholder": "Enter your email" },
+      "copyright": "© 2025 Voyaro. All rights reserved.",
+      "pay": "VISA · Mastercard · PayPal"
+    }
+  }
+}

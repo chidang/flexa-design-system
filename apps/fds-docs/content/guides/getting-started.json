@@ -1,0 +1,29 @@
+{
+  "slug": "getting-started",
+  "title": "Getting started",
+  "description": "Install FDS, drop the theme stylesheet into any page, and style your first component with design tokens.",
+  "order": 1,
+  "blocks": [
+    { "type": "p", "text": "FDS ships as a single npm package: `flexa-design-system`. It contains a design-token source (DTCG JSON), pure TypeScript functions that turn tokens into CSS, and two pre-built stylesheets for projects that don't want a build step at all." },
+    { "type": "h2", "text": "Option A — just the CSS" },
+    { "type": "p", "text": "The fastest way to use FDS is the pre-built theme stylesheet. It defines every `--fx-*` custom property (light + dark + reduced-motion) and nothing else — no classes, no resets, no specificity fights." },
+    { "type": "code", "lang": "html", "code": "<link rel=\"stylesheet\" href=\"https://unpkg.com/flexa-design-system/dist/theme.css\">\n<link rel=\"stylesheet\" href=\"https://unpkg.com/flexa-design-system/dist/base-typography.css\">" },
+    { "type": "p", "text": "Then style anything with the semantic variables:" },
+    { "type": "code", "lang": "css", "code": ".card {\n  background: var(--fx-color-surface);\n  color: var(--fx-color-text);\n  padding: var(--fx-space-6);\n  border-radius: var(--fx-radius-lg);\n  box-shadow: var(--fx-shadow-md);\n}" },
+    { "type": "p", "text": "Dark mode is one attribute — set `data-fx-scheme=\"dark\"` on `<html>` (or let `prefers-color-scheme` do it automatically):" },
+    { "type": "code", "lang": "html", "code": "<html data-fx-scheme=\"dark\">" },
+    { "type": "h2", "text": "Option B — the JS API" },
+    { "type": "code", "lang": "sh", "code": "npm install flexa-design-system" },
+    { "type": "p", "text": "Everything is a pure function over the token registry — emit a theme stylesheet at build time, resolve token ids into `var()` strings, or gate a custom theme against the WCAG pairs:" },
+    { "type": "code", "lang": "ts", "code": "import {\n  defaultTheme, emitTheme, emitBaseTypography,\n  tokenIdToCssVar, hasToken, checkThemeContrast,\n} from 'flexa-design-system';\n\nconst css = emitTheme(defaultTheme());   // full :root stylesheet\ntokenIdToCssVar('color.on-primary');     // '--fx-color-on-primary'\ncheckThemeContrast(defaultTheme());      // [] — every pair passes AA" },
+    { "type": "h2", "text": "What's in the box" },
+    { "type": "table", "header": ["Export", "What it is"], "rows": [
+      ["`dist/theme.css`", "Every `--fx-*` variable: light, dark, `prefers-*` blocks"],
+      ["`dist/base-typography.css`", "h1–h6/body element rules driven by the variables"],
+      ["`fds.tokens.json`", "The DTCG token source — feed it to Style Dictionary etc."],
+      ["JS API", "`emitTheme`, `resolveStyleTokens`, `checkThemeContrast`, registry"]
+    ] },
+    { "type": "note", "text": "`base-typography.css` scopes its rules to `[data-fx-type=\"flexa/root\"]` — add that attribute to your content wrapper to opt in. This keeps FDS from restyling pages that only want the variables." },
+    { "type": "p", "text": "Next: read how the three token tiers fit together in the Token tiers guide, or browse every token on the Tokens page." }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "brand-derivation",
+  "title": "Brand derivation (applyBrand)",
+  "description": "Turn a handful of brand choices — one color, two fonts, a radius feel — into a complete, accessible theme with a single pure function.",
+  "order": 4,
+  "blocks": [
+    { "type": "p", "text": "Most projects don't design a token system — they have a logo color and a font. `applyBrand(theme, brand)` (shipped in `@flexa/core`, built on the FDS token model) derives everything else deterministically." },
+    { "type": "code", "lang": "ts", "code": "import { defaultTheme } from 'flexa-design-system';\nimport { applyBrand } from '@flexa/core';\n\nconst theme = applyBrand(defaultTheme(), {\n  primaryColor: '#0f766e',\n  headingFont: '\"Fraunces\", serif',\n  bodyFont: '\"Inter\", sans-serif',\n  radius: 'lg',\n});" },
+    { "type": "h2", "text": "What gets derived" },
+    { "type": "table", "header": ["Brand field", "Tokens re-pointed", "Derivation"], "rows": [
+      ["`primaryColor`", "`color.primary` + hover/active + `on-primary` + focus ring", "Hover/active darken toward black; `on-primary` picks white or black by max contrast"],
+      ["`secondaryColor`", "the `color.secondary` family", "Same derivation as primary"],
+      ["`headingFont` / `bodyFont`", "`font.family-heading` / `font.family-base`", "Verbatim stacks"],
+      ["`radius`", "the whole `radius.*` scale", "5 presets: none / sm / md / lg / xl"],
+      ["`fontScale`", "the whole `ref.font-size.*` ramp", "Modular scale from `base` × `ratio` (9 steps)"],
+      ["`density`", "the whole `ref.space.*` ramp", "Multiplier 0.8–1.2 (compact ↔ airy)"],
+      ["`containerWidth`", "`size.container-lg`", "Verbatim CSS length"]
+    ] },
+    { "type": "h2", "text": "Why a function and not a config file" },
+    { "type": "p", "text": "Because it's pure and total: same brand in, same theme out, on any runtime — build scripts, the browser (this site's playground runs it live), or a server. An empty brand returns the theme untouched, so it composes safely." },
+    { "type": "p", "text": "Derivation is also where accessibility lives: you can pick any primary, but `on-primary` is computed, and `checkThemeContrast` tells you immediately if your mid-tone choice can't carry readable text." },
+    { "type": "h2", "text": "Scales, not values" },
+    { "type": "p", "text": "Note that `fontScale` and `density` re-point primitive ramps, not individual tokens. Because every semantic size aliases into those ramps, one multiplier restyles the whole system consistently — there is no way to make `h3` bigger than `h2` by accident." },
+    { "type": "note", "text": "Try all of this live on the Playground page — brand controls on the left, the derived theme applied to sample UI on the right, contrast check inline." }
+  ]
+}
