@@ -1,0 +1,18 @@
+{
+  "slug": "wordpress-bridge",
+  "title": "WordPress theme.json bridge",
+  "description": "How FDS coexists with WordPress global styles: preset-aliased emission and a generated theme.json settings fragment.",
+  "order": 6,
+  "blocks": [
+    { "type": "p", "text": "WordPress block themes have their own variable system (`--wp--preset--*`) generated from `theme.json`. FDS doesn't fight it — the bridge makes FDS sit on top of it, so a WP admin changing a palette color updates FDS-styled content too." },
+    { "type": "h2", "text": "Preset-aliased emission" },
+    { "type": "p", "text": "`emitWpTheme(theme)` emits the same stylesheet as `emitTheme`, except primitive color/space values are wrapped: instead of a literal, each declaration becomes `var(--wp--preset--…, literal)` — WordPress preset first, FDS literal as fallback. On a site without matching presets nothing changes; on a block theme, WP's palette wins." },
+    { "type": "code", "lang": "ts", "code": "import { emitWpTheme, wpPresetVar } from 'flexa-design-system';\n\nwpPresetVar('color', 'fx-brand-600');\n// '--wp--preset--color--fx-brand-600'\n\nconst css = emitWpTheme(defaultTheme());\n// --fx-ref-brand-600: var(--wp--preset--color--fx-brand-600, #4f46e5);" },
+    { "type": "h2", "text": "The settings fragment" },
+    { "type": "p", "text": "`wpThemeJson()` generates the matching `theme.json` settings fragment — the palette and spacing entries whose slugs line up with the preset vars above. A WP plugin merges it via the `wp_theme_json_data_theme` filter; the presets then appear in the native editor UI." },
+    { "type": "code", "lang": "ts", "code": "import { wpThemeJson } from 'flexa-design-system';\n\nconst fragment = wpThemeJson();\n// { settings: { color: { palette: [{ slug: 'fx-brand-600', … }] }, … } }" },
+    { "type": "h2", "text": "Why only primitives" },
+    { "type": "p", "text": "Only the primitive tier is bridged. Semantic tokens keep aliasing FDS primitives, so the FDS contract (naming, tiers, contrast pairs) stays intact regardless of what WordPress does — the bridge swaps where raw values come from, not how the system is wired." },
+    { "type": "note", "text": "The bridge is pure data/string emission — this package never touches WordPress APIs. The enqueue/filter glue lives in the consuming plugin (Flexa Builder's WP adapter is the reference implementation)." }
+  ]
+}

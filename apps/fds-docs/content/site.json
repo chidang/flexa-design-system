@@ -1,0 +1,8 @@
+{
+  "name": "Flexa Design System",
+  "tagline": "A zero-runtime, WCAG-gated design token system",
+  "description": "FDS is a CSS-variables design token system: a DTCG token source plus pure functions for theme emission, brand derivation and contrast checking. No framework, no runtime, no dependencies.",
+  "repoUrl": "https://github.com/chidang/flexa-builder",
+  "npmUrl": "https://www.npmjs.com/package/flexa-design-system",
+  "packageName": "flexa-design-system"
+}

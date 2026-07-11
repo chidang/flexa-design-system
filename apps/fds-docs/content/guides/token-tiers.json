@@ -1,0 +1,25 @@
+{
+  "slug": "token-tiers",
+  "title": "The three token tiers",
+  "description": "Primitive, semantic and component tokens — why only one tier holds raw values, and the naming grammar that makes the system machine-checkable.",
+  "order": 2,
+  "blocks": [
+    { "type": "p", "text": "FDS organizes tokens into three tiers. The rule that makes re-theming cheap: raw values (hex colors, px sizes) exist ONLY in the primitive tier — everything above is an alias." },
+    { "type": "table", "header": ["Tier", "CSS prefix", "Example id", "Role"], "rows": [
+      ["Primitive (`ref`)", "`--fx-ref-*`", "`ref.brand.600`", "Raw scales — the only tier with literals"],
+      ["Semantic", "`--fx-*`", "`color.primary`, `space.4`", "Intent-named aliases — what you should use"],
+      ["Component", "`--fx-c-*`", "`c.button.radius`", "Narrow aliases for one component's knobs"]
+    ] },
+    { "type": "h2", "text": "Why aliases all the way up" },
+    { "type": "p", "text": "A theme (or a brand change) never edits a component: it re-points aliases. Dark mode re-points `color.bg` from `ref.neutral.0` to `ref.neutral.900`; a brand swap re-points `color.primary` to a new primitive. Every component that reads `var(--fx-color-primary)` updates for free." },
+    { "type": "p", "text": "Components read semantic tokens, never primitives. If a button hardcoded `ref.brand.600` it would survive a theme swap unchanged — which is exactly the bug this architecture prevents." },
+    { "type": "h2", "text": "Naming grammar" },
+    { "type": "p", "text": "Every token has a dot-path id whose segments are lowercase kebab-case, and a deterministic CSS variable: `color.on-primary` → `--fx-color-on-primary`. The mapping is pure (`tokenIdToCssVar`), so tooling never needs a lookup table." },
+    { "type": "code", "lang": "ts", "code": "import { tokenIdToCssVar, hasToken, tokenType, getToken } from 'flexa-design-system';\n\ntokenIdToCssVar('space.4');   // '--fx-space-4'\nhasToken('color.primary');    // true — the vocabulary gate\ntokenType('shadow.md');       // 'shadow' (DTCG $type)\ngetToken('color.primary');    // full registry entry (tier, refs, value)" },
+    { "type": "h2", "text": "The `on-X` convention" },
+    { "type": "p", "text": "Every filled color `X` ships a paired `on-X` for the text/icon that sits on it: `color.primary` / `color.on-primary`, `color.danger` / `color.on-danger`. These pairs are contrast-checked in CI (WCAG 2.2 AA) in both light and dark — see the contrast matrix on the Tokens page." },
+    { "type": "h2", "text": "Reserved namespaces" },
+    { "type": "p", "text": "The first segment of every token id (`color`, `space`, `radius`, `ref`, `c`, …) is a reserved namespace. `isTokenNamespace(segment)` is the discriminator validation tools use: a dot-path inside a reserved namespace that is NOT a known token is an off-system token (a typo or an unregistered custom id) and gets rejected, while `img.png` or `1.5px` are ordinary CSS literals and pass through untouched." },
+    { "type": "note", "text": "The full vocabulary is data: `TOKEN_IDS` (sorted list) and `FDS_TOKENS` (full entries) are exported for pickers, linters and AI gates." }
+  ]
+}

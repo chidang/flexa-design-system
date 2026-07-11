@@ -1,0 +1,26 @@
+{
+  "slug": "theming",
+  "title": "Themes & dark mode",
+  "description": "The Theme model: one base token set, per-scheme overrides, automatic prefers-color-scheme, and the WCAG contrast gate.",
+  "order": 3,
+  "blocks": [
+    { "type": "p", "text": "A `Theme` is data: a name, a base token set, and optional per-scheme override sets. `emitTheme(theme)` turns it into a deterministic stylesheet — the ONE place raw values ever appear in CSS." },
+    { "type": "code", "lang": "ts", "code": "import { defaultTheme, emitTheme } from 'flexa-design-system';\n\nconst theme = defaultTheme();\n// {\n//   name: 'default',\n//   base: [...all tokens...],\n//   modes: [{ scheme: 'dark', tokens: [...overrides...] }],\n//   autoScheme: true,\n//   reducedMotion: [...],\n// }\nconst css = emitTheme(theme);" },
+    { "type": "h2", "text": "What emitTheme produces" },
+    { "type": "list", "items": [
+      "A base block at `:root` (or `[data-fx-theme=\"name\"]` for named themes) declaring every variable.",
+      "One `[data-fx-scheme=\"dark\"]{…}` block per mode — explicit opt-in via attribute.",
+      "With `autoScheme`, a `@media (prefers-color-scheme: dark)` block that applies unless an explicit `data-fx-scheme` is set — so a site toggle always wins over the OS setting.",
+      "With `reducedMotion`, a `@media (prefers-reduced-motion: reduce)` block that flattens motion tokens."
+    ] },
+    { "type": "h2", "text": "Dark mode in practice" },
+    { "type": "p", "text": "Dark mode is a token override set, not a second stylesheet. The default theme's dark mode re-points backgrounds, surfaces, text and brand fills to their dark-appropriate primitives. Consumers switch with a single attribute:" },
+    { "type": "code", "lang": "html", "code": "<!-- follow the OS -->\n<html>\n\n<!-- force dark -->\n<html data-fx-scheme=\"dark\">\n\n<!-- force light -->\n<html data-fx-scheme=\"light\">" },
+    { "type": "h2", "text": "Named themes nest" },
+    { "type": "p", "text": "A theme whose name isn't `default` emits scoped to `[data-fx-theme=\"name\"]` instead of `:root`. That means themes nest: a subtree carrying the attribute re-declares the variables for its branch only — the same pattern as Carbon's Layer or Radix's Theme component." },
+    { "type": "h2", "text": "The contrast gate" },
+    { "type": "p", "text": "`checkThemeContrast(theme)` evaluates every guaranteed pair (body text on surfaces, every `on-X` on its `X`) against WCAG 2.2 AA in the base scheme and every mode. It returns a list of failures — empty means the theme is safe to ship. Flexa runs this in CI on the default theme and on every starter pack, and surfaces it as warnings when users pick brand colors." },
+    { "type": "code", "lang": "ts", "code": "import { checkThemeContrast } from 'flexa-design-system';\n\nconst failures = checkThemeContrast(myTheme);\n// [{ scheme: 'dark', fg: 'color.on-primary', bg: 'color.primary',\n//    ratio: 3.1, min: 4.5 }]  ← fix your primary, or ship warnings" },
+    { "type": "note", "text": "`text-subtle` is intentionally low-contrast (decorative) and excluded from the guaranteed pairs." }
+  ]
+}

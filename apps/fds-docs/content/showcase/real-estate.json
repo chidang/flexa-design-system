@@ -1,0 +1,193 @@
+{
+  "brand": "🏠 Havenly",
+  "nav": ["Home", "Listings", "Agents", "Neighbourhoods", "Contact"],
+  "phone": "📞 +1 800-555-0148",
+  "signIn": "Sign in",
+  "listCta": "List property",
+  "hero": {
+    "eyebrow": "Trusted property portal",
+    "titleA": "The right address",
+    "titleHi": "for the life",
+    "titleB": " you're building",
+    "sub": "Search thousands of verified homes, meet vetted local agents, and settle into a place that truly fits — without the guesswork.",
+    "art": "Modern Home",
+    "popularLabel": "Popular:",
+    "popular": ["Miami", "Los Angeles", "New York", "Chicago"]
+  },
+  "search": {
+    "fields": [
+      { "label": "Location", "value": "City, area or postcode" },
+      { "label": "Type", "value": "For sale" },
+      { "label": "Price", "value": "Any budget" }
+    ],
+    "submit": "🔍 Search"
+  },
+  "stats": [
+    { "icon": "🏘", "value": "18,400+", "label": "Active properties" },
+    { "icon": "📍", "value": "120+", "label": "Cities covered" },
+    { "icon": "🤝", "value": "850+", "label": "Verified agents" },
+    { "icon": "🗓", "value": "15 yrs", "label": "In the market" }
+  ],
+  "featured": {
+    "eyebrow": "Handpicked homes",
+    "title": "Featured properties",
+    "sub": "A curated selection of standout listings, checked and ready for viewing.",
+    "tabs": ["For sale", "For rent", "New listings"],
+    "cta": "View details",
+    "items": [
+      {
+        "name": "Modern Family House",
+        "address": "Miami, Florida",
+        "price": "$850,000",
+        "tag": "For Sale",
+        "beds": "4 Beds",
+        "baths": "3 Baths",
+        "area": "2,400 sqft"
+      },
+      {
+        "name": "Hillside Luxury Villa",
+        "address": "Los Angeles, California",
+        "price": "$1,250,000",
+        "tag": "Featured",
+        "beds": "5 Beds",
+        "baths": "4 Baths",
+        "area": "3,900 sqft"
+      },
+      {
+        "name": "Downtown Apartment",
+        "address": "New York, USA",
+        "price": "$680,000",
+        "tag": "For Sale",
+        "beds": "2 Beds",
+        "baths": "2 Baths",
+        "area": "1,200 sqft"
+      },
+      {
+        "name": "Beachfront Condo",
+        "address": "Miami, Florida",
+        "price": "$950,000",
+        "tag": "Hot",
+        "beds": "3 Beds",
+        "baths": "2 Baths",
+        "area": "1,800 sqft"
+      },
+      {
+        "name": "Suburban Retreat",
+        "address": "Chicago, Illinois",
+        "price": "$720,000",
+        "tag": "For Sale",
+        "beds": "4 Beds",
+        "baths": "2 Baths",
+        "area": "2,000 sqft"
+      },
+      {
+        "name": "Skyline Penthouse",
+        "address": "New York, USA",
+        "price": "$1,750,000",
+        "tag": "New",
+        "beds": "3 Beds",
+        "baths": "3 Baths",
+        "area": "2,800 sqft"
+      }
+    ]
+  },
+  "types": {
+    "eyebrow": "Browse by category",
+    "title": "Find the property type for you",
+    "sub": "Whatever your stage of life, there's a home shape that suits it.",
+    "items": [
+      { "icon": "🏠", "name": "Houses", "count": "2,350+ listings" },
+      { "icon": "🏢", "name": "Apartments", "count": "1,600+ listings" },
+      { "icon": "🏬", "name": "Condos", "count": "1,120+ listings" },
+      { "icon": "🏡", "name": "Villas", "count": "980+ listings" },
+      { "icon": "🏙", "name": "Offices", "count": "540+ listings" },
+      { "icon": "🌳", "name": "Land", "count": "420+ listings" }
+    ]
+  },
+  "why": {
+    "eyebrow": "Why Havenly",
+    "title": "Home hunting, made simple",
+    "sub": "From the first search to signing the papers, we stay beside you at every step so nothing catches you off guard.",
+    "art": "Happy Homeowners",
+    "feats": [
+      { "icon": "✅", "title": "Verified listings", "text": "Every property is inspected and confirmed before it reaches you." },
+      { "icon": "🎯", "title": "Matched to you", "text": "Recommendations tuned to your budget and the way you actually live." },
+      { "icon": "🔍", "title": "Transparent search", "text": "No hidden fees, no surprises — just clear numbers and honest advice." },
+      { "icon": "💬", "title": "Expert guidance", "text": "Local specialists on hand to answer questions the moment they arise." }
+    ]
+  },
+  "agents": {
+    "eyebrow": "Meet the team",
+    "title": "Top agents near you",
+    "sub": "Seasoned local experts ready to help you find — or sell — the right home.",
+    "cta": "View all agents",
+    "items": [
+      { "name": "James Carter", "role": "Luxury property expert", "listings": "130+ listings", "rating": "4.9 (250)" },
+      { "name": "Sophia Martinez", "role": "Residential specialist", "listings": "150+ listings", "rating": "4.8 (380)" },
+      { "name": "Daniel Thompson", "role": "Investment advisor", "listings": "90+ listings", "rating": "4.9 (120)" },
+      { "name": "Olivia Bennett", "role": "First-home guide", "listings": "110+ listings", "rating": "5.0 (190)" }
+    ]
+  },
+  "cities": {
+    "eyebrow": "Explore areas",
+    "title": "Homes by neighbourhood",
+    "sub": "Discover the cities and districts where our buyers are settling right now.",
+    "items": [
+      { "name": "New York", "count": "1,250+ properties" },
+      { "name": "Los Angeles", "count": "980+ properties" },
+      { "name": "Miami", "count": "870+ properties" },
+      { "name": "Chicago", "count": "760+ properties" }
+    ]
+  },
+  "reviews": {
+    "eyebrow": "Client stories",
+    "title": "Loved by homeowners",
+    "sub": "Genuine words from people who found their place through Havenly.",
+    "items": [
+      {
+        "name": "Michael Brown",
+        "place": "Austin, Texas",
+        "quote": "The whole process felt calm and clear. I never once wondered what was happening next — they kept me in the loop the entire way."
+      },
+      {
+        "name": "Elena Ruiz",
+        "place": "Seattle, Washington",
+        "quote": "My agent understood exactly what I needed after one conversation. We toured three homes and I fell for the second one."
+      },
+      {
+        "name": "Priya Sharma",
+        "place": "Denver, Colorado",
+        "quote": "As a first-time buyer I expected stress. Instead I got patient answers and a fair deal on a place I adore."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to find your next home?",
+    "sub": "Talk to an agent and get tailored recommendations, or book a viewing for a property you've already got your eye on.",
+    "primary": "Book a viewing",
+    "secondary": "Talk to an agent",
+    "art": "🏡 🔑"
+  },
+  "footer": {
+    "about": "Havenly helps you find the right property with less friction. Your next home is only a search away.",
+    "socials": ["f", "◎", "𝕏", "in"],
+    "columns": [
+      {
+        "title": "Explore",
+        "links": ["Home", "Listings", "Agents", "Neighbourhoods", "Contact"]
+      },
+      {
+        "title": "Resources",
+        "links": ["FAQ", "How it works", "Privacy policy", "Terms of service", "Support"]
+      }
+    ],
+    "newsletter": {
+      "title": "Property updates",
+      "sub": "New listings and price drops, straight to your inbox.",
+      "placeholder": "Your email address",
+      "cta": "Subscribe"
+    },
+    "copyright": "© 2025 Havenly. All rights reserved.",
+    "contact": "✉ hello@havenly.example · 📍 1234 Cedar St, Suite 100, Austin, TX"
+  }
+}

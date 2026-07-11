@@ -1,0 +1,9 @@
+{
+  "title": "Recipes",
+  "description": "Common components — button, badge, alert, card — as copy-paste CSS generated from token recipes. No component library to install; the recipe is data and the CSS is what the engine emits.",
+  "intro": "A recipe is the variant mechanism underneath the Builder: pure data (a base fragment, variant dimensions, an optional compound rule, defaults) that composes into a stylesheet by the options you pick. Nothing here is a React component you import — each snippet below is produced by the same pipeline the render engine runs, so the CSS you copy is exactly what the system emits, every value a token.",
+  "dataSummary": "The recipe (data)",
+  "cssTitle": "Generated CSS",
+  "proofTitle": "How this stays honest",
+  "proofBlurb": "Every recipe is checked two ways at build time: the merged spec is scanned for token-namespace paths that are not real tokens (a typo would be caught before it renders), and the compiled CSS is scanned so every --fx-* reference is a registry token. Custom properties like --btn-bg are plumbing — they carry the chosen colour without multiplying variants, and the token scan ignores them by construction. An off-system value would surface here as a failure, not drift silently."
+}

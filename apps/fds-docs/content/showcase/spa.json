@@ -1,0 +1,258 @@
+{
+  "brand": "🌿 Séréne",
+  "nav": ["Home", "About", "Packages", "Therapists", "Prices", "Journal"],
+  "book": "Book Now",
+  "topbar": {
+    "left": "📞 +1 415 208 4470   ✉ hello@serene.spa",
+    "right": "Open daily 9am–8pm · Sausalito, CA   f ◎ 𝕏 in"
+  },
+  "hero": {
+    "titleA": "Find Your Calm,",
+    "titleHi": "Nurture",
+    "titleB": " Your Wellbeing",
+    "sub": "Slow down, unwind, and come back to yourself with holistic treatments shaped around your body, mind, and mood.",
+    "cta": "Reserve Your Retreat",
+    "art": "Serene Spa"
+  },
+  "services": {
+    "eyebrow": "What We Offer",
+    "title": "Treatments for Every Sense",
+    "sub": "A curated menu of therapies to release tension, refresh your skin, and reset your energy.",
+    "items": [
+      {
+        "icon": "🌿",
+        "name": "Massage Therapy",
+        "desc": "Melt away built-up tension and rebalance the body with our signature hands-on rituals.",
+        "price": "from $80",
+        "cta": "Book"
+      },
+      {
+        "icon": "✨",
+        "name": "Facial Care",
+        "desc": "Uncover a fresh, luminous complexion through skincare tailored to you.",
+        "price": "from $75",
+        "cta": "Explore"
+      },
+      {
+        "icon": "🧖",
+        "name": "Body Rituals",
+        "desc": "Purify, nourish, and soften with soothing full-body wraps and scrubs.",
+        "price": "from $95",
+        "cta": "Discover"
+      },
+      {
+        "icon": "🌸",
+        "name": "Aromatherapy",
+        "desc": "Breathe deeply as botanical oils quiet the mind and lift the spirit.",
+        "price": "from $70",
+        "cta": "Book"
+      },
+      {
+        "icon": "🧘",
+        "name": "Guided Meditation",
+        "desc": "Learn to settle a busy mind with sessions led by our wellness coaches.",
+        "price": "from $60",
+        "cta": "Explore"
+      },
+      {
+        "icon": "💧",
+        "name": "Hydro Therapy",
+        "desc": "Ease sore muscles in warm mineral pools and restorative water treatments.",
+        "price": "from $110",
+        "cta": "Discover"
+      }
+    ]
+  },
+  "packages": {
+    "eyebrow": "Wellness Plans",
+    "title": "Journeys Made Just for You",
+    "sub": "Half-day and full-day escapes that pair several treatments into one seamless experience.",
+    "items": [
+      {
+        "name": "Serenity Escape",
+        "desc": "A gentle afternoon of massage, facial, and quiet tea to soften a hard week.",
+        "price": "$180",
+        "cta": "Book"
+      },
+      {
+        "name": "Renewal Retreat",
+        "desc": "A full-day reset built around detox rituals, aromatherapy, and mindful rest.",
+        "price": "$320",
+        "popular": true,
+        "cta": "Book"
+      },
+      {
+        "name": "Together Time",
+        "desc": "Share a calming side-by-side ritual with someone you love.",
+        "price": "$260",
+        "cta": "Book"
+      }
+    ]
+  },
+  "rejuvenate": {
+    "eyebrow": "Your Journey",
+    "title": "Awaken Every Sense",
+    "sub": "Step into a quiet sanctuary where each treatment is shaped to soothe the mind, restore the body, and gently reawaken your senses. Our therapists guide you toward deep, lasting calm.",
+    "cta": "Discover More",
+    "art": "Wellness",
+    "feats": [
+      {
+        "icon": "🍃",
+        "title": "Natural Care",
+        "text": "Botanical, cruelty-free products chosen for skin and planet alike."
+      },
+      {
+        "icon": "🕯️",
+        "title": "Calm Spaces",
+        "text": "Warm light, soft sound, and private rooms built for true rest."
+      },
+      {
+        "icon": "👐",
+        "title": "Expert Hands",
+        "text": "Certified therapists with years of dedicated practice."
+      },
+      {
+        "icon": "🎁",
+        "title": "Thoughtful Gifting",
+        "text": "Beautifully wrapped vouchers for the people you cherish."
+      }
+    ]
+  },
+  "stats": {
+    "eyebrow": "By the Numbers",
+    "title": "A Little About Us",
+    "items": [
+      { "value": "1,500+", "label": "Happy Guests" },
+      { "value": "12 Years", "label": "Of Practice" },
+      { "value": "98%", "label": "Would Return" },
+      { "value": "90%", "label": "Natural Products" }
+    ]
+  },
+  "benefits": {
+    "eyebrow": "Why Séréne",
+    "title": "Care You Can Feel",
+    "sub": "Small touches, considered spaces, and genuine attention — the details that make a visit linger.",
+    "items": [
+      {
+        "icon": "🌱",
+        "title": "Holistic Approach",
+        "text": "We treat the whole person, not a single symptom."
+      },
+      {
+        "icon": "🧴",
+        "title": "Clean Ingredients",
+        "text": "Gentle, plant-led formulas kind to sensitive skin."
+      },
+      {
+        "icon": "📅",
+        "title": "Easy Booking",
+        "text": "Reserve in moments and reschedule with a tap."
+      },
+      {
+        "icon": "💛",
+        "title": "Personal Touch",
+        "text": "Every session is shaped around how you feel today."
+      }
+    ]
+  },
+  "therapists": {
+    "eyebrow": "The People",
+    "title": "Meet Our Therapists",
+    "sub": "A warm, experienced team devoted to helping you feel entirely at ease.",
+    "items": [
+      { "name": "Emma Rose", "role": "Massage Therapist", "social": "◎ 𝕏 f" },
+      { "name": "Sophia Lane", "role": "Facial Specialist", "social": "◎ 𝕏 f" },
+      { "name": "Olivia Grey", "role": "Wellness Coach", "social": "◎ 𝕏 f" }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Menu & Rates",
+    "title": "Treatments & Pricing",
+    "sub": "Transparent pricing with no surprises — choose a category to see the full list.",
+    "tabs": [
+      "🌿 Therapeutic Massage",
+      "💆 Stress Relief",
+      "⚡ Energy Work",
+      "🧴 Skin & Facial",
+      "🌸 Aromatherapy",
+      "🧘 Meditation Coaching"
+    ],
+    "rows": [
+      { "name": "Swedish Deep Tissue", "time": "60 min", "price": "$80" },
+      { "name": "Hot Stone Massage", "time": "75 min", "price": "$95" },
+      { "name": "Aromatherapy Massage", "time": "60 min", "price": "$85" },
+      { "name": "Couples Massage", "time": "90 min", "price": "$150" }
+    ]
+  },
+  "book2": {
+    "eyebrow": "Reserve Now",
+    "title": "Book Your Appointment",
+    "sub": "Tell us what you need and when — we'll take care of the rest.",
+    "fields": [
+      { "label": "Service", "value": "Aromatherapy Massage" },
+      { "label": "Therapist", "value": "No preference" },
+      { "label": "Date", "value": "Fri, 18 Jul" },
+      { "label": "Time", "value": "2:00 PM" }
+    ],
+    "submit": "Request Appointment",
+    "art": "Relaxing"
+  },
+  "testimonials": {
+    "eyebrow": "Kind Words",
+    "title": "Loved by Our Guests",
+    "sub": "The moments that stay with people long after they leave.",
+    "items": [
+      {
+        "quote": "The care in every detail and the hush of the rooms made my visit something I still think about.",
+        "name": "Diana Walters",
+        "role": "Regular Guest"
+      },
+      {
+        "quote": "I arrived tense and left feeling like a different person. The therapists truly listen.",
+        "name": "Marcus Bell",
+        "role": "First Visit"
+      },
+      {
+        "quote": "A calm, thoughtful place. The aromatherapy session was easily the highlight of my month.",
+        "name": "Priya Nair",
+        "role": "Member"
+      }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "Our Space",
+    "title": "A Look Inside",
+    "sub": "Warm textures, soft light, and quiet corners made for slowing down.",
+    "items": ["Treatment Room", "Relaxation Lounge", "Mineral Pool", "Herbal Bar", "Garden Deck"]
+  },
+  "cta": {
+    "title": "Begin Your Journey to Calm",
+    "sub": "Give yourself an hour, an afternoon, or a whole day. Your quiet is waiting.",
+    "button": "Book Your Escape",
+    "art": "🌿"
+  },
+  "footer": {
+    "about": "A sanctuary for body and mind. Restore your balance and rediscover a gentler pace.",
+    "socials": ["f", "◎", "▶", "𝕏"],
+    "columns": [
+      {
+        "title": "Explore",
+        "links": ["Home", "About Us", "Treatments", "Journal", "Contact"]
+      },
+      {
+        "title": "Visit Us",
+        "links": ["45 Harbor Lane", "Sausalito, CA", "+1 415 208 4470", "hello@serene.spa"]
+      }
+    ],
+    "hours": {
+      "title": "Spa Hours",
+      "rows": ["Mon–Fri: 9am–8pm", "Saturday: 10am–6pm", "Sunday: 10am–4pm"]
+    },
+    "newsletter": {
+      "title": "Enjoy 10% off your first visit",
+      "sub": "Join our list for seasonal offers and quiet-day tips.",
+      "placeholder": "Enter your email"
+    },
+    "copyright": "© 2025 🌿 Séréne. All rights reserved."
+  }
+}

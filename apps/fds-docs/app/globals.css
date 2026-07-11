@@ -1,0 +1,721 @@
+/*
+ * Site chrome — every color/space/radius/shadow below is an FDS variable
+ * (the theme is injected in layout.tsx). The docs site has no palette of its
+ * own: it IS a consumer of the system it documents.
+ */
+
+/*
+ * Link ink — the brand cyan (--fx-color-primary, #3fc7f1) is a fill colour: as
+ * text on the page background it is only 1.97:1 (fails WCAG AA). Links use a
+ * scheme-aware shade of the same hue instead — a darker cyan on light (5.08:1),
+ * the bright brand cyan on dark. Selectors mirror the emitter's scheme contract
+ * (see ThemeToggle.tsx): base :root = light, [data-fx-scheme] + the
+ * prefers-color-scheme media query handle the toggle and OS preference.
+ */
+:root {
+  --fx-link: #267791;
+}
+:root[data-fx-scheme='dark'] {
+  --fx-link: #71d6f5;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-fx-scheme]) {
+    --fx-link: #71d6f5;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-font-size-base);
+  line-height: var(--fx-font-line-height-normal, 1.6);
+  color: var(--fx-color-text);
+  background: var(--fx-color-bg);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--fx-font-family-heading);
+  line-height: 1.25;
+  color: var(--fx-color-text);
+}
+
+h1 {
+  font-size: var(--fx-font-size-3xl, 2.5rem);
+}
+
+h2 {
+  font-size: var(--fx-font-size-xl, 1.5rem);
+  margin-top: var(--fx-space-10);
+}
+
+h3 {
+  font-size: var(--fx-font-size-lg, 1.25rem);
+}
+
+a {
+  color: var(--fx-link);
+}
+
+main {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: var(--fx-space-8) var(--fx-space-6) var(--fx-space-16);
+}
+
+/* Header / footer */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-4);
+  padding: var(--fx-space-3) var(--fx-space-6);
+  border-bottom: 1px solid var(--fx-color-border);
+  background: var(--fx-color-surface);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  font-family: var(--fx-font-family-heading);
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--fx-color-text);
+}
+
+.brand-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-primary);
+  color: var(--fx-color-on-primary);
+  font-size: 1rem;
+}
+
+.version {
+  font-size: var(--fx-font-size-sm, 0.875rem);
+  font-weight: 400;
+  color: var(--fx-color-text-muted);
+}
+
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-4);
+}
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-4);
+}
+
+.site-header nav a {
+  color: var(--fx-color-text-muted);
+  text-decoration: none;
+}
+
+.site-header nav a:hover {
+  color: var(--fx-link);
+}
+
+/* Brand-mark links (npm / GitHub) — icon only on the desktop bar */
+.nav-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+.nav-icon svg {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.nav-icon-label {
+  display: none;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+/* Hamburger — hidden until the nav collapses (see the 52rem media query) */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  color: var(--fx-color-text);
+  background: transparent;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  cursor: pointer;
+}
+
+.nav-toggle-bars {
+  position: relative;
+  display: block;
+  width: 1.125rem;
+  height: 0.75rem;
+}
+
+.nav-toggle-bars span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition:
+    top 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-toggle-bars span:nth-child(1) {
+  top: 0;
+}
+.nav-toggle-bars span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.nav-toggle-bars span:nth-child(3) {
+  top: 100%;
+  transform: translateY(-100%);
+}
+
+/* Bars morph into an X when the menu is open */
+.nav-toggle[aria-expanded='true'] .nav-toggle-bars span:nth-child(1) {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+.nav-toggle[aria-expanded='true'] .nav-toggle-bars span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded='true'] .nav-toggle-bars span:nth-child(3) {
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-toggle-bars span {
+    transition: none;
+  }
+}
+
+/* Collapse the nav behind the hamburger on narrow viewports */
+@media (max-width: 52rem) {
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .site-header nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--fx-space-2) var(--fx-space-4) var(--fx-space-3);
+    background: var(--fx-color-surface);
+    border-bottom: 1px solid var(--fx-color-border);
+    box-shadow: var(--fx-shadow-md, none);
+  }
+
+  .site-header nav.is-open {
+    display: flex;
+  }
+
+  .site-header nav a {
+    padding: var(--fx-space-3) var(--fx-space-2);
+    border-bottom: 1px solid var(--fx-color-border);
+  }
+
+  .site-header nav a:last-child {
+    border-bottom: none;
+  }
+
+  /* In the dropdown list the icon links read as rows — show their labels */
+  .site-header nav .nav-icon-label {
+    display: inline;
+  }
+}
+
+.theme-toggle {
+  font: inherit;
+  font-size: var(--fx-font-size-sm, 0.875rem);
+  color: var(--fx-color-text-muted);
+  background: transparent;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  padding: var(--fx-space-1) var(--fx-space-3);
+  cursor: pointer;
+}
+
+.site-footer {
+  border-top: 1px solid var(--fx-color-border);
+  padding: var(--fx-space-6);
+  text-align: center;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-font-size-sm, 0.875rem);
+}
+
+/* Content blocks */
+pre {
+  background: var(--fx-color-surface-alt, var(--fx-color-surface));
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  padding: var(--fx-space-4);
+  overflow-x: auto;
+  font-size: var(--fx-font-size-sm, 0.875rem);
+  line-height: 1.55;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.925em;
+}
+
+p code,
+li code,
+td code {
+  background: var(--fx-color-surface-alt, var(--fx-color-surface));
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-sm);
+  padding: 0 var(--fx-space-1);
+}
+
+/* Wide tables scroll inside their own box rather than widening the page */
+.table-wrap {
+  overflow-x: auto;
+  margin: var(--fx-space-4) 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fx-font-size-sm, 0.9375rem);
+}
+
+th,
+td {
+  text-align: left;
+  padding: var(--fx-space-2) var(--fx-space-3);
+  border-bottom: 1px solid var(--fx-color-border);
+  vertical-align: top;
+}
+
+th {
+  color: var(--fx-color-text-muted);
+  font-weight: 600;
+}
+
+.note {
+  border-left: 3px solid var(--fx-color-primary);
+  background: var(--fx-color-surface);
+  border-radius: var(--fx-radius-md);
+  padding: var(--fx-space-3) var(--fx-space-4);
+  margin: var(--fx-space-4) 0;
+  color: var(--fx-color-text-muted);
+}
+
+/* Guides layout */
+.guide-layout {
+  display: grid;
+  grid-template-columns: 14rem 1fr;
+  gap: var(--fx-space-10);
+}
+
+/*
+ * Grid tracks default to min-width:auto, so a wide <pre>/<table> in the article
+ * would refuse to shrink and push the whole page into a horizontal scroll (and
+ * stretch the full-width TOC on mobile). min-width:0 lets the track shrink so
+ * those blocks scroll inside their own overflow-x box instead.
+ */
+.guide-layout > * {
+  min-width: 0;
+}
+
+.guide-nav {
+  position: sticky;
+  top: 5rem;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+
+.guide-nav a {
+  text-decoration: none;
+  color: var(--fx-color-text-muted);
+  padding: var(--fx-space-1) var(--fx-space-3);
+  border-radius: var(--fx-radius-md);
+}
+
+.guide-nav a:hover {
+  background: var(--fx-color-surface);
+}
+
+.guide-nav a[aria-current='page'] {
+  color: var(--fx-link);
+  background: var(--fx-color-surface);
+  font-weight: 600;
+}
+
+@media (max-width: 48rem) {
+  .guide-layout {
+    grid-template-columns: 1fr;
+    gap: var(--fx-space-5);
+  }
+
+  .guide-nav {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--fx-space-2);
+    padding-bottom: var(--fx-space-4);
+    border-bottom: 1px solid var(--fx-color-border);
+  }
+
+  .guide-nav a {
+    background: var(--fx-color-surface);
+    border: 1px solid var(--fx-color-border);
+  }
+}
+
+/* Home */
+.hero {
+  text-align: center;
+  padding: var(--fx-space-16) 0 var(--fx-space-10);
+}
+
+.hero p {
+  max-width: 42rem;
+  margin: var(--fx-space-4) auto;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-font-size-lg, 1.125rem);
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--fx-space-3);
+  justify-content: center;
+  margin-top: var(--fx-space-6);
+}
+
+.btn {
+  display: inline-block;
+  padding: var(--fx-space-3) var(--fx-space-6);
+  border-radius: var(--fx-c-button-radius, var(--fx-radius-md));
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--fx-color-primary);
+  color: var(--fx-color-on-primary);
+}
+
+.btn-primary:hover {
+  background: var(--fx-color-primary-hover, var(--fx-color-primary));
+}
+
+.btn-ghost {
+  border-color: var(--fx-color-border);
+  color: var(--fx-color-text);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--fx-space-4);
+  margin-top: var(--fx-space-8);
+}
+
+.card {
+  display: block;
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  padding: var(--fx-space-5);
+  text-decoration: none;
+  color: var(--fx-color-text);
+  box-shadow: var(--fx-shadow-sm, none);
+}
+
+.card:hover {
+  border-color: var(--fx-color-primary);
+}
+
+.card h3 {
+  margin: 0 0 var(--fx-space-2);
+}
+
+.card p {
+  margin: 0;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-font-size-sm, 0.9375rem);
+}
+
+/* Token reference */
+.swatch {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--fx-radius-sm);
+  border: 1px solid var(--fx-color-border);
+  vertical-align: middle;
+}
+
+.token-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.875em;
+}
+
+.pass {
+  color: var(--fx-color-success);
+  font-weight: 600;
+}
+
+.tier-badge {
+  font-size: var(--fx-font-size-sm, 0.75rem);
+  color: var(--fx-color-text-muted);
+}
+
+/* Packs gallery — each card scopes its own derived theme */
+.pack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: var(--fx-space-5);
+  margin-top: var(--fx-space-5);
+}
+
+.pack-card {
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  overflow: hidden;
+  background: var(--fx-color-surface);
+}
+
+/* The preview subtree reads the SCOPED pack theme (data-fx-theme="pack-…") */
+.pack-preview {
+  background: var(--fx-color-bg);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  padding: var(--fx-space-5);
+  border-bottom: 1px solid var(--fx-color-border);
+}
+
+.pack-preview-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--fx-space-2);
+}
+
+.pack-preview h3 {
+  font-family: var(--fx-font-family-heading);
+  color: var(--fx-color-text);
+  margin: 0;
+}
+
+.pack-personality {
+  font-size: var(--fx-font-size-sm, 0.75rem);
+  color: var(--fx-color-text-muted);
+}
+
+.pack-desc {
+  margin: var(--fx-space-2) 0 var(--fx-space-4);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-font-size-sm, 0.9375rem);
+}
+
+.pack-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+
+.pack-actions .btn {
+  padding: var(--fx-space-2) var(--fx-space-4);
+  font-size: var(--fx-font-size-sm, 0.875rem);
+  cursor: default;
+}
+
+.pack-surface {
+  margin-top: var(--fx-space-4);
+  padding: var(--fx-space-4);
+}
+
+.pack-surface strong {
+  font-family: var(--fx-font-family-heading);
+}
+
+.pack-surface p {
+  margin: var(--fx-space-1) 0 0;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-font-size-sm, 0.875rem);
+}
+
+/* The meta footer is chrome — it reads the SITE theme, not the pack's */
+.pack-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-3) var(--fx-space-5);
+}
+
+.pack-swatches {
+  display: inline-flex;
+  gap: var(--fx-space-1);
+}
+
+.pack-recipe {
+  display: flex;
+  gap: var(--fx-space-4);
+  margin: 0;
+  flex: 1;
+}
+
+.pack-recipe div {
+  display: flex;
+  flex-direction: column;
+}
+
+.pack-recipe dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--fx-color-text-muted);
+}
+
+.pack-recipe dd {
+  margin: 0;
+  font-size: var(--fx-font-size-sm, 0.8125rem);
+}
+
+.pack-a11y {
+  font-size: var(--fx-font-size-sm, 0.8125rem);
+  font-weight: 600;
+}
+
+.pack-a11y.fail {
+  color: var(--fx-color-danger);
+}
+
+.pack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-1);
+  padding: 0 var(--fx-space-5) var(--fx-space-4);
+}
+
+.pack-tag {
+  font-size: 0.75rem;
+  color: var(--fx-color-text-muted);
+  background: var(--fx-color-surface-alt, var(--fx-color-bg));
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-sm);
+  padding: 0 var(--fx-space-2);
+}
+
+/* Playground */
+.playground {
+  display: grid;
+  grid-template-columns: 18rem 1fr;
+  gap: var(--fx-space-8);
+  align-items: start;
+}
+
+.playground-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+  position: sticky;
+  top: 5rem;
+}
+
+.playground-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  font-size: var(--fx-font-size-sm, 0.875rem);
+  color: var(--fx-color-text-muted);
+}
+
+.playground-controls input,
+.playground-controls select {
+  font: inherit;
+  color: var(--fx-color-text);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  padding: var(--fx-space-2) var(--fx-space-3);
+}
+
+.playground-controls input[type='color'] {
+  padding: 0;
+  height: 2.25rem;
+}
+
+@media (max-width: 48rem) {
+  .playground {
+    grid-template-columns: 1fr;
+  }
+
+  .playground-controls {
+    position: static;
+  }
+}
+
+/* Preview surface reads the SCOPED playground theme */
+.preview {
+  background: var(--fx-color-bg);
+  color: var(--fx-color-text);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  padding: var(--fx-space-8);
+  font-family: var(--fx-font-family-base);
+}
+
+.preview h2 {
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-font-size-2xl, 2rem);
+  margin-top: 0;
+}
+
+.preview .card {
+  margin-top: var(--fx-space-4);
+}
+
+.contrast-report {
+  margin-top: var(--fx-space-4);
+  font-size: var(--fx-font-size-sm, 0.875rem);
+}
+
+.contrast-report .fail {
+  color: var(--fx-color-danger);
+}

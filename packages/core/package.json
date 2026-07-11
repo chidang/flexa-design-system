@@ -1,0 +1,20 @@
+{
+  "name": "@flexa/core",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "flexa-design-system": "workspace:*",
+    "mustache": "^4.2.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/mustache": "^4.2.5",
+    "typescript": "^5.5.4"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "brand": "🍴 Tavola",
+  "nav": ["Home", "About", "Menu", "Chefs", "Specials", "Contact"],
+  "reserve": "Book a table",
+  "hero": {
+    "titleA": "Taste the ",
+    "titleHi": "craft",
+    "titleB": "behind every plate",
+    "sub": "Seasonal dishes built from ingredients we source ourselves, plated with care and brought to your table in a room that feels like home.",
+    "ctaPrimary": "Browse the menu",
+    "ctaOutline": "Reserve a table",
+    "rating": "4.9",
+    "ratingLabel": "from 2,100+ guests",
+    "dishes": [
+      { "icon": "🍝", "title": "House Pasta", "text": "Silky, rolled fresh each morning" },
+      { "icon": "🍲", "title": "Warm Plates", "text": "Slow-cooked, deeply comforting" }
+    ],
+    "art": "👨‍🍳 In the kitchen"
+  },
+  "highlights": [
+    { "icon": "🥬", "title": "Farm-fresh", "text": "Sourced from local growers daily" },
+    { "icon": "👩‍🍳", "title": "Skilled chefs", "text": "Decades of combined craft" },
+    { "icon": "🛵", "title": "Quick delivery", "text": "Hot to your door in 30 min" },
+    { "icon": "🕰", "title": "Open late", "text": "Mon–Sun, 11am till midnight" }
+  ],
+  "popular": {
+    "eyebrow": "Guest favourites",
+    "title": "Most-loved dishes",
+    "sub": "The plates our regulars keep coming back for, each one made to order.",
+    "items": [
+      { "icon": "🍛", "name": "Herb Grilled Chicken", "text": "Char-grilled, marinated in garden herbs.", "price": "$18", "tag": "Popular" },
+      { "icon": "🍝", "name": "Tomato Spaghetti", "text": "Simple, bright and endlessly comforting.", "price": "$16" },
+      { "icon": "🍤", "name": "Prawn Risotto", "text": "Creamy arborio folded with sweet prawns.", "price": "$22", "tag": "Chef's pick" },
+      { "icon": "🥗", "name": "Garden Stir-Fry", "text": "Crisp seasonal vegetables, wok-tossed.", "price": "$14" }
+    ],
+    "cta": "Order"
+  },
+  "story": {
+    "eyebrow": "Our story",
+    "title": "A kitchen built on honest cooking",
+    "body": "What began as a small corner counter has grown into a table many now call their own. We still cook the way we started — patiently, with real ingredients and no shortcuts.",
+    "points": [
+      "Menus that follow the seasons, not trends",
+      "Every sauce and stock made in-house",
+      "Suppliers we know by name",
+      "A dining room that welcomes everyone"
+    ],
+    "signature": "Chef Lorenzo Vitale",
+    "role": "Founder & Head Chef",
+    "art": "🍷 The dining room",
+    "stats": [
+      { "value": "12", "label": "Years serving" },
+      { "value": "40+", "label": "Signature plates" },
+      { "value": "9", "label": "Culinary awards" }
+    ]
+  },
+  "specialties": {
+    "eyebrow": "What we do best",
+    "title": "House specialties",
+    "sub": "Three things we pour our whole heart into, every single service.",
+    "items": [
+      { "icon": "🔥", "name": "Wood-fired grill", "text": "Meats and vegetables kissed by open flame for a smoky, honest char." },
+      { "icon": "🍕", "name": "Stone-baked pizza", "text": "Slow-proved dough, blistered in a searing oven and finished simply." },
+      { "icon": "🍰", "name": "Handmade desserts", "text": "Classic sweets made fresh daily, from tiramisu to warm fruit tarts." }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "A look inside",
+    "title": "Moments from our tables",
+    "sub": "A glimpse of the plates, the people and the room that make an evening with us.",
+    "items": [
+      { "icon": "🥩", "label": "Grill" },
+      { "icon": "🍜", "label": "Bowls" },
+      { "icon": "🍮", "label": "Sweets" },
+      { "icon": "🍸", "label": "Bar" },
+      { "icon": "🧑‍🍳", "label": "Line" },
+      { "icon": "🥂", "label": "Cheers" }
+    ]
+  },
+  "booking": {
+    "eyebrow": "Reservations",
+    "title": "Save your table tonight",
+    "sub": "Pick a date and time, tell us how many are joining, and we'll have your table ready.",
+    "fields": [
+      { "label": "Date", "value": "Fri, 12 Jul" },
+      { "label": "Time", "value": "7:30 PM" },
+      { "label": "Guests", "value": "2 people" }
+    ],
+    "submit": "Confirm reservation",
+    "note": "No deposit needed — free cancellation up to two hours before."
+  },
+  "reviews": {
+    "eyebrow": "Guest reviews",
+    "title": "What our diners say",
+    "sub": "Kind words from the people who share our tables night after night.",
+    "items": [
+      { "name": "Amara Osei", "city": "Portland, OR", "quote": "Every course felt considered. Warm service, and the risotto was the best I've had in years." },
+      { "name": "Daniel Cho", "city": "Seattle, WA", "quote": "We booked for an anniversary and left already planning the next visit. Effortless from start to finish." },
+      { "name": "Priya Nair", "city": "Austin, TX", "quote": "You can taste the freshness in everything. The wood-fired grill alone is worth the trip." }
+    ]
+  },
+  "awards": [
+    { "icon": "🏆", "value": "9", "label": "Culinary awards" },
+    { "icon": "⭐", "value": "4.9", "label": "Average rating" },
+    { "icon": "🍽", "value": "500k", "label": "Plates served" },
+    { "icon": "🌿", "value": "100%", "label": "Fresh sourcing" }
+  ],
+  "cta": {
+    "title": "Hungry yet? Let's set your table.",
+    "sub": "Whether it's a quiet dinner for two or a long table for the whole crew, we'd love to cook for you.",
+    "button": "Book your table",
+    "art": "🍷🍝"
+  },
+  "footer": {
+    "about": "Where honest ingredients meet unhurried cooking. A neighbourhood kitchen crafting plates worth lingering over.",
+    "socials": ["f", "◎", "▶", "𝕏"],
+    "columns": [
+      { "title": "Explore", "links": ["Home", "About us", "Full menu", "Our chefs", "Journal"] },
+      { "title": "Support", "links": ["FAQ", "Contact", "Reservations", "Private events"] }
+    ],
+    "hours": {
+      "title": "Opening hours",
+      "rows": [
+        { "day": "Mon – Thu", "time": "11am – 11pm" },
+        { "day": "Fri – Sat", "time": "11am – 12am" },
+        { "day": "Sunday", "time": "12pm – 10pm" }
+      ]
+    },
+    "copyright": "© 2025 🍴 Tavola. All rights reserved.",
+    "tagline": "Crafted with care, served with joy."
+  }
+}

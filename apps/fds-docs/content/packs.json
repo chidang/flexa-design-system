@@ -1,0 +1,283 @@
+{
+  "title": "Starter packs",
+  "tagline": "One core design system, sixteen brand personalities.",
+  "intro": "A pack is not a template. It is a tiny Brand — a couple of colors, a font pairing, a rounding feel — that the pure `applyBrand` function turns into a complete, WCAG-checked theme. Every card below is derived live at build time from the brand shown beneath it: same components, same spacing, same accessibility rules. Only the personality changes.",
+  "principles": [
+    "Don't design 20 design systems — design 1 core system and 20 brand personalities.",
+    "Packs differ only in colors, typography, radius, shadow and mood — never in layout logic, component behavior or API.",
+    "Every first-party pack passes the WCAG 2.2 AA contrast gate through applyBrand — accessibility is derived, not decorated.",
+    "Generic first (the seven packs that fit most sites), then broad industries — no hyper-niche one-offs.",
+    "Taste bar: Modern, Clean, Professional, Premium, Timeless. No glassmorphism, neumorphism or brutalism defaults."
+  ],
+  "curationNote": "These mirror the starter packs Flexa Builder ships; the curation SSOT is design-pack-philosophy.md.",
+  "groups": [
+    {
+      "key": "generic",
+      "title": "Generic",
+      "blurb": "Seven packs that serve most sites out of the box."
+    },
+    {
+      "key": "industry",
+      "title": "Industry",
+      "blurb": "Nine broad industry personalities — a starting point, not a straitjacket."
+    }
+  ],
+  "packs": [
+    {
+      "id": "modern",
+      "name": "Modern",
+      "group": "generic",
+      "description": "Friendly indigo, generous rounding — product sites and startups.",
+      "tags": ["startup", "saas", "tech"],
+      "personality": "Modern",
+      "brand": {
+        "primaryColor": "#4f46e5",
+        "secondaryColor": "#14b8a6",
+        "headingFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "bodyFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "radius": "lg",
+        "containerWidth": "1024px"
+      }
+    },
+    {
+      "id": "minimal",
+      "name": "Minimal",
+      "group": "generic",
+      "description": "Near-black on white, zero rounding — portfolios and editorial.",
+      "tags": ["portfolio", "agency"],
+      "personality": "Elegant",
+      "brand": {
+        "primaryColor": "#111827",
+        "secondaryColor": "#6b7280",
+        "headingFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "bodyFont": "'Segoe UI', Tahoma, Verdana, sans-serif",
+        "radius": "none",
+        "containerWidth": "768px"
+      }
+    },
+    {
+      "id": "agency",
+      "name": "Agency",
+      "group": "generic",
+      "description": "Bold orange, big shapes — creative studios that want to be seen.",
+      "tags": ["agency", "portfolio"],
+      "personality": "Creative",
+      "brand": {
+        "primaryColor": "#f97316",
+        "secondaryColor": "#0ea5e9",
+        "headingFont": "'Avenir Next', 'Century Gothic', Futura, sans-serif",
+        "bodyFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "radius": "xl",
+        "containerWidth": "1280px"
+      }
+    },
+    {
+      "id": "corporate",
+      "name": "Corporate",
+      "group": "generic",
+      "description": "Trustworthy navy, serif headings — finance, legal, consulting.",
+      "tags": ["finance", "consulting", "law"],
+      "personality": "Corporate",
+      "brand": {
+        "primaryColor": "#1d4ed8",
+        "secondaryColor": "#0f766e",
+        "headingFont": "Georgia, 'Times New Roman', serif",
+        "bodyFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "radius": "sm",
+        "containerWidth": "1024px"
+      }
+    },
+    {
+      "id": "startup",
+      "name": "Startup",
+      "group": "generic",
+      "description": "Approachable blue with an energetic accent — launch-ready product sites.",
+      "tags": ["startup", "tech"],
+      "personality": "Friendly",
+      "brand": {
+        "primaryColor": "#2563eb",
+        "secondaryColor": "#f97316",
+        "headingFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "bodyFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "radius": "lg",
+        "containerWidth": "1024px"
+      }
+    },
+    {
+      "id": "saas",
+      "name": "SaaS",
+      "group": "generic",
+      "description": "Confident violet, tidy spacing — dashboards, docs and pricing pages.",
+      "tags": ["saas", "tech"],
+      "personality": "Professional",
+      "brand": {
+        "primaryColor": "#6d28d9",
+        "secondaryColor": "#0d9488",
+        "headingFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "bodyFont": "'Segoe UI', Tahoma, Verdana, sans-serif",
+        "radius": "md",
+        "containerWidth": "1024px"
+      }
+    },
+    {
+      "id": "portfolio",
+      "name": "Portfolio",
+      "group": "generic",
+      "description": "Quiet charcoal with a warm accent — let the work speak.",
+      "tags": ["portfolio", "agency"],
+      "personality": "Creative",
+      "brand": {
+        "primaryColor": "#292524",
+        "secondaryColor": "#d97706",
+        "headingFont": "Georgia, 'Times New Roman', serif",
+        "bodyFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "radius": "sm",
+        "containerWidth": "768px"
+      }
+    },
+    {
+      "id": "restaurant",
+      "name": "Restaurant",
+      "group": "industry",
+      "description": "Warm terracotta, serif menus — bistros, cafés and bookings.",
+      "tags": ["restaurant"],
+      "personality": "Friendly",
+      "brand": {
+        "primaryColor": "#9a3412",
+        "secondaryColor": "#15803d",
+        "headingFont": "Georgia, 'Times New Roman', serif",
+        "bodyFont": "'Segoe UI', Tahoma, Verdana, sans-serif",
+        "radius": "md",
+        "containerWidth": "1024px"
+      }
+    },
+    {
+      "id": "healthcare",
+      "name": "Healthcare",
+      "group": "industry",
+      "description": "Calm clinical teal — clinics, dentists and wellness practices.",
+      "tags": ["healthcare"],
+      "personality": "Professional",
+      "brand": {
+        "primaryColor": "#0e7490",
+        "secondaryColor": "#2563eb",
+        "headingFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "bodyFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "radius": "lg",
+        "containerWidth": "1024px"
+      }
+    },
+    {
+      "id": "beauty",
+      "name": "Beauty",
+      "group": "industry",
+      "description": "Soft rose and elegant serifs — salons, spas and skincare.",
+      "tags": ["beauty"],
+      "personality": "Elegant",
+      "brand": {
+        "primaryColor": "#be185d",
+        "secondaryColor": "#b45309",
+        "headingFont": "Georgia, 'Times New Roman', serif",
+        "bodyFont": "'Segoe UI', Tahoma, Verdana, sans-serif",
+        "radius": "xl",
+        "containerWidth": "768px"
+      }
+    },
+    {
+      "id": "education",
+      "name": "Education",
+      "group": "industry",
+      "description": "Clear, friendly blue — schools, courses and e-learning.",
+      "tags": ["education"],
+      "personality": "Friendly",
+      "brand": {
+        "primaryColor": "#0369a1",
+        "secondaryColor": "#16a34a",
+        "headingFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "bodyFont": "'Segoe UI', Tahoma, Verdana, sans-serif",
+        "radius": "lg",
+        "containerWidth": "1024px"
+      }
+    },
+    {
+      "id": "hotel",
+      "name": "Hotel",
+      "group": "industry",
+      "description": "Deep emerald and gold — hotels, resorts and fine stays.",
+      "tags": ["hotel"],
+      "personality": "Luxury",
+      "brand": {
+        "primaryColor": "#065f46",
+        "secondaryColor": "#b45309",
+        "headingFont": "Georgia, 'Times New Roman', serif",
+        "bodyFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "radius": "sm",
+        "containerWidth": "1280px"
+      }
+    },
+    {
+      "id": "realestate",
+      "name": "Real Estate",
+      "group": "industry",
+      "description": "Solid, trustworthy blue — listings, agencies and developments.",
+      "tags": ["realestate"],
+      "personality": "Professional",
+      "brand": {
+        "primaryColor": "#1e40af",
+        "secondaryColor": "#0d9488",
+        "headingFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "bodyFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "radius": "sm",
+        "containerWidth": "1280px"
+      }
+    },
+    {
+      "id": "law",
+      "name": "Law",
+      "group": "industry",
+      "description": "Deep navy and serif authority — firms, chambers and advisors.",
+      "tags": ["law", "finance"],
+      "personality": "Corporate",
+      "brand": {
+        "primaryColor": "#1e3a8a",
+        "secondaryColor": "#be123c",
+        "headingFont": "Georgia, 'Times New Roman', serif",
+        "bodyFont": "'Segoe UI', Tahoma, Verdana, sans-serif",
+        "radius": "none",
+        "containerWidth": "1024px"
+      }
+    },
+    {
+      "id": "fitness",
+      "name": "Fitness",
+      "group": "industry",
+      "description": "High-energy red, bold shapes — gyms, coaches and studios.",
+      "tags": ["fitness"],
+      "personality": "Playful",
+      "brand": {
+        "primaryColor": "#b91c1c",
+        "secondaryColor": "#111827",
+        "headingFont": "'Avenir Next', 'Century Gothic', Futura, sans-serif",
+        "bodyFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "radius": "xl",
+        "containerWidth": "1024px"
+      }
+    },
+    {
+      "id": "ecommerce",
+      "name": "Ecommerce",
+      "group": "industry",
+      "description": "Conversion-friendly green with a clear action accent — shops and catalogs.",
+      "tags": ["ecommerce"],
+      "personality": "Friendly",
+      "brand": {
+        "primaryColor": "#15803d",
+        "secondaryColor": "#ea580c",
+        "headingFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "bodyFont": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        "radius": "md",
+        "containerWidth": "1280px"
+      }
+    }
+  ]
+}
