@@ -8,6 +8,12 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { FLEXA_UI_COMPONENTS, UI_CATEGORIES } from '../src/registry';
+import {
+  SHOWCASE_GRID_COLS,
+  SHOWCASE_LAUNCH,
+  SHOWCASE_READABLE,
+  SHOWCASE_WIDE,
+} from '../src/showcase-layout';
 import * as ENUMS from '../src/enums';
 
 const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
@@ -54,5 +60,24 @@ describe('showcase-registry', () => {
 
   it('has at least the seed component', () => {
     expect(FLEXA_UI_COMPONENTS.length).toBeGreaterThan(0);
+  });
+
+  it('every showcase-layout slug exists in the registry', () => {
+    const slugs = new Set(FLEXA_UI_COMPONENTS.map((c) => c.slug));
+    const referenced = [
+      ...SHOWCASE_LAUNCH,
+      ...SHOWCASE_WIDE,
+      ...SHOWCASE_READABLE,
+      ...SHOWCASE_GRID_COLS.keys(),
+    ];
+    for (const slug of referenced) {
+      expect(slugs.has(slug), `showcase-layout references unknown slug "${slug}"`).toBe(true);
+    }
+  });
+
+  it('wide and readable placements are disjoint', () => {
+    for (const slug of SHOWCASE_WIDE) {
+      expect(SHOWCASE_READABLE.has(slug), `"${slug}" is both wide and readable`).toBe(false);
+    }
   });
 });

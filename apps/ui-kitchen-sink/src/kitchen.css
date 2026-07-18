@@ -1,0 +1,210 @@
+/* Workbench chrome — styled with FDS tokens like the rest of Flexa. The preview
+   area (.ks-main) carries [data-fx-theme="kitchen"] so component vars there come
+   from the live ThemeBar, while the chrome uses the page :root theme. */
+:root {
+  color-scheme: light;
+  font-family: var(--fx-font-family-base, system-ui, sans-serif);
+}
+* { box-sizing: border-box; }
+/* Page colours live on <body>, not :root — App.tsx mirrors the live theme onto
+   <body>, so vars here follow the scheme; on <html> they'd stay light and the
+   (transparent) chrome nav would sit on a white page in dark mode. */
+body {
+  margin: 0;
+  color: var(--fx-color-text, #1a1a1a);
+  background: var(--fx-color-bg, #ffffff);
+}
+body[data-fx-scheme='dark'] { color-scheme: dark; }
+
+.ks-themebar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-5, 1.5rem);
+  padding: var(--fx-space-3, 0.75rem) var(--fx-space-5, 1.5rem);
+  background: var(--fx-color-surface, #f6f6f7);
+  border-bottom: 1px solid var(--fx-color-border, #e2e2e5);
+}
+.ks-themebar label { display: flex; align-items: center; gap: var(--fx-space-2, 0.5rem); font-size: 0.85rem; }
+.ks-brand { margin-right: auto; font-size: 1rem; }
+
+.ks-body { display: flex; align-items: flex-start; }
+
+.ks-nav {
+  position: sticky;
+  top: 57px;
+  flex: none;
+  width: 240px;
+  max-height: calc(100vh - 57px);
+  overflow-y: auto;
+  padding: var(--fx-space-4, 1rem);
+  border-right: 1px solid var(--fx-color-border, #e2e2e5);
+}
+.ks-nav-group { margin-bottom: var(--fx-space-4, 1rem); }
+.ks-nav-title {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fx-color-text-muted, #6b7280);
+  margin-bottom: var(--fx-space-2, 0.5rem);
+}
+.ks-nav a,
+.ks-nav-link {
+  display: block;
+  width: 100%;
+  padding: var(--fx-space-1, 0.25rem) 0;
+  color: var(--fx-color-text, #1a1a1a);
+  text-decoration: none;
+}
+.ks-nav-link {
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.ks-nav a:hover,
+.ks-nav-link:hover { color: var(--fx-color-primary, #4f46e5); }
+/* Scrollspy: the section currently under the reading line. */
+.ks-nav-link[aria-current='true'] {
+  color: var(--fx-color-primary, #4f46e5);
+  font-weight: 600;
+}
+
+.ks-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  /* Clip so a too-wide demo (a table/board in a full-row cell) scrolls inside
+     its own cell instead of giving the whole page a horizontal scrollbar. */
+  overflow-x: clip;
+  padding: var(--fx-space-6, 2rem);
+  background: var(--fx-color-bg);
+  color: var(--fx-color-text);
+}
+
+/* scroll-margin keeps a jumped-to heading clear of the sticky theme bar. */
+.ks-component { padding-bottom: var(--fx-space-7, 3rem); scroll-margin-top: 72px; }
+.ks-component-head { display: flex; align-items: center; gap: var(--fx-space-3, 0.75rem); }
+.ks-component-head h2 { margin: 0; }
+.ks-slice, .ks-stub {
+  font-size: 0.7rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--fx-radius-sm, 4px);
+  background: var(--fx-color-surface-alt, #eee);
+  color: var(--fx-color-text-muted, #6b7280);
+}
+.ks-stub { background: var(--fx-color-warning, #f59e0b); color: #fff; }
+.ks-tagline { color: var(--fx-color-text-muted, #6b7280); margin: 0.25rem 0 1rem; }
+
+.ks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--fx-space-4, 1rem);
+}
+/* Fixed 3-up (desktop) → 2-up (tablet) → 1-up (mobile) for components whose
+   variants need more room than the auto-fill narrow columns give (e.g. Tree). */
+.ks-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1024px) {
+  .ks-grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .ks-grid-3 { grid-template-columns: minmax(0, 1fr); }
+}
+
+.ks-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 640px) {
+  .ks-grid-2 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Fixed 4-up (desktop) → 3-up → 2-up → 1-up for compact variants that still
+   read badly in the auto-fill columns (e.g. Rating). */
+.ks-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1280px) {
+  .ks-grid-4 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 1024px) {
+  .ks-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .ks-grid-4 { grid-template-columns: minmax(0, 1fr); }
+}
+
+.ks-cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2, 0.5rem);
+  padding: var(--fx-space-4, 1rem);
+  border: 1px solid var(--fx-color-border, #e2e2e5);
+  border-radius: var(--fx-radius-md, 8px);
+  background: var(--fx-color-surface, #f9f9fa);
+}
+/* Wide components (wizards, tables, boards, feeds) get the full grid row so
+   their horizontal layout has room instead of overlapping in a narrow cell. */
+.ks-cell-wide { grid-column: 1 / -1; min-width: 0; }
+.ks-cell-wide .ks-stage { display: block; overflow-x: auto; }
+
+/* Content cards / banners (AI suggestion card, alert) read badly in a narrow
+   cell — give each its own row, but cap the demo width so it stays a readable
+   card instead of stretching edge to edge. */
+.ks-cell-readable { grid-column: 1 / -1; }
+.ks-cell-readable .ks-stage { display: block; }
+.ks-cell-readable .ks-stage > * { max-width: 32rem; }
+
+.ks-stage { display: flex; align-items: center; justify-content: center; min-height: 56px; min-width: 0; }
+/* Keep a demo whose root sizes to its content (e.g. a fixed-width skeleton
+   shimmer) from bleeding past its cell into the neighbouring column. */
+.ks-stage > * { max-width: 100%; }
+.ks-cell-label { font-size: 0.78rem; color: var(--fx-color-text-muted, #6b7280); text-align: center; }
+.ks-cell-note { font-size: 0.72rem; color: var(--fx-color-text-muted, #6b7280); text-align: center; }
+
+/* Launcher — for demos that open an overlay / fixed / full-page surface which
+   would otherwise escape the grid cell. Opens one at a time in .ks-preview. */
+.ks-launch {
+  padding: var(--fx-space-2, 0.5rem) var(--fx-space-4, 1rem);
+  border: 1px dashed var(--fx-color-border-strong, #c7c7cc);
+  border-radius: var(--fx-radius-md, 8px);
+  background: var(--fx-color-surface-alt, #eee);
+  color: var(--fx-color-text, #1a1a1a);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.ks-launch:hover { border-color: var(--fx-color-primary, #4f46e5); color: var(--fx-color-primary, #4f46e5); }
+
+/* Full-screen themed surface hosting a single launched demo. */
+.ks-preview {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  background: var(--fx-color-bg, #ffffff);
+  color: var(--fx-color-text, #1a1a1a);
+}
+.ks-preview-bar {
+  position: sticky;
+  top: 0;
+  z-index: 2147483000; /* above component overlays rendered inside the stage */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-4, 1rem);
+  padding: var(--fx-space-3, 0.75rem) var(--fx-space-5, 1.5rem);
+  background: var(--fx-color-surface, #f6f6f7);
+  border-bottom: 1px solid var(--fx-color-border, #e2e2e5);
+}
+.ks-preview-title { font-size: 0.9rem; color: var(--fx-color-text-muted, #6b7280); }
+.ks-preview-close {
+  padding: var(--fx-space-2, 0.5rem) var(--fx-space-4, 1rem);
+  border: 1px solid var(--fx-color-border, #e2e2e5);
+  border-radius: var(--fx-radius-md, 8px);
+  background: var(--fx-color-bg, #ffffff);
+  color: var(--fx-color-text, #1a1a1a);
+  font: inherit;
+  cursor: pointer;
+}
+.ks-preview-close:hover { border-color: var(--fx-color-primary, #4f46e5); color: var(--fx-color-primary, #4f46e5); }
+.ks-preview-stage { position: relative; flex: 1 1 auto; overflow: auto; padding: var(--fx-space-6, 2rem); }

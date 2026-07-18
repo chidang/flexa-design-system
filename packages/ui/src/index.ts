@@ -627,3 +627,13 @@ export {
   findComponent,
   componentsByCategory,
 } from './registry';
+export {
+  SHOWCASE_LAUNCH,
+  SHOWCASE_WIDE,
+  SHOWCASE_READABLE,
+  SHOWCASE_GRID_COLS,
+  showcaseLaunch,
+  showcaseCellKind,
+  showcaseGridCols,
+} from './showcase-layout';
+export type { ShowcaseCellKind } from './showcase-layout';
