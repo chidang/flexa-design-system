@@ -1,0 +1,5 @@
+{
+  "slug": "media-grid",
+  "tagline": "File-manager tile grid — selection, type icons and a per-item context menu.",
+  "whenToUse": "Use Media Grid as the browse-and-manage surface of a media library: a responsive tile grid where each item shows a thumbnail, a type icon, its name and size, with optional multi-selection checkboxes and a per-tile context menu. It is a `role=grid` with 2-D arrow roving. For simply viewing a curated set of images one at a time use Gallery; for uploading files use File Upload or Drag-Drop Upload; for dense tabular file lists use Data Grid."
+}

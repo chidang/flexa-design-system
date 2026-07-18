@@ -1,0 +1,5 @@
+{
+  "slug": "virtual-table",
+  "tagline": "FxTable API + row virtualization for 1k–100k rows.",
+  "whenToUse": "Use Virtual Table when the dataset is large enough (roughly 1k–100k rows) that rendering every row would stall the page — it keeps Table's column and selection API but renders only the visible window plus overscan. It adds the server-side select-all-matching contract (onSelectionChange(['*']) + selectedAllExcept) that the Bulk Actions Bar consumes. Prefer plain Table for small, fully-rendered lists, and Data Grid when you need cell editing or keyboard grid navigation rather than just scale."
+}

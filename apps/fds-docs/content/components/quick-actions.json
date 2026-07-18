@@ -1,0 +1,5 @@
+{
+  "slug": "quick-actions",
+  "tagline": "A promoted cluster of the highest-value actions for the context.",
+  "whenToUse": "Use quick actions to surface the 2–4 most frequent actions of a screen as always-visible entry points. Beyond four actions use a menu, and never duplicate the screen's single primary CTA."
+}

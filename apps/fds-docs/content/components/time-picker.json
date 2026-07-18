@@ -1,0 +1,5 @@
+{
+  "slug": "time-picker",
+  "tagline": "Pick a time of day from an interval listbox — value is a 24h 'HH:mm' string.",
+  "whenToUse": "Use for a time of day chosen from regular intervals — an appointment slot, an office-hours cutoff, an alarm. The popover is a scrollable listbox stepped by `step` minutes; typed entry parses \"9am\" or \"14:30\". For a date use the Date Picker; for a duration (not a clock time) a Number Input or Slider fits better."
+}

@@ -7,22 +7,16 @@ import {
   defaultTheme,
   tokenIdToCssVar,
 } from '../src/index.js';
-import type {
-  Diagnostic,
-  ContrastFailure,
-  ApcaFailure,
-  CvdFailure,
-  Theme,
-} from '../src/index.js';
+import type { ContrastFailure, ApcaFailure, CvdFailure, Theme } from '../src/index.js';
 
 /**
  * Accessibility diagnostics — Track D, doc 20. The three gates each hand back raw
  * failure records; this layer turns them into one actionable `Diagnostic` (which
  * standard, the numbers in that standard's unit, and a remedy pointing the fix).
  * These tests cover the per-record explainers over synthetic inputs and the
- * `diagnoseTheme` aggregate over real themes — including that it surfaces the
- * default theme's known deferred APCA finding in readable form (PR-4: add signal,
- * never hide it).
+ * `diagnoseTheme` aggregate over real themes — including that the shipped default
+ * theme now reports NOTHING (every standard clears after the 2.8.2 dark-accent
+ * re-tune), while a synthetic broken theme still surfaces grouped diagnostics.
  */
 
 describe('explainers — one failure record → one actionable Diagnostic', () => {
@@ -101,19 +95,12 @@ function setTokens(theme: Theme, overrides: Record<string, string>): Theme {
 }
 
 describe('diagnoseTheme — one call, every standard, actionable', () => {
-  it('surfaces the default theme\'s deferred APCA dark-accent finding — nothing else', () => {
-    // The WCAG and CVD gates clear the default palette; APCA flags the bright dark-mode
-    // accent labels (a known, deferred design finding). The diagnostics layer makes that
-    // finding readable without touching any gate.
+  it('reports nothing for the shipped default theme — every standard clears', () => {
+    // After the 2.8.2 dark-accent re-tune, all four standards (WCAG text + non-text,
+    // APCA, CVD) pass in every scheme, so the aggregate is empty. "Nothing to report"
+    // is the point of gating; a regression on any standard turns this red.
     const diags = diagnoseTheme(defaultTheme());
-    expect(diags.length).toBeGreaterThan(0);
-    expect(diags.every((d: Diagnostic) => d.standard === 'apca')).toBe(true);
-    expect(diags.every((d: Diagnostic) => d.scheme === 'dark')).toBe(true);
-    for (const d of diags) {
-      expect(d.tokens[0]).toMatch(/^color\.on-/);
-      expect(d.shortfall).toBeGreaterThan(0);
-      expect(d.remedy.length).toBeGreaterThan(0);
-    }
+    expect(diags).toEqual([]);
   });
 
   it('collects failures from all three standards in grouped order (WCAG, APCA, CVD)', () => {

@@ -1,0 +1,5 @@
+{
+  "slug": "bulk-actions-bar",
+  "tagline": "Selection toolbar — count, select-all-matching, actions + overflow.",
+  "whenToUse": "Use the Bulk Actions Bar above any list where users act on many rows at once: it shows the selection count, offers a \"Select all {total}\" affordance that consumes the Virtual Table '*' select-all-matching contract, and renders up to four action buttons plus an overflow menu. Destructive actions are marked danger and should be gated behind a Confirmation Dialog with the count in the title. It is a standalone toolbar — pair it with Table or Virtual Table, which own the row selection state it reflects."
+}

@@ -1,0 +1,162 @@
+/* Aggregate stylesheet — the `flexa-ui/styles.css` subpath export. Imports every
+   component's token-only CSS in dependency order. Consumers who tree-shake by
+   component can import the per-file CSS instead (published under dist/css/*).
+   Pure @import aggregator — the token-discipline gate skips this file. */
+
+/* Foundations */
+@import './icon/icon.css';
+
+/* U1 — Form primitives */
+@import './button/button.css';
+@import './input/input.css';
+@import './textarea/textarea.css';
+@import './checkbox/checkbox.css';
+@import './radio-group/radio-group.css';
+@import './switch/switch.css';
+@import './field-group/field-group.css';
+@import './validation-message/validation-message.css';
+
+/* U2 — Display primitives */
+@import './badge/badge.css';
+@import './tag/tag.css';
+@import './chip/chip.css';
+@import './avatar/avatar.css';
+@import './progress/progress.css';
+@import './skeleton/skeleton.css';
+@import './empty-state/empty-state.css';
+@import './card/card.css';
+@import './description-list/description-list.css';
+
+/* U3 — Overlays & layering */
+@import './toast/toast.css';
+@import './alert/alert.css';
+@import './confirmation-dialog/confirmation-dialog.css';
+@import './dialog/dialog.css';
+@import './right-drawer/right-drawer.css';
+@import './tooltip/tooltip.css';
+@import './loading-overlay/loading-overlay.css';
+
+/* U4 — Navigation */
+@import './tabs/tabs.css';
+@import './breadcrumb/breadcrumb.css';
+@import './pagination/pagination.css';
+@import './search-bar/search-bar.css';
+@import './command-palette/command-palette.css';
+@import './context-menu/context-menu.css';
+@import './sidebar/sidebar.css';
+@import './nested-sidebar/nested-sidebar.css';
+@import './top-navigation/top-navigation.css';
+@import './quick-actions/quick-actions.css';
+@import './fab/fab.css';
+
+/* U5 — Forms advanced */
+@import './select/select.css';
+@import './autocomplete/autocomplete.css';
+@import './tag-input/tag-input.css';
+@import './number-input/number-input.css';
+@import './currency-input/currency-input.css';
+@import './password-input/password-input.css';
+@import './email-input/email-input.css';
+@import './phone-input/phone-input.css';
+@import './url-input/url-input.css';
+@import './date-picker/date-picker.css';
+@import './time-picker/time-picker.css';
+@import './date-range-picker/date-range-picker.css';
+@import './slider/slider.css';
+@import './stepper/stepper.css';
+@import './color-picker/color-picker.css';
+@import './file-upload/file-upload.css';
+@import './drag-drop-upload/drag-drop-upload.css';
+@import './avatar-upload/avatar-upload.css';
+@import './image-gallery-upload/image-gallery-upload.css';
+@import './form-wizard/form-wizard.css';
+
+/* U6 — Data display */
+@import './table/table.css';
+@import './virtual-table/virtual-table.css';
+@import './data-grid/data-grid.css';
+@import './bulk-actions-bar/bulk-actions-bar.css';
+@import './list/list.css';
+@import './accordion/accordion.css';
+@import './tree/tree.css';
+@import './kanban-board/kanban-board.css';
+@import './calendar/calendar.css';
+@import './timeline/timeline.css';
+@import './gallery/gallery.css';
+@import './media-grid/media-grid.css';
+@import './statistic-block/statistic-block.css';
+@import './rating/rating.css';
+
+/* U7 — Layouts & dashboard */
+@import './metric-card/metric-card.css';
+@import './charts-container/charts-container.css';
+@import './statistics-card/statistics-card.css';
+@import './widget/widget.css';
+@import './app-shell/app-shell.css';
+@import './sidebar-layout/sidebar-layout.css';
+@import './top-navigation-layout/top-navigation-layout.css';
+@import './bottom-navigation/bottom-navigation.css';
+@import './content-area/content-area.css';
+@import './split-view/split-view.css';
+@import './wizard-layout/wizard-layout.css';
+@import './settings-layout/settings-layout.css';
+@import './authentication-layout/authentication-layout.css';
+@import './dashboard-layout/dashboard-layout.css';
+@import './blank-state-layout/blank-state-layout.css';
+@import './activity-feed/activity-feed.css';
+@import './recent-activity/recent-activity.css';
+@import './progress-summary/progress-summary.css';
+@import './quick-links/quick-links.css';
+
+/* U8 — Commerce */
+@import './product-card/product-card.css';
+@import './listing-card/listing-card.css';
+@import './pricing-card/pricing-card.css';
+@import './order-card/order-card.css';
+@import './invoice-card/invoice-card.css';
+@import './cart-summary/cart-summary.css';
+@import './checkout-summary/checkout-summary.css';
+@import './payment-status/payment-status.css';
+@import './shipping-timeline/shipping-timeline.css';
+@import './escrow-timeline/escrow-timeline.css';
+@import './review-card/review-card.css';
+@import './seller-card/seller-card.css';
+@import './buyer-card/buyer-card.css';
+@import './marketplace-statistics/marketplace-statistics.css';
+
+/* U9 — Collaboration & feedback */
+@import './chat/chat.css';
+@import './conversation-list/conversation-list.css';
+@import './comment-thread/comment-thread.css';
+@import './mention/mention.css';
+@import './notification-center/notification-center.css';
+@import './activity-timeline/activity-timeline.css';
+@import './audit-log/audit-log.css';
+@import './version-history/version-history.css';
+@import './error-page/error-page.css';
+@import './success-page/success-page.css';
+@import './warning-banner/warning-banner.css';
+@import './maintenance-banner/maintenance-banner.css';
+@import './offline-state/offline-state.css';
+@import './inline-error/inline-error.css';
+
+/* U10 — Admin & System */
+@import './data-management-toolbar/data-management-toolbar.css';
+@import './advanced-filters/advanced-filters.css';
+@import './saved-filters/saved-filters.css';
+@import './role-badge/role-badge.css';
+@import './permission-matrix/permission-matrix.css';
+@import './audit-timeline/audit-timeline.css';
+@import './system-logs/system-logs.css';
+@import './queue-monitor/queue-monitor.css';
+@import './background-jobs-panel/background-jobs-panel.css';
+
+/* U10 — AI */
+@import './ai-assistant-panel/ai-assistant-panel.css';
+@import './prompt-input/prompt-input.css';
+@import './ai-suggestion-card/ai-suggestion-card.css';
+@import './ai-generation-status/ai-generation-status.css';
+@import './ai-confidence-indicator/ai-confidence-indicator.css';
+@import './ai-diff-viewer/ai-diff-viewer.css';
+@import './approve-reject-panel/approve-reject-panel.css';
+@import './ai-activity-history/ai-activity-history.css';

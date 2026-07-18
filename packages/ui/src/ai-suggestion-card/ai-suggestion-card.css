@@ -1,0 +1,130 @@
+/* FxAiSuggestionCard — token-only. AI accent = info family (no bespoke AI
+   color): border-start + sparkle in color.info, faint info tint background.
+   Destructive proposals shift the accent to warning. Applied state settles to a
+   quiet surface. The class rides on FxCard, so accents target both classes. */
+.fx-ai-suggestion-card.fx-card {
+  border-inline-start: 3px solid var(--fx-color-info);
+  background: var(--fx-color-info-soft);
+}
+/* The rows (head/content/confidence/rationale/actions) are FxCard body
+   children — the gap must live on the body, not the card root, or the rows
+   stack with nothing but line-height between them. */
+.fx-ai-suggestion-card .fx-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+}
+.fx-ai-suggestion-card.is-destructive.fx-card {
+  border-inline-start-color: var(--fx-color-warning);
+  background: var(--fx-color-warning-soft);
+}
+.fx-ai-suggestion-card.is-applied.fx-card {
+  background: var(--fx-color-surface);
+}
+
+.fx-ai-suggestion-card-head {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+.fx-ai-suggestion-card-sparkle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fx-color-info);
+}
+.fx-ai-suggestion-card.is-destructive .fx-ai-suggestion-card-sparkle {
+  color: var(--fx-color-warning);
+}
+
+.fx-ai-suggestion-card-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-0);
+  margin-inline-end: auto;
+  min-width: 0;
+}
+.fx-ai-suggestion-card-title {
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+.fx-ai-suggestion-card-kind {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-ai-suggestion-card-content {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+  line-height: var(--fx-line-height-normal);
+}
+
+.fx-ai-suggestion-card-rationale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+.fx-ai-suggestion-card-why {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-info);
+  font-family: inherit;
+  font-size: var(--fx-text-body-sm-size);
+  cursor: pointer;
+}
+.fx-ai-suggestion-card-why:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+.fx-ai-suggestion-card-why[aria-expanded='true'] .fx-ai-suggestion-card-why-icon {
+  transform: rotate(180deg);
+}
+.fx-ai-suggestion-card-rationale-text {
+  margin: 0;
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+  line-height: var(--fx-line-height-normal);
+}
+
+.fx-ai-suggestion-card-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+
+.fx-ai-suggestion-card-undo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-warning);
+  font-family: inherit;
+  font-size: var(--fx-text-body-sm-size);
+  cursor: pointer;
+}
+.fx-ai-suggestion-card-undo:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+.fx-ai-suggestion-card-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

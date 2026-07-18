@@ -1,0 +1,5 @@
+{
+  "slug": "product-card",
+  "tagline": "Storefront product tile — image, title link, price, rating and wishlist.",
+  "whenToUse": "Product Card is the storefront tile for a single catalogue item: media on top, a title link, price (with an optional struck compare-at price for sales), a read-only rating, and optional wishlist and add-to-cart actions — all inside Card chrome. The title link is the accessible action and sale pricing pairs the strikethrough with visually-hidden text, so nothing relies on colour alone. Reach for Listing Card when the item is a marketplace listing that also needs a status badge, view/favourite metrics, or owner actions; use a plain Card when you need a fully bespoke layout."
+}

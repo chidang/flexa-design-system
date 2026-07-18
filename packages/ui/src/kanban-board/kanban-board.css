@@ -1,0 +1,214 @@
+/* FxKanbanBoard (doc 04 §3.5) — horizontally scrollable columns of draggable
+   cards. Token-only: column bg color.surface-alt, radius radius.lg, padding
+   space.3; over-limit count color.danger; keyboard-drag indicator color.primary
+   2px. State via data-attributes and is- classes, never BEM modifiers on root. */
+
+.fx-kanban {
+  display: flex;
+  gap: var(--fx-space-3);
+  align-items: flex-start;
+  overflow-x: auto;
+  padding-bottom: var(--fx-space-2);
+}
+
+/* ── Column ─────────────────────────────────────────────────────────────── */
+.fx-kanban-column {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  width: 240px;
+  max-height: 100%;
+  padding: var(--fx-space-3);
+  background: var(--fx-color-surface-alt);
+  border-radius: var(--fx-radius-lg);
+  gap: var(--fx-space-3);
+}
+
+.fx-kanban-column-header {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+.fx-kanban-column-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-sm-size);
+  font-weight: var(--fx-text-heading-sm-weight);
+  line-height: var(--fx-text-heading-sm-line-height);
+  color: var(--fx-color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fx-kanban-column[data-tone] .fx-kanban-column-title {
+  border-inline-start: var(--fx-border-2) solid var(--fx-color-primary);
+  padding-inline-start: var(--fx-space-2);
+}
+.fx-kanban-column[data-tone='info'] .fx-kanban-column-title { border-color: var(--fx-color-info); }
+.fx-kanban-column[data-tone='success'] .fx-kanban-column-title { border-color: var(--fx-color-success); }
+.fx-kanban-column[data-tone='warning'] .fx-kanban-column-title { border-color: var(--fx-color-warning); }
+.fx-kanban-column[data-tone='danger'] .fx-kanban-column-title { border-color: var(--fx-color-danger); }
+
+.fx-kanban-count {
+  flex: 0 0 auto;
+}
+
+.fx-kanban-column-menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+  transition: background var(--fx-motion-duration-fast);
+}
+.fx-kanban-column-menu:hover {
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+}
+.fx-kanban-column-menu:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ── Column body / cards ────────────────────────────────────────────────── */
+.fx-kanban-column-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+  overflow-y: auto;
+}
+
+.fx-kanban-card {
+  position: relative;
+}
+
+/* Keyboard-drag lift indicator: 2px primary rail on the leading edge. */
+.fx-kanban-card[data-lifted]::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 2px;
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-color-primary);
+}
+.fx-kanban-card[data-lifted] .fx-card {
+  box-shadow: var(--fx-shadow-md);
+}
+
+.fx-kanban-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fx-space-2);
+}
+
+.fx-kanban-card-handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin-top: 2px;
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: grab;
+}
+.fx-kanban-card-handle:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+.fx-kanban-card-handle[aria-pressed='true'] {
+  color: var(--fx-color-primary);
+  cursor: grabbing;
+}
+
+.fx-kanban-card-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fx-kanban-card-title {
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-text-body-weight);
+  line-height: var(--fx-text-body-line-height);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text);
+}
+
+.fx-kanban-card-desc {
+  margin: var(--fx-space-1) 0 0;
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-kanban-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-2);
+  margin-top: var(--fx-space-2);
+}
+
+.fx-kanban-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-1);
+  min-width: 0;
+}
+
+/* ── Column footer add-button ───────────────────────────────────────────── */
+.fx-kanban-column-footer {
+  flex: 0 0 auto;
+}
+
+.fx-kanban-add {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  width: 100%;
+  padding: var(--fx-space-2);
+  border: 0;
+  border-radius: var(--fx-radius-md);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  cursor: pointer;
+  transition: background var(--fx-motion-duration-fast);
+}
+.fx-kanban-add:hover {
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+}
+.fx-kanban-add:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ── Live region (visually hidden) ──────────────────────────────────────── */
+.fx-kanban-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+}

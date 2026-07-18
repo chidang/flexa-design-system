@@ -1,0 +1,158 @@
+/* FxToast — token-only. One per-app region, fixed top-end (top full-width on
+   mobile). Layered above modal scrims (z.popover). Scheme-agnostic. */
+.fx-toast-region {
+  position: fixed;
+  inset-block-start: var(--fx-space-4);
+  inset-inline-end: var(--fx-space-4);
+  z-index: var(--fx-z-popover);
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+  width: 360px;
+  max-width: calc(100vw - var(--fx-space-8));
+  pointer-events: none;
+}
+
+@media (max-width: 480px) {
+  .fx-toast-region {
+    inset-inline: var(--fx-space-4);
+    width: auto;
+  }
+}
+
+.fx-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-3) var(--fx-space-4);
+  background: var(--fx-color-surface);
+  border-radius: var(--fx-radius-lg);
+  border-inline-start: 3px solid var(--fx-toast-accent, var(--fx-color-border-strong));
+  box-shadow: var(--fx-shadow-lg);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  pointer-events: auto;
+  animation: fx-toast-in var(--fx-motion-duration-normal) var(--fx-motion-easing-out);
+}
+
+.fx-toast[data-tone='info'] {
+  --fx-toast-accent: var(--fx-color-info);
+}
+.fx-toast[data-tone='success'] {
+  --fx-toast-accent: var(--fx-color-success);
+}
+.fx-toast[data-tone='warning'] {
+  --fx-toast-accent: var(--fx-color-warning);
+}
+.fx-toast[data-tone='danger'] {
+  --fx-toast-accent: var(--fx-color-danger);
+}
+
+.fx-toast-icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--fx-toast-accent, var(--fx-color-text-muted));
+}
+
+.fx-toast-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fx-toast-title {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  line-height: var(--fx-line-height-normal);
+}
+
+.fx-toast-description {
+  margin-top: var(--fx-space-1);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+  line-height: var(--fx-line-height-normal);
+}
+
+.fx-toast-action {
+  flex: none;
+  align-self: center;
+  padding: var(--fx-space-1) var(--fx-space-2);
+  background: transparent;
+  border: none;
+  border-radius: var(--fx-radius-sm);
+  color: var(--fx-color-primary);
+  font-family: inherit;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  cursor: pointer;
+}
+.fx-toast-action:hover {
+  background: var(--fx-color-surface-alt);
+}
+.fx-toast-action:active {
+  background: var(--fx-color-border);
+}
+.fx-toast-action:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-toast-dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--fx-radius-sm);
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-toast-dismiss:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-toast-dismiss:active {
+  background: var(--fx-color-border);
+}
+.fx-toast-dismiss:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+@keyframes fx-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--fx-space-4)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-toast {
+    animation-name: fx-toast-fade;
+    animation-duration: var(--fx-motion-duration-fast);
+  }
+}
+@keyframes fx-toast-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Tap target — see checkbox.css. */
+@media (pointer: coarse) {
+  .fx-toast-dismiss {
+    position: relative;
+  }
+  .fx-toast-dismiss::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: max(100%, var(--fx-size-tap));
+    height: max(100%, var(--fx-size-tap));
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "checkout-summary",
+  "tagline": "Read-only order recap at checkout — sticky aside, host renders the pay button.",
+  "whenToUse": "Checkout Summary is the order recap shown alongside the checkout form: it composes Cart Summary in read-only mode (no steppers, no remove) and adds shipping/payment recap sections, each with an Edit link that jumps back to the matching wizard step. The host supplies the actual pay button through the placeOrder slot, since that is payment-SDK territory. It becomes a sticky aside from 1024px and collapses into a disclosure above the form on mobile. Reach for Cart Summary when the shopper is still editing quantities; reach for Checkout Summary once they are confirming and paying."
+}

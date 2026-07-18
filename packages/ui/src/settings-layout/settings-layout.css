@@ -1,0 +1,125 @@
+/* FxSettingsLayout (doc 04 §3.1) — two-pane settings shell. Token-only: nav
+   width 240px, active link color.primary, save bar surface + top divider. The
+   save bar slides up when [data-dirty]; state via data-attributes, not BEM. */
+
+.fx-settings-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100%;
+  background: var(--fx-color-bg);
+}
+
+/* ── Nav ────────────────────────────────────────────────────────────────── */
+.fx-settings-nav {
+  border-right: 1px solid var(--fx-color-border);
+  padding: var(--fx-space-4) var(--fx-space-2);
+  background: var(--fx-color-surface);
+}
+
+.fx-settings-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+
+.fx-settings-nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-2) var(--fx-space-3);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  text-decoration: none;
+}
+
+.fx-settings-nav-link:hover {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-settings-nav-link:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-settings-nav-link[data-active] {
+  color: var(--fx-color-primary);
+  font-weight: var(--fx-font-weight-medium);
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-settings-nav-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--fx-color-text-muted);
+}
+
+.fx-settings-nav-link[data-active] .fx-settings-nav-icon {
+  color: var(--fx-color-primary);
+}
+
+.fx-settings-nav-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Content ────────────────────────────────────────────────────────────── */
+.fx-settings-content {
+  min-width: 0;
+  padding: var(--fx-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-6);
+}
+
+/* ── Save bar ───────────────────────────────────────────────────────────── */
+.fx-settings-save-bar {
+  position: sticky;
+  bottom: 0;
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-4);
+  padding: var(--fx-space-3) var(--fx-space-6);
+  border-top: 1px solid var(--fx-color-border);
+  background: var(--fx-color-surface);
+  box-shadow: var(--fx-shadow-md);
+  animation: fx-settings-save-in var(--fx-motion-duration-normal) var(--fx-motion-easing-out);
+}
+
+.fx-settings-save-message {
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-text);
+}
+
+.fx-settings-save-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+@keyframes fx-settings-save-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-settings-save-bar {
+    animation: none;
+  }
+}

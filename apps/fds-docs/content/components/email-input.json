@@ -1,0 +1,5 @@
+{
+  "slug": "email-input",
+  "tagline": "Single-address email entry with optional \"did you mean …?\" suggestions.",
+  "whenToUse": "Use for one email address with the right keyboard, autofill and validity hints; pass domainSuggestions to catch common typos. For entering several addresses at once use the Tag Input with a tag validator instead."
+}

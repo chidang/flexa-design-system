@@ -1,0 +1,79 @@
+/* FxBuyerCard — token-only. A buyer identity panel inside FxCard chrome: an
+   avatar + name + verified badge header, a stat row (orders · dispute rate in the
+   admin perspective) built from FxStatisticBlocks, and a member-since line. No
+   store link (a buyer has no storefront). The compact variant is an inline
+   byline for an Order Detail row (no Card chrome). */
+.fx-buyer-card .fx-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+}
+
+.fx-buyer-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-3);
+}
+
+.fx-buyer-card-identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  min-inline-size: 0;
+}
+
+.fx-buyer-card-name-row,
+.fx-buyer-card-byline-name {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  flex-wrap: wrap;
+}
+
+.fx-buyer-card-name {
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-sm-size);
+  font-weight: var(--fx-text-heading-sm-weight);
+  line-height: var(--fx-text-heading-sm-line-height);
+  color: var(--fx-color-text);
+}
+
+.fx-buyer-card-badge {
+  flex: none;
+}
+
+.fx-buyer-card-member {
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-buyer-card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-5);
+}
+
+.fx-buyer-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+
+/* Compact byline (Order Detail row) — no Card chrome. */
+.fx-buyer-card.is-compact {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-3);
+}
+
+.fx-buyer-card.is-compact .fx-buyer-card-name {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-text-label-weight);
+  line-height: var(--fx-text-label-line-height);
+}
+
+.fx-buyer-card.is-compact .fx-buyer-card-actions {
+  margin-inline-start: auto;
+}

@@ -1,0 +1,180 @@
+/* FxReviewCard — token-only. A review inside FxCard chrome: an identity header
+   (avatar + author + rating + date + verified badge), a CSS-clamped body with an
+   inert "Read more" affordance, optional image gallery, an inset seller-response
+   block, and a footer (helpful button + report menu). */
+.fx-review-card .fx-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+}
+
+.fx-review-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fx-space-3);
+}
+
+.fx-review-card-identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  min-inline-size: 0;
+  flex: 1 1 auto;
+}
+
+.fx-review-card-author {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-text-label-weight);
+  line-height: var(--fx-text-label-line-height);
+  color: var(--fx-color-text);
+}
+.fx-review-card-author a {
+  color: inherit;
+  text-decoration: none;
+}
+.fx-review-card-author a:hover {
+  text-decoration: underline;
+}
+
+.fx-review-card-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  flex-wrap: wrap;
+}
+
+.fx-review-card-date {
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-review-card-verified {
+  flex: none;
+}
+
+.fx-review-card-title {
+  margin: 0;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-text-label-weight);
+  line-height: var(--fx-text-label-line-height);
+  color: var(--fx-color-text);
+}
+
+.fx-review-card-text {
+  margin: 0;
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-text-body-weight);
+  line-height: var(--fx-text-body-line-height);
+  color: var(--fx-color-text);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--fx-review-card-clamp, 4);
+  overflow: hidden;
+}
+
+.fx-review-card-readmore {
+  align-self: flex-start;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-primary);
+  cursor: pointer;
+}
+.fx-review-card-readmore:hover {
+  text-decoration: underline;
+}
+.fx-review-card-readmore:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-review-card-images {
+  margin-block-start: var(--fx-space-1);
+}
+
+.fx-review-card-response {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  padding: var(--fx-space-3);
+  background: var(--fx-color-surface-alt);
+  border-radius: var(--fx-radius-md);
+  border-inline-start: 2px solid var(--fx-color-border);
+}
+
+.fx-review-card-response-title {
+  margin: 0;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-text-label-weight);
+  line-height: var(--fx-text-label-line-height);
+  color: var(--fx-color-text);
+}
+.fx-review-card-response-body {
+  margin: 0;
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-text);
+}
+.fx-review-card-response-date {
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-review-card-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+.fx-review-card-helpful,
+.fx-review-card-respond {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  padding: var(--fx-space-1) var(--fx-space-2);
+  background: none;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-review-card-helpful:hover,
+.fx-review-card-respond:hover {
+  color: var(--fx-color-text);
+  border-color: var(--fx-color-text-subtle);
+}
+.fx-review-card-helpful:focus-visible,
+.fx-review-card-respond:focus-visible,
+.fx-review-card-report:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-review-card-report {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 32px;
+  block-size: 32px;
+  background: none;
+  border: none;
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-review-card-report:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}

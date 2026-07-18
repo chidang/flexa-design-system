@@ -1,0 +1,93 @@
+/* FxAiConfidenceIndicator — token-only. A 3-segment meter (filled per band) +
+   band label + optional info tooltip. Tone: low=danger, medium=warning,
+   high=success; empty segments = surface-alt. Never colour-only (label/tooltip
+   always accompanies the meter). */
+.fx-ai-confidence-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-ai-confidence-indicator-meter {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+}
+
+.fx-ai-confidence-indicator-seg {
+  display: block;
+  width: 16px;
+  height: 3px;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface-alt);
+}
+.fx-ai-confidence-indicator[data-size='sm'] .fx-ai-confidence-indicator-seg {
+  width: 16px;
+  height: 2px;
+}
+
+/* Filled segments carry the band tone. */
+.fx-ai-confidence-indicator[data-tone='danger'] .fx-ai-confidence-indicator-seg[data-filled] {
+  background: var(--fx-color-danger);
+}
+.fx-ai-confidence-indicator[data-tone='warning'] .fx-ai-confidence-indicator-seg[data-filled] {
+  background: var(--fx-color-warning);
+}
+.fx-ai-confidence-indicator[data-tone='success'] .fx-ai-confidence-indicator-seg[data-filled] {
+  background: var(--fx-color-success);
+}
+
+.fx-ai-confidence-indicator-label {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text);
+}
+.fx-ai-confidence-indicator[data-size='sm'] .fx-ai-confidence-indicator-label {
+  font-size: var(--fx-text-caption-size);
+}
+
+/* dots variant: circular pips instead of bars. */
+.fx-ai-confidence-indicator[data-variant='dots'] .fx-ai-confidence-indicator-seg {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--fx-radius-full);
+}
+.fx-ai-confidence-indicator[data-variant='dots'][data-size='sm'] .fx-ai-confidence-indicator-seg {
+  width: 16px;
+  height: 16px;
+}
+
+/* inline variant: label leads, meter trails, tighter framing. */
+.fx-ai-confidence-indicator[data-variant='inline'] {
+  gap: var(--fx-space-1);
+}
+
+/* badge variant: tinted pill wrapping meter + label. */
+.fx-ai-confidence-indicator[data-variant='badge'] {
+  padding: var(--fx-space-1) var(--fx-space-2);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-info-soft);
+  border: 1px solid var(--fx-color-border);
+}
+
+.fx-ai-confidence-indicator-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--fx-radius-full);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: help;
+}
+.fx-ai-confidence-indicator-info:hover {
+  color: var(--fx-color-text);
+}
+.fx-ai-confidence-indicator-info:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}

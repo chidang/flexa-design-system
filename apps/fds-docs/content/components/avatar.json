@@ -1,0 +1,5 @@
+{
+  "slug": "avatar",
+  "tagline": "A user or entity avatar — image, initials, or icon fallback.",
+  "whenToUse": "Use an avatar to represent a person or entity by photo, with a deterministic initials fallback when no image loads. It is non-interactive on its own — wrap it in a button or link for actions."
+}

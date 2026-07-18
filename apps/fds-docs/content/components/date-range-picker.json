@@ -1,0 +1,5 @@
+{
+  "slug": "date-range-picker",
+  "tagline": "Pick a start and end date across one or two months, with quick presets.",
+  "whenToUse": "Use for a bounded date interval — a booking, a report window, a stay. First pick sets the start, second sets the end (auto-swapped if earlier); presets like \"Last 30 days\" short-cut common ranges. For a single date use the Date Picker. onChange fires only when the pair is complete or cleared."
+}

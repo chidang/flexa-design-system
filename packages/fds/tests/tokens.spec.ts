@@ -152,22 +152,45 @@ describe('emitThemeRoot — token set -> :root{} (Slice 1)', () => {
     ).toBe(':root{--fx-ref-easing-standard:cubic-bezier(0.2, 0, 0, 1)}');
   });
 
-  it('skips typography (multi-property, no single :root value)', () => {
+  it('expands typography per-property — size/weight/line-height, family omitted (FDS 2.10)', () => {
     const css = emitThemeRoot([
-      { cssVar: '--fx-text-body', type: 'typography', value: { fontSize: '{ref.font-size.base}' } },
+      {
+        cssVar: '--fx-text-body',
+        type: 'typography',
+        value: {
+          fontFamily: '{font.family-base}',
+          fontSize: '{ref.font-size.base}',
+          fontWeight: '{ref.font-weight.regular}',
+          lineHeight: '{ref.line-height.normal}',
+        },
+      },
       { cssVar: '--fx-color-text', type: 'color', value: '{ref.neutral.900}' },
     ]);
-    expect(css).toBe(':root{--fx-color-text:var(--fx-ref-neutral-900)}');
+    expect(css).toBe(
+      ':root{--fx-text-body-size:var(--fx-ref-font-size-base);' +
+        '--fx-text-body-weight:var(--fx-ref-font-weight-regular);' +
+        '--fx-text-body-line-height:var(--fx-ref-line-height-normal);' +
+        '--fx-color-text:var(--fx-ref-neutral-900)}',
+    );
+  });
+
+  it('typography: literal parts pass through, missing parts are skipped (FDS 2.10)', () => {
+    const css = emitThemeRoot([
+      { cssVar: '--fx-text-custom', type: 'typography', value: { fontSize: '1.25rem', lineHeight: 1.2 } },
+    ]);
+    expect(css).toBe(':root{--fx-text-custom-size:1.25rem;--fx-text-custom-line-height:1.2}');
   });
 
   it('emits the full default theme deterministically', () => {
     const css = emitThemeRoot(FDS_TOKENS);
     expect(css.startsWith(':root{')).toBe(true);
     expect(css.endsWith('}')).toBe(true);
-    // Every primitive color literal + every semantic alias is present; no typography var.
+    // Every primitive color literal + every semantic alias is present; typography
+    // composites appear as per-property vars only (FDS 2.10) — never bare.
     expect(css).toContain('--fx-ref-brand-600:#2563eb');
     expect(css).toContain('--fx-color-primary:var(--fx-ref-brand-600)');
-    expect(css).not.toContain('--fx-text-body');
+    expect(css).toContain('--fx-text-body-size:var(--fx-ref-font-size-base)');
+    expect(css).not.toContain('--fx-text-body:');
   });
 });
 

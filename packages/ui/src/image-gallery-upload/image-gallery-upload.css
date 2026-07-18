@@ -1,0 +1,168 @@
+/* FxImageGalleryUpload — token-only. A responsive grid of square image tiles
+   plus a trailing add-tile. Tile size uses rem (off the px ladder by design).
+   `data-lifted` marks the item currently held in the keyboard reorder protocol. */
+.fx-image-gallery-upload {
+  display: block;
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-image-gallery-upload[data-disabled] {
+  opacity: var(--fx-opacity-disabled);
+}
+
+.fx-image-gallery-upload-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: var(--fx-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fx-image-gallery-upload-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--fx-radius-md);
+  overflow: hidden;
+}
+
+.fx-image-gallery-upload-item[data-lifted] {
+  outline: 2px solid var(--fx-color-primary);
+  outline-offset: 2px;
+}
+
+.fx-image-gallery-upload-thumb {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fx-color-surface-alt);
+  border: 1px solid var(--fx-color-border);
+  border-radius: inherit;
+}
+
+.fx-image-gallery-upload-image {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.fx-image-gallery-upload-placeholder {
+  display: inline-flex;
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-image-gallery-upload-cover {
+  position: absolute;
+  inset-block-start: var(--fx-space-1);
+  inset-inline-start: var(--fx-space-1);
+}
+
+.fx-image-gallery-upload-progress {
+  position: absolute;
+  inset-inline: var(--fx-space-2);
+  inset-block-end: var(--fx-space-2);
+}
+
+.fx-image-gallery-upload-actions {
+  position: absolute;
+  inset-block-start: var(--fx-space-1);
+  inset-inline-end: var(--fx-space-1);
+  display: inline-flex;
+  gap: var(--fx-space-1);
+}
+
+.fx-image-gallery-upload-handle,
+.fx-image-gallery-upload-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text-muted);
+  box-shadow: var(--fx-shadow-sm);
+  cursor: pointer;
+}
+
+.fx-image-gallery-upload-handle {
+  cursor: grab;
+}
+
+.fx-image-gallery-upload-handle:hover:not(:disabled),
+.fx-image-gallery-upload-remove:hover:not(:disabled) {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+
+.fx-image-gallery-upload-remove:active:not(:disabled) {
+  background: var(--fx-color-border);
+}
+
+.fx-image-gallery-upload-handle[aria-pressed='true'] {
+  background: var(--fx-color-primary);
+  color: var(--fx-color-on-primary);
+}
+
+.fx-image-gallery-upload-handle:focus-visible,
+.fx-image-gallery-upload-remove:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-image-gallery-upload-handle:disabled,
+.fx-image-gallery-upload-remove:disabled {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-image-gallery-upload-add {
+  aspect-ratio: 1 / 1;
+}
+
+/* The add-tile hosts a DragDrop zone; make it fill the square. */
+.fx-image-gallery-upload-add .fx-drag-drop-upload,
+.fx-image-gallery-upload-add .fx-drag-drop-upload-zone {
+  block-size: 100%;
+}
+
+.fx-image-gallery-upload-add .fx-drag-drop-upload-zone {
+  min-block-size: 0;
+  padding: var(--fx-space-3);
+}
+
+.fx-image-gallery-upload-add .fx-drag-drop-upload-zone-hint,
+.fx-image-gallery-upload-add .fx-drag-drop-upload-zone-browse {
+  display: none;
+}
+
+.fx-image-gallery-upload-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Tap target — see checkbox.css. */
+@media (pointer: coarse) {
+  .fx-image-gallery-upload-remove {
+    position: relative;
+  }
+  .fx-image-gallery-upload-remove::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: max(100%, var(--fx-size-tap));
+    height: max(100%, var(--fx-size-tap));
+  }
+}

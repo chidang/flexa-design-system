@@ -22,7 +22,7 @@
  *   via a host-supplied `(id) => url | null` resolver; unresolved refs pass through.
  */
 
-import type { ControlDef, ElementManifest, FlexaNode } from './types.js';
+import type { ControlDef, ElementManifest, FlexaNode, Json } from './types.js';
 import type { ElementRegistry } from './registry.js';
 
 /** A setting value with this prefix is a reference into `FlexaProject.assets`, not a URL. */
@@ -58,23 +58,68 @@ export interface AssetRefUsage {
   id: string;
   /** Node carrying the reference. */
   nodeId: string;
-  /** Media-control setting key holding it. */
+  /**
+   * Setting key holding it — a media-control key for a top-level ref, or the
+   * REPEATER key when the ref lives inside one of its entries (see `index`/`field`).
+   */
   key: string;
+  /** For a ref inside a repeater entry: the entry index. Absent for a top-level control. */
+  index?: number;
+  /** For a ref inside a repeater entry: the media field name. Absent for a top-level control. */
+  field?: string;
 }
 
 /** `(declared asset id) => real URL`; null/empty leaves the placeholder untouched. */
 export type AssetResolver = (id: string) => string | null | undefined;
 
+/** One asset reference located on a node: a top-level control, or a repeater entry field. */
+interface RefEntry {
+  key: string;
+  id: string;
+  /** Present only when the ref lives inside a repeater entry. */
+  index?: number;
+  field?: string;
+}
+
+/** Media field names of a repeater control's item schema, in declaration order. */
+function repeaterMediaFields(control: ControlDef): string[] {
+  const fields = control.fields ?? {};
+  const out: string[] = [];
+  for (const [name, f] of Object.entries(fields)) {
+    if (ASSET_CONTROLS.has(f.type)) out.push(name);
+  }
+  return out;
+}
+
 /**
- * A node's un-ingested asset references — only media-control settings whose value is an
- * `asset:<id>` placeholder (a real URL is already ingested). Same selection drives
- * collect and apply.
+ * A node's un-ingested asset references — every `asset:<id>` placeholder on a media
+ * slot (a real URL is already ingested). Covers BOTH top-level media controls AND
+ * media fields inside a repeater's entries (e.g. a gallery's `images[].src`), so the
+ * host importer/preview resolve nested images too, not just top-level ones. Schema
+ * declaration order; within a repeater, entry order then media-field order. Same
+ * selection drives collect and apply.
  */
-function refEntries(node: FlexaNode, manifest: ElementManifest): Array<{ key: string; id: string }> {
-  const out: Array<{ key: string; id: string }> = [];
-  for (const key of assetKeys(manifest)) {
-    const id = parseAssetRef(node.settings?.[key]);
-    if (id !== null) out.push({ key, id });
+function refEntries(node: FlexaNode, manifest: ElementManifest): RefEntry[] {
+  const out: RefEntry[] = [];
+  for (const [key, control] of Object.entries(manifest.schema)) {
+    if (ASSET_CONTROLS.has(control.type)) {
+      const id = parseAssetRef(node.settings?.[key]);
+      if (id !== null) out.push({ key, id });
+      continue;
+    }
+    if (control.type !== 'repeater') continue;
+    const mediaFields = repeaterMediaFields(control);
+    if (mediaFields.length === 0) continue;
+    const list = node.settings?.[key];
+    if (!Array.isArray(list)) continue;
+    list.forEach((entry, index) => {
+      if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return;
+      const e = entry as Record<string, Json>;
+      for (const field of mediaFields) {
+        const id = parseAssetRef(e[field]);
+        if (id !== null) out.push({ key, id, index, field });
+      }
+    });
   }
   return out;
 }
@@ -89,8 +134,13 @@ export function collectAssetRefs(root: FlexaNode, registry: ElementRegistry): As
   const walk = (node: FlexaNode): void => {
     const manifest = registry.get(node.type);
     if (manifest) {
-      for (const { key, id } of refEntries(node, manifest)) {
-        uses.push({ id, nodeId: node.id, key });
+      for (const ent of refEntries(node, manifest)) {
+        const use: AssetRefUsage = { id: ent.id, nodeId: node.id, key: ent.key };
+        if (ent.index !== undefined) {
+          use.index = ent.index;
+          use.field = ent.field;
+        }
+        uses.push(use);
       }
     }
     for (const child of node.children ?? []) walk(child);
@@ -118,9 +168,22 @@ export function applyAssetUrls(
       const ent = refEntries(node, manifest);
       if (ent.length > 0) {
         settings = { ...node.settings };
-        for (const { key, id } of ent) {
-          const url = resolve(id);
-          if (url != null && url !== '') settings[key] = url;
+        for (const e of ent) {
+          const url = resolve(e.id);
+          if (url == null || url === '') continue;
+          if (e.index === undefined) {
+            settings[e.key] = url;
+          } else {
+            // Nested repeater field: clone the array + the target entry so the
+            // input tree stays pure (the shallow settings copy still aliases them).
+            const list = settings[e.key];
+            if (!Array.isArray(list)) continue;
+            const arr = list.slice();
+            const entry = arr[e.index];
+            if (!entry || typeof entry !== 'object' || Array.isArray(entry)) continue;
+            arr[e.index] = { ...(entry as Record<string, Json>), [e.field as string]: url };
+            settings[e.key] = arr;
+          }
         }
       }
     }

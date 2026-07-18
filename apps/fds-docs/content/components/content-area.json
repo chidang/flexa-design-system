@@ -1,0 +1,5 @@
+{
+  "slug": "content-area",
+  "tagline": "The routed page body — breadcrumb, page title, actions, and content.",
+  "whenToUse": "Content Area is the standard page body that sits inside App Shell: it renders the breadcrumb, the page h1 (focused on route change so screen readers announce the new page), the page-level action buttons, and the content. Use one per route. It caps content width and owns the single page title; nested sections use headings below it."
+}

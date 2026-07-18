@@ -1,0 +1,69 @@
+/* FxNestedSidebar — token-only. Extends FxSidebar (reuses its `.fx-sidebar-*`
+   structure from sidebar.css); this file adds only the disclosure toggle and the
+   indented child group. */
+.fx-nested-sidebar .fx-sidebar-item-toggle {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  text-align: start;
+  cursor: pointer;
+}
+
+.fx-nested-sidebar .fx-sidebar-item-chevron {
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  transition: transform var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-nested-sidebar .fx-sidebar-item-toggle[aria-expanded='true'] .fx-sidebar-item-chevron {
+  transform: rotate(90deg);
+}
+
+.fx-nested-sidebar .fx-sidebar-subitems {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  margin: 0;
+  padding: 0;
+  padding-block-start: var(--fx-space-1);
+  padding-inline-start: var(--fx-space-6);
+  list-style: none;
+}
+
+.fx-nested-sidebar .fx-sidebar-subitem {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  height: 2.25rem;
+  padding-inline: var(--fx-space-3);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text-muted);
+  text-decoration: none;
+  font-size: var(--fx-text-body-sm-size);
+  transition: background var(--fx-motion-duration-fast) var(--fx-motion-easing-standard),
+    color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-nested-sidebar .fx-sidebar-subitem:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+
+.fx-nested-sidebar .fx-sidebar-subitem[data-active] {
+  color: var(--fx-color-primary);
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-nested-sidebar .fx-sidebar-subitem:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-nested-sidebar .fx-sidebar-item-chevron {
+    transition: none;
+  }
+}

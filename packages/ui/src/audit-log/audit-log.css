@@ -1,0 +1,149 @@
+/* FxAuditLog — token-only. Composes FxTable chrome; styles only the audit-
+   specific cell contents (actor, target link, IP, details button) and the
+   change-list drawer. Read-only by contract — no edit/delete affordances. */
+.fx-audit-log {
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-audit-log-time {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+  white-space: nowrap;
+  cursor: default;
+}
+.fx-audit-log-time:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+.fx-audit-log-actor {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+.fx-audit-log-actor-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text-muted);
+}
+.fx-audit-log-actor-name {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+}
+
+.fx-audit-log-target {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-primary);
+  text-decoration: none;
+}
+a.fx-audit-log-target:hover {
+  text-decoration: underline;
+}
+
+.fx-audit-log-ip {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.fx-audit-log-empty-cell {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-audit-log-details-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-audit-log-details-btn:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-audit-log-details-btn:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-audit-log-empty {
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+/* Change list inside the details drawer. */
+.fx-audit-log-changes {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+}
+.fx-audit-log-change {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+}
+.fx-audit-log-field {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+.fx-audit-log-diff {
+  margin: 0;
+  display: flex;
+  align-items: stretch;
+  gap: var(--fx-space-2);
+}
+.fx-audit-log-before,
+.fx-audit-log-after {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+.fx-audit-log-diff-label {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+.fx-audit-log-value {
+  display: block;
+  padding: var(--fx-space-1) var(--fx-space-2);
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-sm-size);
+  word-break: break-word;
+}
+.fx-audit-log-before .fx-audit-log-value {
+  background: var(--fx-color-danger-soft);
+  color: var(--fx-color-danger);
+}
+.fx-audit-log-after .fx-audit-log-value {
+  background: var(--fx-color-success-soft);
+  color: var(--fx-color-success);
+}
+.fx-audit-log-arrow {
+  display: inline-flex;
+  align-items: center;
+  color: var(--fx-color-text-subtle);
+  align-self: center;
+}
+
+.fx-audit-log-no-changes {
+  margin: 0;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}

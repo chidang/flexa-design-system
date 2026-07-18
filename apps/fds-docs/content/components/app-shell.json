@@ -1,0 +1,5 @@
+{
+  "slug": "app-shell",
+  "tagline": "The one shell per app — sidebar, optional topbar, and the single main.",
+  "whenToUse": "App Shell is the top-level frame for an authenticated product: it owns the landmark structure (one navigation, an optional banner topbar, exactly one main) and the skip link that is the first tab stop. Use exactly one per app and compose Sidebar, Top Navigation, and Content Area inside it. Reach for Top Navigation Layout instead when the product is marketing/public-facing and leads with a horizontal bar rather than a sidebar."
+}

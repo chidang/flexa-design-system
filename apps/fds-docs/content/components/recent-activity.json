@@ -1,0 +1,5 @@
+{
+  "slug": "recent-activity",
+  "tagline": "Dashboard card of the latest few activity items with a \"View all\" link.",
+  "whenToUse": "Use Recent Activity as a dashboard widget that surfaces the most recent handful of events (≤5 by default, no day grouping) inside a card, with a \"View all\" link to the full log. Reach for the full Activity Feed on a dedicated page when you need grouping, paging, and the complete stream. Pair Recent Activity with Metric Card and Quick Links to compose a home dashboard."
+}

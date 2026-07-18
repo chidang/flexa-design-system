@@ -1,0 +1,21 @@
+/* FxWarningBanner — token-only. Full-width sticky wrapper around a warning
+   FxAlert; the alert itself owns the tone tint + colours. */
+.fx-warning-banner {
+  display: block;
+  width: 100%;
+  font-family: var(--fx-font-family-base);
+}
+
+/* Pinned below the Top Navigation, above the Content Area. */
+.fx-warning-banner[data-sticky='true'] {
+  position: sticky;
+  top: 0;
+  z-index: var(--fx-z-sticky);
+}
+
+/* Square the sticky span so it reads as a page-width bar, not a card. */
+.fx-warning-banner .fx-alert {
+  border-radius: 0;
+  border-inline-start: 0;
+  border-block-end: 1px solid var(--fx-color-warning-border-soft);
+}

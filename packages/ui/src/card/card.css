@@ -1,0 +1,117 @@
+/* FxCard — token-only. Elevation mode (shadow over borders, 03 §whitespace);
+   selection adds a primary ring. Padding applies to header/body/footer, not to
+   the full-bleed media region. */
+.fx-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--fx-color-surface);
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-lg);
+  box-shadow: var(--fx-shadow-sm);
+  color: var(--fx-color-text);
+  overflow: hidden;
+  text-decoration: none;
+}
+
+a.fx-card {
+  color: inherit;
+}
+
+/* Padding scale (space.3 / space.4 / space.6). */
+.fx-card[data-padding='sm'] .fx-card-header,
+.fx-card[data-padding='sm'] .fx-card-body,
+.fx-card[data-padding='sm'] .fx-card-footer {
+  padding: var(--fx-space-3);
+}
+.fx-card[data-padding='md'] .fx-card-header,
+.fx-card[data-padding='md'] .fx-card-body,
+.fx-card[data-padding='md'] .fx-card-footer {
+  padding: var(--fx-space-4);
+}
+.fx-card[data-padding='lg'] .fx-card-header,
+.fx-card[data-padding='lg'] .fx-card-body,
+.fx-card[data-padding='lg'] .fx-card-footer {
+  padding: var(--fx-space-6);
+}
+
+/* Collapse doubled vertical padding when regions stack. */
+.fx-card-header + .fx-card-body {
+  padding-block-start: 0;
+}
+.fx-card-body + .fx-card-footer {
+  padding-block-start: 0;
+}
+
+.fx-card-media {
+  display: block;
+}
+.fx-card-media img {
+  display: block;
+  inline-size: 100%;
+  height: auto;
+}
+
+.fx-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--fx-space-3);
+}
+
+.fx-card-title {
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-md-size);
+  font-weight: var(--fx-text-heading-md-weight);
+  line-height: var(--fx-text-heading-md-line-height);
+}
+.fx-card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.fx-card-subtitle {
+  margin-block-start: var(--fx-space-1);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-card-header-actions {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+}
+
+.fx-card-body {
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  line-height: var(--fx-line-height-normal);
+}
+
+.fx-card-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  margin-block-start: auto;
+}
+
+/* Interactive: hover elevation + pointer. */
+.fx-card.is-interactive {
+  cursor: pointer;
+  transition: box-shadow var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+.fx-card.is-interactive:hover {
+  box-shadow: var(--fx-shadow-md);
+}
+.fx-card.is-interactive:focus-visible,
+a.fx-card:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Selected: primary ring. */
+.fx-card.is-selected {
+  border-color: var(--fx-color-primary);
+  box-shadow: 0 0 0 1px var(--fx-color-primary);
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "switch",
+  "tagline": "An instant-effect on/off setting — flip it and it applies.",
+  "whenToUse": "Use when flipping it applies immediately, usually with autosave (notifications on, maintenance mode). For a value that needs Submit use Checkbox."
+}

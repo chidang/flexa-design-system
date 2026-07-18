@@ -1,0 +1,73 @@
+/* FxStatisticBlock — token-only. Unstyled stat primitive: value + label (+ delta)
+   in a tight vertical stack. Delta tone → token per doc 04 §1.9 / §2.47; the
+   direction is spelled in the visually-hidden sentence, colour is an enhancement
+   (§1.7.7). */
+.fx-statistic-block {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-statistic-block[data-align='center'] {
+  align-items: center;
+  text-align: center;
+}
+
+/* Visually-hidden accessible sentence (label: value, delta direction caption). */
+.fx-statistic-block-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  clip-path: inset(50%);
+}
+
+.fx-statistic-block-value {
+  order: 2;
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-sm-size);
+  font-weight: var(--fx-text-heading-sm-weight);
+  line-height: var(--fx-text-heading-sm-line-height);
+  color: var(--fx-color-text);
+}
+
+.fx-statistic-block[data-size='lg'] .fx-statistic-block-value {
+  font-size: var(--fx-text-heading-md-size);
+}
+
+.fx-statistic-block-label {
+  order: 1;
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-statistic-block-delta {
+  order: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  line-height: 1;
+}
+
+.fx-statistic-block-delta[data-tone='success'] {
+  color: var(--fx-color-success);
+}
+.fx-statistic-block-delta[data-tone='danger'] {
+  color: var(--fx-color-danger);
+}
+.fx-statistic-block-delta[data-tone='neutral'] {
+  color: var(--fx-color-text-muted);
+}
+
+.fx-statistic-block-delta-sign {
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-statistic-block-caption {
+  order: 4;
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "activity-timeline",
+  "tagline": "Entity-scoped actor history on a day-grouped rail, filterable by kind.",
+  "whenToUse": "Activity Timeline is the history of one entity — this order, this listing, this user — rendered chronologically on a timeline rail. It is the scoped counterpart to the dashboard-wide Activity Feed and reuses the very same ActivityItem shape, so data flows between them freely. Events group under calendar-day headings (Today / Yesterday / a weekday date), and each rail item pairs the actor's avatar with a \"{actor} {verb} {target}\" sentence plus a relative time. Filter Chips narrow the rail by event kind (comments, shipping, payments…) via a host-supplied bucketing predicate, and a real \"Show more\" button — never infinite-scroll-only — pages older events. Use it inside a detail view; reach for Activity Feed when the stream spans the whole workspace."
+}

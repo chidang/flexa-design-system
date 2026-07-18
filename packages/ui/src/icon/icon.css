@@ -1,0 +1,8 @@
+/* Icons inherit the surrounding ink (`currentColor`) and never introduce their
+   own colour — theming is free by construction (02 foundations §icons). */
+.fx-icon {
+  display: inline-block;
+  flex: none;
+  color: inherit;
+  vertical-align: middle;
+}

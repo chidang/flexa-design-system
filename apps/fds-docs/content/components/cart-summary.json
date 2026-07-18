@@ -1,0 +1,5 @@
+{
+  "slug": "cart-summary",
+  "tagline": "Cart line items + totals + checkout — quantity in, callbacks out.",
+  "whenToUse": "Cart Summary is the editable shopping-cart panel: each line shows a thumbnail, title, quantity stepper, line total and remove control, followed by a subtotal/shipping/tax/discount/total block, a promo-code field and a checkout button. It is presentational and controlled — the host owns the numbers and reacts to onQuantityChange / onRemove / onApplyPromo / onCheckout. Set editable=false for a static, read-only recap (steppers, remove, checkout and promo drop away); that same read-only mode is what Checkout Summary composes. Reach for Checkout Summary when you need the final order recap with shipping/payment sections and a host-rendered pay button instead."
+}

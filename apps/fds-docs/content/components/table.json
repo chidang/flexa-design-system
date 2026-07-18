@@ -1,0 +1,5 @@
+{
+  "slug": "table",
+  "tagline": "Semantic data table — sortable columns, row selection, sticky header.",
+  "whenToUse": "Use Table for record lists an admin reads and scans: sortable columns, row selection, a sticky header, and a pagination slot, all working controlled for server-driven datasets. Reach for Data Grid only when you need keyboard cell navigation, inline editing, or column resize/reorder — Table is deliberately not grid-navigable so screen readers use native table semantics. For 1k–100k rows, use Virtual Table, which keeps this same API but renders only the visible window."
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "metric-card",
+  "tagline": "Single-KPI dashboard tile — value + label + trend, read as one phrase.",
+  "whenToUse": "Metric Card is the single-KPI dashboard tile: a labelled value with an optional trend delta, sparkline, and drill-down, all inside Card chrome. The value, delta, and caption read as one phrase to screen readers and the trend always pairs colour with an arrow. Reach for Statistics Card when you need several related metrics together, or Statistic Block when you only need the bare number inside another surface."
+}

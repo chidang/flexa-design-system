@@ -1,0 +1,5 @@
+{
+  "slug": "tabs",
+  "tagline": "Switch between facets of the same entity or dataset, in place.",
+  "whenToUse": "Use tabs for 2–7 peer views of one thing under a page header (Details / Escrow / Messages). For navigating to different sections use the Sidebar or Top Navigation, and for sequential steps use a wizard."
+}

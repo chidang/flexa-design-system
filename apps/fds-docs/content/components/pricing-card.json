@@ -1,0 +1,5 @@
+{
+  "slug": "pricing-card",
+  "tagline": "A single pricing-table tier — plan, price/period, features and CTA.",
+  "whenToUse": "Pricing Card is one tier in a pricing table: a plan name, its price and billing period, a feature checklist, a CTA, and an optional footnote — all inside Card chrome. Set `featured` to elevate the recommended tier with a primary ring and Badge, and `current` to disable the CTA for the subscriber's active plan. Excluded features carry visually-hidden \"not included\" text so nothing depends on a strikethrough or colour alone; lay several cards side by side to build the full plan comparison."
+}

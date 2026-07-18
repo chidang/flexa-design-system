@@ -1,0 +1,194 @@
+/* FxColorPicker — token-only chrome. The picked color, the pure-hue color and
+   the SL-pad gradient corners arrive as inline CSS custom properties set from
+   TSX (§3.4 note: the value is data, not style); no color literal appears here.
+   Every structural token is a var(--fx-*). */
+.fx-color-picker {
+  display: inline-block;
+}
+
+.fx-color-picker-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  height: 40px;
+  padding: 0 var(--fx-space-3);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  cursor: pointer;
+}
+
+.fx-color-picker[data-size='sm'] .fx-color-picker-trigger {
+  height: 32px;
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-color-picker[data-size='lg'] .fx-color-picker-trigger {
+  height: 48px;
+}
+
+.fx-color-picker-trigger:hover:not(:disabled) {
+  border-color: var(--fx-color-border-strong);
+}
+
+.fx-color-picker-trigger:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-color-picker[data-disabled] .fx-color-picker-trigger {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-color-picker-trigger-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--fx-radius-sm);
+  border: 1px solid var(--fx-color-border);
+  background: var(--fx-cp-value);
+}
+
+.fx-color-picker-trigger-value {
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+  letter-spacing: var(--fx-font-tracking-wide);
+}
+
+/* ── Popover ────────────────────────────────────────────────────────────── */
+.fx-color-picker-popover {
+  position: absolute;
+  z-index: var(--fx-z-popover);
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+  width: 240px;
+  margin-top: var(--fx-space-2);
+  padding: var(--fx-space-3);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  box-shadow: var(--fx-shadow-lg);
+}
+
+/* Saturation/Value pad: white→hue horizontally, transparent→black vertically. */
+.fx-color-picker-area {
+  position: relative;
+  width: 100%;
+  height: 10rem;
+  border-radius: var(--fx-radius-md);
+  cursor: crosshair;
+  touch-action: none;
+  background:
+    linear-gradient(to top, var(--fx-cp-black), var(--fx-cp-transparent)),
+    linear-gradient(to right, var(--fx-cp-white), var(--fx-cp-hue-color));
+}
+
+.fx-color-picker-area:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-color-picker-area-thumb {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  border-radius: var(--fx-radius-full);
+  border: 2px solid var(--fx-color-surface);
+  box-shadow: var(--fx-shadow-sm);
+  background: var(--fx-cp-value);
+  pointer-events: none;
+}
+
+/* Hue rail — the rainbow gradient is applied inline from TSX. */
+.fx-color-picker-hue {
+  position: relative;
+  width: 100%;
+  height: 0.75rem;
+  border-radius: var(--fx-radius-full);
+  cursor: pointer;
+  touch-action: none;
+}
+
+.fx-color-picker-hue:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-color-picker-hue-thumb {
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  border-radius: var(--fx-radius-full);
+  border: 2px solid var(--fx-color-surface);
+  box-shadow: var(--fx-shadow-sm);
+  background: var(--fx-color-surface);
+  pointer-events: none;
+}
+
+.fx-color-picker-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+.fx-color-picker-preview {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--fx-radius-sm);
+  border: 1px solid var(--fx-color-border);
+  background: var(--fx-cp-value);
+}
+
+.fx-color-picker-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 32px;
+  padding: 0 var(--fx-space-2);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-sm);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-sm-size);
+  text-transform: uppercase;
+  letter-spacing: var(--fx-font-tracking-wide);
+}
+
+.fx-color-picker-input:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-color-picker-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+
+.fx-color-picker-swatch {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: var(--fx-radius-sm);
+  border: 1px solid var(--fx-color-border);
+  background: var(--fx-cp-value);
+  cursor: pointer;
+}
+
+.fx-color-picker-swatch[aria-checked='true'] {
+  outline: 2px solid var(--fx-color-primary);
+  outline-offset: 2px;
+}
+
+.fx-color-picker-swatch:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}

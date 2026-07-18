@@ -1,0 +1,5 @@
+{
+  "slug": "warning-banner",
+  "tagline": "Full-width warning pinned above the Content Area — a nudge with one action.",
+  "whenToUse": "Warning Banner is a constrained warning FxAlert stretched full-width and pinned below the Top Navigation at the sticky layer, so a whole-account nudge stays visible while the user works. Use it for verification prompts, an expiring payment method or a plan limit being approached — situations that warrant attention but not a blocking dialog. It carries at most a single action plus an optional dismiss; the icon-only dismiss button always has an accessible name and tone is conveyed by the warning icon and the text, never colour alone. Dismissal is host-persisted via dismissKey — the component hides itself and fires onDismiss so the host can remember not to show it again. Show at most one at a time and queue the rest by priority."
+}

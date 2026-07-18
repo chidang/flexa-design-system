@@ -1,0 +1,5 @@
+{
+  "slug": "chat",
+  "tagline": "A conversation surface — bubbles, day separators, system events, attachments, typing, receipts.",
+  "whenToUse": "Chat is the one-to-one conversation surface between a buyer and a seller (or a user and support): a header with the counterparty and an optional context link (the order it is about), a scrolling message log, a typing indicator and a composer. Messages render as bubbles aligned by author — the current user's on the right (data-self) with a time and read receipt — while a kind:'system' message renders as a centered event card (\"Order #1024 was paid\", \"Escrow released\") that narrates lifecycle events inline, with no bubble and no receipt. Attachments show as cards inside the bubble; a failed message offers a retry. Enter sends and Shift+Enter newlines; the log stays pinned to the bottom unless the user scrolls up, which surfaces a \"New messages\" jump button. When the conversation is locked, the composer is replaced by a reason banner."
+}

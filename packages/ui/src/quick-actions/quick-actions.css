@@ -1,0 +1,75 @@
+/* FxQuickActions — token-only. Card-styled action tiles; hover lifts with a
+   shadow token. Grid flows by min tile width unless a fixed column count is set. */
+.fx-quick-actions {
+  display: grid;
+  gap: var(--fx-space-3);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.fx-quick-actions[data-columns='fixed'] {
+  grid-template-columns: repeat(var(--fx-quick-actions-cols, 3), 1fr);
+}
+
+.fx-quick-action {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-4);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  font-family: inherit;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow var(--fx-motion-duration-fast) var(--fx-motion-easing-standard),
+    border-color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-quick-actions[data-size='sm'] .fx-quick-action {
+  padding: var(--fx-space-3);
+  gap: var(--fx-space-2);
+}
+
+.fx-quick-action:hover:not(:disabled) {
+  border-color: var(--fx-color-border-strong);
+  box-shadow: var(--fx-shadow-md);
+}
+
+.fx-quick-action:active:not(:disabled) {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-quick-action:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-quick-action:disabled {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-quick-action-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--fx-color-primary);
+}
+
+.fx-quick-action-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  min-width: 0;
+}
+
+.fx-quick-action-label {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-quick-action-desc {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}

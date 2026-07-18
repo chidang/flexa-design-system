@@ -1,0 +1,5 @@
+{
+  "slug": "command-palette",
+  "tagline": "A keyboard-first launcher for commands, destinations, and entities.",
+  "whenToUse": "Mount the command palette at app-shell level in every authenticated product as the ⌘K accelerator. It complements visible navigation rather than replacing it, and still routes destructive actions through their normal confirmation."
+}

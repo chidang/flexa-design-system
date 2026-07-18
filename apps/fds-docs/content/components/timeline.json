@@ -1,0 +1,5 @@
+{
+  "slug": "timeline",
+  "tagline": "Vertical ordered-list timeline — a rail of state markers with content.",
+  "whenToUse": "Use Timeline to show an ordered sequence of events over time — order status, escrow stages, audit trails, activity history — where each step has a state (complete, current, upcoming, failed). Steps are an ordered list and every state is spelled in text, so the sequence is legible without relying on marker colour. For a live, prependable stream of heterogeneous events use Activity Feed; for a numbered wizard of steps a user walks through use a Stepper."
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "loading-overlay",
+  "tagline": "A scrim and spinner over a region briefly unusable during a mutation.",
+  "whenToUse": "Use a loading overlay when an in-place operation invalidates an entire region and interacting meanwhile would corrupt state — a bulk apply or a recalculation. Prefer a button spinner or skeletons first; overlays are the last step on the ladder."
+}

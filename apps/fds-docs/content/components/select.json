@@ -1,0 +1,5 @@
+{
+  "slug": "select",
+  "tagline": "Single-choice combobox — pick one option from a portalled listbox.",
+  "whenToUse": "Use Select when a user picks exactly one value from a bounded, known set (status, category, country) that is too long for a radio group. For multiple values use Tag Input, for typed filtering over many options use Autocomplete, and for a handful of visible mutually-exclusive choices use a radio group."
+}

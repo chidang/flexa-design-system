@@ -1,0 +1,5 @@
+{
+  "slug": "rating",
+  "tagline": "5-star rating — read-only (fractional) or an input radio group.",
+  "whenToUse": "Use Rating to display an aggregate score (read-only, fractional fills like 4.6, optionally with a value and a review count) or to collect one (input mode, integer 1–max). Read-only renders as a single image with an accessible \"Rated 4.6 out of 5\" label; input mode is a radio group where Arrow keys move focus and selection over the stars. For an arbitrary 0–100 quantity use Progress; for a numeric quantity control use Stepper or Number Input."
+}

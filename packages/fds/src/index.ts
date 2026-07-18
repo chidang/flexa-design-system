@@ -254,8 +254,49 @@ export const TOKEN_IDS: readonly string[] = REGISTRY.entries.map((e) => e.id);
  * `@media (prefers-contrast: more) and (prefers-color-scheme: light)`, re-pointing
  * neutrals/brand to WCAG-AAA (7:1). Additive behaviour + one new export, NO token
  * id changed — every 2.x pack still loads.
+ *
+ * 2.9.0 — added the deprecation registry (`DEPRECATIONS` + `isDeprecated` /
+ * `deprecationOf` / `deprecatedRenameMap`): the machine-readable half of INV-6, so
+ * a token rename in a future major carries an aliased one-major window and a
+ * codemod-ready rename map instead of a silent break. The list is EMPTY today
+ * (nothing deprecated yet), so nothing changed for consumers — additive API + a
+ * load-time guard keeping any future entry honest; NO token id changed.
+ *
+ * 2.9.1 — corrective (a11y): re-tuned the DEFAULT theme's dark-mode accent fills so
+ * every `on-*` UI label clears APCA Lc ≥ 60 (brand/slate one step lighter with dark
+ * ink; status fills to `.600` with white ink) — closing the last deferred Track D
+ * finding. DATA change to the shipped dark theme only (visible in `dist/theme.css`);
+ * NO token id, NO public API, NO emitter change — every 2.x pack still loads.
+ *
+ * 2.10.0 — semantic typography tier (ui-kit doc 14 R2): `emitTheme`/`emitThemeRoot`
+ * now expand each `text.*` composite into `--fx-text-<name>-{size,weight,line-height}`
+ * custom properties (family stays on `--fx-font-family-*`), and the vocabulary gains
+ * `text.heading-sm` / `text.body-lg` / `text.caption`, semantic `font-weight.*` +
+ * `line-height.*` alias ramps, `font.family-mono` and `font.tracking-wide`. All
+ * additive (new ids + new emitted declarations only) — every 2.x pack still loads.
+ *
+ * 2.11.0 — interaction & a11y vocabulary (ui-kit doc 14 R3/R4 prep): the danger
+ * interaction ramp is completed like primary's (`ref.danger.700/.800` primitives,
+ * `color.danger-hover`/`color.danger-active` + dark-mode counterparts) and
+ * `size.tap` (44px minimum touch target) joins the size group — both additive.
+ * One DATA re-point: `color.text-subtle` moves to `ref.neutral.500` light /
+ * `.400` dark (2.56:1 → 4.76:1), making tertiary text AA for normal text; packs
+ * that re-point it themselves are unaffected. NO emitter change.
+ *
+ * 2.12.0 — calm-surface & loop vocabulary (ui-kit doc 14 R5/R6 prep): soft tint
+ * roles `color.<tone>-soft` / `color.<tone>-border-soft` for the five tones
+ * (primary/success/warning/danger/info) — the tone mixed 12% (fill) / 40% (border)
+ * into the scheme's surface, PRE-COMPUTED to hex literals (scrim precedent; the
+ * interop surfaces — export/Figma/IDE/pickers — require concrete values, so no
+ * runtime `color-mix`) with dark counterparts in the dark mode; `motion.duration-loop`
+ * (1200ms, ref-backed, NOT zeroed by reduced-motion — loop consumers gate with
+ * `animation: none`); and the DEFAULT theme's dark mode gains `shadow.*` re-inks
+ * (`DARK_SHADOW_OVERRIDES`, pure-black ink at elevation-scaled alpha, unchanged
+ * geometry) so dark elevation is visible. All additive; NO emitter change. Note:
+ * `applyBrand` does not yet re-derive `primary-soft` under a brand re-point —
+ * a Track C follow-up; a pack may re-point the softs directly meanwhile.
  */
-export const FDS_VERSION = '2.8.1';
+export const FDS_VERSION = '2.12.0';
 
 /** True when `id` is a known token. Basis of the AI/CLI gate (Slice 7). */
 export function hasToken(id: string): boolean {
@@ -357,3 +398,20 @@ export {
 // FDS standalone (doc 19) — the value shapes the pipeline operates on. Defined
 // here so the package is dependency-free; `@flexa/core` re-exports them.
 export type { Json, StyleDecls, StyleSpec } from './types.js';
+
+// Track H (doc 20) — the deprecation registry: the machine-readable half of INV-6.
+// Guard the list against the real token set at load, so a dishonest deprecation
+// (phantom replacement, dropped alias, non-future removal) can never ship.
+import { DEPRECATIONS, assertDeprecationsValid } from './deprecations.js';
+assertDeprecationsValid(DEPRECATIONS, hasToken);
+export {
+  DEPRECATIONS,
+  assertDeprecationsValid,
+  renameMap,
+  removalsInMajor,
+  isDeprecated,
+  deprecationOf,
+  deprecatedRenameMap,
+  DeprecationError,
+  type TokenDeprecation,
+} from './deprecations.js';

@@ -1,0 +1,5 @@
+{
+  "slug": "pagination",
+  "tagline": "Traverse a long collection in pages with position feedback.",
+  "whenToUse": "Use pagination for tables and lists longer than one page. Prev/Next is the primitive (cursor mode); numbered pages are an enhancement only when a stable total is known. Feeds and chat use infinite scroll instead."
+}

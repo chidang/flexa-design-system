@@ -1,0 +1,5 @@
+{
+  "slug": "validation-message",
+  "tagline": "The one message line under a field — error, warning, or success.",
+  "whenToUse": "Use for field-level feedback below a control. For form-level feedback use an error-summary Alert; for async operation results use a Toast."
+}

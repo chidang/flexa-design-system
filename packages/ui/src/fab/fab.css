@@ -1,0 +1,60 @@
+/* FxFloatingActionButton — token-only. Fixed bottom-end circle in the primary
+   token; extended variant grows to a labelled pill. */
+.fx-fab {
+  position: fixed;
+  inset-block-end: var(--fx-space-5);
+  inset-inline-end: var(--fx-space-5);
+  z-index: var(--fx-z-fixed);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fx-space-2);
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-primary);
+  color: var(--fx-color-on-primary);
+  box-shadow: var(--fx-shadow-lg);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  cursor: pointer;
+  transition: background var(--fx-motion-duration-fast) var(--fx-motion-easing-standard),
+    transform var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-fab[data-extended] {
+  width: auto;
+  padding: 0 var(--fx-space-5);
+}
+
+.fx-fab:hover:not(:disabled) {
+  background: var(--fx-color-primary-hover);
+}
+
+.fx-fab:active:not(:disabled) {
+  background: var(--fx-color-primary-active);
+  transform: scale(0.97);
+}
+
+.fx-fab:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-fab:disabled {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-fab-label {
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-fab:active:not(:disabled) {
+    transform: none;
+  }
+}

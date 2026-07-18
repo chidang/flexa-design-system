@@ -1,0 +1,240 @@
+/* FxNotificationCenter — token-only. A bell trigger with a count Badge and a
+   non-modal popover panel at popover elevation. Tone tints reuse the §1.9
+   semantic soft tokens; no invented colour literals. */
+.fx-notification-center {
+  position: relative;
+  display: inline-flex;
+  font-family: var(--fx-font-family-base);
+}
+
+/* Bell trigger — icon-only button, count Badge pinned to the top-end corner. */
+.fx-notification-center-bell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-md);
+  background: transparent;
+  color: var(--fx-color-text);
+  cursor: pointer;
+}
+.fx-notification-center-bell:hover {
+  background: var(--fx-color-surface-alt);
+}
+.fx-notification-center-bell[data-open] {
+  background: var(--fx-color-surface-alt);
+}
+.fx-notification-center-bell:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-notification-center-count {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  transform: translate(40%, -40%);
+}
+
+/* Non-modal popover panel. */
+.fx-notification-center-panel {
+  position: absolute;
+  inset-block-start: calc(100% + var(--fx-space-2));
+  inset-inline-end: 0;
+  z-index: var(--fx-z-popover);
+  width: 360px;
+  max-width: calc(100vw - var(--fx-space-4));
+  display: flex;
+  flex-direction: column;
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  box-shadow: var(--fx-shadow-lg);
+  overflow: hidden;
+}
+
+.fx-notification-center-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-3);
+  border-block-end: 1px solid var(--fx-color-border);
+}
+.fx-notification-center-title {
+  margin: 0;
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+.fx-notification-center-header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+.fx-notification-center-mark {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-primary);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  font-family: inherit;
+  cursor: pointer;
+}
+.fx-notification-center-mark:hover:not(:disabled) {
+  text-decoration: underline;
+}
+.fx-notification-center-mark:disabled {
+  color: var(--fx-color-text-subtle);
+  cursor: not-allowed;
+  text-decoration: none;
+}
+.fx-notification-center-mark:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-notification-center-settings {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--fx-radius-sm);
+  color: var(--fx-color-text-muted);
+}
+.fx-notification-center-settings:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-notification-center-settings:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Row leading tone icon. */
+.fx-notification-center-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text-muted);
+}
+.fx-notification-center-icon[data-tone='info'] {
+  background: var(--fx-color-info-soft);
+  color: var(--fx-color-info);
+}
+.fx-notification-center-icon[data-tone='success'] {
+  background: var(--fx-color-success-soft);
+  color: var(--fx-color-success);
+}
+.fx-notification-center-icon[data-tone='warning'] {
+  background: var(--fx-color-warning-soft);
+  color: var(--fx-color-warning);
+}
+.fx-notification-center-icon[data-tone='danger'] {
+  background: var(--fx-color-danger-soft);
+  color: var(--fx-color-danger);
+}
+
+/* Trailing meta: relative time + unread dot. */
+.fx-notification-center-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+.fx-notification-center-time {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+  white-space: nowrap;
+}
+.fx-notification-center-dot {
+  flex: none;
+  width: var(--fx-space-2);
+  height: var(--fx-space-2);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-primary);
+}
+.fx-notification-center-dot[data-tone='info'] {
+  background: var(--fx-color-info);
+}
+.fx-notification-center-dot[data-tone='success'] {
+  background: var(--fx-color-success);
+}
+.fx-notification-center-dot[data-tone='warning'] {
+  background: var(--fx-color-warning);
+}
+.fx-notification-center-dot[data-tone='danger'] {
+  background: var(--fx-color-danger);
+}
+
+.fx-notification-center-empty {
+  padding: var(--fx-space-6) var(--fx-space-3);
+  text-align: center;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-notification-center-more {
+  display: flex;
+  justify-content: center;
+  padding: var(--fx-space-2);
+}
+.fx-notification-center-more-btn {
+  padding: var(--fx-space-1) var(--fx-space-3);
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-primary);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  font-family: inherit;
+  cursor: pointer;
+}
+.fx-notification-center-more-btn:hover {
+  text-decoration: underline;
+}
+.fx-notification-center-more-btn:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-notification-center-footer {
+  padding: var(--fx-space-2) var(--fx-space-3);
+  border-block-start: 1px solid var(--fx-color-border);
+  text-align: center;
+}
+.fx-notification-center-view-all {
+  color: var(--fx-color-primary);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  text-decoration: none;
+}
+.fx-notification-center-view-all:hover {
+  text-decoration: underline;
+}
+.fx-notification-center-view-all:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Visually-hidden state word (state-in-text, never colour alone). */
+.fx-notification-center-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

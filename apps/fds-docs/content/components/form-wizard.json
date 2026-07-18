@@ -1,0 +1,5 @@
+{
+  "slug": "form-wizard",
+  "tagline": "Sequential, validated multi-step forms with a navigable step list.",
+  "whenToUse": "Use a Form Wizard to break a long or branching form into ordered steps with per-step validation, a progress step list, and Back/Next/Submit navigation. Use it when steps must be completed in sequence or reviewed before submit. For peer views of one entity use Tabs, and for a single-page form use Field Group + form controls directly."
+}

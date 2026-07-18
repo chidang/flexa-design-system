@@ -1,0 +1,70 @@
+/* FxValidationMessage — token-only. text + icon take the tone colour. success
+   renders a real check glyph (FxIcon); danger/warning render an exclamation drawn
+   in CSS on a tone-coloured disc. The icon is decorative — tone is conveyed by the
+   text (§1.7.7) — so no specific icon-registry name is needed for danger/warning.
+   Glyph offsets use em (relative to the 16px icon) to stay off the px ladder. */
+.fx-validation-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fx-space-1);
+  margin: var(--fx-space-1) 0 0;
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-sm-size);
+  line-height: var(--fx-line-height-normal);
+}
+
+.fx-validation-message[data-tone='danger'] {
+  color: var(--fx-color-danger);
+}
+
+.fx-validation-message[data-tone='warning'] {
+  color: var(--fx-color-warning);
+}
+
+.fx-validation-message[data-tone='success'] {
+  color: var(--fx-color-success);
+}
+
+.fx-validation-message-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  color: inherit;
+}
+
+/* danger / warning: a filled tone disc carrying a white exclamation. */
+.fx-validation-message-icon[data-tone='danger'],
+.fx-validation-message-icon[data-tone='warning'] {
+  border-radius: var(--fx-radius-full);
+  background: currentColor;
+}
+
+.fx-validation-message-icon[data-tone='danger']::before,
+.fx-validation-message-icon[data-tone='warning']::before {
+  content: '';
+  position: absolute;
+  top: 0.1875em;
+  width: 0.125em;
+  height: 0.375em;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface);
+}
+
+.fx-validation-message-icon[data-tone='danger']::after,
+.fx-validation-message-icon[data-tone='warning']::after {
+  content: '';
+  position: absolute;
+  bottom: 0.1875em;
+  width: 0.125em;
+  height: 0.125em;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface);
+}
+
+.fx-validation-message-text {
+  min-width: 0;
+}

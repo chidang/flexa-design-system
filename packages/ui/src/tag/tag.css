@@ -1,0 +1,92 @@
+/* FxTag — token-only. Neutral uses surface-alt; toned uses the §1.9 tint.
+   Capsule family: full radius beside badge/chip pills (chip sm shares the
+   24px height + space-2 padding metric). */
+.fx-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  height: 24px;
+  padding: 0 var(--fx-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.fx-tag[data-size='sm'] {
+  height: 20px;
+}
+
+/* Interactive form (link/button reset to inherit tag styling). */
+a.fx-tag,
+button.fx-tag {
+  cursor: pointer;
+  transition: border-color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+button.fx-tag {
+  font: inherit;
+}
+.fx-tag.is-interactive:hover {
+  border-color: var(--fx-color-border-strong);
+}
+.fx-tag.is-interactive:active {
+  background: var(--fx-color-border);
+}
+.fx-tag.is-interactive:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Toned tints (info / success / warning / danger). */
+.fx-tag[data-tone='info'] {
+  background: var(--fx-color-info-soft);
+  color: var(--fx-color-info);
+}
+.fx-tag[data-tone='success'] {
+  background: var(--fx-color-success-soft);
+  color: var(--fx-color-success);
+}
+.fx-tag[data-tone='warning'] {
+  background: var(--fx-color-warning-soft);
+  color: var(--fx-color-warning);
+}
+.fx-tag[data-tone='danger'] {
+  background: var(--fx-color-danger-soft);
+  color: var(--fx-color-danger);
+}
+
+/* Pressed toned tags deepen their own tint (12% → 16%). */
+.fx-tag.is-interactive[data-tone='info']:active {
+  background: color-mix(in srgb, var(--fx-color-info) 16%, var(--fx-color-surface));
+}
+.fx-tag.is-interactive[data-tone='success']:active {
+  background: color-mix(in srgb, var(--fx-color-success) 16%, var(--fx-color-surface));
+}
+.fx-tag.is-interactive[data-tone='warning']:active {
+  background: color-mix(in srgb, var(--fx-color-warning) 16%, var(--fx-color-surface));
+}
+.fx-tag.is-interactive[data-tone='danger']:active {
+  background: color-mix(in srgb, var(--fx-color-danger) 16%, var(--fx-color-surface));
+}
+
+/* Tap target — see checkbox.css. */
+@media (pointer: coarse) {
+  .fx-tag.is-interactive {
+    position: relative;
+  }
+  .fx-tag.is-interactive::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: max(100%, var(--fx-size-tap));
+    height: max(100%, var(--fx-size-tap));
+  }
+}

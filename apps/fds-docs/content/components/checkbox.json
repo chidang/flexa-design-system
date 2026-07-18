@@ -1,0 +1,5 @@
+{
+  "slug": "checkbox",
+  "tagline": "A boolean that takes effect on submit — or one item in a list.",
+  "whenToUse": "Use for an on/off fact applied on submit, or lists of independent selections. For mutually exclusive options use Radio Group; for instant-effect settings use Switch."
+}

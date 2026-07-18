@@ -1,0 +1,5 @@
+{
+  "slug": "sidebar-layout",
+  "tagline": "A fixed-width start pane beside a fluid main column.",
+  "whenToUse": "Sidebar Layout is the generic two-pane primitive — a fixed-width aside next to a fluid main — that App Shell and Settings Layout build on. Use it directly when you need a side pane (filters, a secondary nav, a table of contents) without the full app chrome. It is not itself a landmark; the children bring their own roles."
+}

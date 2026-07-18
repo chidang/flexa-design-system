@@ -1,0 +1,56 @@
+/* FxSkeletonLoader — token-only. Base fill = surface-alt; shimmer sweeps a
+   surface-lit band across it. Reduced motion drops the animation (§2.32). */
+.fx-skeleton-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+}
+
+.fx-skeleton {
+  display: block;
+  inline-size: 100%;
+  background: var(--fx-color-surface-alt);
+  border-radius: var(--fx-radius-sm);
+}
+
+.fx-skeleton[data-shape='text'] {
+  block-size: 1em;
+  border-radius: var(--fx-radius-sm);
+}
+.fx-skeleton[data-shape='rect'] {
+  block-size: 100%;
+  border-radius: var(--fx-radius-md);
+}
+.fx-skeleton[data-shape='circle'] {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--fx-radius-full);
+}
+
+.fx-skeleton[data-animated] {
+  background-image: linear-gradient(
+    90deg,
+    var(--fx-color-surface-alt) 0%,
+    var(--fx-color-surface) 50%,
+    var(--fx-color-surface-alt) 100%
+  );
+  background-size: 200% 100%;
+  /* duration-loop, not duration-slow: a 400ms cycle strobes — the loop token
+     (1200ms) is the shimmer/spinner cadence (FDS 2.12). */
+  animation: fx-skeleton-shimmer var(--fx-motion-duration-loop) var(--fx-motion-easing-in-out) infinite;
+}
+
+@keyframes fx-skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-skeleton[data-animated] {
+    background-image: none;
+    animation: none;
+  }
+}

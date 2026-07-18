@@ -1,0 +1,5 @@
+{
+  "slug": "top-navigation-layout",
+  "tagline": "A sticky top bar above the routed page — the top-nav-first app shell.",
+  "whenToUse": "Top Navigation Layout is the horizontal-bar alternative to a sidebar-first App Shell: a sticky header over a width-capped content column. Reach for it on marketing sites, docs, and public-facing surfaces where primary navigation reads better across the top. For dense authenticated apps with many destinations, prefer App Shell with a Sidebar."
+}

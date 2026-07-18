@@ -1,0 +1,5 @@
+{
+  "slug": "mention",
+  "tagline": "Inline @-mention token + an @-triggered user picker for composers.",
+  "whenToUse": "Mention has two faces. The token (FxMention) is the inline @-name chip rendered in message bodies, comments and descriptions — it links to the mentioned user's profile, or renders as static text when interactive is false. The picker (FxMentionPicker) is the combobox popover a composer opens when the user types the trigger character (@ by default): it lists matching users (avatar + name + handle) from loadUsers, capped at maxResults, and commits the active one on Enter/Tab (Esc dismisses and restores plain text). Both faces share the MentionUser shape and are reused by Chat and Comment Thread composers. The token uses a primary tint background and primary text so the mention reads as a link, never colour alone."
+}

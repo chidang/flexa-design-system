@@ -1,0 +1,5 @@
+{
+  "slug": "widget",
+  "tagline": "Standard dashboard-block chrome — header, overflow menu, built-in states.",
+  "whenToUse": "Widget is the standard chrome every rearrangeable dashboard block sits in: a titled header with an optional drag handle and an overflow menu (refresh / configure / remove), a body slot, and built-in loading, empty, and error states with retry. Dashboard Layout accepts Widget children in editable mode. Drop content — a Metric Card, a feed, a chart — into its body rather than reinventing the header and states."
+}

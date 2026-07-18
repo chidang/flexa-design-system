@@ -1,0 +1,5 @@
+{
+  "slug": "stepper",
+  "tagline": "A compact − / value / + control for small quantities.",
+  "whenToUse": "Use for nudging small integers inline — cart line quantities, guest counts, seat pickers — where a full field would be overkill. For a labelled numeric form field with free typing use the Number Input."
+}

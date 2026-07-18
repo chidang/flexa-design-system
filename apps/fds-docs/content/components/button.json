@@ -1,0 +1,5 @@
+{
+  "slug": "button",
+  "tagline": "The primary action control — one clear emphasis per view.",
+  "whenToUse": "Use a button to trigger an action in place (submit, save, open a dialog). For navigation to another page, use a link styled as needed — not a button."
+}

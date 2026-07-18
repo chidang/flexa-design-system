@@ -1,0 +1,5 @@
+{
+  "slug": "top-navigation",
+  "tagline": "Horizontal primary navigation for content-first surfaces.",
+  "whenToUse": "Use top navigation for a few destinations that want maximum content width and a public-facing tone. Keep it to six or fewer links; beyond that, or with deep grouped IA, switch to a sidebar shell."
+}

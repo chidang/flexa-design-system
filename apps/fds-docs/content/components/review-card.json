@@ -1,0 +1,5 @@
+{
+  "slug": "review-card",
+  "tagline": "A single marketplace review — author, rating, clamped body, images, and a seller response.",
+  "whenToUse": "Review Card renders one marketplace review inside Card chrome: an identity header (avatar + author + read-only Rating + date), a body clamped by CSS with an inert \"Read more\" affordance, optional review photos through Gallery, an inset seller-response block, and a footer with a helpful-count button and a report menu. Verified purchases surface a text-bearing Badge, never colour alone, and every review image requires alt text. Reach for it on product pages and seller review lists; compose Seller Card or Buyer Card when you need a party's identity summary rather than their words."
+}

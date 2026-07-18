@@ -107,6 +107,12 @@ export const rawTokens: Record<string, unknown> = {
       "600": {
         "$value": "#b91c1c"
       },
+      "700": {
+        "$value": "#991b1b"
+      },
+      "800": {
+        "$value": "#7f1d1d"
+      },
       "$type": "color"
     },
     "info": {
@@ -308,6 +314,9 @@ export const rawTokens: Record<string, unknown> = {
       },
       "slow": {
         "$value": "400ms"
+      },
+      "loop": {
+        "$value": "1200ms"
       }
     },
     "easing": {
@@ -428,7 +437,8 @@ export const rawTokens: Record<string, unknown> = {
       "$value": "{ref.neutral.600}"
     },
     "text-subtle": {
-      "$value": "{ref.neutral.400}"
+      "$value": "{ref.neutral.500}",
+      "$description": "Tertiary text (timestamps, helper copy) — AA for normal text on bg/surface (FDS 2.11)."
     },
     "primary": {
       "$value": "{ref.brand.600}"
@@ -488,11 +498,49 @@ export const rawTokens: Record<string, unknown> = {
     "on-danger": {
       "$value": "{ref.neutral.0}"
     },
+    "danger-hover": {
+      "$value": "{ref.danger.700}"
+    },
+    "danger-active": {
+      "$value": "{ref.danger.800}"
+    },
     "info": {
       "$value": "{ref.info.600}"
     },
     "on-info": {
       "$value": "{ref.neutral.0}"
+    },
+    "primary-soft": {
+      "$value": "#e5ecfd",
+      "$description": "Soft tint fill (selected rows, quiet chips) — the tone mixed 12% into the light surface, PRE-COMPUTED to a literal (scrim precedent) because interop surfaces (export/Figma/IDE/pickers) require concrete values (FDS 2.12). Dark re-mixes over the dark surface via mode override. Pair with full-strength tone text."
+    },
+    "primary-border-soft": {
+      "$value": "#a8c1f7",
+      "$description": "Border for soft-tinted surfaces (FDS 2.12) — same derivation at 40%."
+    },
+    "success-soft": {
+      "$value": "#e3f0e8"
+    },
+    "success-border-soft": {
+      "$value": "#a1ccb1"
+    },
+    "warning-soft": {
+      "$value": "#f6eae1"
+    },
+    "warning-border-soft": {
+      "$value": "#e1ba9d"
+    },
+    "danger-soft": {
+      "$value": "#f7e4e4"
+    },
+    "danger-border-soft": {
+      "$value": "#e3a4a4"
+    },
+    "info-soft": {
+      "$value": "#e2eef2"
+    },
+    "info-border-soft": {
+      "$value": "#9fc7d3"
     }
   },
   "space": {
@@ -604,11 +652,49 @@ export const rawTokens: Record<string, unknown> = {
     },
     "family-heading": {
       "$value": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
+    },
+    "family-mono": {
+      "$value": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
+      "$description": "Monospace stack for code, IDs and tabular figures (FDS 2.10)."
+    },
+    "tracking-wide": {
+      "$type": "dimension",
+      "$value": "0.04em",
+      "$description": "Letter-spacing for uppercase overlines / small labels (FDS 2.10)."
+    }
+  },
+  "font-weight": {
+    "$type": "fontWeight",
+    "$description": "Semantic font weights — alias the ref ramp so components never touch refs (FDS 2.10).",
+    "regular": {
+      "$value": "{ref.font-weight.regular}"
+    },
+    "medium": {
+      "$value": "{ref.font-weight.medium}"
+    },
+    "semibold": {
+      "$value": "{ref.font-weight.semibold}"
+    },
+    "bold": {
+      "$value": "{ref.font-weight.bold}"
+    }
+  },
+  "line-height": {
+    "$type": "number",
+    "$description": "Semantic line heights — alias the ref ramp so components never touch refs (FDS 2.10).",
+    "tight": {
+      "$value": "{ref.line-height.tight}"
+    },
+    "normal": {
+      "$value": "{ref.line-height.normal}"
+    },
+    "relaxed": {
+      "$value": "{ref.line-height.relaxed}"
     }
   },
   "text": {
     "$type": "typography",
-    "$description": "Semantic type roles — composite tokens (family+size+weight+line-height applied together). Consumed as a bundle; the runtime maps a composite to its CSS declarations (Slice 2/5).",
+    "$description": "Semantic type roles — composite tokens (family+size+weight+line-height applied together). Consumed as a bundle; the runtime maps a composite to its CSS declarations (Slice 2/5). Also emitted as per-property custom properties `--fx-text-<name>-{size,weight,line-height}` (FDS 2.10).",
     "heading-xl": {
       "$value": {
         "fontFamily": "{font.family-heading}",
@@ -633,6 +719,15 @@ export const rawTokens: Record<string, unknown> = {
         "lineHeight": "{ref.line-height.tight}"
       }
     },
+    "heading-sm": {
+      "$value": {
+        "fontFamily": "{font.family-heading}",
+        "fontSize": "{ref.font-size.xl}",
+        "fontWeight": "{ref.font-weight.semibold}",
+        "lineHeight": "{ref.line-height.tight}"
+      },
+      "$description": "Card/section titles — same mapping as the base-typography h4 rule (FDS 2.10)."
+    },
     "body": {
       "$value": {
         "fontFamily": "{font.family-base}",
@@ -640,6 +735,15 @@ export const rawTokens: Record<string, unknown> = {
         "fontWeight": "{ref.font-weight.regular}",
         "lineHeight": "{ref.line-height.normal}"
       }
+    },
+    "body-lg": {
+      "$value": {
+        "fontFamily": "{font.family-base}",
+        "fontSize": "{ref.font-size.lg}",
+        "fontWeight": "{ref.font-weight.regular}",
+        "lineHeight": "{ref.line-height.normal}"
+      },
+      "$description": "Lead/emphasized body copy (FDS 2.10)."
     },
     "body-sm": {
       "$value": {
@@ -656,6 +760,15 @@ export const rawTokens: Record<string, unknown> = {
         "fontWeight": "{ref.font-weight.medium}",
         "lineHeight": "{ref.line-height.normal}"
       }
+    },
+    "caption": {
+      "$value": {
+        "fontFamily": "{font.family-base}",
+        "fontSize": "{ref.font-size.xs}",
+        "fontWeight": "{ref.font-weight.regular}",
+        "lineHeight": "{ref.line-height.normal}"
+      },
+      "$description": "Timestamps, fine print, dense metadata (FDS 2.10)."
     }
   },
   "motion": {
@@ -671,6 +784,11 @@ export const rawTokens: Record<string, unknown> = {
     "duration-slow": {
       "$type": "duration",
       "$value": "{ref.duration.slow}"
+    },
+    "duration-loop": {
+      "$type": "duration",
+      "$value": "{ref.duration.loop}",
+      "$description": "Continuous/looping animation cycle (spinners, shimmer, marquee) — FDS 2.12. NOT zeroed under prefers-reduced-motion (a 0s infinite loop still animates every frame); loop consumers must gate with `animation: none` themselves."
     },
     "easing-standard": {
       "$type": "cubicBezier",
@@ -716,7 +834,7 @@ export const rawTokens: Record<string, unknown> = {
   },
   "size": {
     "$type": "dimension",
-    "$description": "Container widths — on WordPress these bridge settings.layout.contentSize/wideSize (Slice 4).",
+    "$description": "Container widths — on WordPress these bridge settings.layout.contentSize/wideSize (Slice 4) — plus fixed interaction sizes.",
     "container-sm": {
       "$value": "640px"
     },
@@ -731,6 +849,10 @@ export const rawTokens: Record<string, unknown> = {
     },
     "container-full": {
       "$value": "100%"
+    },
+    "tap": {
+      "$value": "44px",
+      "$description": "Minimum touch-target hit area (WCAG 2.5.8 / a11y guide) — bind under pointer:coarse so pointer UIs keep their compact metrics."
     }
   },
   "bp": {

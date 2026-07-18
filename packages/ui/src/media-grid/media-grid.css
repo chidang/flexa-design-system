@@ -1,0 +1,128 @@
+/* FxMediaGrid — token-only file-manager tile grid. Auto layout fills at a min
+   tile of 160px; selected tiles carry a primary ring. */
+.fx-media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--fx-space-3);
+}
+
+.fx-media-grid[data-empty='true'] {
+  display: block;
+}
+
+/* Rows are structure-only (grid > row > gridcell for AT); the CSS grid still
+   places the cells directly. */
+.fx-media-grid-row {
+  display: contents;
+}
+
+.fx-media-grid-item {
+  display: flex;
+  flex-direction: column;
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-media-grid-item:hover {
+  box-shadow: var(--fx-shadow-md);
+}
+
+.fx-media-grid-item:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-media-grid-item.is-selected {
+  border-color: var(--fx-color-primary);
+  box-shadow: 0 0 0 1px var(--fx-color-primary);
+}
+
+.fx-media-grid-thumb {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1.3333;
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-media-grid-thumb-image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.fx-media-grid-select {
+  position: absolute;
+  top: var(--fx-space-2);
+  inset-inline-start: var(--fx-space-2);
+  background: var(--fx-color-surface);
+  border-radius: var(--fx-radius-md);
+}
+
+.fx-media-grid-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-2) var(--fx-space-3);
+}
+
+.fx-media-grid-type-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--fx-color-text-muted);
+}
+
+.fx-media-grid-name {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-media-grid-actions {
+  flex: 0 0 auto;
+}
+
+.fx-media-grid-actions-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 24px;
+  block-size: 24px;
+  border: 0;
+  border-radius: var(--fx-radius-md);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+
+.fx-media-grid-actions-trigger:hover {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-media-grid-actions-trigger:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-media-grid-size {
+  padding: 0 var(--fx-space-3) var(--fx-space-2);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-media-grid-skeleton {
+  aspect-ratio: 1.3333;
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface-alt);
+}

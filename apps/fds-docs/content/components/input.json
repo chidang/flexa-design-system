@@ -1,0 +1,5 @@
+{
+  "slug": "input",
+  "tagline": "Single-line text entry — the base every text-like field inherits.",
+  "whenToUse": "Use for one short line of free text: names, titles, search terms, identifiers. For multi-line text use Textarea; for a closed set use Select; for typed values (email, number, currency) use the specialized inputs."
+}

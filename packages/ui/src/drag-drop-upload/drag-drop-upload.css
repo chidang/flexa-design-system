@@ -1,0 +1,58 @@
+/* FxDragDropUpload — token-only. The dropzone is a full-width dashed button;
+   `data-dragover` (and the base `.is-dragover`) tint it with the primary accent.
+   Height is expressed in rem (off the px ladder by design — see U5 rules). */
+.fx-drag-drop-upload-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fx-space-2);
+  inline-size: 100%;
+  min-block-size: 10rem;
+  padding: var(--fx-space-6);
+  background: var(--fx-color-surface);
+  border: 2px dashed var(--fx-color-border-strong);
+  border-radius: var(--fx-radius-lg);
+  color: var(--fx-color-text-muted);
+  font-family: var(--fx-font-family-base);
+  cursor: pointer;
+  transition: border-color var(--fx-motion-duration-fast) var(--fx-motion-easing-out),
+    background var(--fx-motion-duration-fast) var(--fx-motion-easing-out);
+}
+
+.fx-drag-drop-upload-zone:hover:not(:disabled) {
+  border-color: var(--fx-color-primary);
+}
+
+.fx-drag-drop-upload-zone:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-drag-drop-upload-zone[data-dragover],
+.fx-drag-drop-upload.is-dragover .fx-drag-drop-upload-zone {
+  border-color: var(--fx-color-primary);
+  color: var(--fx-color-primary);
+  background: var(--fx-color-primary-soft);
+}
+
+.fx-drag-drop-upload-zone:disabled {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-drag-drop-upload-zone-icon {
+  display: inline-flex;
+  color: var(--fx-color-primary);
+}
+
+.fx-drag-drop-upload-zone-hint {
+  font-size: var(--fx-text-body-size);
+}
+
+.fx-drag-drop-upload-zone-browse {
+  color: var(--fx-color-primary);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  text-decoration: underline;
+}

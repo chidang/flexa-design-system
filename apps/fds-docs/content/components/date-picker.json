@@ -1,0 +1,5 @@
+{
+  "slug": "date-picker",
+  "tagline": "A text field plus a calendar popover for picking a single date.",
+  "whenToUse": "Use for one date where the calendar context helps — a due date, a start date, a delivery day. Dates cross the API as ISO-8601 strings ('2026-07-11'), never Date objects. For a start/end pair use the Date Range Picker; for a time-of-day use the Time Picker; for a plain free-form value with no calendar affordance a native input may be enough."
+}

@@ -31,9 +31,10 @@
 
 import { z } from 'zod';
 import { validateManifest } from './manifest.js';
-import type { ElementManifest, Json, PresetNode, StyleSpec } from './types.js';
+import { nodeStyleToSpec } from './nodeStyle.js';
+import type { ElementManifest, Json, NodeStyle, PresetNode, StyleSpec } from './types.js';
 import type { Theme } from 'flexa-design-system';
-import { FDS_TOKENS, FDS_VERSION } from 'flexa-design-system';
+import { FDS_TOKENS, FDS_VERSION, findUnknownStyleTokens } from 'flexa-design-system';
 import { brandSchema, validateComponentStyles, type Brand } from './design.js';
 // A site pack's payload IS a FlexaProject (doc 11 §106). `validateProject` is
 // used only inside `validateSite` (a function body), so the pack.ts ↔ project.ts
@@ -351,6 +352,27 @@ function walkPresetNode(node: unknown, where: string, errors: string[]): void {
   }
   if (node['settings'] !== undefined && !isPlainJson(node['settings'])) {
     errors.push(`${where}.settings: must be plain JSON data`);
+  }
+  if (node['label'] !== undefined && typeof node['label'] !== 'string') {
+    errors.push(`${where}.label: must be a string`);
+  }
+  const style = node['style'];
+  if (style !== undefined) {
+    if (!isObject(style)) {
+      errors.push(`${where}.style: must be a style object`);
+    } else {
+      // Same on-system token gate node.style runs everywhere else (AE-V2
+      // set-style op, component styles): compile to a StyleSpec and flag any
+      // off-system token. Real CSS literals pass through — advanced mode is legal.
+      const spec = nodeStyleToSpec(style as NodeStyle);
+      if (spec) {
+        for (const id of findUnknownStyleTokens(spec)) {
+          errors.push(
+            `${where}.style: unknown design token "${id}" — use an on-system token or a CSS literal`,
+          );
+        }
+      }
+    }
   }
   const children = node['children'];
   if (children !== undefined) {

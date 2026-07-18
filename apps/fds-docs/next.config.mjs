@@ -15,7 +15,7 @@ const nextConfig = {
   basePath: process.env.DOCS_BASE_PATH ?? '',
   trailingSlash: true,
   images: { unoptimized: true },
-  transpilePackages: ['flexa-design-system', '@flexa/core'],
+  transpilePackages: ['flexa-design-system', 'flexa-ui-kit', '@flexa/core'],
   webpack: (config) => {
     // Workspace packages viết import ESM-style `./x.js` nhưng file thật là .ts
     // (moduleResolution Bundler, không build step) — map lại cho webpack.

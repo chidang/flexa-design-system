@@ -1,0 +1,5 @@
+{
+  "slug": "slider",
+  "tagline": "Pick a number — or a range — by dragging along a track.",
+  "whenToUse": "Use when the approximate magnitude matters more than an exact figure and immediate visual feedback helps — volume, opacity, a price range. A tuple value renders two thumbs for a range. For a precise numeric entry use a Number Input or Stepper; for a small set of discrete choices use a Radio Group or Segmented control."
+}

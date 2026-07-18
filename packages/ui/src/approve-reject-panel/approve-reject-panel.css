@@ -1,0 +1,105 @@
+/* FxApproveRejectPanel — token-only. AI accent = info family (no bespoke AI
+   color): faint info-tint framing marks the review context. Approve = success
+   emphasis via the primary button; reject stays neutral/danger on confirm. The
+   `bar` variant is a sticky footer strip. */
+.fx-approve-reject-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-3);
+  border: 1px solid var(--fx-color-info);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-info-soft);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+}
+
+.fx-approve-reject-panel[data-variant='bar'] {
+  position: sticky;
+  bottom: 0;
+  border-radius: 0;
+  border-inline: 0;
+  border-block-end: 0;
+}
+
+.fx-approve-reject-panel[data-disabled] {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-approve-reject-panel-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--fx-space-3);
+}
+
+.fx-approve-reject-panel-summary {
+  margin: 0;
+  margin-inline-end: auto;
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text);
+}
+
+.fx-approve-reject-panel-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+.fx-approve-reject-panel-diff {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  padding: 0 var(--fx-space-1);
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-info);
+  font-family: inherit;
+  font-size: var(--fx-text-body-sm-size);
+  cursor: pointer;
+}
+.fx-approve-reject-panel-diff:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+.fx-approve-reject-panel-diff:disabled {
+  color: var(--fx-color-text-subtle);
+  cursor: not-allowed;
+}
+
+.fx-approve-reject-panel-reason {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+  padding-block-start: var(--fx-space-2);
+  border-block-start: 1px solid var(--fx-color-border);
+}
+.fx-approve-reject-panel-reason-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+.fx-approve-reject-panel-reason-label {
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text);
+}
+.fx-approve-reject-panel-reason-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--fx-space-2);
+}
+
+.fx-approve-reject-panel-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

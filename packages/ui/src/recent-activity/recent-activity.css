@@ -1,0 +1,22 @@
+/* FxRecentActivity — token-only. A Card that frames a compact FxActivityFeed with
+   a "View all" footer link. Layout is inherited from FxCard; this only styles the
+   footer link. */
+.fx-recent-activity-view-all {
+  display: inline-block;
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-primary);
+  text-decoration: none;
+}
+
+.fx-recent-activity-view-all:hover {
+  text-decoration: underline;
+}
+
+.fx-recent-activity-view-all:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}

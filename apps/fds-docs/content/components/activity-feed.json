@@ -1,0 +1,5 @@
+{
+  "slug": "activity-feed",
+  "tagline": "Chronological activity stream — avatar + rich sentence + relative time.",
+  "whenToUse": "Reach for Activity Feed when you need a full, scrollable audit stream — who did what to which object, newest first, with optional sticky day headers and a real load-more button. It is the primitive Recent Activity wraps in a card: use Activity Feed on a dedicated \"Activity\" page or a tall panel; use Recent Activity for a compact dashboard widget of the latest few items. Prefer Timeline instead when you are showing an ordered process with fixed stages rather than a live event log."
+}

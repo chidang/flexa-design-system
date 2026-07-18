@@ -1,0 +1,46 @@
+/* FxTopNavigationLayout — token-only. A 64px sticky bar above the routed main;
+   the content column centres once it hits its container cap. */
+.fx-top-nav-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: var(--fx-color-bg);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-top-nav-layout-bar {
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  background: var(--fx-color-surface);
+  border-bottom: 1px solid var(--fx-color-border);
+}
+
+.fx-top-nav-layout[data-sticky] .fx-top-nav-layout-bar {
+  position: sticky;
+  top: 0;
+  z-index: var(--fx-z-sticky);
+}
+
+.fx-top-nav-layout-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fx-top-nav-layout-inner {
+  margin-inline: auto;
+  min-width: 0;
+  padding: var(--fx-space-6);
+}
+
+.fx-top-nav-layout[data-max-width='lg'] .fx-top-nav-layout-inner {
+  max-width: var(--fx-size-container-lg);
+}
+
+.fx-top-nav-layout[data-max-width='xl'] .fx-top-nav-layout-inner {
+  max-width: var(--fx-size-container-xl);
+}
+
+.fx-top-nav-layout[data-max-width='full'] .fx-top-nav-layout-inner {
+  max-width: var(--fx-size-container-full);
+}

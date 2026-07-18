@@ -1,0 +1,141 @@
+/* FxCheckoutSummary — token-only. A read-only Cart Summary + recap sections +
+   place-order slot. On mobile it's a native <details> disclosure above the
+   form; from >=1024px it becomes an always-open sticky aside. */
+.fx-checkout-summary {
+  font-family: var(--fx-font-family-base);
+  color: var(--fx-color-text);
+}
+
+/* Card chrome lives on the wrapper, not the <details> — the place-order block
+   sits outside the disclosure so collapsing never hides the pay CTA. */
+.fx-checkout-summary-card {
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface);
+  overflow: hidden;
+}
+
+.fx-checkout-summary-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-4);
+  cursor: pointer;
+  list-style: none;
+  font-weight: var(--fx-font-weight-semibold);
+}
+.fx-checkout-summary-toggle::-webkit-details-marker {
+  display: none;
+}
+.fx-checkout-summary-toggle:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-checkout-summary-title {
+  font-size: var(--fx-text-body-size);
+}
+
+.fx-checkout-summary-chevron {
+  flex: none;
+  color: var(--fx-color-text-muted);
+  transition: transform var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+.fx-checkout-summary-disclosure[open] .fx-checkout-summary-chevron {
+  transform: rotate(180deg);
+}
+
+.fx-checkout-summary-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+  padding: var(--fx-space-4);
+  padding-block-start: 0;
+}
+
+/* Recap sections. */
+.fx-checkout-summary-sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+  padding-block-start: var(--fx-space-3);
+  border-block-start: 1px solid var(--fx-color-border);
+}
+
+.fx-checkout-summary-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--fx-space-2);
+}
+
+.fx-checkout-summary-section-label {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-checkout-summary-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-primary);
+  font: inherit;
+  font-size: var(--fx-text-body-sm-size);
+  cursor: pointer;
+}
+.fx-checkout-summary-edit:hover {
+  text-decoration: underline;
+}
+.fx-checkout-summary-edit:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-checkout-summary-section-summary {
+  margin-block-start: var(--fx-space-1);
+  font-size: var(--fx-text-body-size);
+  line-height: var(--fx-line-height-normal);
+}
+
+/* Place-order slot. */
+.fx-checkout-summary-place {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-3) var(--fx-space-4) var(--fx-space-4);
+  border-block-start: 1px solid var(--fx-color-border);
+}
+/* The place-order CTA fills the rail — same stretch FxCartSummary gives its
+   checkout button, so the sibling summaries agree. */
+.fx-checkout-summary-place .fx-button {
+  inline-size: 100%;
+}
+
+.fx-checkout-summary-terms {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+
+/* Desktop: always-open sticky aside. */
+@media (min-width: 1024px) {
+  .fx-checkout-summary {
+    position: sticky;
+    inset-block-start: var(--fx-space-4);
+  }
+  .fx-checkout-summary-toggle {
+    cursor: default;
+    pointer-events: none;
+  }
+  .fx-checkout-summary-chevron {
+    display: none;
+  }
+  /* Force the disclosure open regardless of the mobile toggle state. */
+  .fx-checkout-summary-body {
+    display: flex;
+  }
+}

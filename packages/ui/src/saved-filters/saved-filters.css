@@ -1,0 +1,60 @@
+/* FxSavedFilters — token-only. A views Select + a save action + a per-item
+   manage menu; dialogs/confirm are portalled by the composed primitives. */
+.fx-saved-filters {
+  display: inline-flex;
+  align-items: center;
+  /* Wraps in narrow containers (a 280px filter rail can't fit select + save
+     action on one line) instead of overflowing into neighbouring columns. */
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-saved-filters-select {
+  min-width: 160px;
+}
+
+.fx-saved-filters-empty {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+  white-space: nowrap;
+}
+
+/* Icon-only manage "⋯" trigger. */
+.fx-saved-filters-manage {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-saved-filters-manage:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-saved-filters-manage:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+.fx-saved-filters-manage[aria-expanded='true'] {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+
+/* Name field inside the save / rename Dialog. */
+.fx-saved-filters-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+.fx-saved-filters-field-label {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text);
+}

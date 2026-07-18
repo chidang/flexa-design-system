@@ -1,0 +1,186 @@
+/* FxAdvancedFilters — token-only. A trigger + chips row plus a staged builder
+   popover at popover elevation. AND-only combinator, stated inline. */
+.fx-advanced-filters {
+  position: relative;
+  display: inline-flex;
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-advanced-filters-bar {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+
+/* Applied-count pill on the trigger. */
+.fx-advanced-filters-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--fx-space-4);
+  height: var(--fx-space-4);
+  padding: 0 var(--fx-space-1);
+  margin-inline-start: var(--fx-space-1);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-primary);
+  color: var(--fx-color-on-primary);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+/* Active-filter chip row. */
+.fx-advanced-filters-chips {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.fx-advanced-filters-chip {
+  display: inline-flex;
+}
+
+/* Builder popover. */
+.fx-advanced-filters-popover {
+  position: absolute;
+  inset-block-start: calc(100% + var(--fx-space-2));
+  inset-inline-start: 0;
+  z-index: var(--fx-z-popover);
+  width: 360px;
+  max-width: calc(100vw - var(--fx-space-4));
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-3);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  box-shadow: var(--fx-shadow-lg);
+}
+
+.fx-advanced-filters-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+.fx-advanced-filters-heading {
+  margin: 0;
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+.fx-advanced-filters-and {
+  margin: 0;
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-advanced-filters-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+}
+
+.fx-advanced-filters-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr) auto;
+  align-items: center;
+  gap: var(--fx-space-1);
+}
+.fx-advanced-filters-value {
+  min-width: 0;
+}
+
+/* Between: two inputs with a dash. */
+.fx-advanced-filters-between {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+}
+.fx-advanced-filters-dash {
+  color: var(--fx-color-text-muted);
+}
+
+.fx-advanced-filters-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-advanced-filters-remove:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+
+.fx-advanced-filters-remove:active {
+  background: var(--fx-color-border);
+}
+.fx-advanced-filters-remove:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-advanced-filters-add {
+  display: flex;
+}
+.fx-advanced-filters-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  padding: var(--fx-space-1) var(--fx-space-2);
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-primary);
+  font-family: inherit;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  cursor: pointer;
+}
+.fx-advanced-filters-add-btn:hover:not(:disabled) {
+  text-decoration: underline;
+}
+.fx-advanced-filters-add-btn:disabled {
+  color: var(--fx-color-text-subtle);
+  cursor: not-allowed;
+  text-decoration: none;
+}
+.fx-advanced-filters-add-btn:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-advanced-filters-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-2);
+  padding-block-start: var(--fx-space-2);
+  border-block-start: 1px solid var(--fx-color-border);
+}
+
+/* Tap target — see checkbox.css. */
+@media (pointer: coarse) {
+  .fx-advanced-filters-remove {
+    position: relative;
+  }
+  .fx-advanced-filters-remove::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: max(100%, var(--fx-size-tap));
+    height: max(100%, var(--fx-size-tap));
+  }
+}

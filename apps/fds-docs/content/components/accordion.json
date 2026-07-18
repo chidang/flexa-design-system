@@ -1,0 +1,5 @@
+{
+  "slug": "accordion",
+  "tagline": "Stacked expandable sections — single or multiple open, boxed or plain.",
+  "whenToUse": "Use Accordion to let users scan a set of section headings and expand only the ones they need — FAQs, settings groups, long forms broken into stages. Keep multiple=false to reveal one section at a time, or allow several open. For switching between mutually-exclusive views of the same region use Tabs, and for a single show/hide of one block use a Disclosure/Collapse."
+}

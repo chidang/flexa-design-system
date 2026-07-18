@@ -1,0 +1,5 @@
+{
+  "slug": "error-page",
+  "tagline": "Full-page error surface with a status-code slot and recovery actions.",
+  "whenToUse": "Error Page is the full Content-Area surface for hard failures: a permission block (403), a missing route (404), a server error (500), or an offline hard-stop. It renders the big status code above an FxEmptyState (size lg) whose title becomes the page's single h1 — focused on mount so a keyboard or screen-reader user lands on it. Each code ships sensible English default copy (Page not found, Access denied, Something went wrong, You're offline) that you can override per case; an unknown string code falls back to the 500 copy. Pass an actions slot for recovery (Go home / Retry / Contact support) and a requestId for support correlation, rendered small and subtle. The host owns document.title — this component owns presentation only."
+}

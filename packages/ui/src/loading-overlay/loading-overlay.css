@@ -1,0 +1,56 @@
+/* FxLoadingOverlay — token-only. Covers its positioned parent (parent must be
+   position: relative). Scrim = surface at ~75% via color-mix on the var — no
+   invented opacity token, no literal. */
+.fx-loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fx-space-3);
+  background: color-mix(in srgb, var(--fx-color-surface) 75%, transparent);
+  color: var(--fx-color-text-muted);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-loading-overlay[data-blur] {
+  backdrop-filter: blur(2px);
+}
+
+.fx-loading-overlay-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--fx-color-border);
+  border-top-color: var(--fx-color-primary);
+  border-radius: var(--fx-radius-full);
+  animation: fx-loading-spin calc(var(--fx-motion-duration-loop) / 2) linear infinite;
+}
+
+.fx-loading-overlay-label {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-loading-overlay-actions {
+  margin-top: var(--fx-space-2);
+}
+
+@keyframes fx-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced motion: the spinner rotation is decorative; pulse opacity instead. */
+@media (prefers-reduced-motion: reduce) {
+  .fx-loading-overlay-spinner {
+    animation: fx-loading-pulse var(--fx-motion-duration-loop) ease-in-out infinite;
+  }
+}
+@keyframes fx-loading-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}

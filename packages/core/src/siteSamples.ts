@@ -165,6 +165,44 @@ const SECTION_SAMPLES: Readonly<Record<string, PlanSection>> = {
       ],
     },
   },
+  'pricing-with-toggle': {
+    preset: 'pricing-with-toggle',
+    copy: {
+      heading: 'Plans that scale with you',
+      // priceYear ≈ 10× the monthly price (a ~20% yearly discount, matching the
+      // toggle's default "Save 20%" note). Numeric strings — the card formats.
+      items: [
+        {
+          title: 'Starter',
+          price: '19',
+          priceYear: '182',
+          subtitle: 'For individuals getting started',
+          features: ['Up to 3 projects', 'Community support', '1 GB storage'],
+          cta: 'Start free',
+          featured: 'false',
+        },
+        {
+          title: 'Pro',
+          price: '49',
+          priceYear: '470',
+          subtitle: 'For growing teams',
+          features: ['Unlimited projects', 'Priority support', '50 GB storage', 'Advanced analytics'],
+          cta: 'Get started',
+          trial: '14-day free trial',
+          featured: 'true',
+        },
+        {
+          title: 'Business',
+          price: '99',
+          priceYear: '950',
+          subtitle: 'For organisations at scale',
+          features: ['Everything in Pro', 'SSO & audit logs', 'Dedicated manager', 'Custom contracts'],
+          cta: 'Contact sales',
+          featured: 'false',
+        },
+      ],
+    },
+  },
   'comparison-table': {
     preset: 'comparison-table',
     copy: {
@@ -230,6 +268,13 @@ const SECTION_SAMPLES: Readonly<Record<string, PlanSection>> = {
       info: '123 Main Street, Springfield — Mon–Fri 9:00–17:00 — (555) 123-4567 — hello@example.com',
     },
   },
+  'lead-form': {
+    preset: 'lead-form',
+    copy: {
+      heading: 'Request a quote',
+      intro: 'Tell us about your project and we will get back to you with a tailored proposal.',
+    },
+  },
   team: {
     preset: 'team',
     copy: {
@@ -287,6 +332,38 @@ const SECTION_SAMPLES: Readonly<Record<string, PlanSection>> = {
         },
       ],
     },
+  },
+  timeline: {
+    preset: 'timeline',
+    copy: {
+      heading: 'Our journey',
+      items: [
+        { date: '2019', title: 'Founded', text: 'We opened with a small team and a big idea.' },
+        { date: '2021', title: 'Ten thousand customers', text: 'Our community grew faster than we imagined.' },
+        { date: '2023', title: 'Going global', text: 'We launched in three new markets.' },
+      ],
+    },
+  },
+  'spec-list': {
+    preset: 'spec-list',
+    copy: {
+      heading: 'Specifications',
+      items: [
+        { term: 'Material', description: 'Solid oak with a natural oil finish.' },
+        { term: 'Dimensions', description: '120 × 60 × 75 cm (W × D × H).' },
+        { term: 'Warranty', description: 'Five years, parts and labour included.' },
+      ],
+    },
+  },
+  'before-after': {
+    preset: 'before-after',
+    copy: {
+      heading: 'See the difference',
+      body: 'Drag the slider to compare the result.',
+      beforeAlt: 'Before',
+      afterAlt: 'After',
+    },
+    images: { before: SAMPLE_IMAGE, after: SAMPLE_IMAGE },
   },
   'shop-grid': {
     preset: 'shop-grid',
@@ -381,6 +458,22 @@ const SECTION_SAMPLES: Readonly<Record<string, PlanSection>> = {
       submitLabel: 'Request a table',
     },
   },
+  'appointment-booking': {
+    preset: 'appointment-booking',
+    copy: {
+      heading: 'Book an appointment',
+      intro: 'Choose a service and a time that suits you — we will confirm by email.',
+      submitLabel: 'Request appointment',
+    },
+  },
+  'event-registration': {
+    preset: 'event-registration',
+    copy: {
+      heading: 'Reserve your spot',
+      intro: 'Register for the workshop — places are limited and confirmed by email.',
+      submitLabel: 'Register now',
+    },
+  },
   'feature-cards-image': {
     preset: 'feature-cards-image',
     copy: {
@@ -401,6 +494,76 @@ const SECTION_SAMPLES: Readonly<Record<string, PlanSection>> = {
           image: SAMPLE_IMAGE,
           title: 'Insightful analytics',
           text: 'Track what matters with dashboards your whole team can read.',
+        },
+      ],
+    },
+  },
+  'room-cards': {
+    preset: 'room-cards',
+    copy: {
+      heading: 'Rooms & suites',
+      items: [
+        {
+          image: SAMPLE_IMAGE,
+          name: 'Garden Double',
+          description: 'A bright room opening onto the courtyard garden.',
+          price: '$120 / night',
+          guests: '2 guests',
+          bed: '1 Queen bed',
+          size: '24 m²',
+          status: 'Popular',
+        },
+        {
+          image: SAMPLE_IMAGE,
+          name: 'Deluxe King',
+          description: 'Spacious king room with a city-view balcony.',
+          price: '$180 / night',
+          guests: '2 guests',
+          bed: '1 King bed',
+          size: '32 m²',
+        },
+        {
+          image: SAMPLE_IMAGE,
+          name: 'Family Suite',
+          description: 'Two connected rooms with a small lounge area.',
+          price: '$260 / night',
+          guests: '4 guests',
+          bed: '1 King + 2 Singles',
+          size: '48 m²',
+          status: 'Last rooms',
+        },
+      ],
+    },
+  },
+  'course-cards': {
+    preset: 'course-cards',
+    copy: {
+      heading: 'Popular courses',
+      intro: 'Learn at your own pace with hands-on projects.',
+      items: [
+        {
+          image: SAMPLE_IMAGE,
+          title: 'Web Design Foundations',
+          description: 'Build and publish your first responsive site.',
+          duration: '6 weeks',
+          level: 'Beginner',
+          price: '$149',
+        },
+        {
+          image: SAMPLE_IMAGE,
+          title: 'Front-end Development',
+          description: 'Master HTML, CSS and modern JavaScript.',
+          duration: '10 weeks',
+          level: 'Intermediate',
+          price: '$299',
+        },
+        {
+          image: SAMPLE_IMAGE,
+          title: 'UX Research & Strategy',
+          description: 'Turn user insights into product decisions.',
+          duration: '8 weeks',
+          level: 'Advanced',
+          price: '$249',
         },
       ],
     },
@@ -490,6 +653,30 @@ const SECTION_SAMPLES: Readonly<Record<string, PlanSection>> = {
   'header-shop-mega': {
     preset: 'header-shop-mega',
     copy: { brand: 'Your Store' },
+  },
+  // Search and cart are provider-driven (no slots) — only brand + nav to fill.
+  'header-commerce': {
+    preset: 'header-commerce',
+    copy: {
+      brand: 'Your Store',
+      links: [
+        { label: 'Shop', url: '#' },
+        { label: 'Deals', url: '#' },
+        { label: 'Contact', url: '#' },
+      ],
+    },
+  },
+  // Brand is the real Site Logo (provider-driven) — only the nav links to fill.
+  'header-logo': {
+    preset: 'header-logo',
+    copy: {
+      links: [
+        { label: 'Home', url: '#' },
+        { label: 'About', url: '#' },
+        { label: 'Services', url: '#' },
+        { label: 'Contact', url: '#' },
+      ],
+    },
   },
   'footer-columns': {
     preset: 'footer-columns',

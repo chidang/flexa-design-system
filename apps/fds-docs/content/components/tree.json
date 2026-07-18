@@ -1,0 +1,5 @@
+{
+  "slug": "tree",
+  "tagline": "Hierarchical tree view — expand, select, multi-select with tri-state.",
+  "whenToUse": "Use Tree to browse or edit nested hierarchies — category trees, file browsers, nested navigation — where depth matters and users expand/collapse branches. Turn on multiSelect for checkbox picking with tri-state parents, and lazy nodes to load children on demand. For a flat single-column run without hierarchy use List, and for step-by-step navigation of one path use Breadcrumb."
+}

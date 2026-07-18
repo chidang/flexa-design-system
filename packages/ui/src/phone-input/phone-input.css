@@ -1,0 +1,98 @@
+/* FxPhoneInput — token-only. A start-affix country FxSelect fused to a tel
+   number field inside one bordered control. */
+.fx-phone-input {
+  display: inline-flex;
+  align-items: stretch;
+  gap: var(--fx-space-2);
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--fx-space-3);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  transition: border-color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard), box-shadow var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-phone-input[data-size='sm'] {
+  height: 32px;
+  padding: 0 var(--fx-space-2);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-phone-input[data-size='lg'] {
+  height: 48px;
+  padding: 0 var(--fx-space-4);
+}
+
+.fx-phone-input:hover:not(.is-disabled) {
+  border-color: var(--fx-color-border-strong);
+}
+
+.fx-phone-input:focus-within {
+  border-color: var(--fx-color-border-strong);
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-phone-input.is-invalid,
+.fx-phone-input[data-invalid] {
+  border-color: var(--fx-color-danger);
+}
+
+.fx-phone-input.is-disabled {
+  background: var(--fx-color-surface-alt);
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-phone-input.is-readonly {
+  background: var(--fx-color-surface-alt);
+}
+
+/* The country select sheds its own border/padding — it lives inside the field. */
+.fx-phone-input-country {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 8rem;
+  border-inline-end: 1px solid var(--fx-color-border);
+  padding-inline-end: var(--fx-space-2);
+}
+
+.fx-phone-input-country .fx-select-trigger {
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.fx-phone-input-country .fx-select-trigger:hover:not(:disabled) {
+  border-color: transparent;
+}
+
+.fx-phone-input-control {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+.fx-phone-input-control:focus {
+  outline: none;
+}
+
+.fx-phone-input-control::placeholder {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-phone-input-control:disabled {
+  cursor: not-allowed;
+}

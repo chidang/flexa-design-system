@@ -1,0 +1,5 @@
+{
+  "slug": "comment-thread",
+  "tagline": "Threaded discussion — comments, one reply level, edit/delete, tombstones.",
+  "whenToUse": "Comment Thread is a threaded discussion attached to an entity — a listing question, a dispute note, a review reply. Each comment is an Avatar + author (linking to the profile) + relative time + body, followed by an actions row (reply / edit / delete) and one level of nested, indented replies. Reply and edit open an inline Textarea composer in place; delete always routes through a Confirmation Dialog so it is deliberate. A soft-deleted comment renders a \"Comment removed\" tombstone rather than vanishing, keeping the thread coherent. maxDepth caps nesting at one level, sort orders top-level comments oldest- or newest-first, and edit/delete appear only on the viewer's own comments unless canModerate is set."
+}

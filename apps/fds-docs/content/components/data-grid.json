@@ -1,0 +1,5 @@
+{
+  "slug": "data-grid",
+  "tagline": "Spreadsheet-class grid — keyboard cell navigation + inline editing.",
+  "whenToUse": "Use Data Grid for spreadsheet-class editing: APG grid keyboard navigation (single tab stop, roving cell focus, arrow keys), inline cell editors, and column resize/reorder/pin. It is a distinct role=\"grid\" implementation, not Table with extra props — reach for it only when those interactions are needed. For a read-and-select record list use Table, and for pure scale over a large dataset use Virtual Table."
+}

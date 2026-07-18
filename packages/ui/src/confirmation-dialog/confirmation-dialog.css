@@ -1,0 +1,47 @@
+/* FxConfirmationDialog — token-only. Reuses the FxDialog surface parts
+   (`.fx-dialog-*`, dialog.css) and adds only the confirmation specifics. */
+.fx-confirmation-dialog {
+  max-width: 440px;
+}
+
+.fx-confirmation-dialog-icon {
+  color: var(--fx-color-danger);
+  vertical-align: middle;
+}
+
+.fx-confirmation-dialog-description {
+  margin: 0;
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-size);
+  line-height: var(--fx-line-height-normal);
+}
+
+.fx-confirmation-dialog-field {
+  display: block;
+  margin-top: var(--fx-space-4);
+}
+
+.fx-confirmation-dialog-field-label {
+  display: block;
+  margin-bottom: var(--fx-space-2);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+}
+
+.fx-confirmation-dialog-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--fx-space-3);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+}
+.fx-confirmation-dialog-input:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-color: var(--fx-color-border-strong);
+}

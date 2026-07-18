@@ -1,0 +1,122 @@
+/* FxTopNavigation — token-only. 56px sticky bar; the active link carries a
+   bottom indicator in the primary token (never colour alone). */
+.fx-top-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--fx-z-sticky);
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-4);
+  height: 56px;
+  padding: 0 var(--fx-space-4);
+  background: var(--fx-color-surface);
+  border-bottom: 1px solid var(--fx-color-border);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-top-nav-brand {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.fx-top-nav-links {
+  min-width: 0;
+  /* Guard for narrow containers: links scroll instead of letting the utilities
+     cluster (bell/avatar, margin-auto) paint over them. The contract's "More"
+     overflow menu supersedes this when it ships; mobile collapses to a drawer. */
+  overflow-x: auto;
+}
+
+.fx-top-nav-list {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fx-top-nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  height: 56px;
+  padding: 0 var(--fx-space-3);
+  color: var(--fx-color-text-muted);
+  text-decoration: none;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  transition: color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-top-nav-link:hover {
+  color: var(--fx-color-text);
+}
+
+.fx-top-nav-link[data-active] {
+  color: var(--fx-color-text);
+}
+
+.fx-top-nav-link[data-active]::after {
+  content: '';
+  position: absolute;
+  inset-inline: var(--fx-space-3);
+  bottom: 0;
+  height: 2px;
+  background: var(--fx-color-primary);
+}
+
+.fx-top-nav-link:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-md);
+}
+
+.fx-top-nav-utilities {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  margin-inline-start: auto;
+}
+
+.fx-top-nav-bell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--fx-radius-md);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+  transition: background var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-top-nav-bell:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+
+.fx-top-nav-bell:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-top-nav-bell-badge {
+  position: absolute;
+  top: var(--fx-space-1);
+  inset-inline-end: var(--fx-space-1);
+  min-width: 16px;
+  height: 16px;
+  padding: 0 0.25em;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-danger);
+  color: var(--fx-color-on-danger);
+  font-size: var(--fx-text-body-sm-size);
+  line-height: 16px;
+  text-align: center;
+}

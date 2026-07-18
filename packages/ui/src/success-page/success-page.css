@@ -1,0 +1,74 @@
+/* FxSuccessPage — token-only. Centered success stack: 48px success badge +
+   h1 + description + summary card slot + actions (§3.6). */
+.fx-success-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--fx-space-4);
+  padding: var(--fx-space-12);
+  text-align: center;
+  font-family: var(--fx-font-family-base);
+}
+
+/* 48px success mark (icon renders at 24 inside the tinted badge). */
+.fx-success-page-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--fx-radius-full);
+  color: var(--fx-color-success);
+  background: var(--fx-color-success-soft);
+}
+
+.fx-success-page-title {
+  margin: 0;
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-md-size);
+  font-weight: var(--fx-text-heading-md-weight);
+  line-height: var(--fx-text-heading-md-line-height);
+  color: var(--fx-color-text);
+}
+
+.fx-success-page-description {
+  max-inline-size: 40ch;
+  margin: 0;
+  font-size: var(--fx-text-body-size);
+  line-height: var(--fx-line-height-normal);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-success-page-summary {
+  inline-size: 100%;
+  max-inline-size: 480px;
+  margin-block-start: var(--fx-space-2);
+  text-align: start;
+}
+
+.fx-success-page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fx-space-3);
+  margin-block-start: var(--fx-space-2);
+}
+
+.fx-success-page-advance {
+  margin: 0;
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+.fx-success-page-advance-link {
+  color: var(--fx-color-primary);
+  text-decoration: none;
+}
+.fx-success-page-advance-link:hover {
+  text-decoration: underline;
+}
+.fx-success-page-advance-link:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}

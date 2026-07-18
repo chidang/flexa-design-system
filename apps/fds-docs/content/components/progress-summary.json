@@ -1,0 +1,5 @@
+{
+  "slug": "progress-summary",
+  "tagline": "A card of labelled progress bars with per-row and optional overall totals.",
+  "whenToUse": "Use Progress Summary to show completion across several related tracks at once — onboarding steps, verification tasks, quota usage — each as a labelled bar with a done/total value, plus an optional aggregate bar. Reach for a single Progress bar when you only have one metric, and for Statistics Card when the numbers are point-in-time values rather than progress toward a goal. Linked rows navigate to the detail for that track."
+}

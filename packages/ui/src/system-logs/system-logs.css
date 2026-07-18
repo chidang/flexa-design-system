@@ -1,0 +1,177 @@
+/* FxSystemLogs — token-only. Toolbar chrome + a monospace log list with tabular
+   timestamps and an expandable JSON context block. Composes Chip/Select/Switch/
+   SearchBar/Badge/Tag; styles only the log-specific parts. */
+.fx-system-logs {
+  font-family: var(--fx-font-family-base);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface);
+  overflow: hidden;
+}
+
+.fx-system-logs-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-3);
+  border-bottom: 1px solid var(--fx-color-border);
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-system-logs-levels {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--fx-space-1);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.fx-system-logs-legend {
+  padding: 0;
+  margin-right: var(--fx-space-1);
+  /* A <legend> sits outside the fieldset's flex flow, so the row gap can't
+     space it from the chips — push the chip row down explicitly. */
+  margin-block-end: var(--fx-space-2);
+  font-size: var(--fx-text-caption-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--fx-font-tracking-wide);
+}
+
+.fx-system-logs-selects {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+.fx-system-logs-search {
+  flex: 1;
+  min-width: 160px;
+}
+
+.fx-system-logs-older {
+  display: flex;
+  justify-content: center;
+  padding: var(--fx-space-2);
+  border-bottom: 1px solid var(--fx-color-border);
+}
+.fx-system-logs-older-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-1) var(--fx-space-3);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-sm-size);
+  cursor: pointer;
+}
+.fx-system-logs-older-btn:hover {
+  background: var(--fx-color-surface-alt);
+}
+.fx-system-logs-older-btn:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-system-logs-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 480px;
+  overflow: auto;
+}
+
+.fx-system-logs-row {
+  padding: var(--fx-space-1) var(--fx-space-3);
+  border-bottom: 1px solid var(--fx-color-border);
+}
+.fx-system-logs-row:hover {
+  background: var(--fx-color-surface-alt);
+}
+.fx-system-logs-row:last-child {
+  border-bottom: 0;
+}
+
+.fx-system-logs-line {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+.fx-system-logs [data-wrap] .fx-system-logs-line,
+.fx-system-logs[data-wrap] .fx-system-logs-line {
+  flex-wrap: wrap;
+}
+
+.fx-system-logs-time {
+  font-family: var(--fx-font-family-mono);
+  font-size: var(--fx-text-caption-size);
+  color: var(--fx-color-text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.fx-system-logs-message {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--fx-font-family-mono);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fx-system-logs[data-wrap] .fx-system-logs-message {
+  white-space: normal;
+  overflow: visible;
+  word-break: break-word;
+}
+
+.fx-system-logs-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-system-logs-toggle:hover {
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+}
+.fx-system-logs-toggle:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+.fx-system-logs-toggle[aria-expanded='true'] {
+  transform: rotate(180deg);
+}
+
+.fx-system-logs-context {
+  margin: var(--fx-space-2) 0 var(--fx-space-1);
+  padding: var(--fx-space-2) var(--fx-space-3);
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-mono);
+  font-size: var(--fx-text-caption-size);
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow: auto;
+}
+
+.fx-system-logs-empty {
+  padding: var(--fx-space-6) var(--fx-space-3);
+  text-align: center;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}

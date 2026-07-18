@@ -1,0 +1,175 @@
+/* FxAiActivityHistory — token-only. AI accent = info family (no bespoke AI
+   color): a sparkle marker sits on a rail (timeline-style). Status/decision
+   tones ride on FxBadge (approved=success, rejected=neutral, undone=warning,
+   failed=danger via status). Read-only: no edit affordances — Audit-log
+   discipline. */
+.fx-ai-activity-history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+}
+
+.fx-ai-activity-history-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+
+.fx-ai-activity-history-empty {
+  margin: 0;
+  padding: var(--fx-space-6);
+  text-align: center;
+  color: var(--fx-color-text-muted);
+}
+
+.fx-ai-activity-history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.fx-ai-activity-history-item {
+  display: flex;
+  gap: var(--fx-space-3);
+  padding-block: var(--fx-space-3);
+}
+.fx-ai-activity-history-item + .fx-ai-activity-history-item {
+  border-block-start: 1px solid var(--fx-color-border);
+}
+
+.fx-ai-activity-history-rail {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+}
+.fx-ai-activity-history-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-info-soft);
+  color: var(--fx-color-info);
+}
+
+.fx-ai-activity-history-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+
+.fx-ai-activity-history-head {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+
+.fx-ai-activity-history-prompt {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-text);
+  font-family: inherit;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  cursor: pointer;
+}
+.fx-ai-activity-history-prompt:hover {
+  color: var(--fx-color-info);
+  text-decoration: underline;
+}
+.fx-ai-activity-history-prompt:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+.fx-ai-activity-history-badges {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+
+.fx-ai-activity-history-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+  /* Breathing room around the provenance line — the column's space.1 gap alone
+     reads cramped against the head above and the details below. */
+  margin-block: var(--fx-space-1);
+  font-size: var(--fx-text-caption-size);
+  color: var(--fx-color-text-muted);
+}
+.fx-ai-activity-history-meta > * + *::before {
+  content: '·';
+  margin-inline-end: var(--fx-space-2);
+  color: var(--fx-color-text-subtle);
+}
+.fx-ai-activity-history-time {
+  font-variant-numeric: tabular-nums;
+}
+
+.fx-ai-activity-history-rerun {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-info);
+  font-family: inherit;
+  font-size: var(--fx-text-caption-size);
+  cursor: pointer;
+}
+.fx-ai-activity-history-rerun::before {
+  content: none;
+}
+.fx-ai-activity-history-rerun:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+.fx-ai-activity-history-pagination {
+  display: flex;
+  justify-content: center;
+}
+
+/* Drawer detail. */
+.fx-ai-activity-history-detail {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+}
+.fx-ai-activity-history-detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+.fx-ai-activity-history-detail-label {
+  font-size: var(--fx-text-caption-size);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--fx-font-tracking-wide);
+}
+.fx-ai-activity-history-detail-value {
+  margin: 0;
+  color: var(--fx-color-text);
+  line-height: var(--fx-line-height-normal);
+}

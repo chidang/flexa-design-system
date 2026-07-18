@@ -1,0 +1,73 @@
+/* FxFieldGroup — token-only. Vertical rhythm space.2 between parts; the label
+   sits above the control (single-column default, doc 02 forms). The error slot is
+   always present (empty when valid) so the alert region is stable for assistive
+   tech; it collapses to zero height when empty. */
+.fx-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-field-group[data-disabled] {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-field-group-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--fx-space-1);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+
+/* Visually hidden but still wired (labelHidden). Uses clip-path (no negative
+   margin) so it stays on the px allowlist. */
+.fx-field-group-label[data-hidden] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.fx-field-group-required-mark {
+  color: var(--fx-color-danger);
+}
+
+.fx-field-group-optional {
+  color: var(--fx-color-text-muted);
+  font-weight: var(--fx-font-weight-regular);
+}
+
+.fx-field-group-help {
+  margin: 0;
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+  line-height: var(--fx-line-height-normal);
+}
+
+.fx-field-group-control {
+  display: block;
+}
+
+/* Empty alert slot collapses; when it holds a message the message owns its own
+   top margin, so the slot itself adds nothing. */
+.fx-field-group-error-slot:empty {
+  display: none;
+}
+
+.fx-field-group-meta {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fx-field-group-count {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}

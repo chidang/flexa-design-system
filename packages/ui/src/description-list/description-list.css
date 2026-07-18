@@ -1,0 +1,70 @@
+/* FxDescriptionList — token-only. Term = label type/muted; detail = body.
+   Horizontal uses a fixed term column (~200px expressed as 12.5rem to stay on
+   the token ladder — see slice report); vertical stacks; grid columns. */
+.fx-description-list {
+  margin: 0;
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-description-list-row {
+  display: flex;
+  gap: var(--fx-space-3);
+  padding-block: var(--fx-space-3);
+}
+
+.fx-description-list-term {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-description-list-detail {
+  margin: 0;
+  font-size: var(--fx-text-body-size);
+  line-height: var(--fx-line-height-normal);
+  color: var(--fx-color-text);
+}
+
+/* Horizontal: term column + detail fills the rest. */
+.fx-description-list[data-layout='horizontal'] .fx-description-list-term {
+  flex: none;
+  inline-size: 12.5rem;
+}
+.fx-description-list[data-layout='horizontal'] .fx-description-list-detail {
+  flex: 1;
+}
+
+/* Vertical: stack term above detail. */
+.fx-description-list[data-layout='vertical'] .fx-description-list-row {
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+
+/* Grid: rows flow into a column grid; each row stacks its pair. */
+.fx-description-list[data-layout='grid'] {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--fx-space-4);
+}
+.fx-description-list[data-layout='grid'][data-columns='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.fx-description-list[data-layout='grid'] .fx-description-list-row {
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  padding-block: 0;
+}
+.fx-description-list[data-layout='grid'] .fx-description-list-row[data-span='2'] {
+  grid-column: 1 / -1;
+}
+
+/* Divided: hairline separators between rows. */
+.fx-description-list[data-divided] .fx-description-list-row {
+  border-block-start: 1px solid var(--fx-color-border);
+}
+.fx-description-list[data-divided] .fx-description-list-row:first-child {
+  border-block-start: 0;
+}
+.fx-description-list[data-layout='grid'][data-divided] .fx-description-list-row {
+  border-block-start: 0;
+}

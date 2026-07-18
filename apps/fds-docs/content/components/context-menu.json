@@ -1,0 +1,5 @@
+{
+  "slug": "context-menu",
+  "tagline": "A contextual action list on right-click or from a ⋯ trigger.",
+  "whenToUse": "Use a context menu for per-item secondary actions on dense surfaces (table rows, cards). Always pair it with a visible ⋯ trigger — it must never be the only path to an action."
+}

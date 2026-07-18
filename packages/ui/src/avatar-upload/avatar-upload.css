@@ -1,0 +1,147 @@
+/* FxAvatarUpload — token-only. An xl avatar preview with an overlaid circular
+   edit button, plus a change/remove action row and an optional minimal crop
+   dialog whose zoom control is a native range input. */
+.fx-avatar-upload {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--fx-space-3);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-avatar-upload[data-disabled] {
+  opacity: var(--fx-opacity-disabled);
+}
+
+.fx-avatar-upload-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.fx-avatar-upload-preview {
+  position: relative;
+  display: inline-flex;
+}
+
+.fx-avatar-upload-edit {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: var(--fx-color-primary);
+  color: var(--fx-color-on-primary);
+  border: 2px solid var(--fx-color-surface);
+  border-radius: var(--fx-radius-full);
+  cursor: pointer;
+}
+
+.fx-avatar-upload-edit:hover:not(:disabled) {
+  background: var(--fx-color-primary-hover);
+}
+
+.fx-avatar-upload-edit:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-avatar-upload-edit:disabled {
+  cursor: not-allowed;
+}
+
+.fx-avatar-upload-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+/* ── crop dialog ──────────────────────────────────────────────────────────── */
+.fx-avatar-upload-crop-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--fx-z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--fx-space-4);
+  background: var(--fx-color-scrim);
+}
+
+.fx-avatar-upload-crop {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+  inline-size: 100%;
+  max-inline-size: 360px;
+  padding: var(--fx-space-5);
+  background: var(--fx-color-surface);
+  border-radius: var(--fx-radius-lg);
+  box-shadow: var(--fx-shadow-xl);
+}
+
+.fx-avatar-upload-crop:focus {
+  outline: none;
+}
+
+.fx-avatar-upload-crop-title {
+  margin: 0;
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-sm-size);
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-avatar-upload-crop-frame {
+  position: relative;
+  inline-size: 100%;
+  block-size: 15rem;
+  overflow: hidden;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-avatar-upload-crop-image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  transform-origin: center;
+}
+
+.fx-avatar-upload-crop-zoom-row {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-3);
+}
+
+.fx-avatar-upload-crop-zoom-label {
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-avatar-upload-zoom {
+  flex: 1;
+  accent-color: var(--fx-color-primary);
+}
+
+.fx-avatar-upload-zoom:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-avatar-upload-crop-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--fx-space-2);
+}

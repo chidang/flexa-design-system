@@ -1,0 +1,5 @@
+{
+  "slug": "marketplace-statistics",
+  "tagline": "An admin-dashboard KPI band — a responsive grid of Metric Cards with a range selector.",
+  "whenToUse": "Marketplace Statistics is the admin-dashboard KPI band: a responsive dashboard grid of Metric Cards (GMV, orders, active listings, take-rate…) with a range selector and an optional Charts Container slot. It is a marketplace specialization built entirely from existing widgets — no new primitives — and the band is a section with an accessible name so screen readers announce it as a landmark region. Reach for it at the top of an operator dashboard; use Metric Card directly for a single tile, or Statistics Card when the metrics belong to one analytical block with a breakdown."
+}

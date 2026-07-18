@@ -1,0 +1,33 @@
+/* FxMaintenanceBanner — token-only. Same full-width sticky bar as the Warning
+   Banner; the inner FxAlert owns the tone tint (info by default, warning while
+   the window is active). */
+.fx-maintenance-banner {
+  display: block;
+  width: 100%;
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-maintenance-banner[data-sticky='true'] {
+  position: sticky;
+  top: 0;
+  z-index: var(--fx-z-sticky);
+}
+
+.fx-maintenance-banner .fx-alert {
+  border-radius: 0;
+  border-inline-start: 0;
+}
+.fx-maintenance-banner[data-tone='info'] .fx-alert {
+  border-block-end: 1px solid var(--fx-color-info-border-soft);
+}
+.fx-maintenance-banner[data-tone='warning'] .fx-alert {
+  border-block-end: 1px solid var(--fx-color-warning-border-soft);
+}
+
+/* Locale-formatted window sits on its own muted line under the message. */
+.fx-maintenance-banner-window {
+  display: block;
+  margin-block-start: var(--fx-space-1);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}

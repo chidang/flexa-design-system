@@ -1,0 +1,5 @@
+{
+  "slug": "inline-error",
+  "tagline": "A widget failed — bigger than a Validation Message, smaller than an Error Page.",
+  "whenToUse": "Inline Error is the section-scale failure surface: it replaces a single widget that failed to load — an orders list, an activity feed, a chart — sitting between the field-level Validation Message and the whole-screen Error Page. A danger-tone icon pairs with the message so the failure is never signalled by colour alone, with an optional detail line for a technical hint or request id, and an optional retry that renders as a real button (onRetry) or a semantic link (retryHref). It carries role=\"alert\" because it typically appears after a failed async operation, replacing content, so screen readers announce the failure. Use the compact density inside cards and table cells where space is tight."
+}

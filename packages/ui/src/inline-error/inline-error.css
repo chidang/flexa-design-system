@@ -1,0 +1,71 @@
+/* FxInlineError — token-only. Danger-tinted panel that replaces a failed widget:
+   danger icon + message + optional detail + retry. */
+.fx-inline-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-3);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-danger-soft);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+}
+.fx-inline-error.is-compact {
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-2);
+}
+
+.fx-inline-error-icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--fx-color-danger);
+}
+
+.fx-inline-error-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fx-inline-error-message {
+  margin: 0;
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-medium);
+  line-height: var(--fx-line-height-normal);
+  color: var(--fx-color-danger);
+}
+
+.fx-inline-error-detail {
+  margin: var(--fx-space-1) 0 0;
+  font-size: var(--fx-text-body-sm-size);
+  line-height: var(--fx-line-height-normal);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-inline-error-retry {
+  margin: var(--fx-space-3) 0 0;
+}
+.fx-inline-error.is-compact .fx-inline-error-retry {
+  margin-block-start: var(--fx-space-2);
+}
+
+.fx-inline-error-retry-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--fx-color-danger);
+  font-family: inherit;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  text-decoration: none;
+  cursor: pointer;
+}
+.fx-inline-error-retry-action:hover {
+  text-decoration: underline;
+}
+.fx-inline-error-retry-action:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "tooltip",
+  "tagline": "A text-only hover and focus hint — never interactive, never load-bearing.",
+  "whenToUse": "Use a tooltip to name an icon-only control or add a short clarifying hint on hover and focus. It must never hold interactive content or information required to operate the UI."
+}

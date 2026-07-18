@@ -1,0 +1,5 @@
+{
+  "slug": "authentication-layout",
+  "tagline": "A centered auth card with logo, title, form, and an optional brand aside.",
+  "whenToUse": "Authentication Layout is the centered card shell for sign-in, sign-up, and password-reset: logo, an h1, the form slot, switch-mode footer links, and an optional brand panel on wide screens. Auth errors render in a live Alert the host focuses on failed submit. It owns the single main landmark for these unauthenticated pages."
+}

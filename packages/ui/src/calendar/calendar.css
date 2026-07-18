@@ -1,0 +1,392 @@
+/* FxCalendar — token-only scheduling surface. Month = a 6×7 event grid; week/day
+   = a time gutter with positioned event blocks. Event chips/blocks tint from the
+   tone tokens (info/success/warning/danger) + their on-* text tokens. Distinct
+   from FxDatePicker's `.fx-calendar` (single-date picking). */
+.fx-calendar-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+  width: 100%;
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+}
+
+/* ── Toolbar ──────────────────────────────────────────────────────────────── */
+.fx-calendar-view-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-3);
+  flex-wrap: wrap;
+}
+
+.fx-calendar-view-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+}
+
+.fx-calendar-view-navbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+
+.fx-calendar-view-navbtn:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+
+.fx-calendar-view-navbtn:focus-visible,
+.fx-calendar-view-today:focus-visible,
+.fx-calendar-view-more:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-calendar-view-today {
+  height: 32px;
+  padding: 0 var(--fx-space-3);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.fx-calendar-view-today:hover {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-calendar-view-title {
+  flex: 1 1 auto;
+  margin: 0;
+  text-align: center;
+  font-size: var(--fx-text-body-lg-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+
+.fx-calendar-view-tabs {
+  flex: 0 0 auto;
+}
+
+/* ── Grid frame (month + time views share the outer shell) ────────────────────
+   Card pattern: transparent border slot + shadow — the frame stays defined
+   without a hard perimeter line. */
+.fx-calendar-view-grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-lg);
+  overflow: hidden;
+  background: var(--fx-color-surface);
+  box-shadow: var(--fx-shadow-sm);
+}
+
+.fx-calendar-view-grid:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ── Month view ───────────────────────────────────────────────────────────── */
+.fx-calendar-view-weekdays,
+.fx-calendar-view-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.fx-calendar-view-weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-bottom: 1px solid var(--fx-color-border);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+}
+
+/* Row dividers only — no vertical cell borders; columns read from the weekday
+   header alignment and cell padding. */
+.fx-calendar-view-cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  min-height: var(--fx-space-24);
+  padding: var(--fx-space-1);
+  border-top: 1px solid var(--fx-color-border);
+  background: var(--fx-color-surface);
+  cursor: pointer;
+}
+
+.fx-calendar-view-cell:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  /* Inset ring: cells sit inside the overflow-hidden grid frame — an offset ring would clip. */
+  outline-offset: 0;
+}
+
+.fx-calendar-view-cell[data-outside] {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-calendar-view-cell[data-outside] .fx-calendar-view-daynum {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-calendar-view-daynum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--fx-radius-full);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+}
+
+.fx-calendar-view-cell[data-today] .fx-calendar-view-daynum {
+  background: var(--fx-color-primary);
+  color: var(--fx-color-on-primary);
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-calendar-view-cell-events {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  min-width: 0;
+}
+
+/* ── Event chips (shared) ─────────────────────────────────────────────────── */
+.fx-calendar-view-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  width: 100%;
+  min-width: 0;
+  padding: var(--fx-space-1) var(--fx-space-2);
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-chip-fill, var(--fx-color-info));
+  color: var(--fx-chip-on, var(--fx-color-on-info));
+  font: inherit;
+  font-size: var(--fx-text-body-sm-size);
+  line-height: var(--fx-line-height-tight);
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.fx-calendar-view-chip:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-calendar-view-chip[data-tone='neutral'] {
+  --fx-chip-fill: var(--fx-color-surface-alt);
+  --fx-chip-on: var(--fx-color-text);
+}
+.fx-calendar-view-chip[data-tone='info'] {
+  --fx-chip-fill: var(--fx-color-info);
+  --fx-chip-on: var(--fx-color-on-info);
+}
+.fx-calendar-view-chip[data-tone='success'] {
+  --fx-chip-fill: var(--fx-color-success);
+  --fx-chip-on: var(--fx-color-on-success);
+}
+.fx-calendar-view-chip[data-tone='warning'] {
+  --fx-chip-fill: var(--fx-color-warning);
+  --fx-chip-on: var(--fx-color-on-warning);
+}
+.fx-calendar-view-chip[data-tone='danger'] {
+  --fx-chip-fill: var(--fx-color-danger);
+  --fx-chip-on: var(--fx-color-on-danger);
+}
+
+.fx-calendar-view-chip-time {
+  flex: 0 0 auto;
+  font-weight: var(--fx-font-weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+
+.fx-calendar-view-chip-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fx-calendar-view-more {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--fx-space-2);
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-primary);
+  font: inherit;
+  font-size: var(--fx-text-body-sm-size);
+  cursor: pointer;
+}
+
+.fx-calendar-view-more:hover {
+  background: var(--fx-color-surface-alt);
+}
+
+/* ── Week / Day view (time grid) ──────────────────────────────────────────── */
+.fx-calendar-view[data-view='week'] .fx-calendar-view-timehead,
+.fx-calendar-view[data-view='week'] .fx-calendar-view-timebody {
+  grid-template-columns: 56px repeat(7, 1fr);
+}
+
+.fx-calendar-view[data-view='day'] .fx-calendar-view-timehead,
+.fx-calendar-view[data-view='day'] .fx-calendar-view-timebody {
+  grid-template-columns: 56px 1fr;
+}
+
+.fx-calendar-view-timehead {
+  display: grid;
+  border-bottom: 1px solid var(--fx-color-border);
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-calendar-view-gutter-corner {
+  border-inline-end: 1px solid var(--fx-color-border);
+}
+
+.fx-calendar-view-dayhead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-inline-start: 1px solid var(--fx-color-border);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+}
+
+.fx-calendar-view-dayhead[data-today] {
+  color: var(--fx-color-primary);
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-calendar-view-timebody {
+  display: grid;
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.fx-calendar-view-gutter {
+  display: flex;
+  flex-direction: column;
+  border-inline-end: 1px solid var(--fx-color-border);
+}
+
+.fx-calendar-view-hour {
+  display: block;
+  height: 48px;
+  padding-inline-end: var(--fx-space-2);
+  text-align: end;
+  color: var(--fx-color-text-subtle);
+  font-size: var(--fx-text-body-sm-size);
+  font-variant-numeric: tabular-nums;
+}
+
+.fx-calendar-view-daycol {
+  position: relative;
+  border-inline-start: 1px solid var(--fx-color-border);
+  cursor: pointer;
+}
+
+.fx-calendar-view-slotline {
+  display: block;
+  height: 48px;
+  border-top: 1px solid var(--fx-color-border);
+}
+
+.fx-calendar-view-slotline:first-child {
+  border-top: 0;
+}
+
+.fx-calendar-view-block {
+  position: absolute;
+  inset-inline: var(--fx-space-1);
+  min-height: 20px;
+  overflow: hidden;
+}
+
+.fx-calendar-view-block .fx-calendar-view-chip {
+  height: 100%;
+  align-items: flex-start;
+}
+
+/* ── Empty state ──────────────────────────────────────────────────────────── */
+.fx-calendar-view-empty {
+  padding: var(--fx-space-6);
+  text-align: center;
+  color: var(--fx-color-text-muted);
+}
+
+/* ── "+N more" overflow popover ───────────────────────────────────────────── */
+.fx-calendar-view-popover-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--fx-z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--fx-space-4);
+  background: var(--fx-color-scrim);
+}
+
+.fx-calendar-view-popover {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+  width: 100%;
+  max-width: 360px;
+  padding: var(--fx-space-4);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  box-shadow: var(--fx-shadow-lg);
+}
+
+.fx-calendar-view-popover:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-calendar-view-popover-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-2);
+}
+
+.fx-calendar-view-popover-title {
+  margin: 0;
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-calendar-view-popover-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

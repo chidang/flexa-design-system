@@ -1,0 +1,140 @@
+/* FxDateRangePicker — token-only. Trigger is a labelled button showing the
+   range summary; the popover hosts an optional preset rail plus 1–2 calendars.
+   In-range days reuse the .fx-calendar-day[data-in-range] tint from date-picker. */
+.fx-date-range-picker {
+  display: inline-block;
+  width: 100%;
+}
+
+.fx-date-range-picker-field {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-2);
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--fx-space-2) 0 var(--fx-space-3);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  text-align: left;
+  cursor: pointer;
+}
+
+.fx-date-range-picker[data-size='sm'] .fx-date-range-picker-field {
+  height: 32px;
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-date-range-picker[data-size='lg'] .fx-date-range-picker-field {
+  height: 48px;
+}
+
+.fx-date-range-picker-field:hover:not(:disabled) {
+  border-color: var(--fx-color-border-strong);
+}
+
+.fx-date-range-picker-field:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-date-range-picker[data-invalid] .fx-date-range-picker-field {
+  border-color: var(--fx-color-danger);
+}
+
+.fx-date-range-picker[data-disabled] .fx-date-range-picker-field {
+  background: var(--fx-color-surface-alt);
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-date-range-picker-value {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fx-date-range-picker-value[data-empty] {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-date-range-picker-trigger {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  color: var(--fx-color-text-muted);
+}
+
+/* ── Popover ────────────────────────────────────────────────────────────── */
+.fx-date-range-picker-popover {
+  position: fixed; /* coordinates from useAnchorPosition (portalled) */
+  z-index: var(--fx-z-popover);
+  display: flex;
+  gap: var(--fx-space-4);
+  padding: var(--fx-space-3);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  box-shadow: var(--fx-shadow-lg);
+}
+
+.fx-date-range-presets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  margin: 0;
+  padding: 0 var(--fx-space-4) 0 0;
+  list-style: none;
+  border-right: 1px solid var(--fx-color-border);
+  min-width: 240px;
+}
+
+.fx-date-range-preset {
+  width: 100%;
+  padding: var(--fx-space-2) var(--fx-space-3);
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.fx-date-range-preset:hover {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-date-range-preset:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-date-range-calendars {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+}
+
+.fx-date-range-months {
+  display: flex;
+  gap: var(--fx-space-4);
+}
+
+.fx-date-range-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

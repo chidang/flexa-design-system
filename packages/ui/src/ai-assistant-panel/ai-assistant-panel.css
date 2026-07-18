@@ -1,0 +1,177 @@
+/* FxAiAssistantPanel — token-only. AI accent = info family (no bespoke AI
+   color): sparkle marks in color.info, assistant bubbles use a faint info tint,
+   user bubbles a neutral surface. `docked` is a fixed inline-end panel. No human
+   avatar — assistant turns are marked by the sparkle glyph. */
+.fx-ai-assistant-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+  overflow: hidden;
+}
+
+.fx-ai-assistant-panel[data-variant='docked'] {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: 400px;
+  max-width: 100%;
+  border-radius: 0;
+  border-block: 0;
+  border-inline-end: 0;
+  z-index: 200;
+}
+
+.fx-ai-assistant-panel-header {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-3);
+  border-block-end: 1px solid var(--fx-color-border);
+}
+
+.fx-ai-assistant-panel-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  margin-inline-end: auto;
+}
+.fx-ai-assistant-panel-sparkle {
+  display: inline-flex;
+  color: var(--fx-color-info);
+}
+.fx-ai-assistant-panel-name {
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-ai-assistant-panel-menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: var(--fx-radius-md);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-ai-assistant-panel-menu:hover {
+  background: var(--fx-color-surface-alt);
+}
+.fx-ai-assistant-panel-menu:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-ai-assistant-panel-transcript {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--fx-space-3);
+}
+
+/* Empty state. */
+.fx-ai-assistant-panel-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--fx-space-2);
+  text-align: center;
+  padding-block: var(--fx-space-6);
+}
+.fx-ai-assistant-panel-empty-sparkle {
+  display: inline-flex;
+  color: var(--fx-color-info);
+}
+.fx-ai-assistant-panel-empty-title {
+  margin: 0;
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+.fx-ai-assistant-panel-empty-hint {
+  margin: 0;
+  color: var(--fx-color-text-muted);
+}
+.fx-ai-assistant-panel-starters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--fx-space-2);
+  margin-block-start: var(--fx-space-1);
+}
+
+/* Transcript turns. */
+.fx-ai-assistant-panel-turns {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+}
+.fx-ai-assistant-panel-turn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  max-width: 640px;
+}
+.fx-ai-assistant-panel-turn[data-role='user'] {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+.fx-ai-assistant-panel-turn[data-role='assistant'] {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.fx-ai-assistant-panel-turn-role {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  font-size: var(--fx-text-caption-size);
+  color: var(--fx-color-text-muted);
+}
+.fx-ai-assistant-panel-turn-sparkle {
+  display: inline-flex;
+  color: var(--fx-color-info);
+}
+
+.fx-ai-assistant-panel-bubble {
+  border-radius: var(--fx-radius-lg);
+  padding: var(--fx-space-2) var(--fx-space-3);
+  line-height: var(--fx-line-height-normal);
+}
+.fx-ai-assistant-panel-turn[data-role='user'] .fx-ai-assistant-panel-bubble {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-ai-assistant-panel-turn[data-role='assistant'] .fx-ai-assistant-panel-bubble {
+  background: var(--fx-color-info-soft);
+  color: var(--fx-color-text);
+}
+
+.fx-ai-assistant-panel-suggestion {
+  margin-block-start: var(--fx-space-3);
+}
+
+.fx-ai-assistant-panel-turn-time {
+  font-size: var(--fx-text-caption-size);
+  color: var(--fx-color-text-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.fx-ai-assistant-panel-status {
+  padding: var(--fx-space-2) var(--fx-space-3);
+  border-block-start: 1px solid var(--fx-color-border);
+}
+
+.fx-ai-assistant-panel-composer {
+  padding: var(--fx-space-3);
+  border-block-start: 1px solid var(--fx-color-border);
+}

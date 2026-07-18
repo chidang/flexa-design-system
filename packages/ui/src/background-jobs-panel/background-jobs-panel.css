@@ -1,0 +1,105 @@
+/* FxBackgroundJobsPanel — token-only. Composes FxTable + Badge + Progress +
+   RightDrawer + Confirmation Dialog; styles only the job-cell contents and the
+   detail-drawer JSON blocks. */
+.fx-background-jobs-panel {
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-background-jobs-panel-name {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text);
+}
+
+.fx-background-jobs-panel-muted {
+  color: var(--fx-color-text-subtle);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-background-jobs-panel-attempts {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+  font-variant-numeric: tabular-nums;
+}
+.fx-background-jobs-panel-attempts[data-exhausted] {
+  color: var(--fx-color-danger);
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-background-jobs-panel-started {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--fx-space-2);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.fx-background-jobs-panel-duration {
+  font-size: var(--fx-text-caption-size);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-background-jobs-panel-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  justify-content: flex-end;
+}
+
+.fx-background-jobs-panel-view {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-background-jobs-panel-view:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-background-jobs-panel-view:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-background-jobs-panel-empty {
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+/* Detail drawer. */
+.fx-background-jobs-panel-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-5);
+}
+.fx-background-jobs-panel-detail-heading {
+  margin: 0 0 var(--fx-space-2);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+.fx-background-jobs-panel-payload,
+.fx-background-jobs-panel-error-body {
+  margin: 0;
+  padding: var(--fx-space-3);
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-mono);
+  font-size: var(--fx-text-caption-size);
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow: auto;
+}
+.fx-background-jobs-panel-error-body {
+  background: var(--fx-color-danger-soft);
+  color: var(--fx-color-danger);
+}

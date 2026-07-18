@@ -1,0 +1,67 @@
+/* FxSidebarLayout — token-only. A fixed-width start pane beside a fluid main
+   column. Tablet: the aside narrows to an icon rail. Mobile: it slides off-canvas
+   (class hooks only — the host toggles the drawer). */
+.fx-sidebar-layout {
+  display: grid;
+  grid-template-columns: 256px 1fr;
+  min-height: 100%;
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-sidebar-layout[data-aside-width='sm'] {
+  grid-template-columns: 208px 1fr;
+}
+
+.fx-sidebar-layout-aside {
+  min-width: 0;
+  min-height: 0;
+  background: var(--fx-color-surface);
+  border-inline-end: 1px solid var(--fx-color-border);
+}
+
+.fx-sidebar-layout[data-sticky-aside] .fx-sidebar-layout-aside {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.fx-sidebar-layout-main {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Tablet: aside collapses to an icon rail. */
+@media (max-width: 1024px) {
+  .fx-sidebar-layout[data-collapsible] {
+    grid-template-columns: 64px 1fr;
+  }
+}
+
+/* Mobile: aside leaves the flow as an off-canvas drawer (host toggles it). */
+@media (max-width: 768px) {
+  .fx-sidebar-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .fx-sidebar-layout-aside {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 256px;
+    z-index: var(--fx-z-fixed);
+    transform: translateX(-100%);
+    transition: transform var(--fx-motion-duration-normal) var(--fx-motion-easing-standard);
+  }
+
+  .fx-sidebar-layout[data-drawer-open] .fx-sidebar-layout-aside {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-sidebar-layout-aside {
+    transition: none;
+  }
+}

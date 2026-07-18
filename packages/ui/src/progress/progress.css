@@ -1,0 +1,84 @@
+/* FxProgress — token-only. Track heights use rem (no off-ladder px). Fill colour
+   is the primary token, tone-shifted for outcome colouring (§2.31). */
+.fx-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  inline-size: 100%;
+}
+
+.fx-progress-track {
+  position: relative;
+  flex: 1;
+  block-size: 0.375rem;
+  overflow: hidden;
+  background: var(--fx-color-surface-alt);
+  border-radius: var(--fx-radius-full);
+}
+.fx-progress[data-size='sm'] .fx-progress-track {
+  block-size: 0.25rem;
+}
+.fx-progress[data-size='lg'] .fx-progress-track {
+  block-size: 0.5rem;
+}
+
+.fx-progress-fill {
+  block-size: 100%;
+  inline-size: 0;
+  background: var(--fx-color-primary);
+  border-radius: inherit;
+  transition: inline-size var(--fx-motion-duration-normal) var(--fx-motion-easing-out);
+}
+
+.fx-progress[data-tone='success'] .fx-progress-fill {
+  background: var(--fx-color-success);
+}
+.fx-progress[data-tone='warning'] .fx-progress-fill {
+  background: var(--fx-color-warning);
+}
+.fx-progress[data-tone='danger'] .fx-progress-fill {
+  background: var(--fx-color-danger);
+}
+
+.fx-progress-value {
+  flex: none;
+  min-inline-size: 3ch;
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text-muted);
+  text-align: end;
+}
+
+/* Indeterminate: a sweeping segment. */
+.fx-progress-track.is-indeterminate .fx-progress-fill {
+  inline-size: 40%;
+  transition: none;
+  animation: fx-progress-sweep var(--fx-motion-duration-loop) var(--fx-motion-easing-in-out) infinite;
+}
+
+@keyframes fx-progress-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-progress-track.is-indeterminate .fx-progress-fill {
+    inline-size: 100%;
+    animation: fx-progress-pulse var(--fx-motion-duration-loop) var(--fx-motion-easing-in-out) infinite;
+    transform: none;
+  }
+  @keyframes fx-progress-pulse {
+    0%,
+    100% {
+      opacity: var(--fx-opacity-muted);
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,148 @@
+/* FxFileUpload — token-only. Trigger row + managed list; per-file status colours
+   the icon and error text. The hidden native input is visually removed but stays
+   in the a11y tree, labelled by the trigger button. */
+.fx-file-upload {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+  inline-size: 100%;
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-file-upload-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.fx-file-upload-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-3);
+  flex-wrap: wrap;
+}
+
+.fx-file-upload-hint {
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-file-upload[data-disabled] {
+  opacity: var(--fx-opacity-disabled);
+}
+
+.fx-file-upload-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fx-file-upload-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-3);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+}
+
+.fx-file-upload-item[data-status='success'] .fx-file-upload-item-icon {
+  color: var(--fx-color-success);
+}
+.fx-file-upload-item[data-status='error'] .fx-file-upload-item-icon {
+  color: var(--fx-color-danger);
+}
+
+.fx-file-upload-item-icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--fx-color-text-muted);
+}
+
+.fx-file-upload-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}
+
+.fx-file-upload-item-name {
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-size);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fx-file-upload-item-size {
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-file-upload-item-progress {
+  display: block;
+  margin-block-start: var(--fx-space-1);
+}
+
+.fx-file-upload-item-error {
+  color: var(--fx-color-danger);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-file-upload-item-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  flex: none;
+}
+
+.fx-file-upload-item-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+
+.fx-file-upload-item-action:hover:not(:disabled) {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+
+.fx-file-upload-item-action:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-file-upload-item-action:disabled {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-file-upload-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

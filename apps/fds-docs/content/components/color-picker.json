@@ -1,0 +1,5 @@
+{
+  "slug": "color-picker",
+  "tagline": "Pick a color from a saturation/value pad, hue slider, hex field or presets.",
+  "whenToUse": "Use when a user needs to choose an arbitrary color — a brand accent, a label color, a theme override. The picked value is a literal hex string (data, not a design token); the component's own chrome still uses tokens. Offer `swatches` to steer toward an on-brand palette while still allowing a free pick."
+}

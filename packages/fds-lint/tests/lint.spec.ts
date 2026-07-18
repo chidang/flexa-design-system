@@ -18,8 +18,13 @@ const REAL = FDS_TOKENS[0]!.cssVar; // e.g. --fx-color-bg
 
 describe('FX_VARS registry', () => {
   it('is derived from the package, not hardcoded', () => {
-    expect(FX_VARS.size).toBe(FDS_TOKENS.length);
+    // Typography composites contribute 3 longhand vars each instead of their
+    // bare name (FDS 2.10) — so: non-typography tokens + 3 per composite.
+    const typographyCount = FDS_TOKENS.filter((t) => t.type === 'typography').length;
+    expect(FX_VARS.size).toBe(FDS_TOKENS.length - typographyCount + typographyCount * 3);
     expect(FX_VARS.has('--fx-color-primary')).toBe(true);
+    expect(FX_VARS.has('--fx-text-body-size')).toBe(true);
+    expect(FX_VARS.has('--fx-text-body')).toBe(false);
     expect(FX_VARS.has('--fx-not-a-token')).toBe(false);
   });
 

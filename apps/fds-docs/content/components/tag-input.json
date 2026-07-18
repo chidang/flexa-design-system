@@ -1,0 +1,5 @@
+{
+  "slug": "tag-input",
+  "tagline": "Multi-value entry — committed values render as dismissible chips.",
+  "whenToUse": "Use Tag Input to collect an open-ended set of short values (labels, keywords, recipients) where the user types and commits each one, optionally with suggestions. For a single value from a known set use Select, and for one typed match use Autocomplete."
+}

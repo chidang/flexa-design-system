@@ -1,6 +1,6 @@
 {
   "name": "flexa-design-system",
-  "version": "2.8.1",
+  "version": "2.12.0",
   "description": "Flexa Design System (FDS) — a zero-runtime, WCAG-gated design token system: DTCG token source, 3-tier token contract (ref → semantic → component), theme model with light/dark modes, contrast gate, and a pure token->var() CSS pipeline. Pure data + pure functions; no dependencies.",
   "license": "MIT",
   "author": "chidang",

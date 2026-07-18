@@ -1,0 +1,5 @@
+{
+  "slug": "radio-group",
+  "tagline": "Choose exactly one of 2–6 visible, mutually exclusive options.",
+  "whenToUse": "Use when users benefit from seeing all options at once (plans, shipping speed, visibility). For more than six options use Select; for non-exclusive choices use Checkbox; for a binary instant toggle use Switch."
+}

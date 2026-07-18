@@ -50,9 +50,12 @@ describe('toFlatTokens', () => {
     }
   });
 
-  it('excludes typography composites (no single CSS value — matches the emitter)', () => {
+  it('typography composites appear as per-property longhands only (FDS 2.10)', () => {
     const typo = FDS_TOKENS.find((t) => t.type === 'typography')!;
     expect(flat[typo.cssVar]).toBeUndefined();
+    expect(flat[`${typo.cssVar}-size`]).toBeTruthy();
+    expect(flat[`${typo.cssVar}-weight`]).toBeTruthy();
+    expect(flat[`${typo.cssVar}-line-height`]).toBeTruthy();
   });
 });
 

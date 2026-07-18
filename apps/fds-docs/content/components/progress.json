@@ -1,0 +1,5 @@
+{
+  "slug": "progress",
+  "tagline": "A determinate or indeterminate progress bar.",
+  "whenToUse": "Use a progress bar to show how far a known task has advanced (upload, import), or its indeterminate mode when the duration is unknown. For a full-surface refresh use a Loading Overlay; for content placeholders use a Skeleton Loader."
+}
