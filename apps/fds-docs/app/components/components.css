@@ -57,8 +57,84 @@
   border: 1px solid var(--fx-color-border);
   border-radius: var(--fx-radius-md);
 }
-.cx-instance { display: flex; align-items: center; justify-content: center; min-height: 48px; }
+.cx-instance { display: flex; align-items: center; justify-content: center; min-height: 48px; min-width: 0; max-width: 100%; }
+/* Keep a demo whose root sizes to its content from bleeding past its cell. */
+.cx-instance > * { max-width: 100%; }
 .cx-cell-label, .cx-cell-note { font-size: 0.78rem; color: var(--fx-color-text-muted); text-align: center; }
+
+/* ── Placement (shared showcase-layout classification, mirror kitchen-sink) ── */
+/* Wide components (wizards, tables, boards, feeds) get the full grid row. */
+.cx-cell-wide { grid-column: 1 / -1; align-items: stretch; min-width: 0; }
+.cx-cell-wide .cx-instance { display: block; overflow-x: auto; }
+
+/* Content cards / banners get their own row at a readable width. */
+.cx-cell-readable { grid-column: 1 / -1; align-items: stretch; }
+.cx-cell-readable .cx-instance { display: block; }
+.cx-cell-readable .cx-instance > * { max-width: 32rem; margin-inline: auto; }
+
+/* Fixed column counts stepping down on smaller viewports. */
+.cx-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cx-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cx-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1280px) {
+  .cx-grid-4 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 1024px) {
+  .cx-grid-3, .cx-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .cx-grid-2, .cx-grid-3, .cx-grid-4 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ── Launcher (open overlays / fixed surfaces / 100vh compositions) ────────── */
+.cx-launch {
+  padding: var(--fx-space-2) var(--fx-space-4);
+  border: 1px dashed var(--fx-color-border-strong);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.cx-launch:hover { border-color: var(--fx-color-primary); color: var(--fx-color-primary); }
+
+/* Full-screen themed surface hosting a single launched demo. Rendered inside
+   the themed stage subtree (fixed positioning keeps DOM ancestry), so the live
+   theme vars resolve; ancestor overflow:hidden does not clip fixed elements. */
+.cx-preview {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  background: var(--fx-color-bg);
+  color: var(--fx-color-text);
+}
+.cx-preview-bar {
+  position: sticky;
+  top: 0;
+  z-index: 2147483000; /* above component overlays rendered inside the stage */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-4);
+  padding: var(--fx-space-3) var(--fx-space-5);
+  background: var(--fx-color-surface);
+  border-bottom: 1px solid var(--fx-color-border);
+}
+.cx-preview-title { font-size: 0.9rem; color: var(--fx-color-text-muted); }
+.cx-preview-close {
+  padding: var(--fx-space-2) var(--fx-space-4);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-bg);
+  color: var(--fx-color-text);
+  font: inherit;
+  cursor: pointer;
+}
+.cx-preview-close:hover { border-color: var(--fx-color-primary); color: var(--fx-color-primary); }
+.cx-preview-stage { position: relative; flex: 1 1 auto; overflow: auto; padding: var(--fx-space-6); }
 
 .cx-enum { display: flex; flex-wrap: wrap; align-items: center; gap: var(--fx-space-2); }
 .cx-chip {

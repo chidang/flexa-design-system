@@ -1,0 +1,114 @@
+/* U11 reference-screen HARNESS scaffolding — layout-only utilities (page width,
+   stacks, grids, sticky rails) built from FDS tokens. These style the workbench
+   page frame, NOT flexa-ui components: the screens compose flexa-ui for every
+   visual element, and any gap is fixed in the component, never patched here.
+   Component appearance never appears in this file. */
+
+/* Shell topbar: section tabs + ThemeBar on one sticky row. */
+.ks-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-4, 1rem);
+  background: var(--fx-color-surface, #f6f6f7);
+  border-bottom: 1px solid var(--fx-color-border, #e2e2e5);
+}
+.ks-topbar .ks-themebar {
+  position: static;
+  flex: 1 1 auto;
+  border-bottom: 0;
+  background: transparent;
+}
+.ks-tabs { display: flex; gap: var(--fx-space-1, 0.25rem); padding-left: var(--fx-space-4, 1rem); }
+.ks-tab {
+  padding: var(--fx-space-3, 0.75rem) var(--fx-space-3, 0.75rem);
+  color: var(--fx-color-text-muted, #6b7280);
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-bottom: 2px solid transparent;
+}
+.ks-tab.active { color: var(--fx-color-primary, #4f46e5); border-bottom-color: var(--fx-color-primary, #4f46e5); }
+
+/* Screen root — the themed preview surface. */
+.ks-screen-root { background: var(--fx-color-bg, #fff); min-height: calc(100vh - 57px); }
+
+/* A screen page: capped width, comfortable padding, vertical rhythm. */
+.ks-screen {
+  max-width: var(--fx-size-container-xl, 1280px);
+  margin: 0 auto;
+  padding: var(--fx-space-6, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-6, 2rem);
+}
+
+/* Generic stack — vertical gap via --ks-gap (defaults to space-4). */
+.ks-stack { display: flex; flex-direction: column; gap: var(--ks-gap, var(--fx-space-4, 1rem)); }
+.ks-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ks-gap, var(--fx-space-3, 0.75rem)); }
+.ks-row-between { justify-content: space-between; }
+.ks-spacer { flex: 1 1 auto; }
+
+/* Content + rail (listing detail, checkout). Rail collapses below the fold on
+   narrow widths. */
+.ks-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--fx-space-6, 2rem);
+  align-items: start;
+}
+.ks-rail { position: sticky; top: 72px; display: flex; flex-direction: column; gap: var(--fx-space-4, 1rem); }
+
+/* Filter rail + results (search results). */
+.ks-sidebar-cols {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: var(--fx-space-6, 2rem);
+  align-items: start;
+}
+
+/* Filter-group title (legend/strong) — one extra step of air before the first
+   control; the stack gap alone (space-2) sat the title too close to it. */
+.ks-group-title {
+  display: block;
+  padding: 0;
+  margin: 0 0 var(--fx-space-1, 0.25rem);
+  font-weight: var(--fx-font-weight-semibold, 600);
+}
+/* A <legend> is pulled out of the fieldset's flex flow, so the stack gap never
+   applies to it — carry the full 12px on the margin instead (strong = gap 8 + 4). */
+legend.ks-group-title {
+  margin-block-end: var(--fx-space-3, 0.75rem);
+}
+
+/* Auto-fill card grids (results grid, related, screens index). */
+.ks-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--fx-space-4, 1rem);
+}
+
+/* Text helpers. */
+.ks-page-title { margin: 0; font-size: 1.5rem; }
+.ks-muted { color: var(--fx-color-text-muted, #6b7280); }
+
+/* Screens-index link cards (harness only). */
+.ks-screen-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2, 0.5rem);
+  padding: var(--fx-space-5, 1.5rem);
+  border: 1px solid var(--fx-color-border, #e2e2e5);
+  border-radius: var(--fx-radius-lg, 0.5rem);
+  background: var(--fx-color-surface, #f6f6f7);
+  color: var(--fx-color-text, #1a1a1a);
+  text-decoration: none;
+}
+.ks-screen-link:hover { border-color: var(--fx-color-primary, #4f46e5); }
+.ks-screen-link-doc { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--fx-color-text-muted, #6b7280); }
+
+@media (max-width: 900px) {
+  .ks-cols, .ks-sidebar-cols { grid-template-columns: minmax(0, 1fr); }
+  .ks-rail { position: static; }
+}

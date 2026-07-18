@@ -11,8 +11,15 @@ import { handlers, resetDb } from './handlers';
 export const worker = setupWorker(...handlers);
 
 /** Reset seeded state and start intercepting. `onUnhandledRequest: 'bypass'` so
- * real asset/HMR requests pass through untouched. */
-export async function startMockWorker(): Promise<void> {
+ * real asset/HMR requests pass through untouched. The worker URL is RELATIVE by
+ * default (resolves against the page, not the origin root), so an app mounted
+ * at a subpath — e.g. the workbench served under fds.sitebefy.com/kitchen-sink/
+ * — registers /kitchen-sink/mockServiceWorker.js instead of 404ing at /. */
+export async function startMockWorker(options?: { serviceWorkerUrl?: string }): Promise<void> {
   resetDb();
-  await worker.start({ onUnhandledRequest: 'bypass', quiet: true });
+  await worker.start({
+    onUnhandledRequest: 'bypass',
+    quiet: true,
+    serviceWorker: { url: options?.serviceWorkerUrl ?? 'mockServiceWorker.js' },
+  });
 }

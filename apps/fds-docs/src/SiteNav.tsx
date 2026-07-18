@@ -91,6 +91,12 @@ export function SiteNav({ npmUrl, repoUrl }: { npmUrl: string; repoUrl: string }
             {l.label}
           </Link>
         ))}
+        {/* The kitchen-sink workbench build, copied in by the docs deploy — a
+            static subtree, not a Next route, so a plain <a> (resolves on the
+            deployed site; 404 under bare `next dev`). */}
+        <a href="/kitchen-sink/" onClick={close}>
+          Workbench
+        </a>
         <a href={npmUrl} className="nav-icon" aria-label="npm" onClick={close}>
           <NpmIcon />
           <span className="nav-icon-label">npm</span>
