@@ -38,11 +38,9 @@ jobs:
       - run: pnpm --filter @flexa/fds-docs build
         # Served at the custom domain root (fds.sitebefy.com, public/CNAME) — no
         # basePath. For a bare project-Pages URL set DOCS_BASE_PATH here instead.
-      # The kitchen-sink workbench rides along under /kitchen-sink/ (relative
-      # vite base + HashRouter, so no rewrite rules; the "Workbench" nav link
-      # in the docs points here).
-      - run: pnpm --filter @flexa/ui-kitchen-sink build
-      - run: cp -r apps/ui-kitchen-sink/dist apps/fds-docs/out/kitchen-sink
+        # The fds-docs build script also builds the kitchen-sink workbench and
+        # copies it to out/kitchen-sink — self-contained so every deploy target
+        # (this workflow, Vercel, local) ships /kitchen-sink/ identically.
       - uses: actions/upload-pages-artifact@v5
         with:
           path: apps/fds-docs/out
