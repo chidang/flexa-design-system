@@ -1,0 +1,5 @@
+{
+  "slug": "seller-card",
+  "tagline": "A seller identity + trust summary — name link, verification badge, and rating · sales · response stats.",
+  "whenToUse": "Seller Card summarises a marketplace seller: an avatar, a name that always links to their store, a verification or role Badge, a stat row of rating · sales · response time, a member-since line, and an actions slot (Contact / Follow / View store). Each stat is a Statistic Block so it reads as one accessible phrase, and the compact form collapses to an inline byline for a Listing Detail sidebar. Use Seller Card for the storefront perspective; use Buyer Card for the customer perspective — it shares the same shape but drops the store link and swaps in order-count and (admin-only) dispute-rate stats."
+}

@@ -6,6 +6,7 @@ import {
   APCA_UI_MIN,
   checkThemeContrast,
   checkThemeContrastApca,
+  contrastRatio,
   CONTRAST_PAIRS,
   defaultTheme,
 } from '../src/index.js';
@@ -14,8 +15,9 @@ import {
  * APCA (WCAG 3 candidate) — Track D, doc 20. Added ALONGSIDE the WCAG 2 ratio, never
  * replacing it (PR-4). These tests (a) prove the algorithm against the published
  * APCA-W3 0.1.9 reference anchors, and (b) pin the default theme's two-standard
- * posture: body text clears APCA everywhere, while APCA honestly flags bright
- * dark-mode accent labels that WCAG 2 passes.
+ * posture: after the dark-accent re-tune (FDS 2.8.2) every guaranteed pair clears
+ * BOTH gates in every scheme, while a synthetic pair still proves APCA is the stricter
+ * standard — it can flag a fill WCAG 2 waves through.
  */
 
 describe('APCA algorithm — reference vectors', () => {
@@ -76,19 +78,22 @@ describe('APCA theme gate — a second standard beside WCAG 2 (PR-4)', () => {
     expect(bodyFailures).toEqual([]);
   });
 
-  it('adds signal WCAG 2 misses: WCAG-AA-clear accent labels fall below the APCA UI floor', () => {
-    // The whole reason to add the standard: the default theme passes WCAG AA everywhere…
+  it('clears BOTH gates on every guaranteed pair in every scheme (the 2.8.2 re-tune)', () => {
+    // The default theme passes WCAG AA everywhere…
     expect(checkThemeContrast(theme)).toEqual([]);
-    // …yet APCA flags bright dark-mode accent labels below Lc 60 — a real perceptual gap.
-    const apca = checkThemeContrastApca(theme);
-    expect(apca.length).toBeGreaterThan(0);
-    // The gaps are confined to UI-label (`on-*`) pairs in a non-base scheme — never body
-    // text, never the base scheme. This locks the theme's APCA posture without pinning
-    // exact colours; re-tuning the dark accents to clear Lc 60 is a deferred design call.
-    for (const f of apca) {
-      expect(f.min).toBe(APCA_UI_MIN);
-      expect(f.fg.startsWith('color.on-')).toBe(true);
-      expect(f.scheme).not.toBe('base');
-    }
+    // …and, after re-tuning the dark-mode accent fills, APCA too — the last deferred
+    // Track D finding (dark `on-*` labels below Lc 60) is closed. No colours pinned:
+    // the guarantee is "zero failures", so a future regression turns CI red.
+    expect(checkThemeContrastApca(theme)).toEqual([]);
+  });
+
+  it('remains the stricter standard: it flags a UI label WCAG 2 passes', () => {
+    // Dark ink on the old dark-mode primary (brand.400) — the exact pair the re-tune
+    // fixed. WCAG reads it as a comfortable ~7.9:1 (well past AA), but APCA scores the
+    // light fill far more harshly (Lc ≈ 54 < 60). This is why APCA sits beside WCAG 2.
+    const darkInk = '#020617'; // ref.neutral.950
+    const lightFill = '#60a5fa'; // ref.brand.400 (the pre-2.8.2 dark primary)
+    expect(contrastRatio(darkInk, lightFill)).toBeGreaterThan(4.5);
+    expect(Math.abs(apcaContrast(darkInk, lightFill))).toBeLessThan(APCA_UI_MIN);
   });
 });

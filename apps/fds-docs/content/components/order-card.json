@@ -1,0 +1,5 @@
+{
+  "slug": "order-card",
+  "tagline": "One order in a list — number, status, item thumbnails, status-driven action.",
+  "whenToUse": "Order Card summarises a single order in a buyer's or seller's order list: a header with the order-number link, placed date and a status Badge; a row of item thumbnails with a +N overflow; and a footer pairing the total with one primary action whose label follows the status (Pay for created, Track for paid / in_fulfilment, Review for delivered / completed, otherwise View). The perspective prop flips the action set (sellers see Fulfil / View) and which counterparty is shown (buyer sees the seller and vice versa). The status Badge always renders its text through the shared status→tone mapping so colour is never used alone."
+}

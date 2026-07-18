@@ -1,0 +1,5 @@
+{
+  "slug": "settings-layout",
+  "tagline": "A two-pane settings shell with a grouped nav and a dirty-state save bar.",
+  "whenToUse": "Settings Layout is the preferences surface: a grouped vertical nav beside stacked setting sections, with a sticky save bar that appears only when the form is dirty and announces unsaved changes politely. Use it for account, workspace, and admin settings. On mobile the nav becomes a page and each section a sub-page."
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "autocomplete",
+  "tagline": "Editable combobox — type to filter a list, pick or free-type a value.",
+  "whenToUse": "Use Autocomplete when the option set is large enough that typing to filter beats scrolling (users, products, cities), optionally with an async source. For a small bounded list use Select, and for entering many values at once use Tag Input."
+}

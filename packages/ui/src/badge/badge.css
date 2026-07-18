@@ -1,0 +1,105 @@
+/* FxBadge — token-only. Tone → token per doc 04 §1.9; subtle tint uses the
+   semantic soft tokens (no invented opacity tokens). */
+.fx-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  height: 1.375rem;
+  padding: 0 var(--fx-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-full);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.fx-badge[data-size='sm'] {
+  height: 1.125rem;
+}
+
+.fx-badge-dot {
+  width: var(--fx-space-2);
+  height: var(--fx-space-2);
+  border-radius: var(--fx-radius-full);
+  background: currentColor;
+}
+
+.fx-badge-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── neutral ─────────────────────────────────────────────────────────────── */
+.fx-badge[data-tone='neutral'][data-appearance='solid'] {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-badge[data-tone='neutral'][data-appearance='subtle'] {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-badge[data-tone='neutral'][data-appearance='outline'] {
+  color: var(--fx-color-text);
+  border-color: var(--fx-color-border);
+}
+
+/* ── toned (info / success / warning / danger) share one rule each ───────── */
+.fx-badge[data-tone='info'][data-appearance='solid'] {
+  background: var(--fx-color-info);
+  color: var(--fx-color-on-info);
+}
+.fx-badge[data-tone='info'][data-appearance='subtle'] {
+  background: var(--fx-color-info-soft);
+  color: var(--fx-color-info);
+}
+.fx-badge[data-tone='info'][data-appearance='outline'] {
+  color: var(--fx-color-info);
+  border-color: var(--fx-color-info);
+}
+
+.fx-badge[data-tone='success'][data-appearance='solid'] {
+  background: var(--fx-color-success);
+  color: var(--fx-color-on-success);
+}
+.fx-badge[data-tone='success'][data-appearance='subtle'] {
+  background: var(--fx-color-success-soft);
+  color: var(--fx-color-success);
+}
+.fx-badge[data-tone='success'][data-appearance='outline'] {
+  color: var(--fx-color-success);
+  border-color: var(--fx-color-success);
+}
+
+.fx-badge[data-tone='warning'][data-appearance='solid'] {
+  background: var(--fx-color-warning);
+  color: var(--fx-color-on-warning);
+}
+.fx-badge[data-tone='warning'][data-appearance='subtle'] {
+  background: var(--fx-color-warning-soft);
+  color: var(--fx-color-warning);
+}
+.fx-badge[data-tone='warning'][data-appearance='outline'] {
+  color: var(--fx-color-warning);
+  border-color: var(--fx-color-warning);
+}
+
+.fx-badge[data-tone='danger'][data-appearance='solid'] {
+  background: var(--fx-color-danger);
+  color: var(--fx-color-on-danger);
+}
+.fx-badge[data-tone='danger'][data-appearance='subtle'] {
+  background: var(--fx-color-danger-soft);
+  color: var(--fx-color-danger);
+}
+.fx-badge[data-tone='danger'][data-appearance='outline'] {
+  color: var(--fx-color-danger);
+  border-color: var(--fx-color-danger);
+}

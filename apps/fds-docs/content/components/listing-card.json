@@ -1,0 +1,5 @@
+{
+  "slug": "listing-card",
+  "tagline": "Marketplace listing tile — Product Card plus status, metrics and owner actions.",
+  "whenToUse": "Listing Card is the marketplace tile: it composes Product Card and overlays the chrome a catalogue item lacks — a lifecycle status Badge (tone from the shared §5 status→tone table), a views · favourites metrics strip, and, in owner mode, an Edit/Pause/Delete Context Menu plus an optional bulk-select checkbox for moderation. Reach for it when a listing has its own status and engagement metrics or when the seller/moderator needs per-item actions. Use Product Card directly for a plain storefront where none of that listing chrome applies."
+}

@@ -1,0 +1,24 @@
+/* FxStatisticsCard — token-only. Multi-metric block: a responsive 1–4 column
+   metric row + optional chart + breakdown, all inside one FxCard. The nested
+   FxMetricCards drop their own elevation so the group reads as one surface. */
+.fx-statistics-card-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--fx-space-4);
+}
+
+/* Flatten nested metric cards — the group is one panel, not stacked cards. */
+.fx-statistics-card-metrics .fx-metric-card {
+  box-shadow: none;
+  border-color: var(--fx-color-border);
+}
+
+.fx-statistics-card-chart {
+  margin-block-start: var(--fx-space-5);
+}
+
+.fx-statistics-card-breakdown {
+  margin-block-start: var(--fx-space-5);
+  padding-block-start: var(--fx-space-4);
+  border-block-start: 1px solid var(--fx-color-border);
+}

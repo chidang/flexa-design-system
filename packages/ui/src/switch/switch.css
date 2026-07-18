@@ -1,0 +1,142 @@
+/* FxSwitch — token-only. Native input hidden but focusable; the focus ring draws
+   on the track. Track heights (18/22px) are off the px allowlist, so they are
+   expressed in rem (1.125rem / 1.375rem at the 16px root); track widths 40/32 are
+   canonical. Thumb travel is computed from track width − thumb − 2×inset. */
+.fx-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  font-family: var(--fx-font-family-base);
+  color: var(--fx-color-text);
+  cursor: pointer;
+}
+
+.fx-switch[data-disabled] {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-switch-control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 40px;
+  height: 1.375rem;
+}
+
+.fx-switch[data-size='sm'] .fx-switch-control {
+  width: 32px;
+  height: 1.125rem;
+}
+
+.fx-switch-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+
+.fx-switch-track {
+  position: absolute;
+  inset: 0;
+  background: var(--fx-color-border-strong);
+  border-radius: var(--fx-radius-full);
+  transition: background var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-switch[data-checked] .fx-switch-track {
+  background: var(--fx-color-primary);
+}
+
+/* Hover affordance — the track deepens one notch (off: neutral, on: hover token). */
+.fx-switch:hover:not([data-disabled]) .fx-switch-track {
+  background: var(--fx-color-text-subtle);
+}
+.fx-switch[data-checked]:hover:not([data-disabled]) .fx-switch-track {
+  background: var(--fx-color-primary-hover);
+}
+
+/* Invalid: the track is the switch's "border" — paint it danger (as FxCheckbox
+   paints the box border; message via FxValidationMessage). */
+.fx-switch[data-invalid] .fx-switch-track {
+  background: var(--fx-color-danger);
+}
+
+.fx-switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(1.375rem - var(--fx-space-1));
+  height: calc(1.375rem - var(--fx-space-1));
+  background: var(--fx-color-surface);
+  border-radius: var(--fx-radius-full);
+  box-shadow: var(--fx-shadow-sm);
+  transition: transform var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-switch[data-size='sm'] .fx-switch-thumb {
+  width: calc(1.125rem - var(--fx-space-1));
+  height: calc(1.125rem - var(--fx-space-1));
+}
+
+/* Travel = track width − thumb width − 2×2px inset (space.1 = 4px). */
+.fx-switch[data-checked] .fx-switch-thumb {
+  transform: translateX(calc(40px - (1.375rem - var(--fx-space-1)) - var(--fx-space-1)));
+}
+
+.fx-switch[data-size='sm'][data-checked] .fx-switch-thumb {
+  transform: translateX(calc(32px - (1.125rem - var(--fx-space-1)) - var(--fx-space-1)));
+}
+
+.fx-switch-control:has(.fx-switch-input:focus-visible) .fx-switch-track {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-switch-label {
+  font-size: var(--fx-text-body-size);
+  line-height: var(--fx-line-height-normal);
+}
+
+/* Loading: a spinner sits inside the thumb (which keeps its travel transform).
+   reduced-motion drops the spin (01 § Motion). */
+.fx-switch-spinner {
+  position: absolute;
+  inset: 2px;
+  border: 2px solid var(--fx-color-border);
+  border-top-color: var(--fx-color-primary);
+  border-radius: var(--fx-radius-full);
+  animation: fx-switch-spin calc(var(--fx-motion-duration-loop) / 2) linear infinite;
+}
+
+@keyframes fx-switch-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-switch-thumb,
+  .fx-switch-track {
+    transition: none;
+  }
+  .fx-switch-spinner {
+    animation: none;
+  }
+}
+
+/* Tap target — see checkbox.css (overlay = the hidden native input). */
+@media (pointer: coarse) {
+  .fx-switch-input {
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: max(100%, var(--fx-size-tap));
+    height: max(100%, var(--fx-size-tap));
+  }
+}

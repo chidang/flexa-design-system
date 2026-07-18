@@ -1,0 +1,5 @@
+{
+  "slug": "version-history",
+  "tagline": "Saved revisions with per-item Preview / Restore and an optional diff.",
+  "whenToUse": "Version History is the revisions panel (or Right Drawer body) for any document: an FxList of saved versions, each showing a version label, the author's avatar, a relative time and a short change summary, with the newest carrying a \"Current\" Badge. Every past version offers Preview (load it read-only) and Restore, and an optional side-by-side diff slot renders beside the list for comparison. Restore always routes through a Confirmation Dialog — \"Restore version {n}? Current state becomes a new version.\" — because restoring is undoable and additive, never a rewrite of history; it is the exact contract flexa-builder's own revisions UI follows. Reach for it wherever users need to review, compare and roll back to earlier saved states."
+}

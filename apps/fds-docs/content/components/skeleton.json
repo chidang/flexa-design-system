@@ -1,0 +1,5 @@
+{
+  "slug": "skeleton",
+  "tagline": "A content placeholder that mirrors final layout while loading.",
+  "whenToUse": "Use a skeleton for the initial load of a region whose shape you know (cards, table rows, a profile). Mirror the final dimensions to avoid layout shift; for in-place refresh of already-shown content use a Loading Overlay."
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "invoice-card",
+  "tagline": "A billing document summarised — number, status, dates, money rows, actions.",
+  "whenToUse": "Invoice Card summarises a billing document inside Card chrome: an invoice number with a tone-coded status Badge and issued/due dates, a Description List of the money rows (subtotal, tax, fees, total), and Download-PDF plus optional Pay actions. Reach for it in a billing history list or an order's invoices tab where the whole document — not just its payment state — must be reviewable and downloadable. Use Payment Status when you only need a single payment's outcome, or Description List alone for arbitrary term/detail metadata."
+}

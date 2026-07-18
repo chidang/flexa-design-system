@@ -1,0 +1,79 @@
+{
+  "name": "flexa-ui-kit",
+  "version": "0.1.0",
+  "description": "Flexa UI — a React component kit built on the Flexa Design System (flexa-design-system). Token-only CSS, WCAG-gated, one component per file. Depends one-way on FDS; never imports the Flexa Builder core.",
+  "license": "MIT",
+  "author": "chidang",
+  "homepage": "https://github.com/chidang/flexa-design-system/tree/main/packages/ui",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chidang/flexa-design-system.git",
+    "directory": "packages/ui"
+  },
+  "keywords": [
+    "react",
+    "component-library",
+    "design-system",
+    "ui-kit",
+    "accessible",
+    "wcag",
+    "flexa"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./src/styles.css",
+    "./mocks": "./mocks/index.ts",
+    "./mocks/browser": "./mocks/browser.ts"
+  },
+  "files": [
+    "dist",
+    "src",
+    "mocks",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "./styles.css": "./dist/styles.css",
+      "./mocks": {
+        "types": "./dist/mocks/index.d.ts",
+        "import": "./dist/mocks/index.js"
+      },
+      "./mocks/browser": {
+        "types": "./dist/mocks/browser.d.ts",
+        "import": "./dist/mocks/browser.js"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.mocks.json && tsx scripts/build-css.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "flexa-design-system": "workspace:^",
+    "lucide-react": "^0.400.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "jest-axe": "^9.0.0",
+    "jsdom": "^24.1.0",
+    "msw": "^2.4.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  }
+}

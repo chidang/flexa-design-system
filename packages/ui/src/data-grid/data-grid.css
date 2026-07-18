@@ -1,0 +1,237 @@
+/* FxDataGrid — token-only. role=grid built from flex rows so cell focus, editing
+   and (future) virtualization compose. Focused cell = inset focus ring; editing
+   cell = surface + primary border; pinned edge = shadow. */
+.fx-data-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  color: var(--fx-color-text);
+  overflow: hidden;
+}
+
+.fx-data-grid-grid {
+  display: flex;
+  flex-direction: column;
+  max-height: 480px;
+  overflow: auto;
+}
+
+.fx-data-grid-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Header. */
+.fx-data-grid-header {
+  display: flex;
+  align-items: stretch;
+  position: sticky;
+  top: 0;
+  z-index: var(--fx-z-sticky);
+  background: var(--fx-color-surface);
+  border-bottom: 1px solid var(--fx-color-border);
+}
+
+.fx-data-grid-hcell {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: var(--fx-space-3) var(--fx-space-4);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-data-grid-hcell[data-align='end'] {
+  justify-content: flex-end;
+}
+.fx-data-grid-hcell[data-align='center'] {
+  justify-content: center;
+}
+
+.fx-data-grid-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.fx-data-grid-sort-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: transform var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+.fx-data-grid-sort-icon::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+.fx-data-grid-sort-btn[data-dir='ascending'] .fx-data-grid-sort-icon,
+.fx-data-grid-sort-btn[data-dir='descending'] .fx-data-grid-sort-icon {
+  opacity: 1;
+  color: var(--fx-color-primary);
+}
+.fx-data-grid-sort-btn[data-dir='ascending'] .fx-data-grid-sort-icon {
+  transform: rotate(180deg);
+}
+
+/* Column resizer handle. */
+.fx-data-grid-resizer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+}
+.fx-data-grid-resizer:hover {
+  background: var(--fx-color-primary);
+}
+
+/* Rows + cells. */
+.fx-data-grid-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--fx-color-border);
+}
+
+.fx-data-grid-row[data-selected] {
+  background: var(--fx-color-primary-soft);
+}
+
+.fx-data-grid-cell {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: var(--fx-space-3) var(--fx-space-4);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  outline: none;
+}
+
+.fx-data-grid-cell[data-align='end'] {
+  justify-content: flex-end;
+  text-align: end;
+}
+.fx-data-grid-cell[data-align='center'] {
+  justify-content: center;
+  text-align: center;
+}
+
+/* Focused cell ring (inset). */
+.fx-data-grid-cell[data-focused] {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--fx-color-focus-ring);
+  border-radius: var(--fx-radius-sm);
+}
+
+/* Editing cell. */
+.fx-data-grid-cell[data-editing] {
+  background: var(--fx-color-surface);
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--fx-color-primary);
+  padding: 0;
+}
+
+.fx-data-grid-editor {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.fx-data-grid-editor-input {
+  width: 100%;
+  height: 100%;
+  padding: 0 var(--fx-space-3);
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-text);
+  font: inherit;
+  outline: none;
+}
+
+/* Select column + checkboxes. */
+.fx-data-grid-select {
+  flex: 0 0 44px;
+  justify-content: center;
+}
+
+.fx-data-grid-checkbox {
+  accent-color: var(--fx-color-primary);
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+/* Pinned column edges. */
+.fx-data-grid-cell[data-pinned='start'],
+.fx-data-grid-hcell[data-pinned='start'] {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--fx-color-surface);
+  box-shadow: var(--fx-shadow-sm);
+}
+.fx-data-grid-cell[data-pinned='end'],
+.fx-data-grid-hcell[data-pinned='end'] {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  background: var(--fx-color-surface);
+  box-shadow: var(--fx-shadow-sm);
+}
+
+/* Compact density. */
+.fx-data-grid[data-density='compact'] .fx-data-grid-hcell,
+.fx-data-grid[data-density='compact'] .fx-data-grid-cell {
+  padding: var(--fx-space-2) var(--fx-space-3);
+}
+
+.fx-data-grid-empty {
+  display: flex;
+}
+.fx-data-grid-empty-cell {
+  flex: 1 1 auto;
+  padding: var(--fx-space-4);
+  display: flex;
+  justify-content: center;
+}
+
+/* Status region (visually hidden — polite announcements). */
+.fx-data-grid-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "dashboard-layout",
+  "tagline": "A 12-column dashboard grid; children set their own 3/4/6/12 span.",
+  "whenToUse": "Dashboard Layout is the responsive 12-column grid that arranges dashboard blocks — Metric Cards, Statistics Cards, Charts Containers, Activity Feeds, and Widgets. Children choose their span (3/4/6/12); the grid collapses to two columns on tablet and one on mobile in DOM order, so order children by priority. Use Widget as the chrome around each block when the dashboard is user-rearrangeable."
+}

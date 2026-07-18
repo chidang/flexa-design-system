@@ -1,0 +1,5 @@
+{
+  "slug": "conversation-list",
+  "tagline": "The inbox rail — searchable conversation rows with unread counts + snippets.",
+  "whenToUse": "Conversation List is the inbox rail that pairs with Chat in a Split View: a Search Bar header over a single-select listbox of conversation rows. Each row shows the participant Avatar (with an unread presence dot), their name, a one-line clamped snippet of the last message (prefixed \"You:\" when the current user sent it), a relative time and an unread-count Badge. Unread rows use a heavier label weight and the accessible name includes the unread count, so unread state is never signalled by colour alone. The filter prop narrows to unread only, an optional onArchive adds a per-row archive button, and emptyState fills the rail when nothing matches. Selecting a row (Enter or click) opens that conversation via onSelect."
+}

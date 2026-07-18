@@ -1,0 +1,5 @@
+{
+  "slug": "drag-drop-upload",
+  "tagline": "A full dropzone that opens the file dialog — drag is an enhancement.",
+  "whenToUse": "Use Drag & Drop Upload when the upload is a primary task and you want a large, inviting target. The zone is always a keyboard-operable button (Enter/Space opens the picker); dragging and pasting are enhancements, never the only path. For a compact inline picker use File Upload instead."
+}

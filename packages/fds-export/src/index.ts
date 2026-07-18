@@ -151,15 +151,30 @@ export function resolvedTokens(): readonly ResolvedToken[] {
   return out;
 }
 
+/** Typography field -> emitted var suffix. Mirrors TYPOGRAPHY_LONGHANDS in FDS. */
+const TYPOGRAPHY_LONGHANDS: readonly (readonly [string, string])[] = [
+  ['fontSize', 'size'],
+  ['fontWeight', 'weight'],
+  ['lineHeight', 'line-height'],
+];
+
 /**
- * Flat `{ '--fx-*': '<literal>' }` map of every token with a single CSS value
- * (typography composites are excluded — they have no single value, matching the
- * frozen emitter). Drop-in for a Tailwind/CSS-in-JS/JSON theme config.
+ * Flat `{ '--fx-*': '<literal>' }` map of every token with a single CSS value.
+ * Typography composites contribute their per-property longhands
+ * (`--fx-text-<name>-{size,weight,line-height}`) — matching the emitter's FDS
+ * 2.10 expansion. Drop-in for a Tailwind/CSS-in-JS/JSON theme config.
  */
 export function toFlatTokens(): Record<string, string> {
   const out: Record<string, string> = {};
   for (const t of resolvedTokens()) {
-    if (typeof t.value === 'string') out[t.cssVar] = t.value;
+    if (typeof t.value === 'string') {
+      out[t.cssVar] = t.value;
+    } else if (t.type === 'typography') {
+      for (const [prop, suffix] of TYPOGRAPHY_LONGHANDS) {
+        const v = t.value[prop];
+        if (typeof v === 'string') out[`${t.cssVar}-${suffix}`] = v;
+      }
+    }
   }
   return out;
 }

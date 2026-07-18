@@ -1,0 +1,5 @@
+{
+  "slug": "toast",
+  "tagline": "Transient, non-blocking confirmation of a completed action.",
+  "whenToUse": "Show a toast after the user acted and the action finished but the evidence isn't fully visible in place. Never toast validation errors or decisions that need a choice — those belong to a field message or a dialog."
+}

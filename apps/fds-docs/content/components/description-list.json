@@ -1,0 +1,5 @@
+{
+  "slug": "description-list",
+  "tagline": "Term/detail pairs for detail panes, order metadata, and settings review.",
+  "whenToUse": "Use a description list to present read-only key/value metadata — an order summary, invoice details, a settings review. Choose horizontal for a term column, vertical for narrow spaces, or grid for dense two-column layouts."
+}

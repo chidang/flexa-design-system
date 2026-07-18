@@ -1,0 +1,42 @@
+/* FxTooltip — token-only inverse-surface hint (doc 04 §2.45). Positioned in JS
+   (fixed top/left); this file owns the centering transform, look and fade. */
+.fx-tooltip {
+  z-index: var(--fx-z-tooltip);
+  max-width: 17.5rem; /* 280px — not on the px allowlist; expressed as rem */
+  padding: var(--fx-space-1) var(--fx-space-2);
+  background: var(--fx-color-text);
+  color: var(--fx-color-bg);
+  border-radius: var(--fx-radius-sm);
+  box-shadow: var(--fx-shadow-sm);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-sm-size);
+  line-height: var(--fx-line-height-normal);
+  pointer-events: none;
+  animation: fx-tooltip-in var(--fx-motion-duration-fast) var(--fx-motion-easing-out);
+}
+
+/* Anchor origin: coords are the trigger edge midpoint — transform aligns it. */
+.fx-tooltip[data-placement='top'] {
+  transform: translate(-50%, -100%);
+}
+.fx-tooltip[data-placement='bottom'] {
+  transform: translate(-50%, 0);
+}
+.fx-tooltip[data-placement='start'] {
+  transform: translate(-100%, -50%);
+}
+.fx-tooltip[data-placement='end'] {
+  transform: translate(0, -50%);
+}
+
+@keyframes fx-tooltip-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-tooltip {
+    animation: none;
+  }
+}

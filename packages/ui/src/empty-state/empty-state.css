@@ -1,0 +1,54 @@
+/* FxEmptyState — token-only. Centered stack; padding scales with size (§2.33). */
+.fx-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--fx-space-4);
+  padding: var(--fx-space-8);
+  text-align: center;
+}
+
+.fx-empty-state[data-size='sm'] {
+  padding: var(--fx-space-4);
+  gap: var(--fx-space-3);
+}
+.fx-empty-state[data-size='lg'] {
+  padding: var(--fx-space-12);
+}
+
+.fx-empty-state-media {
+  display: inline-flex;
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-empty-state-title {
+  margin: 0;
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-md-size);
+  font-weight: var(--fx-text-heading-md-weight);
+  line-height: var(--fx-text-heading-md-line-height);
+  color: var(--fx-color-text);
+}
+.fx-empty-state[data-size='sm'] .fx-empty-state-title {
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-medium);
+}
+
+.fx-empty-state-description {
+  max-inline-size: 40ch;
+  margin: 0;
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  line-height: var(--fx-line-height-normal);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-empty-state-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fx-space-3);
+  margin-block-start: var(--fx-space-2);
+}

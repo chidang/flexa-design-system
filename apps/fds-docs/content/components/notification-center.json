@@ -1,0 +1,5 @@
+{
+  "slug": "notification-center",
+  "tagline": "A bell with an unread count opening a non-modal notification popover.",
+  "whenToUse": "Notification Center is the bell in an app header: an icon-only trigger carrying an unread-count Badge that opens a non-modal popover panel. The panel has a header (title + \"Mark all read\" + a settings link), All / Unread Tabs, an FxList of notification rows (a tone icon, the title + optional body, a relative time and an unread dot), and a \"View all\" footer for the full page — which reuses the same list. It is deliberately non-modal: Esc closes it and it never traps focus, so the rest of the page stays interactive; announcing brand-new notifications is the host's live-region decision, not this panel's. The bell's aria-label always spells the unread count, and unread state is carried by a dot paired with a visually-hidden word so colour is never the only signal."
+}

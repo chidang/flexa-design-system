@@ -1,0 +1,152 @@
+/* FxNumberInput — token-only. Mirrors FxInput's wrapper (border + focus ring on
+   the flex container, transparent native input) and adds a stacked stepper group
+   in the end slot. Scheme/dark mode work by construction. */
+.fx-number-input {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--fx-space-1) 0 var(--fx-space-3);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  transition: border-color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard), box-shadow var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-number-input[data-size='sm'] {
+  height: 32px;
+  padding: 0 var(--fx-space-1) 0 var(--fx-space-2);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-number-input[data-size='lg'] {
+  height: 48px;
+  padding: 0 var(--fx-space-2) 0 var(--fx-space-4);
+}
+
+.fx-number-input:hover:not([data-disabled]):not([data-readonly]) {
+  border-color: var(--fx-color-border-strong);
+}
+
+.fx-number-input[data-focused] {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-number-input[data-invalid] {
+  border-color: var(--fx-color-danger);
+}
+
+.fx-number-input[data-disabled] {
+  background: var(--fx-color-surface-alt);
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-number-input[data-readonly] {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-number-input-control {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.fx-number-input-control:focus {
+  outline: none;
+}
+
+.fx-number-input-control::placeholder {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-number-input-control:disabled {
+  color: var(--fx-color-text-subtle);
+  cursor: not-allowed;
+}
+
+.fx-number-input-affix {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+  white-space: nowrap;
+}
+
+/* Stacked up/down group. */
+.fx-number-input-steppers {
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-self: stretch;
+  padding-block: var(--fx-space-1);
+}
+
+.fx-number-input-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  width: 24px;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+
+.fx-number-input-step > .fx-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.fx-number-input-step:hover:not(:disabled) {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+
+.fx-number-input-step:active:not(:disabled) {
+  background: var(--fx-color-border);
+}
+
+.fx-number-input-step:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-number-input-step:disabled {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+/* Tap target — see checkbox.css. Width-only: the up/down pair stack inside the
+   field, so a full-height overlay would swallow the sibling stepper. */
+@media (pointer: coarse) {
+  .fx-number-input-step {
+    position: relative;
+  }
+  .fx-number-input-step::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: max(100%, var(--fx-size-tap));
+    height: 100%;
+  }
+}

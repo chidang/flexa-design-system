@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // flexa-ui renders in the browser: unlike FDS (pure data), it needs DOM libs
+    // and the React JSX runtime. Still zero platform coupling beyond the DOM.
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "types": []
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "mocks/**/*.ts"]
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "quick-links",
+  "tagline": "A card of icon + label navigation shortcuts with trailing chevrons.",
+  "whenToUse": "Use Quick Links for a compact dashboard card of pure navigation shortcuts — icon, label, and a trailing chevron per row, in one or two columns. It carries no metrics or state; reach for Metric Card or Statistics Card when a shortcut should also surface a number. External destinations open in a new tab and are announced as such. Pair with Recent Activity and Progress Summary to build a landing dashboard."
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "avatar-upload",
+  "tagline": "Profile-photo picker with an avatar preview, edit overlay and optional crop-zoom.",
+  "whenToUse": "Use Avatar Upload for a single identity image — a user or entity profile photo. It shows the current photo (or an initials fallback), an edit affordance, and an optional minimal crop-zoom dialog. For multiple images use Image Gallery Upload; for arbitrary documents use File Upload."
+}

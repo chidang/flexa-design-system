@@ -1,0 +1,60 @@
+/* FxWidget — token-only. Standard dashboard-block chrome over FxCard: header
+   actions (drag handle + overflow menu), body, and a refreshed-at footer caption.
+   Built-in loading/error/empty bodies come from the composed primitives. */
+.fx-widget-header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+}
+
+/* Drag handle — grab affordance; a11y role/label set in the markup. */
+.fx-widget-drag-handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 32px;
+  block-size: 32px;
+  border-radius: var(--fx-radius-sm);
+  color: var(--fx-color-text-muted);
+  cursor: grab;
+  background: transparent;
+  border: none;
+}
+.fx-widget-drag-handle:hover {
+  background: var(--fx-color-surface-alt);
+}
+.fx-widget-drag-handle:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Overflow "⋯" trigger — icon button. */
+.fx-widget-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 32px;
+  block-size: 32px;
+  border-radius: var(--fx-radius-sm);
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+.fx-widget-menu-trigger:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-widget-menu-trigger:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-widget-body {
+  min-block-size: var(--fx-space-8);
+}
+
+.fx-widget-refreshed {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}

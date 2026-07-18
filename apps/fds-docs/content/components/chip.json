@@ -1,0 +1,5 @@
+{
+  "slug": "chip",
+  "tagline": "A compact interactive token — filters, choices, and tag-input values.",
+  "whenToUse": "Use a chip for a selectable or removable token: an applied filter, a choice in a group, or a value inside a tag input. For inert status use a Badge; for a categorical link use a Tag."
+}

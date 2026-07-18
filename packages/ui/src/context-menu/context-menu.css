@@ -1,0 +1,99 @@
+/* FxContextMenu — token-only. Floating surface at popover elevation; items
+   highlight with surface-alt, danger items tint their text with the danger token.
+   The trigger wrapper is inline and layout-neutral. */
+.fx-context-menu-trigger {
+  display: inline-flex;
+}
+
+/* Coordinates come from useAnchorPosition (inline style) — portalled out of
+   the trigger's DOM context, CSS alone cannot anchor it. */
+.fx-context-menu {
+  position: fixed;
+  z-index: var(--fx-z-popover);
+}
+
+.fx-context-menu-list {
+  min-width: 11.25rem;
+  margin: 0;
+  padding: var(--fx-space-1);
+  list-style: none;
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  box-shadow: var(--fx-shadow-md);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-context-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  min-height: 32px;
+  padding: var(--fx-space-2) var(--fx-space-3);
+  border-radius: var(--fx-radius-sm);
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-sm-size);
+  cursor: pointer;
+  user-select: none;
+}
+
+.fx-context-menu-item:hover:not([aria-disabled]),
+.fx-context-menu-item:focus-visible {
+  background: var(--fx-color-surface-alt);
+  outline: none;
+}
+
+.fx-context-menu-item:active:not([aria-disabled]) {
+  background: var(--fx-color-border);
+}
+
+.fx-context-menu-item:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-context-menu-item[data-tone='danger'] {
+  color: var(--fx-color-danger);
+}
+
+.fx-context-menu-item[aria-disabled] {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-context-menu-item-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--fx-color-text-muted);
+}
+
+.fx-context-menu-item[data-tone='danger'] .fx-context-menu-item-icon {
+  color: var(--fx-color-danger);
+}
+
+.fx-context-menu-item-label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fx-context-menu-item-kbd {
+  flex: 0 0 auto;
+  color: var(--fx-color-text-subtle);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-context-menu-separator {
+  height: 1px;
+  margin: var(--fx-space-1) 0;
+  background: var(--fx-color-border);
+}
+
+.fx-context-menu-group-label {
+  padding: var(--fx-space-1) var(--fx-space-3);
+  color: var(--fx-color-text-subtle);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--fx-font-tracking-wide);
+}

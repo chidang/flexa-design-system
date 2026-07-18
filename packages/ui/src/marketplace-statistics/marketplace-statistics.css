@@ -1,0 +1,56 @@
+/* FxMarketplaceStatistics — token-only. An admin KPI band: a header (heading +
+   range select), a responsive dashboard grid of FxMetricCards, and an optional
+   chart slot. The grid column count comes from the `columns` prop (inline var),
+   collapsing to 2 columns at 1024px and 1 at 640px (dashboard-grid idiom). */
+.fx-marketplace-statistics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+}
+
+.fx-marketplace-statistics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-4);
+}
+
+.fx-marketplace-statistics-title {
+  margin: 0;
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-md-size);
+  font-weight: var(--fx-text-heading-md-weight);
+  line-height: var(--fx-text-heading-md-line-height);
+  color: var(--fx-color-text);
+}
+
+.fx-marketplace-statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--fx-marketplace-statistics-columns, 4), minmax(0, 1fr));
+  gap: var(--fx-space-4);
+  align-items: start;
+}
+
+/* Flatten nested metric cards — the band reads as one surface, not stacked cards. */
+.fx-marketplace-statistics-grid .fx-metric-card {
+  box-shadow: none;
+  border-color: var(--fx-color-border);
+}
+
+/* Tablet: collapse to 2 columns. */
+@media (max-width: 1024px) {
+  .fx-marketplace-statistics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile: single-column stack, DOM = priority order. */
+@media (max-width: 640px) {
+  .fx-marketplace-statistics-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.fx-marketplace-statistics-chart {
+  margin-block-start: var(--fx-space-2);
+}

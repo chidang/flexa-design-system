@@ -1,0 +1,5 @@
+{
+  "slug": "offline-state",
+  "tagline": "Connectivity surface — a self-managing offline banner or a full-page hard stop.",
+  "whenToUse": "Offline State handles lost connectivity in two modes. The banner is an ambient FxAlert warning (\"You're offline — changes will sync when reconnected\") with an optional retry; it can auto-manage itself by reading navigator.onLine and the online/offline events, hiding while online and politely announcing \"Back online\" before it auto-dismisses on reconnect. The page mode is a hard stop that delegates to FxErrorPage code=\"offline\" for when the app genuinely cannot proceed. Detection wiring is ultimately the host's responsibility — this component owns presentation and announcements. All connectivity access runs inside an effect, so it is SSR-safe and static-renders as the visible banner."
+}

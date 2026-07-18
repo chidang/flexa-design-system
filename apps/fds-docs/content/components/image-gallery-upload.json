@@ -1,0 +1,5 @@
+{
+  "slug": "image-gallery-upload",
+  "tagline": "Reorderable image grid where the first tile is the cover.",
+  "whenToUse": "Use Image Gallery Upload for an ordered set of photos — listing galleries, product shots — where order is meaningful and the first image is the cover. Items reorder by pointer drag or the keyboard drag protocol (Space to lift, Arrow to move, Space to drop). For a single avatar use Avatar Upload; for documents use File Upload."
+}

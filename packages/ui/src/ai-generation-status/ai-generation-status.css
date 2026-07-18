@@ -1,0 +1,180 @@
+/* FxAiGenerationStatus — token-only. AI accent = info family (no bespoke AI
+   color). Pulsing sparkle marks live generation; block variant reserves shimmer
+   placeholder lines; step feed shows a multi-stage pipeline. All motion falls
+   back to static under prefers-reduced-motion. */
+.fx-ai-generation-status {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+}
+
+.fx-ai-generation-status-head {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+.fx-ai-generation-status-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fx-color-info);
+}
+.fx-ai-generation-status[data-status='succeeded'] .fx-ai-generation-status-icon {
+  color: var(--fx-color-success);
+}
+.fx-ai-generation-status[data-status='failed'] .fx-ai-generation-status-icon {
+  color: var(--fx-color-danger);
+}
+.fx-ai-generation-status[data-status='cancelled'] .fx-ai-generation-status-icon,
+.fx-ai-generation-status[data-status='queued'] .fx-ai-generation-status-icon {
+  color: var(--fx-color-text-muted);
+}
+
+.fx-ai-generation-status-text {
+  font-weight: var(--fx-font-weight-medium);
+}
+.fx-ai-generation-status[data-status='failed'] .fx-ai-generation-status-text {
+  color: var(--fx-color-danger);
+}
+
+.fx-ai-generation-status-elapsed {
+  color: var(--fx-color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.fx-ai-generation-status-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  height: 32px;
+  padding: 0 var(--fx-space-2);
+  margin-inline-start: var(--fx-space-1);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-sm-size);
+  font-family: inherit;
+  cursor: pointer;
+}
+.fx-ai-generation-status-action:hover {
+  background: var(--fx-color-surface-alt);
+}
+.fx-ai-generation-status-action:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* button variant: emphasise the action row (pill framing around the head). */
+.fx-ai-generation-status[data-variant='button'] .fx-ai-generation-status-head {
+  padding: var(--fx-space-1) var(--fx-space-3);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-info-soft);
+}
+
+/* block variant: reserved shimmer placeholder lines while generating. */
+.fx-ai-generation-status-shimmer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+}
+.fx-ai-generation-status-line {
+  display: block;
+  height: 16px;
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-color-surface-alt);
+  background-image: linear-gradient(
+    90deg,
+    var(--fx-color-surface-alt) 0%,
+    color-mix(in srgb, var(--fx-color-info) 10%, var(--fx-color-surface-alt)) 50%,
+    var(--fx-color-surface-alt) 100%
+  );
+  background-size: 200% 100%;
+  animation: fx-ai-generation-status-shimmer var(--fx-motion-duration-loop) var(--fx-motion-easing-in-out) infinite;
+}
+.fx-ai-generation-status-line:nth-child(2) {
+  width: 768px;
+  max-width: 100%;
+}
+.fx-ai-generation-status-line:nth-child(3) {
+  width: 480px;
+  max-width: 100%;
+}
+
+/* Step feed. */
+.fx-ai-generation-status-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+.fx-ai-generation-status-step {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  color: var(--fx-color-text-muted);
+}
+.fx-ai-generation-status-step[data-state='active'] {
+  color: var(--fx-color-text);
+}
+.fx-ai-generation-status-step[data-state='done'] {
+  color: var(--fx-color-text);
+}
+.fx-ai-generation-status-step-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fx-color-text-subtle);
+}
+.fx-ai-generation-status-step[data-state='active'] .fx-ai-generation-status-step-mark {
+  color: var(--fx-color-info);
+}
+.fx-ai-generation-status-step[data-state='done'] .fx-ai-generation-status-step-mark {
+  color: var(--fx-color-success);
+}
+.fx-ai-generation-status-step[data-state='error'] {
+  color: var(--fx-color-danger);
+}
+.fx-ai-generation-status-step[data-state='error'] .fx-ai-generation-status-step-mark {
+  color: var(--fx-color-danger);
+}
+
+/* Pulse the sparkle while generating. */
+.fx-ai-generation-status-icon[data-pulse] {
+  animation: fx-ai-generation-status-pulse var(--fx-motion-duration-loop) var(--fx-motion-easing-in-out) infinite;
+}
+
+@keyframes fx-ai-generation-status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes fx-ai-generation-status-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-ai-generation-status-icon[data-pulse] {
+    animation: none;
+  }
+  .fx-ai-generation-status-line {
+    animation: none;
+    background-image: none;
+  }
+}

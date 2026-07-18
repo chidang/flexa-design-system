@@ -1,0 +1,5 @@
+{
+  "slug": "payment-status",
+  "tagline": "A payment outcome at a glance — status Badge, amount, method and timestamp.",
+  "whenToUse": "Payment Status summarises a single payment's outcome: a tone-coded Badge that always spells its status, the formatted amount, the method (brand glyph plus masked last-4) and when it was processed, with a failure reason and retry action when it declines. Reach for it inside an order detail, receipt, or payments table row wherever one payment's state must be legible at a glance. Use Invoice Card when you're presenting the whole billing document with line-item money rows, or a Badge alone when only the status word is needed."
+}

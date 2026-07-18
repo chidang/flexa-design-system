@@ -1,0 +1,5 @@
+{
+  "slug": "empty-state",
+  "tagline": "The zero-data surface — what is true, and what to do next.",
+  "whenToUse": "Use an empty state when a collection has no items or a search returns nothing. The title states what's true, the description says what to do, and an optional action gets the user unstuck."
+}

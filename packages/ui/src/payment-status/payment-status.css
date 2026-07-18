@@ -1,0 +1,66 @@
+/* FxPaymentStatus — token-only. Compact stack: status Badge + amount on one
+   row, method + timestamp beneath, then reason/retry for failures. Colour is an
+   enhancement; the status word inside the Badge carries the meaning (§1.7.7). */
+.fx-payment-status {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-payment-status-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--fx-space-3);
+}
+
+.fx-payment-status-amount {
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-md-size);
+  font-weight: var(--fx-text-heading-md-weight);
+  line-height: var(--fx-text-heading-md-line-height);
+  color: var(--fx-color-text);
+}
+
+.fx-payment-status-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--fx-space-1) var(--fx-space-4);
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-payment-status-method {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+}
+
+.fx-payment-status-method-icon {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-payment-status-time {
+  color: var(--fx-color-text-muted);
+}
+
+/* Failure reason — danger-toned tint band, wired to the Badge (aria-describedby). */
+.fx-payment-status-reason {
+  margin: 0;
+  padding: var(--fx-space-2) var(--fx-space-3);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-danger-soft);
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-danger);
+}
+
+.fx-payment-status-actions {
+  display: flex;
+  gap: var(--fx-space-2);
+}

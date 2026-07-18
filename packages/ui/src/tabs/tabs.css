@@ -1,0 +1,156 @@
+/* FxTabs — token-only. Underline variant: 2px primary indicator under the active
+   tab. Contained variant: active tab is a raised surface card on a surface-alt
+   track. Vertical orientation lays the list beside the panels. */
+.fx-tabs {
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-tabs[data-orientation='vertical'] {
+  display: flex;
+  gap: var(--fx-space-4);
+}
+
+.fx-tabs-list {
+  display: flex;
+  align-items: stretch;
+  gap: var(--fx-space-1);
+}
+
+.fx-tabs[data-orientation='vertical'] .fx-tabs-list {
+  flex-direction: column;
+  align-items: stretch;
+  flex: 0 0 auto;
+}
+
+.fx-tabs[data-variant='underline'] .fx-tabs-list {
+  border-bottom: 1px solid var(--fx-color-border);
+}
+
+.fx-tabs[data-variant='underline'][data-orientation='vertical'] .fx-tabs-list {
+  border-bottom: 0;
+  border-inline-end: 1px solid var(--fx-color-border);
+}
+
+.fx-tabs[data-variant='contained'] .fx-tabs-list {
+  padding: var(--fx-space-1);
+  background: var(--fx-color-surface-alt);
+  border-radius: var(--fx-radius-md);
+}
+
+.fx-tabs-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  height: 40px;
+  padding: 0 var(--fx-space-3);
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  font: inherit;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-tabs[data-size='sm'] .fx-tabs-tab {
+  height: 32px;
+  padding: 0 var(--fx-space-2);
+}
+
+.fx-tabs[data-size='lg'] .fx-tabs-tab {
+  height: 48px;
+  padding: 0 var(--fx-space-4);
+}
+
+.fx-tabs-tab:hover:not([aria-disabled]) {
+  color: var(--fx-color-text);
+}
+
+.fx-tabs-tab:active:not([aria-disabled]) {
+  background: color-mix(in srgb, var(--fx-color-primary) 8%, transparent);
+}
+
+/* Active is signalled by colour + the indicator bar only — a weight bump would
+   reflow the tab row (ui-kit doc 14 F-T3). */
+.fx-tabs-tab[data-active] {
+  color: var(--fx-color-primary);
+}
+
+.fx-tabs-tab:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+.fx-tabs-tab[aria-disabled] {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+/* underline indicator */
+.fx-tabs[data-variant='underline'] .fx-tabs-tab {
+  position: relative;
+}
+
+.fx-tabs[data-variant='underline'] .fx-tabs-tab[data-active]::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--fx-color-primary);
+}
+
+.fx-tabs[data-variant='underline'][data-orientation='vertical'] .fx-tabs-tab[data-active]::after {
+  inset-inline: auto;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: 2px;
+  height: auto;
+}
+
+/* contained active card */
+.fx-tabs[data-variant='contained'] .fx-tabs-tab {
+  border-radius: var(--fx-radius-sm);
+}
+
+.fx-tabs[data-variant='contained'] .fx-tabs-tab[data-active] {
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  box-shadow: var(--fx-shadow-sm);
+}
+
+.fx-tabs-tab-icon {
+  display: inline-flex;
+}
+
+.fx-tabs-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 var(--fx-space-1);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-tabs-panel {
+  padding-block-start: var(--fx-space-4);
+}
+
+.fx-tabs[data-orientation='vertical'] .fx-tabs-panel {
+  padding-block-start: 0;
+  padding-inline-start: var(--fx-space-4);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fx-tabs-panel:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}

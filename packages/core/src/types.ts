@@ -225,6 +225,50 @@ export interface ControlDef {
    * chứa text KHÔNG-phải-nội-dung (id neo, tên class thô…). Các control khác bỏ qua.
    */
   translatable?: boolean;
+  /**
+   * Conditional visibility (Flatsome-style). Control chỉ HIỆN trong settings panel
+   * khi điều kiện đúng với giá trị hiệu dụng của setting anh em (`settings[key] ??
+   * schema[key].default`). Xem `controlWhen.ts` cho ngữ nghĩa eval.
+   * EDITOR-ONLY — engines/PHP bỏ qua; control bị ẩn VẪN giữ giá trị trong data và
+   * VẪN render bình thường (non-destructive). Chỉ đánh giá ở control top-level của
+   * `manifest.schema`; KHÔNG hỗ trợ trên nested control (repeater.fields / responsive.control).
+   */
+  when?: WhenCondition;
+}
+
+/**
+ * Leaf test cho MỘT sibling setting (xem `controlWhen.ts`):
+ *   - array  → `in`   (value ∈ array)
+ *   - object → operator clause (keys ⊆ WHEN_OPERATORS; nhiều operator = AND)
+ *   - còn lại (string/number/boolean/null) → `eq`
+ * Muốn eq với một object value → dùng `{ eq: {...} }` tường minh.
+ */
+export type WhenClause =
+  | Json
+  | Json[]
+  | {
+      eq?: Json;
+      ne?: Json;
+      in?: Json[];
+      nin?: Json[];
+      gt?: number;
+      gte?: number;
+      lt?: number;
+      lte?: number;
+      truthy?: boolean;
+    };
+
+/**
+ * Điều kiện hiển thị: mỗi key (trừ `any`) = tên sibling setting → clause phải đúng;
+ * tất cả AND lại. Key reserved `any` = nhóm OR: pass nếu MỘT sub-condition pass.
+ *
+ * LƯU Ý: `any` là key RESERVED cho nhóm OR — một setting đặt tên đúng `"any"` sẽ bị
+ * hiểu là OR-group, không phải test bằng. Tránh đặt tên setting là `any`.
+ */
+export interface WhenCondition {
+  /** Reserved OR-group — pass nếu MỘT sub-condition trong mảng pass. */
+  any?: WhenCondition[];
+  [setting: string]: WhenClause | WhenCondition[] | undefined;
 }
 
 /**
@@ -278,6 +322,13 @@ export interface A11ySpec {
    * mặc định `{ srcSetting:'src', altSetting:'alt' }`.)
    */
   image?: { srcSetting: string; altSetting: string };
+  /**
+   * Element render một DANH SÁCH ảnh từ repeater (vd flexa/gallery) — enforce alt
+   * TỪNG entry (mirror `image` nhưng cho entry lồng). `setting` = TÊN setting repeater;
+   * `srcField`/`altField` = tên field TRONG mỗi entry. Entry có src non-empty nhưng
+   * alt rỗng ⇒ finding `missing-alt` (kèm số thứ tự entry trong message).
+   */
+  imageItems?: { setting: string; srcField: string; altField: string };
   /**
    * Element render một ARIA landmark (`<main>`, `<nav>`, `<header>`…) — `validateDocument`
    * enforce "landmark duy nhất" cho các role phải là 1 trên trang (`main`/`banner`/`contentinfo`).
@@ -345,6 +396,15 @@ export interface PresetNode {
   type: string;
   settings?: Settings;
   children?: PresetNode[];
+  /**
+   * Node-level style carried into the tree on insert (export/import — doc 22 EX1).
+   * Additive/optional: catalog & marketplace presets that omit it are byte-identical
+   * to before. `validatePack` runs the same on-system token gate node.style runs
+   * everywhere else, so an imported preset can never smuggle an off-system token.
+   */
+  style?: NodeStyle;
+  /** Editor rename carried into the inserted node (export/import — doc 22 EX1). */
+  label?: string;
 }
 
 /**

@@ -40,8 +40,9 @@ export interface ContrastPair {
 
 /**
  * The pairs enforced in CI: primary body text on its surfaces, and every `on-X`
- * text/icon colour on its `X` fill. `text-subtle` is intentionally low-contrast
- * (decorative) so it is not a guaranteed pair and is excluded.
+ * text/icon colour on its `X` fill. `text-subtle` clears WCAG AA for normal text in
+ * both schemes since its FDS 2.11 re-point (neutral.500 light / .400 dark) but stays
+ * outside the guaranteed set: it is the tertiary role, not a body-text contract.
  */
 export const CONTRAST_PAIRS: readonly ContrastPair[] = [
   { fg: 'color.text', bg: 'color.bg', min: AA_NORMAL, apcaMin: APCA_BODY_MIN },

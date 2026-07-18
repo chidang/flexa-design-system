@@ -1,0 +1,121 @@
+/* FxQueueMonitor — token-only. A responsive grid of per-queue Cards composing
+   MetricCard + Badge + Confirmation Dialog. Honest freshness stamp in the
+   header. Styles only the monitor-specific chrome. */
+.fx-queue-monitor {
+  font-family: var(--fx-font-family-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+}
+
+.fx-queue-monitor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+.fx-queue-monitor-heading {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-body-lg-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+.fx-queue-monitor-heading-icon {
+  color: var(--fx-color-text-muted);
+}
+.fx-queue-monitor-freshness {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+.fx-queue-monitor-interval {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-queue-monitor-grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--fx-space-4);
+}
+.fx-queue-monitor-item {
+  min-width: 0;
+}
+
+.fx-queue-monitor-name {
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+
+.fx-queue-monitor-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+}
+
+.fx-queue-monitor-stats {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-3);
+}
+.fx-queue-monitor-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+.fx-queue-monitor-stat dt {
+  font-size: var(--fx-text-caption-size);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--fx-font-tracking-wide);
+}
+.fx-queue-monitor-stat dd {
+  margin: 0;
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+  font-variant-numeric: tabular-nums;
+}
+.fx-queue-monitor-stat dd[data-stale] {
+  color: var(--fx-color-warning);
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-queue-monitor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+
+.fx-queue-monitor-empty {
+  margin: 0;
+  padding: var(--fx-space-6);
+  text-align: center;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+  border: 1px dashed var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+}
+
+.fx-queue-monitor-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

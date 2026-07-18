@@ -1,0 +1,5 @@
+{
+  "slug": "fab",
+  "tagline": "The screen's one dominant creation action, floating above content.",
+  "whenToUse": "Use a floating action button for a single clear creation verb, primarily on mobile where header actions are out of thumb reach. Only one FAB per screen; on desktop prefer the page-header primary action."
+}

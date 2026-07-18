@@ -1,0 +1,5 @@
+{
+  "slug": "confirmation-dialog",
+  "tagline": "A blocking decision before a consequential action proceeds.",
+  "whenToUse": "Use for destructive, irreversible, or costly actions — delete, refund, revoke access. For cheap, reversible actions prefer act-immediately plus an undo toast instead of interrupting the user."
+}

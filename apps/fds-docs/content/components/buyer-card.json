@@ -1,0 +1,5 @@
+{
+  "slug": "buyer-card",
+  "tagline": "A buyer identity + activity summary — orders and (admin) dispute rate, with no store link.",
+  "whenToUse": "Buyer Card summarises a marketplace buyer: an avatar, a name, an optional verified Badge, an order-count stat, and a member-since line, with no store link because a buyer has no storefront. In the admin perspective it additionally surfaces a dispute-rate stat, gated behind perspective='admin' so it never leaks into customer-facing views. Reach for it on a seller's Order Detail (\"who bought\") and on an admin User Detail summary; it mirrors the Seller Card contract minus the store link to keep the two perspectives clean."
+}

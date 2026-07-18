@@ -1,0 +1,121 @@
+/* FxCommentThread — token-only. A list of comments with one nested reply level. */
+.fx-comment-thread {
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-comment-thread-list,
+.fx-comment-replies {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+}
+
+/* Nested replies indent one level (space.8). */
+.fx-comment-replies {
+  margin-block-start: var(--fx-space-4);
+  margin-inline-start: var(--fx-space-8);
+  gap: var(--fx-space-4);
+  border-inline-start: 1px solid var(--fx-color-border);
+  padding-inline-start: var(--fx-space-4);
+}
+
+.fx-comment-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fx-space-3);
+}
+.fx-comment-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+
+/* Head: author + time + edited marker. */
+.fx-comment-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--fx-space-2);
+  flex-wrap: wrap;
+}
+.fx-comment-author {
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-semibold);
+  text-decoration: none;
+}
+a.fx-comment-author:hover {
+  text-decoration: underline;
+}
+.fx-comment-time {
+  color: var(--fx-color-text-subtle);
+  font-size: var(--fx-text-body-sm-size);
+}
+.fx-comment-edited {
+  color: var(--fx-color-text-subtle);
+  font-size: var(--fx-text-body-sm-size);
+  font-style: italic;
+}
+
+.fx-comment-body {
+  margin: 0;
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-size);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Tombstone for a deleted comment. */
+.fx-comment-tombstone {
+  margin: 0;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-size);
+  font-style: italic;
+}
+
+/* Actions row. */
+.fx-comment-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-3);
+  margin-block-start: var(--fx-space-1);
+}
+.fx-comment-action {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--fx-color-text-muted);
+  font: inherit;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  cursor: pointer;
+}
+.fx-comment-action:hover {
+  color: var(--fx-color-text);
+  text-decoration: underline;
+}
+.fx-comment-action[data-tone='danger'] {
+  color: var(--fx-color-danger);
+}
+.fx-comment-action:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Inline reply / edit composer. */
+.fx-comment-composer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+  margin-block-start: var(--fx-space-2);
+}
+.fx-comment-composer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--fx-space-2);
+}

@@ -1,0 +1,298 @@
+/* FxDatePicker — token-only. The field mirrors FxInput chrome; the popover is a
+   portalled non-modal dialog carrying the calendar grid. In-range/selected day
+   tints use the primary + on-primary tokens; today gets a primary ring. */
+.fx-date-picker {
+  display: inline-block;
+  width: 100%;
+}
+
+.fx-date-picker-field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--fx-space-2) 0 var(--fx-space-3);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  transition: border-color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard), box-shadow var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-date-picker[data-size='sm'] .fx-date-picker-field {
+  height: 32px;
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-date-picker[data-size='lg'] .fx-date-picker-field {
+  height: 48px;
+}
+
+.fx-date-picker-field:hover:not([data-disabled]) {
+  border-color: var(--fx-color-border-strong);
+}
+
+.fx-date-picker[data-invalid] .fx-date-picker-field {
+  border-color: var(--fx-color-danger);
+}
+
+.fx-date-picker[data-disabled] .fx-date-picker-field {
+  background: var(--fx-color-surface-alt);
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-date-picker-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+.fx-date-picker-input:focus {
+  outline: none;
+}
+
+.fx-date-picker-input::placeholder {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-date-picker-field:focus-within {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-date-picker-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+
+.fx-date-picker-trigger:hover {
+  color: var(--fx-color-text);
+}
+
+.fx-date-picker-trigger:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ── Popover + calendar ─────────────────────────────────────────────────── */
+.fx-date-picker-popover {
+  position: fixed; /* coordinates from useAnchorPosition (portalled) */
+  z-index: var(--fx-z-popover);
+  margin-top: var(--fx-space-2);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  box-shadow: var(--fx-shadow-lg);
+  padding: var(--fx-space-3);
+}
+
+.fx-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+  width: 240px;
+}
+
+.fx-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-2);
+}
+
+.fx-calendar-title {
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+
+.fx-calendar-prev,
+.fx-calendar-next {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+
+.fx-calendar-prev:hover,
+.fx-calendar-next:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+
+.fx-calendar-prev:active,
+.fx-calendar-next:active {
+  background: var(--fx-color-border);
+}
+
+.fx-calendar-prev:focus-visible,
+.fx-calendar-next:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-calendar-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.fx-calendar-weekdays,
+.fx-calendar-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.fx-calendar-weekday {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+}
+
+.fx-calendar-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fx-calendar-day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--fx-radius-md);
+  background: transparent;
+  color: var(--fx-color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.fx-calendar-day:hover:not([disabled]) {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-calendar-day:active:not([disabled]) {
+  background: var(--fx-color-border);
+}
+
+.fx-calendar-day:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-calendar-day[data-outside] {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-calendar-day[data-today] {
+  box-shadow: inset 0 0 0 1px var(--fx-color-primary);
+}
+
+.fx-calendar-day[data-in-range] {
+  background: var(--fx-color-surface-alt);
+  border-radius: 0;
+}
+
+.fx-calendar-day[data-selected] {
+  background: var(--fx-color-primary);
+  color: var(--fx-color-on-primary);
+}
+
+.fx-calendar-day[data-selected]:active:not([disabled]) {
+  background: var(--fx-color-primary-active);
+}
+
+.fx-calendar-day[disabled],
+.fx-calendar-day[aria-disabled='true'] {
+  color: var(--fx-color-text-subtle);
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-calendar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-2);
+  padding-top: var(--fx-space-1);
+}
+
+.fx-calendar-today-btn,
+.fx-calendar-clear-btn {
+  padding: var(--fx-space-1) var(--fx-space-2);
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-primary);
+  font: inherit;
+  cursor: pointer;
+}
+
+.fx-calendar-today-btn:hover,
+.fx-calendar-clear-btn:hover {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-calendar-today-btn:active,
+.fx-calendar-clear-btn:active {
+  background: var(--fx-color-border);
+}
+
+.fx-calendar-today-btn:focus-visible,
+.fx-calendar-clear-btn:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Tap target — see checkbox.css. */
+@media (pointer: coarse) {
+  .fx-calendar-prev,
+  .fx-calendar-next,
+  .fx-calendar-today-btn,
+  .fx-calendar-clear-btn {
+    position: relative;
+  }
+  .fx-calendar-prev::after,
+  .fx-calendar-next::after,
+  .fx-calendar-today-btn::after,
+  .fx-calendar-clear-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: max(100%, var(--fx-size-tap));
+    height: max(100%, var(--fx-size-tap));
+  }
+}

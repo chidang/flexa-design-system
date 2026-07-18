@@ -12,8 +12,19 @@ import { FDS_TOKENS, FDS_VERSION } from 'flexa-design-system';
 
 export { FDS_VERSION };
 
-/** Every CSS custom property the FDS registry owns, e.g. `--fx-color-primary`. */
-export const FX_VARS: ReadonlySet<string> = new Set(FDS_TOKENS.map((t) => t.cssVar));
+/**
+ * Every CSS custom property the FDS registry owns, e.g. `--fx-color-primary`.
+ * Typography composites are emitted per-property (FDS 2.10), so their KNOWN vars
+ * are the `-size/-weight/-line-height` longhands — the bare composite name is
+ * never defined and referencing it is exactly the drift this linter catches.
+ */
+export const FX_VARS: ReadonlySet<string> = new Set(
+  FDS_TOKENS.flatMap((t) =>
+    t.type === 'typography'
+      ? [`${t.cssVar}-size`, `${t.cssVar}-weight`, `${t.cssVar}-line-height`]
+      : [t.cssVar],
+  ),
+);
 
 /**
  * Matches an FDS custom-property reference: `--fx-` + kebab segments. Deliberately

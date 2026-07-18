@@ -1,0 +1,5 @@
+{
+  "slug": "calendar",
+  "tagline": "A scheduling calendar surface with month, week and day views of events.",
+  "whenToUse": "Use to display and navigate a schedule of events across time — bookings, shifts, appointments, deadlines. It shows many events at once (a month grid with '+N more' overflow, or a week/day time grid) and lets the user move between periods and switch views. This is DISTINCT from the Date Picker: the Date Picker's internal calendar is for picking a single date value into a field, whereas FxCalendar is a read/scheduling surface whose events cross the API as ISO datetime strings. Reach for the Date Picker (or Date Range Picker) when you need to capture a date into a form; reach for FxCalendar when you need to visualise what happens on which day."
+}

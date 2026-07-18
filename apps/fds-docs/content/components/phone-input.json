@@ -1,0 +1,5 @@
+{
+  "slug": "phone-input",
+  "tagline": "Telephone entry — a searchable country code affix beside the number.",
+  "whenToUse": "Use Phone Input to collect a telephone number with an explicit country dialling code, normalized toward E.164 on blur. For generic single-line text use Input, and for multiple phone numbers use several fields rather than Tag Input."
+}

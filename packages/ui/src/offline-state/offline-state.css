@@ -1,0 +1,32 @@
+/* FxOfflineState — token-only. Thin wrapper carrying the root class + data-mode;
+   the visual chrome comes from the composed FxAlert (banner) / FxErrorPage
+   (page). Only the inline retry control is styled here (§3.6). */
+.fx-offline-state[data-mode='banner'] {
+  display: block;
+  inline-size: 100%;
+}
+
+.fx-offline-state[data-mode='page'] {
+  display: block;
+}
+
+/* Retry action inside the warning banner — a link-style button (Alert actions
+   are ghost/link only). */
+.fx-offline-state-retry {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-primary);
+  cursor: pointer;
+}
+.fx-offline-state-retry:hover {
+  text-decoration: underline;
+}
+.fx-offline-state-retry:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}

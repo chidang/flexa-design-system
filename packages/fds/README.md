@@ -5,6 +5,8 @@
 [![minzipped](https://img.shields.io/bundlephobia/minzip/flexa-design-system.svg)](https://bundlephobia.com/package/flexa-design-system)
 [![license](https://img.shields.io/npm/l/flexa-design-system.svg)](./LICENSE)
 
+📖 **[Documentation, token reference & live playground → fds.sitebefy.com](https://fds.sitebefy.com)**
+
 A **zero-runtime, WCAG-gated design token system**. FDS is the design foundation of
 Flexa Builder, packaged so any project — with or without Flexa — can use it: pure
 data (a DTCG token source) plus pure functions (theme emission, token resolution,

@@ -1,0 +1,91 @@
+/* FxActivityTimeline — token-only. Filter chips above day-grouped FxTimeline
+   rails; each rail item hosts an avatar + sentence + relative time in its
+   content slot. Composes Timeline/Chip/Avatar chrome — styles only the
+   timeline-specific regions. */
+.fx-activity-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-activity-timeline-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+
+.fx-activity-timeline-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+}
+
+.fx-activity-timeline-day {
+  margin-block-end: var(--fx-space-2);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text-muted);
+}
+
+/* Rich content slot inside a rail item. */
+.fx-activity-timeline-content {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  flex-wrap: wrap;
+}
+.fx-activity-timeline-avatar {
+  flex: none;
+  display: inline-flex;
+}
+.fx-activity-timeline-sentence {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+}
+.fx-activity-timeline-actor {
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+.fx-activity-timeline-target {
+  color: var(--fx-color-primary);
+  text-decoration: none;
+}
+a.fx-activity-timeline-target:hover {
+  text-decoration: underline;
+}
+.fx-activity-timeline-time {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+  white-space: nowrap;
+}
+
+.fx-activity-timeline-empty {
+  padding: var(--fx-space-6) var(--fx-space-3);
+  text-align: center;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-activity-timeline-more {
+  display: flex;
+  justify-content: center;
+}
+.fx-activity-timeline-more-btn {
+  padding: var(--fx-space-1) var(--fx-space-3);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  font-family: inherit;
+  cursor: pointer;
+}
+.fx-activity-timeline-more-btn:hover {
+  background: var(--fx-color-surface-alt);
+}
+.fx-activity-timeline-more-btn:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}

@@ -1,0 +1,42 @@
+/* FxErrorPage — token-only. Big code slot centered above an FxEmptyState lg
+   (§3.6). Fills the content area; caps line length for readability. */
+.fx-error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 480px;
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-error-page-code {
+  margin: 0;
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-md-size);
+  font-weight: var(--fx-text-heading-md-weight);
+  line-height: var(--fx-text-heading-md-line-height);
+  letter-spacing: var(--fx-font-tracking-wide);
+  color: var(--fx-color-text-subtle);
+}
+
+/* Title rendered as the page h1 inside the empty-state title slot. */
+.fx-error-page-title {
+  margin: 0;
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-md-size);
+  font-weight: var(--fx-text-heading-md-weight);
+  line-height: var(--fx-text-heading-md-line-height);
+  color: var(--fx-color-text);
+}
+.fx-error-page-title:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+.fx-error-page-request-id {
+  display: block;
+  margin-block-start: var(--fx-space-3);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-subtle);
+}

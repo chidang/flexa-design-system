@@ -106,6 +106,26 @@ export function validateDocument(root: FlexaNode, registry: ElementRegistry): A1
           message: `image has a source ("${img.srcSetting}") but empty alt text ("${img.altSetting}")`,
         });
       }
+
+      // Repeater images (e.g. a gallery): gate alt per entry, not just top-level.
+      const items = a11y.imageItems;
+      if (items) {
+        const list = settings[items.setting];
+        if (Array.isArray(list)) {
+          list.forEach((entry, i) => {
+            if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return;
+            const e = entry as Record<string, Json>;
+            if (isNonEmpty(e[items.srcField]) && !isNonEmpty(e[items.altField])) {
+              findings.push({
+                code: 'missing-alt',
+                severity: 'error',
+                nodeId: node.id,
+                message: `image #${i + 1} in "${items.setting}" has a source ("${items.srcField}") but empty alt text ("${items.altField}")`,
+              });
+            }
+          });
+        }
+      }
     }
     for (const child of node.children ?? []) walk(child);
   };

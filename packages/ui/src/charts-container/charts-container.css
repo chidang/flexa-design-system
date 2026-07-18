@@ -1,0 +1,62 @@
+/* FxChartsContainer — token-only. Chrome around a host chart: header + legend +
+   a fixed-min-height canvas. Legend swatches map to the fixed series-order tones
+   (§3.3); colour is paired with the always-present text label. */
+.fx-charts-container-header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+.fx-charts-container-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-3);
+  margin: 0 0 var(--fx-space-3);
+  padding: 0;
+  list-style: none;
+}
+
+.fx-charts-container-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-charts-container-legend-swatch {
+  inline-size: var(--fx-space-3);
+  block-size: var(--fx-space-3);
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-color-text-subtle);
+}
+.fx-charts-container-legend-item[data-tone='neutral'] .fx-charts-container-legend-swatch {
+  background: var(--fx-color-primary);
+}
+.fx-charts-container-legend-item[data-tone='info'] .fx-charts-container-legend-swatch {
+  background: var(--fx-color-info);
+}
+.fx-charts-container-legend-item[data-tone='success'] .fx-charts-container-legend-swatch {
+  background: var(--fx-color-success);
+}
+.fx-charts-container-legend-item[data-tone='warning'] .fx-charts-container-legend-swatch {
+  background: var(--fx-color-warning);
+}
+.fx-charts-container-legend-item[data-tone='danger'] .fx-charts-container-legend-swatch {
+  background: var(--fx-color-danger);
+}
+
+/* Canvas host — fixed 240px min so charts (and the loading rect) don't jump. */
+.fx-charts-container-canvas {
+  min-block-size: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.fx-charts-container-canvas > * {
+  inline-size: 100%;
+}
+
+.fx-charts-container-table {
+  overflow-x: auto;
+}

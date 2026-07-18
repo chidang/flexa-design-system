@@ -1,0 +1,5 @@
+{
+  "slug": "gallery",
+  "tagline": "Image carousel — stage, prev/next, thumbnail listbox, optional fullscreen lightbox.",
+  "whenToUse": "Use Gallery to browse a small ordered set of images: a product's photos, a portfolio piece, a case-study screenshot reel. The stage shows one image with prev/next and a live counter, the thumbnail strip is a roving listbox, and a fullscreen lightbox is available unless disabled. For selecting and managing many files (a media library) use Media Grid instead; for a single upload preview use Image Gallery Upload."
+}

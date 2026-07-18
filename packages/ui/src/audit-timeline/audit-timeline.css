@@ -1,0 +1,114 @@
+/* FxAuditTimeline — token-only. Composes FxTimeline; styles the day headers and
+   the per-entry actor + action Tag + details row rendered into the timeline
+   content slot. Same AuditEntry vocabulary as FxAuditLog. */
+.fx-audit-timeline {
+  font-family: var(--fx-font-family-base);
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+}
+
+.fx-audit-timeline-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+}
+
+.fx-audit-timeline-day {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-1) 0;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text-muted);
+  background: var(--fx-color-surface);
+}
+.fx-audit-timeline-day-icon {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-audit-timeline-entry {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+  margin-top: var(--fx-space-1);
+}
+
+.fx-audit-timeline-actor {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+.fx-audit-timeline-actor-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text-muted);
+}
+.fx-audit-timeline-actor-name {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+}
+
+.fx-audit-timeline-details-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-audit-timeline-details-btn:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-audit-timeline-details-btn:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-audit-timeline-more {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--fx-space-2);
+}
+.fx-audit-timeline-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-2) var(--fx-space-4);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-sm-size);
+  cursor: pointer;
+}
+.fx-audit-timeline-more-btn:hover {
+  background: var(--fx-color-surface-alt);
+}
+.fx-audit-timeline-more-btn:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-audit-timeline-empty {
+  margin: 0;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}

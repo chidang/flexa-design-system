@@ -1,0 +1,5 @@
+{
+  "slug": "url-input",
+  "tagline": "URL entry with an optional protocol prefix folded into the stored value.",
+  "whenToUse": "Use for capturing a web address — profile links, webhook targets, website fields — with the right keyboard and paste hygiene. Set protocolPrefix to imply https:// so users can type the bare host."
+}

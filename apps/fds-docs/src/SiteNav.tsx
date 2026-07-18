@@ -20,6 +20,7 @@ const LINKS: readonly { href: string; label: string }[] = [
   { href: '/why/', label: 'Why FDS' },
   { href: '/guides/getting-started/', label: 'Guides' },
   { href: '/tokens/', label: 'Tokens' },
+  { href: '/components/', label: 'Components' },
   { href: '/accessibility/', label: 'Accessibility' },
   { href: '/example/', label: 'Example' },
   { href: '/showcase/', label: 'Showcase' },

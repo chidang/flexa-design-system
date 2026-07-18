@@ -1,0 +1,128 @@
+/* FxChip — token-only. Selected = primary tint per §1.9 (mix over surface). */
+.fx-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-sm-size);
+  line-height: 1;
+  white-space: nowrap;
+  transition: border-color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-chip[data-size='sm'] {
+  height: 24px;
+}
+.fx-chip[data-size='lg'] {
+  height: 40px;
+}
+
+.fx-chip-main {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  height: 100%;
+  padding: 0 var(--fx-space-3);
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+.fx-chip[data-size='sm'] .fx-chip-main {
+  padding: 0 var(--fx-space-2);
+}
+
+.fx-chip-main:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Hover affordance — unselected lifts to surface (the remove button's ladder)
+   with a strengthened border; selected deepens the primary tint one notch
+   (§1.9 16% mix, the selected-hover grammar). */
+.fx-chip:not(.is-disabled):hover {
+  border-color: var(--fx-color-border-strong);
+}
+.fx-chip:not(.is-disabled) .fx-chip-main:hover {
+  background: var(--fx-color-surface);
+}
+.fx-chip.is-selected:not(.is-disabled):hover {
+  border-color: var(--fx-color-primary-hover);
+}
+.fx-chip.is-selected:not(.is-disabled) .fx-chip-main:hover {
+  background: color-mix(in srgb, var(--fx-color-primary) 16%, var(--fx-color-surface));
+}
+
+.fx-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 100%;
+  padding: 0;
+  margin-inline-end: var(--fx-space-1);
+  border: 0;
+  border-radius: var(--fx-radius-full);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+  transition: background var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+.fx-chip:not(.is-disabled) .fx-chip-remove:hover {
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+}
+.fx-chip:not(.is-disabled) .fx-chip-remove:active {
+  background: var(--fx-color-border);
+}
+.fx-chip-remove:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Selected (choice mode). */
+.fx-chip.is-selected {
+  border-color: var(--fx-color-primary);
+  background: var(--fx-color-primary-soft);
+  color: var(--fx-color-primary);
+}
+
+/* Pressed — the main segment tints one notch (radius inherited from the chip). */
+.fx-chip:not(.is-disabled) .fx-chip-main:active {
+  background: var(--fx-color-border);
+}
+.fx-chip.is-selected:not(.is-disabled) .fx-chip-main:active {
+  background: color-mix(in srgb, var(--fx-color-primary) 16%, var(--fx-color-surface));
+}
+
+/* Disabled. */
+.fx-chip.is-disabled {
+  opacity: var(--fx-opacity-disabled);
+}
+.fx-chip.is-disabled .fx-chip-main,
+.fx-chip.is-disabled .fx-chip-remove {
+  cursor: not-allowed;
+}
+
+/* Tap target — see checkbox.css. */
+@media (pointer: coarse) {
+  .fx-chip-remove {
+    position: relative;
+  }
+  .fx-chip-remove::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: max(100%, var(--fx-size-tap));
+    height: max(100%, var(--fx-size-tap));
+  }
+}

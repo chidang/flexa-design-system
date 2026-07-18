@@ -1,0 +1,5 @@
+{
+  "slug": "tag",
+  "tagline": "A categorical label — optionally a filter link.",
+  "whenToUse": "Use a tag to classify content (categories, topics, labels), optionally as an interactive filter link. For status use a Badge; for a removable, selectable token use a Chip."
+}

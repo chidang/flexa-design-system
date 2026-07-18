@@ -1,0 +1,81 @@
+/* FxAuthenticationLayout (doc 04 §3.1) — centered auth card + optional brand
+   aside. Token-only: card ≈400px on surface, aside on surface-alt shown ≥1024px.
+   State via data-attributes, not BEM modifiers. */
+
+.fx-auth-layout {
+  display: flex;
+  min-height: 100%;
+  background: var(--fx-color-bg);
+}
+
+.fx-auth-layout-main {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--fx-space-8) var(--fx-space-4);
+}
+
+.fx-auth-layout-card {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+  padding: var(--fx-space-8);
+  background: var(--fx-color-surface);
+  /* Shadow-only elevation (card pattern) — the border slot stays transparent
+     so layout never shifts. */
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-xl);
+  box-shadow: var(--fx-shadow-sm);
+}
+
+.fx-auth-layout-logo {
+  display: flex;
+  justify-content: center;
+}
+
+.fx-auth-layout-title {
+  margin: 0;
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-sm-size);
+  font-weight: var(--fx-text-heading-sm-weight);
+  line-height: var(--fx-text-heading-sm-line-height);
+  color: var(--fx-color-text);
+  text-align: center;
+}
+
+.fx-auth-layout-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+}
+
+.fx-auth-layout-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+  align-items: center;
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-text-muted);
+}
+
+/* ── Brand aside (≥1024px) ──────────────────────────────────────────────── */
+.fx-auth-layout-aside {
+  display: none;
+  flex: 1 1 0;
+  padding: var(--fx-space-8);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+
+@media (min-width: 1024px) {
+  .fx-auth-layout[data-has-aside] .fx-auth-layout-aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

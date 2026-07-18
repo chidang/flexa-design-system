@@ -13,6 +13,8 @@ export type {
   DocumentKind,
   ControlType,
   ControlDef,
+  WhenClause,
+  WhenCondition,
   PropDef,
   StyleSpec,
   StyleDecls,
@@ -122,6 +124,7 @@ export {
 } from './assets.js';
 export { nodeStyleToSpec, groupsToDecls, pruneNodeStyle } from './nodeStyle.js';
 export { recipeToSpec } from './recipe.js';
+export { evalWhen, whenRefs, unknownWhenOperators, WHEN_OPERATORS } from './controlWhen.js';
 
 // Marketplace packaging contract (Phase 5.5 Slice 8) — 3 pack kinds (theme/
 // element/preset), all data, gated by an fdsVersion semver + on-system tokens.

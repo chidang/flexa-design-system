@@ -1,0 +1,77 @@
+/* FxInvoiceCard — token-only. Over FxCard: a header (number + status Badge +
+   issued/due dates), the money DescriptionList, then an actions footer. The
+   total row is emphasised; the status word carries meaning, colour only
+   reinforces it (§1.7.7). */
+.fx-invoice-card .fx-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+}
+
+/* ── header ────────────────────────────────────────────────────────────────── */
+.fx-invoice-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--fx-space-3);
+}
+
+.fx-invoice-card-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+.fx-invoice-card-number {
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-md-size);
+  font-weight: var(--fx-text-heading-md-weight);
+  line-height: var(--fx-text-heading-md-line-height);
+  color: var(--fx-color-text);
+}
+
+.fx-invoice-card-dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2) var(--fx-space-4);
+  margin: 0;
+  text-align: end;
+}
+
+.fx-invoice-card-date {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fx-invoice-card-date dt {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-text-label-weight);
+  line-height: var(--fx-text-label-line-height);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-invoice-card-date dd {
+  margin: 0;
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-text);
+}
+
+/* ── money rows ────────────────────────────────────────────────────────────── */
+.fx-invoice-card-total {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-text-label-weight);
+  line-height: var(--fx-text-label-line-height);
+  color: var(--fx-color-text);
+}
+
+/* ── actions ───────────────────────────────────────────────────────────────── */
+.fx-invoice-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}

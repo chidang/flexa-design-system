@@ -1,0 +1,32 @@
+/* FxBlankStateLayout (doc 04 §3.1) — full-content-area centered blank state.
+   Token-only: the wrapped FxEmptyState brings its own tokens; this shell only
+   centers it and styles the secondary Learn-more link (color.primary). */
+
+.fx-blank-state-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fx-space-4);
+  min-height: 100%;
+  padding: var(--fx-space-8) var(--fx-space-4);
+  text-align: center;
+}
+
+.fx-blank-state-layout-learn-more {
+  color: var(--fx-color-primary);
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  text-decoration: none;
+}
+
+.fx-blank-state-layout-learn-more:hover {
+  text-decoration: underline;
+}
+
+.fx-blank-state-layout-learn-more:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}

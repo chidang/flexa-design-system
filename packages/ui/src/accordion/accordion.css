@@ -1,0 +1,107 @@
+/* FxAccordion — token-only. Default variant separates items with a hairline;
+   contained variant boxes each item on its own surface with a radius + border.
+   The chevron rotates on open; the panel is hidden via the `hidden` attribute,
+   so no height animation is needed for correctness. */
+.fx-accordion {
+  font-family: var(--fx-font-family-base);
+  color: var(--fx-color-text);
+}
+
+.fx-accordion[data-variant='default'] .fx-accordion-item {
+  border-block-start: 1px solid var(--fx-color-border);
+}
+.fx-accordion[data-variant='default'] .fx-accordion-item:last-child {
+  border-block-end: 1px solid var(--fx-color-border);
+}
+
+.fx-accordion[data-variant='contained'] .fx-accordion-item {
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  overflow: hidden;
+}
+.fx-accordion[data-variant='contained'] .fx-accordion-item + .fx-accordion-item {
+  margin-block-start: var(--fx-space-3);
+}
+
+.fx-accordion-header {
+  margin: 0;
+  font: inherit;
+}
+
+.fx-accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-3);
+  width: 100%;
+  padding: var(--fx-space-4);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-accordion-trigger:hover:not([aria-disabled]) {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-accordion-trigger:active:not([aria-disabled]) {
+  background: var(--fx-color-border);
+}
+
+.fx-accordion-trigger:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-accordion-trigger[aria-disabled] {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-accordion-heading-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  min-width: 0;
+}
+
+.fx-accordion-title {
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-accordion-subtitle {
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-font-weight-regular);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-accordion-chevron {
+  flex: none;
+  display: inline-flex;
+  color: var(--fx-color-text-muted);
+  transition: transform var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-accordion-item.is-open .fx-accordion-chevron {
+  transform: rotate(180deg);
+}
+
+.fx-accordion-panel-inner {
+  padding: 0 var(--fx-space-4) var(--fx-space-4);
+  font-size: var(--fx-text-body-size);
+  line-height: var(--fx-line-height-normal);
+  color: var(--fx-color-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-accordion-trigger,
+  .fx-accordion-chevron {
+    transition: none;
+  }
+}

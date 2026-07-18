@@ -1,0 +1,5 @@
+{
+  "slug": "split-view",
+  "tagline": "A resizable master-detail two-pane shell with a draggable separator.",
+  "whenToUse": "Split View is the master-detail pattern — a list pane beside a detail pane with a draggable, keyboard-operable separator. Reach for it in Messages, Disputes, or any browse-then-read flow where the selection stays visible. On mobile it collapses to one pane at a time with a back button. Use Sidebar Layout instead when the side pane is navigation rather than a selectable list."
+}

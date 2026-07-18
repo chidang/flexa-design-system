@@ -1,0 +1,5 @@
+{
+  "slug": "success-page",
+  "tagline": "Terminal success surface — success mark, summary recap, next-step actions.",
+  "whenToUse": "Success Page confirms a completed flow — checkout done, onboarding finished — as a full-page terminal. It centers a success mark (color.success) above the page's single h1, an optional description, a summary Card slot for a recap such as an order, and an actions row pairing a primary next-step with a secondary. Pass autoAdvance to redirect on your own after a delay: it renders a manual link plus an announced countdown in a role=status region, so a screen-reader user is told a redirect is imminent and can act first. The success icon is decorative (aria-hidden); the h1 carries the meaning."
+}

@@ -1,0 +1,240 @@
+/* FxGallery — token-only image carousel. Stage bg surface-alt / radius.lg;
+   active thumb ring color.primary / border.2; caption text-muted. */
+.fx-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+}
+
+.fx-gallery-stage-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+}
+
+.fx-gallery-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fx-color-surface-alt);
+  border-radius: var(--fx-radius-lg);
+  overflow: hidden;
+  min-height: 240px;
+}
+
+.fx-gallery-stage:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-gallery-image {
+  display: block;
+  max-inline-size: 100%;
+  max-block-size: 480px;
+  height: auto;
+  object-fit: contain;
+}
+
+.fx-gallery-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 40px;
+  block-size: 40px;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  cursor: pointer;
+  transition: background var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-gallery-nav.is-prev {
+  inset-inline-start: var(--fx-space-3);
+}
+
+.fx-gallery-nav.is-next {
+  inset-inline-end: var(--fx-space-3);
+}
+
+.fx-gallery-nav:hover:not(:disabled) {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-gallery-nav:active:not(:disabled) {
+  background: var(--fx-color-border);
+}
+
+.fx-gallery-nav:disabled {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-gallery-nav:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-gallery-fullscreen {
+  position: absolute;
+  top: var(--fx-space-3);
+  inset-inline-end: var(--fx-space-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 32px;
+  block-size: 32px;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  cursor: pointer;
+}
+
+.fx-gallery-fullscreen:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-gallery-counter {
+  position: absolute;
+  bottom: var(--fx-space-3);
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  padding: 0 var(--fx-space-2);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-gallery-caption {
+  margin: 0;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+/* Thumbnail listbox */
+.fx-gallery-thumbs {
+  display: flex;
+  gap: var(--fx-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+}
+
+.fx-gallery-thumbs:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-md);
+}
+
+.fx-gallery-thumb {
+  flex: 0 0 auto;
+  inline-size: 64px;
+  block-size: 64px;
+  border: 2px solid transparent;
+  border-radius: var(--fx-radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+}
+
+.fx-gallery-thumb.is-active {
+  border-color: var(--fx-color-primary);
+}
+
+.fx-gallery-thumb-image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Lightbox dialog */
+.fx-gallery-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--fx-z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--fx-space-4);
+  background: var(--fx-color-scrim);
+}
+
+.fx-gallery-lightbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  max-inline-size: 1024px;
+  background: var(--fx-color-surface-alt);
+  border-radius: var(--fx-radius-lg);
+  overflow: hidden;
+}
+
+.fx-gallery-lightbox:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-gallery-lightbox-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  min-height: 400px;
+}
+
+.fx-gallery-lightbox-close {
+  position: absolute;
+  top: var(--fx-space-3);
+  inset-inline-end: var(--fx-space-3);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 40px;
+  block-size: 40px;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  cursor: pointer;
+}
+
+.fx-gallery-lightbox-close:hover {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-gallery-lightbox-close:active {
+  background: var(--fx-color-border);
+}
+
+.fx-gallery-lightbox-close:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Tap target — see checkbox.css (nav/close are already absolutely positioned). */
+@media (pointer: coarse) {
+  .fx-gallery-nav::after,
+  .fx-gallery-lightbox-close::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: max(100%, var(--fx-size-tap));
+    height: max(100%, var(--fx-size-tap));
+  }
+}

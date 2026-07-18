@@ -1,0 +1,5 @@
+{
+  "slug": "file-upload",
+  "tagline": "Button-triggered upload with a managed, per-file list.",
+  "whenToUse": "Use File Upload when a form collects one or more documents/attachments and each file needs its own status, progress and remove control. For a large drop surface use Drag & Drop Upload, for a single profile image use Avatar Upload, and for an ordered set of photos use Image Gallery Upload — all of which compose this contract."
+}

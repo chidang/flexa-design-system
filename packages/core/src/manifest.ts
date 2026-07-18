@@ -10,6 +10,7 @@ import { CONTROL_TYPES } from './types.js';
 import { hasFormatter } from './engines/formatters.js';
 import { findForbiddenRawTags } from './engines/template.js';
 import { findUnknownStyleTokens } from 'flexa-design-system';
+import { whenRefs, unknownWhenOperators } from './controlWhen.js';
 
 /**
  * Canonical element categories (15-element-system.md §3) — order here IS the
@@ -45,6 +46,10 @@ const controlSchema: z.ZodType<ControlDef> = z.lazy(() =>
     fields: z.record(controlSchema).optional(),
     pickTargets: z.record(z.string()).optional(),
     translatable: z.boolean().optional(),
+    // Permissive on purpose: keep the whole `when` object as-is (so zod doesn't
+    // strip it). Its semantics — sibling refs resolve, operators are known, no
+    // nesting — are enforced by the validateManifest guardrails below + eval.
+    when: z.record(z.string(), jsonSchema).optional(),
   }) as z.ZodType<ControlDef>,
 );
 
@@ -115,6 +120,9 @@ export const manifestSchema = z
         requiresAlt: z.boolean().optional(),
         heading: z.object({ level: z.number().int().min(1).max(6).optional(), levelFrom: z.string().min(1).optional() }).optional(),
         image: z.object({ srcSetting: z.string().min(1), altSetting: z.string().min(1) }).optional(),
+        imageItems: z
+          .object({ setting: z.string().min(1), srcField: z.string().min(1), altField: z.string().min(1) })
+          .optional(),
         landmark: z.string().min(1).optional(),
         landmarkFrom: z.string().min(1).optional(),
       })
@@ -225,8 +233,43 @@ export function validateManifest(input: unknown): ManifestValidation {
     );
   }
 
+  // Guardrail: `when` conditional visibility (controlWhen.ts). Evaluated only for
+  // top-level schema controls, against sibling settings — so every referenced key
+  // must be a real sibling, operators must be in the closed set, and `when` must
+  // not sit on a nested control (where eval never runs). Loud errors beat a
+  // control that silently never shows.
+  const topKeys = new Set(Object.keys(m.schema));
+  for (const [name, def] of Object.entries(m.schema)) {
+    if (def.when) {
+      for (const ref of whenRefs(def.when)) {
+        if (ref === name) {
+          errors.push(`schema.${name}.when references itself "${ref}"`);
+        } else if (!topKeys.has(ref)) {
+          errors.push(`schema.${name}.when references unknown setting "${ref}"`);
+        }
+      }
+      for (const op of unknownWhenOperators(def.when)) {
+        errors.push(`schema.${name}.when uses unknown operator "${op}"`);
+      }
+    }
+    for (const nested of nestedControls(def)) {
+      if (nested.when) {
+        errors.push(`schema.${name}: when is not supported on nested controls (repeater.fields / responsive.control)`);
+        break;
+      }
+    }
+  }
+
   if (errors.length > 0) return { ok: false, errors };
   return { ok: true, manifest: Object.freeze(m) };
+}
+
+/** Every control nested inside a control (repeater item fields, responsive wrapper). */
+function nestedControls(def: ControlDef): ControlDef[] {
+  const out: ControlDef[] = [];
+  if (def.control) out.push(def.control, ...nestedControls(def.control));
+  if (def.fields) for (const f of Object.values(def.fields)) out.push(f, ...nestedControls(f));
+  return out;
 }
 
 /** Every StyleSpec a manifest carries — `style` plus all recipe fragments. */

@@ -1,0 +1,5 @@
+{
+  "slug": "card",
+  "tagline": "A generic content container — the base for metric, product, and order cards.",
+  "whenToUse": "Use a card to group related content into a scannable unit with optional media, header, body, and footer regions. Make it interactive only when the whole card leads somewhere — the title link stays the accessible action."
+}

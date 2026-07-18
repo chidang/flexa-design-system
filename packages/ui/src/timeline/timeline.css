@@ -1,0 +1,186 @@
+/* FxTimeline — token-only. Ordered-list timeline: a continuous rail behind
+   markers, content to its right. State → marker token per doc 04 §3.5; the state
+   word is spelled in `.fx-timeline-state` (visually hidden), colour is an
+   enhancement (§1.7.7). Row gap `space.5`. */
+.fx-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: var(--fx-space-3);
+  padding-block-end: var(--fx-space-5);
+}
+
+.fx-timeline[data-dense] .fx-timeline-item {
+  padding-block-end: var(--fx-space-3);
+}
+
+.fx-timeline-item:last-child {
+  padding-block-end: 0;
+}
+
+/* Rail column — a vertical line spanning between markers. */
+.fx-timeline-rail {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* The rail spans the grid row (content box); the item's padding-block-end sits
+   below it, so extend past the bottom edge by that padding or the line stops
+   short of the next marker (a dangling stub instead of a continuous rail). */
+.fx-timeline-rail::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 24px;
+  inset-block-end: calc(-1 * var(--fx-space-5));
+  width: 2px;
+  background: var(--fx-color-border);
+}
+
+.fx-timeline[data-dense] .fx-timeline-rail::before {
+  inset-block-end: calc(-1 * var(--fx-space-3));
+}
+
+.fx-timeline-item:last-child .fx-timeline-rail::before {
+  display: none;
+}
+
+.fx-timeline-marker {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-surface);
+  border: 2px solid var(--fx-color-text-subtle);
+}
+
+.fx-timeline-marker-dot {
+  width: var(--fx-space-2);
+  height: var(--fx-space-2);
+  border-radius: var(--fx-radius-full);
+  background: currentColor;
+}
+
+.fx-timeline-marker-icon {
+  color: currentColor;
+}
+
+/* ── state → marker colour ─────────────────────────────────────────────────── */
+.fx-timeline-item[data-state='complete'] .fx-timeline-marker {
+  background: var(--fx-color-success);
+  border-color: var(--fx-color-success);
+  color: var(--fx-color-on-success);
+}
+
+.fx-timeline-item[data-state='current'] .fx-timeline-marker {
+  border-color: var(--fx-color-primary);
+  color: var(--fx-color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--fx-color-primary) 24%, transparent);
+}
+
+.fx-timeline-item[data-state='upcoming'] .fx-timeline-marker {
+  border-color: var(--fx-color-text-subtle);
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-timeline-item[data-state='failed'] .fx-timeline-marker {
+  background: var(--fx-color-danger);
+  border-color: var(--fx-color-danger);
+  color: var(--fx-color-on-danger);
+}
+
+/* ── tone → marker tint (complete items only) ──────────────────────────────────
+   Domain timelines (activity, audit, escrow) carry a per-event `tone`; painting
+   every complete marker solid success shouts one colour down the whole rail
+   (doc 14 R5 calm-surfaces). A toned complete marker renders as a soft tint —
+   tone-soft fill + tone-border-soft ring + tone glyph. `current`/`upcoming`/
+   `failed` keep their state paint: progress semantics outrank the tint. */
+.fx-timeline-item[data-state='complete'][data-tone='neutral'] .fx-timeline-marker {
+  background: var(--fx-color-surface-alt);
+  border-color: var(--fx-color-border);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-timeline-item[data-state='complete'][data-tone='info'] .fx-timeline-marker {
+  background: var(--fx-color-info-soft);
+  border-color: var(--fx-color-info-border-soft);
+  color: var(--fx-color-info);
+}
+
+.fx-timeline-item[data-state='complete'][data-tone='success'] .fx-timeline-marker {
+  background: var(--fx-color-success-soft);
+  border-color: var(--fx-color-success-border-soft);
+  color: var(--fx-color-success);
+}
+
+.fx-timeline-item[data-state='complete'][data-tone='warning'] .fx-timeline-marker {
+  background: var(--fx-color-warning-soft);
+  border-color: var(--fx-color-warning-border-soft);
+  color: var(--fx-color-warning);
+}
+
+.fx-timeline-item[data-state='complete'][data-tone='danger'] .fx-timeline-marker {
+  background: var(--fx-color-danger-soft);
+  border-color: var(--fx-color-danger-border-soft);
+  color: var(--fx-color-danger);
+}
+
+/* ── content ───────────────────────────────────────────────────────────────── */
+.fx-timeline-content {
+  min-width: 0;
+  padding-block-start: 2px;
+}
+
+.fx-timeline-title {
+  margin: 0;
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-medium);
+  line-height: var(--fx-line-height-tight);
+  color: var(--fx-color-text);
+}
+
+/* Visually-hidden state word — conveys state in text, not colour alone. */
+.fx-timeline-state {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  clip-path: inset(50%);
+}
+
+.fx-timeline-description {
+  margin: var(--fx-space-1) 0 0;
+  font-size: var(--fx-text-body-sm-size);
+  line-height: var(--fx-line-height-normal);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-timeline-time {
+  display: block;
+  margin-block-start: var(--fx-space-1);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-timeline-slot {
+  margin-block-start: var(--fx-space-2);
+}
+
+/* Slot-first item (blank title — e.g. Activity Timeline's rich sentence rows):
+   nothing above to space against, so the slot hugs the marker. With the 2px
+   content pad this centres a 20px avatar row on the 24px marker exactly. */
+.fx-timeline-slot:first-child {
+  margin-block-start: 0;
+}

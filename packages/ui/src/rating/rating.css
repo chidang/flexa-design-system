@@ -1,0 +1,117 @@
+/* FxRating — token-only. Filled star `color.warning`, empty `color.text-subtle`
+   (doc 04 §3.5 says border-strong, but at 1.48:1 it fails the non-text 3:1 bar —
+   text-subtle is AA on both schemes; reported deviation). Read-only stacks a
+   clipped full star over the empty one for fractional fills; input mode is a
+   radio group with a visible star per option. Sizes 16 / 20 / 24. */
+.fx-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-rating-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+}
+
+.fx-rating-star {
+  position: relative;
+  display: inline-flex;
+  line-height: 0;
+}
+
+.fx-rating-star[data-size='16'] {
+  width: 16px;
+  height: 16px;
+}
+.fx-rating-star[data-size='20'] {
+  width: 20px;
+  height: 20px;
+}
+.fx-rating-star[data-size='24'] {
+  width: 24px;
+  height: 24px;
+}
+
+/* Base (empty) glyph. */
+.fx-rating-star-empty {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-rating-star-full {
+  color: var(--fx-color-warning);
+}
+
+/* ── read-only fractional overlay ─────────────────────────────────────────── */
+.fx-rating-star-fill {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  height: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+/* The glyph is a stroke-outline icon (`fill="none"`) — solid-fill the painted
+   stars so "filled" reads filled, not a warning-tinted outline. */
+.fx-rating-star-fill .fx-rating-star-full,
+.fx-rating-star[data-filled] .fx-rating-star-full {
+  fill: currentColor;
+}
+
+/* ── input mode ────────────────────────────────────────────────────────────── */
+.fx-rating-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  clip-path: inset(50%);
+}
+
+.fx-rating-star-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  clip-path: inset(50%);
+}
+
+/* Input stars: outline until [data-filled]. Scoped to input mode — read-only
+   stars never carry data-filled, so an unscoped :not([data-filled]) would
+   repaint the fractional overlay subtle and every read-only star reads empty. */
+.fx-rating:not([data-readonly]) .fx-rating-star:not([data-filled]) .fx-rating-star-full {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-rating-star[data-filled] .fx-rating-star-full {
+  color: var(--fx-color-warning);
+}
+
+/* Input stars are interactive — pointer + focus ring on the checked radio. */
+.fx-rating:not([data-readonly]) .fx-rating-star {
+  cursor: pointer;
+}
+
+.fx-rating-input:focus-visible + .fx-rating-star-visual {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+/* ── value + count ─────────────────────────────────────────────────────────── */
+.fx-rating-value {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text);
+}
+
+.fx-rating-count {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+
+a.fx-rating-count {
+  color: var(--fx-color-primary);
+}

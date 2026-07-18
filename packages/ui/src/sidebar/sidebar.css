@@ -1,0 +1,187 @@
+/* FxSidebar — token-only. 240px rail collapsing to 64px icons; the active item
+   pairs a primary-toned label with a surface-alt fill (never colour alone). */
+.fx-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  height: 100%;
+  padding: var(--fx-space-2);
+  background: var(--fx-color-surface);
+  border-inline-end: 1px solid var(--fx-color-border);
+  font-family: var(--fx-font-family-base);
+  transition: width var(--fx-motion-duration-normal) var(--fx-motion-easing-standard);
+}
+
+.fx-sidebar[data-collapsed] {
+  width: 64px;
+}
+
+.fx-sidebar-header {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding-inline: var(--fx-space-2);
+}
+
+.fx-sidebar-nav {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+  padding-block: var(--fx-space-2);
+}
+
+.fx-sidebar-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+
+.fx-sidebar-section-label {
+  margin: 0;
+  padding-inline: var(--fx-space-3);
+  color: var(--fx-color-text-subtle);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--fx-font-tracking-wide);
+}
+
+.fx-sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fx-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  height: 40px;
+  padding-inline: var(--fx-space-3);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text-muted);
+  text-decoration: none;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  transition: background var(--fx-motion-duration-fast) var(--fx-motion-easing-standard),
+    color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-sidebar-item:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+
+.fx-sidebar-item:active {
+  background: var(--fx-color-border);
+}
+
+.fx-sidebar-item[data-active] {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-primary);
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-sidebar-item:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-sidebar-item-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.fx-sidebar-item-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fx-sidebar[data-collapsed] .fx-sidebar-item-label {
+  display: none;
+}
+
+.fx-sidebar-item-badge {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 var(--fx-space-1);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-sidebar[data-collapsed] .fx-sidebar-item-badge {
+  display: none;
+}
+
+.fx-sidebar-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding-block-start: var(--fx-space-2);
+  border-top: 1px solid var(--fx-color-border);
+}
+
+.fx-sidebar-collapse {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-inline-start: auto;
+  border: 0;
+  border-radius: var(--fx-radius-md);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+  transition: background var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-sidebar-collapse:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+
+.fx-sidebar-collapse:active {
+  background: var(--fx-color-border);
+}
+
+.fx-sidebar-collapse:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-sidebar-collapse-icon {
+  transform: rotate(180deg);
+  transition: transform var(--fx-motion-duration-normal) var(--fx-motion-easing-standard);
+}
+
+.fx-sidebar[data-collapsed] .fx-sidebar-collapse {
+  margin-inline: auto;
+}
+
+.fx-sidebar[data-collapsed] .fx-sidebar-collapse-icon {
+  transform: rotate(0deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-sidebar,
+  .fx-sidebar-collapse-icon {
+    transition: none;
+  }
+}

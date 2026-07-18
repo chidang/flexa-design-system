@@ -1,0 +1,207 @@
+/* FxBulkActionsBar — token-only. Slides over the toolbar when selection > 0.
+   Primary tint bg (§1.9) + elevation; destructive actions = danger treatment. */
+.fx-bulk-actions-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-3);
+  width: 100%;
+  min-height: 56px;
+  padding: 0 var(--fx-space-4);
+  z-index: var(--fx-z-sticky);
+  background: var(--fx-color-primary-soft);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  box-shadow: var(--fx-shadow-md);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  animation: fx-bulk-actions-in var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+@keyframes fx-bulk-actions-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-bulk-actions-bar {
+    animation: none;
+  }
+}
+
+.fx-bulk-actions-bar-count {
+  font-weight: var(--fx-font-weight-semibold);
+  white-space: nowrap;
+}
+
+.fx-bulk-actions-bar-select-all {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-primary);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.fx-bulk-actions-bar-select-all:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+.fx-bulk-actions-bar-spacer {
+  flex: 1 1 auto;
+}
+
+.fx-bulk-actions-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+
+.fx-bulk-actions-bar-action,
+.fx-bulk-actions-bar-more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  height: 32px;
+  padding: 0 var(--fx-space-3);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  font: inherit;
+  cursor: pointer;
+  transition: background var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-bulk-actions-bar-more {
+  width: 32px;
+  padding: 0;
+  justify-content: center;
+}
+
+.fx-bulk-actions-bar-action:hover:not(:disabled),
+.fx-bulk-actions-bar-more:hover:not(:disabled) {
+  background: var(--fx-color-surface-alt);
+  border-color: var(--fx-color-border-strong);
+}
+
+.fx-bulk-actions-bar-action:active:not(:disabled),
+.fx-bulk-actions-bar-more:active:not(:disabled) {
+  background: var(--fx-color-border);
+}
+
+.fx-bulk-actions-bar-action:focus-visible,
+.fx-bulk-actions-bar-more:focus-visible,
+.fx-bulk-actions-bar-clear:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-bulk-actions-bar-action:disabled,
+.fx-bulk-actions-bar-more:disabled,
+.fx-bulk-actions-bar-clear:disabled {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-bulk-actions-bar-action[data-tone='danger'] {
+  color: var(--fx-color-danger);
+  border-color: var(--fx-color-danger-border-soft);
+}
+.fx-bulk-actions-bar-action[data-tone='danger']:hover:not(:disabled) {
+  background: var(--fx-color-danger-soft);
+}
+/* Pressed deepens the soft tint one notch (12% → 16%). */
+.fx-bulk-actions-bar-action[data-tone='danger']:active:not(:disabled) {
+  background: color-mix(in srgb, var(--fx-color-danger) 16%, var(--fx-color-surface));
+}
+
+.fx-bulk-actions-bar-action[aria-busy='true'] {
+  opacity: 0.7;
+}
+
+.fx-bulk-actions-bar-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: var(--fx-radius-md);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-bulk-actions-bar-clear:hover:not(:disabled) {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-bulk-actions-bar-clear:active:not(:disabled) {
+  background: var(--fx-color-border);
+}
+
+/* Overflow menu (portalled). */
+.fx-bulk-actions-bar-menu {
+  position: absolute;
+  z-index: var(--fx-z-popover);
+  min-width: 240px;
+  margin: 0;
+  padding: var(--fx-space-1);
+  list-style: none;
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  box-shadow: var(--fx-shadow-md);
+}
+
+.fx-bulk-actions-bar-menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  width: 100%;
+  padding: var(--fx-space-2) var(--fx-space-3);
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.fx-bulk-actions-bar-menu-item:hover:not(:disabled) {
+  background: var(--fx-color-surface-alt);
+}
+.fx-bulk-actions-bar-menu-item:active:not(:disabled) {
+  background: var(--fx-color-border);
+}
+.fx-bulk-actions-bar-menu-item[data-tone='danger'] {
+  color: var(--fx-color-danger);
+}
+.fx-bulk-actions-bar-menu-item:disabled {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+/* Tap target — see checkbox.css. */
+@media (pointer: coarse) {
+  .fx-bulk-actions-bar-clear {
+    position: relative;
+  }
+  .fx-bulk-actions-bar-clear::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: max(100%, var(--fx-size-tap));
+    height: max(100%, var(--fx-size-tap));
+  }
+}

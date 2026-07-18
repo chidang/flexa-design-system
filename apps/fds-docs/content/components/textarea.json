@@ -1,0 +1,5 @@
+{
+  "slug": "textarea",
+  "tagline": "Multi-line free text — descriptions, messages, and notes.",
+  "whenToUse": "Use when the value spans more than one line or benefits from visible drafting space. For formatted content use the Rich Text or Markdown editor; for short values use Input."
+}

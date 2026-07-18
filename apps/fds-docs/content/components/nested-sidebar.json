@@ -1,0 +1,5 @@
+{
+  "slug": "nested-sidebar",
+  "tagline": "A second navigation level for sections with sub-destinations.",
+  "whenToUse": "Use a nested sidebar when a section owns 3–8 stable sub-destinations (Settings categories, report subtypes). Two levels is a hard maximum — promote a lone child, and move dynamic sets into an in-page list or tree."
+}

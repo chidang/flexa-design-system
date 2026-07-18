@@ -1,0 +1,5 @@
+{
+  "slug": "field-group",
+  "tagline": "The label, help, and error shell that wraps every single control.",
+  "whenToUse": "Wrap any single control (or tight cluster) to get the label, help text, required mark, and error wiring. Use a bordered variant for weighty optional sections; use layout rhythm instead when the grouping is purely visual."
+}

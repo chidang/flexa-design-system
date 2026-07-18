@@ -1,0 +1,60 @@
+/* FxProgressSummary — token-only. A Card of labelled progress rows: each row is a
+   head (label + done/total value) above an FxProgress bar. Linked rows get a hover
+   surface. Row gap space.4; label text.body; value text.body-sm muted. */
+.fx-progress-summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+}
+
+.fx-progress-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+}
+
+a.fx-progress-summary-item {
+  text-decoration: none;
+  color: inherit;
+  padding: var(--fx-space-2);
+  margin: calc(-1 * var(--fx-space-2));
+  border-radius: var(--fx-radius-md);
+  transition: background var(--fx-motion-duration-fast) ease;
+}
+
+a.fx-progress-summary-item:hover {
+  background: var(--fx-color-surface-alt);
+}
+
+a.fx-progress-summary-item:focus-visible {
+  outline: 2px solid var(--fx-color-primary);
+  outline-offset: 2px;
+}
+
+.fx-progress-summary-item.is-overall {
+  padding-block-start: var(--fx-space-4);
+  border-block-start: 1px solid var(--fx-color-border);
+}
+
+.fx-progress-summary-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--fx-space-3);
+}
+
+.fx-progress-summary-label {
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-text-body-weight);
+  line-height: var(--fx-text-body-line-height);
+  color: var(--fx-color-text);
+}
+
+.fx-progress-summary-value {
+  flex: none;
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  font-variant-numeric: tabular-nums;
+  color: var(--fx-color-text-muted);
+}

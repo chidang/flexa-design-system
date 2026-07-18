@@ -1,0 +1,113 @@
+/* FxOrderCard — token-only. Sits on FxCard chrome; styles only the order-
+   specific regions (header line, thumbnail row, counterparty, footer). */
+.fx-order-card {
+  font-family: var(--fx-font-family-base);
+}
+
+/* Header: order number link + placed date, status Badge to the right. */
+.fx-order-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--fx-space-3);
+}
+
+.fx-order-card-headline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  min-width: 0;
+}
+
+.fx-order-card-number {
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+  text-decoration: none;
+}
+.fx-order-card-number:hover {
+  text-decoration: underline;
+}
+.fx-order-card-number:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-order-card-date {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+
+/* Thumbnail row + overflow chip. */
+.fx-order-card-thumbs {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  margin-block-start: var(--fx-space-3);
+}
+
+.fx-order-card-thumb {
+  flex: none;
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--fx-radius-md);
+  overflow: hidden;
+  background: var(--fx-color-surface-alt);
+}
+.fx-order-card-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.fx-order-card-thumb-fallback {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-order-card-thumb-more {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding-inline: var(--fx-space-2);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+}
+
+/* Counterparty (buyer sees seller, seller sees buyer). */
+.fx-order-card-party {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  margin-block-start: var(--fx-space-3);
+}
+.fx-order-card-party-name {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text);
+  text-decoration: none;
+}
+a.fx-order-card-party-name:hover {
+  text-decoration: underline;
+}
+
+/* Footer: total + status-driven primary action. */
+.fx-order-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-3);
+  width: 100%;
+}
+.fx-order-card-total {
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-semibold);
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "alert",
+  "tagline": "A persistent, region-scoped message bound to the content it sits within.",
+  "whenToUse": "Use an alert for a message that concerns the content above or within it and must stay readable while the user works — a form error summary or a contextual notice. Not for transient action feedback (toast) or app-wide conditions (banner)."
+}

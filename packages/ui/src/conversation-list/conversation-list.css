@@ -1,0 +1,167 @@
+/* FxConversationList — token-only. Search header over an FxList of rows. */
+.fx-conversation-list {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface);
+  font-family: var(--fx-font-family-base);
+  overflow: hidden;
+}
+
+.fx-conversation-list-header {
+  padding: var(--fx-space-3);
+  border-block-end: 1px solid var(--fx-color-border);
+}
+
+.fx-conversation-list-items {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.fx-conversation-list-empty {
+  padding: var(--fx-space-6);
+  text-align: center;
+  color: var(--fx-color-text-muted);
+}
+
+/* Row: a primary select button + optional sibling archive button. */
+.fx-conversation-list-row {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  padding-inline-end: var(--fx-space-2);
+}
+.fx-conversation-list-select {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-3);
+  border: 0;
+  border-radius: var(--fx-radius-md);
+  background: transparent;
+  font-family: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.fx-conversation-list-select:hover {
+  background: var(--fx-color-surface-alt);
+}
+.fx-conversation-list-select:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+.fx-conversation-list-select[aria-current] {
+  background: var(--fx-color-surface-alt);
+}
+.fx-conversation-list-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+.fx-conversation-list-badge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Row headline: name + relative time. */
+.fx-conversation-list-headline {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--fx-space-2);
+  min-width: 0;
+}
+.fx-conversation-list-name {
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-size);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fx-conversation-list-time {
+  flex: none;
+  color: var(--fx-color-text-subtle);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+/* Snippet: optional context tag + 1-line clamped last-message body. */
+.fx-conversation-list-snippet {
+  display: flex;
+  align-items: baseline;
+  gap: var(--fx-space-1);
+  min-width: 0;
+}
+.fx-conversation-list-context {
+  flex: none;
+  color: var(--fx-color-primary);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+}
+.fx-conversation-list-body {
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Unread rows: heavier name weight + brighter body (text.label). */
+.fx-conversation-list-select[aria-current] .fx-conversation-list-name {
+  font-weight: var(--fx-font-weight-semibold);
+}
+.fx-conversation-list-select:has(.fx-conversation-list-avatar[data-unread]) .fx-conversation-list-name {
+  color: var(--fx-color-text);
+  font-weight: var(--fx-font-weight-semibold);
+}
+.fx-conversation-list-select:has(.fx-conversation-list-avatar[data-unread]) .fx-conversation-list-body {
+  color: var(--fx-color-text);
+}
+
+/* Avatar + unread presence dot. */
+.fx-conversation-list-avatar {
+  position: relative;
+  display: inline-flex;
+}
+.fx-conversation-list-dot {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  width: 3px;
+  height: 3px;
+  padding: 3px;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-info);
+  box-shadow: 0 0 0 2px var(--fx-color-surface);
+}
+
+/* Trailing archive control (sibling of the select button). */
+.fx-conversation-list-archive {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: var(--fx-radius-md);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-conversation-list-archive:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-conversation-list-archive:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}

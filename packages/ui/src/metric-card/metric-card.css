@@ -1,0 +1,87 @@
+/* FxMetricCard — token-only. Single-KPI tile over FxCard; the value/label/delta
+   phrase is FxStatisticBlock, so its tokens (heading value, muted label, tone
+   delta) apply here. Trend colour is an enhancement — the arrow glyph + the
+   visually-hidden sentence carry the direction (§1.7.7). */
+.fx-metric-card .fx-card-body {
+  display: block;
+}
+
+.fx-metric-card-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--fx-space-2);
+}
+
+/* Optional ⓘ definition trigger — sits alongside the stat, its own control. */
+.fx-metric-card-info {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  color: var(--fx-color-text-muted);
+  background: transparent;
+  border: none;
+  cursor: help;
+}
+.fx-metric-card-info:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+.fx-metric-card-unit {
+  margin-inline-start: var(--fx-space-1);
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-regular);
+  color: var(--fx-color-text-muted);
+}
+
+/* Directional trend glyph — colour tracks the delta tone via data-trend. */
+.fx-metric-card-delta-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-start: auto;
+}
+.fx-metric-card-delta-icon[data-trend='up'] {
+  color: var(--fx-color-success);
+}
+.fx-metric-card-delta-icon[data-trend='down'] {
+  color: var(--fx-color-danger);
+}
+.fx-metric-card-delta-icon[data-trend='flat'] {
+  color: var(--fx-color-text-muted);
+}
+
+/* Decorative sparkline (aria-hidden) — primary stroke. */
+.fx-metric-card-sparkline {
+  flex-basis: 100%;
+  margin-block-start: var(--fx-space-2);
+  color: var(--fx-color-primary);
+}
+.fx-metric-card-sparkline polyline {
+  stroke: var(--fx-color-primary);
+}
+
+/* Loading: stable-dimension skeleton bars. */
+.fx-metric-card-loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+}
+.fx-metric-card-skeleton {
+  display: block;
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-color-surface-alt);
+}
+.fx-metric-card-skeleton-label {
+  inline-size: 40%;
+  block-size: var(--fx-text-body-sm-size);
+}
+.fx-metric-card-skeleton-value {
+  inline-size: 60%;
+  block-size: var(--fx-text-heading-md-size);
+}
+.fx-metric-card-skeleton-delta {
+  inline-size: 30%;
+  block-size: var(--fx-text-body-sm-size);
+}

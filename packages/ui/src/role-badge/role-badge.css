@@ -1,0 +1,7 @@
+/* FxRoleBadge — token-only. A thin wrapper around FxBadge that carries the
+   role data-attribute; all tone/fill styling is inherited from FxBadge. The
+   wrapper is inline so it lays out like the badge it contains. */
+.fx-role-badge {
+  display: inline-flex;
+  vertical-align: middle;
+}

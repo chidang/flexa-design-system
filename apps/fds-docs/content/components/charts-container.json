@@ -1,0 +1,5 @@
+{
+  "slug": "charts-container",
+  "tagline": "Standardized chrome around a host chart — legend, loading, empty, a11y table.",
+  "whenToUse": "Charts Container standardizes everything around a chart except the chart itself — title, legend, actions, loading skeleton, empty state, and the accessibility escape hatch (an image-role summary plus an optional data-table toggle). The kit ships no chart engine on purpose: bring your own renderer into the canvas slot. Use it wherever a visualization needs consistent framing and an accessible fallback."
+}

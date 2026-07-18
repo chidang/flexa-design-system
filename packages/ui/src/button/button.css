@@ -1,0 +1,143 @@
+/* FxButton — token-only. Scheme/dark mode work by construction: every colour is
+   a semantic `var(--fx-*)`, so the component contains zero scheme logic.
+   Radius and horizontal padding bind the FDS `c.button` component tier; the
+   vertical rhythm stays height-driven (canonical 32/40/48 control heights), so
+   `c.button.padding-y` is deliberately unbound. Pressed = hover one notch
+   stronger: solid fills go to their `*-active` token, surface tints deepen to
+   the border token (R3, ui-kit doc 14 F-I1). */
+.fx-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fx-space-2);
+  height: 40px;
+  padding: 0 var(--fx-c-button-padding-x);
+  border: 1px solid transparent;
+  border-radius: var(--fx-c-button-radius);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--fx-motion-duration-fast) var(--fx-motion-easing-standard), border-color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard), color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-button[data-size='sm'] {
+  height: 32px;
+  padding: 0 var(--fx-space-3);
+}
+
+.fx-button[data-size='lg'] {
+  height: 48px;
+  padding: 0 var(--fx-space-5);
+}
+
+.fx-button[data-variant='primary'] {
+  background: var(--fx-color-primary);
+  color: var(--fx-color-on-primary);
+}
+.fx-button[data-variant='primary']:hover:not(:disabled) {
+  background: var(--fx-color-primary-hover);
+}
+.fx-button[data-variant='primary']:active:not(:disabled) {
+  background: var(--fx-color-primary-active);
+}
+
+.fx-button[data-variant='secondary'] {
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  border-color: var(--fx-color-border);
+}
+.fx-button[data-variant='secondary']:hover:not(:disabled) {
+  background: var(--fx-color-surface-alt);
+}
+.fx-button[data-variant='secondary']:active:not(:disabled) {
+  background: var(--fx-color-border);
+}
+
+.fx-button[data-variant='ghost'] {
+  background: transparent;
+  color: var(--fx-color-text);
+}
+.fx-button[data-variant='ghost']:hover:not(:disabled) {
+  background: var(--fx-color-surface-alt);
+}
+.fx-button[data-variant='ghost']:active:not(:disabled) {
+  background: var(--fx-color-border);
+}
+
+.fx-button[data-variant='danger'] {
+  background: var(--fx-color-danger);
+  color: var(--fx-color-on-danger);
+}
+.fx-button[data-variant='danger']:hover:not(:disabled) {
+  background: var(--fx-color-danger-hover);
+}
+.fx-button[data-variant='danger']:active:not(:disabled) {
+  background: var(--fx-color-danger-active);
+}
+
+.fx-button:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-button:disabled {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-button[data-loading] {
+  cursor: progress;
+}
+
+/* Loading: a border spinner on the icon ladder, drawn in currentColor so it
+   works on every variant. reduced-motion drops the spin (mirrors FxSwitch). */
+.fx-button-spinner {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid color-mix(in srgb, currentColor 25%, transparent);
+  border-top-color: currentColor;
+  border-radius: var(--fx-radius-full);
+  animation: fx-button-spin calc(var(--fx-motion-duration-loop) / 2) linear infinite;
+}
+
+.fx-button[data-size='lg'] .fx-button-spinner {
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes fx-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-button-spinner {
+    animation: none;
+  }
+}
+
+/* Polite loading announcement — visually hidden. */
+.fx-button-announce {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Tap target — see checkbox.css. Buttons can simply grow on touch. */
+@media (pointer: coarse) {
+  .fx-button {
+    min-width: var(--fx-size-tap);
+    min-height: var(--fx-size-tap);
+  }
+}

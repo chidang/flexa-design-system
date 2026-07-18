@@ -1,0 +1,266 @@
+/* FxTable — token-only. Whitespace over borders: row dividers only — the
+   perimeter border slot stays transparent so layout never shifts; sticky
+   header; selected row = primary tint (§1.9). Scheme/dark work by construction. */
+.fx-table-container {
+  position: relative;
+  width: 100%;
+  max-height: 640px;
+  overflow: auto;
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface);
+}
+
+.fx-table-container:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  color: var(--fx-color-text);
+}
+
+/* Visually-hidden caption / sr text. */
+.fx-table-caption,
+.fx-table-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Header. */
+.fx-table-head {
+  background: var(--fx-color-surface);
+}
+
+.fx-table-head[data-sticky] {
+  position: sticky;
+  top: 0;
+  z-index: var(--fx-z-sticky);
+}
+
+.fx-table-head[data-sticky]::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--fx-color-border);
+  box-shadow: var(--fx-shadow-sm);
+}
+
+.fx-table-th {
+  padding: var(--fx-space-3) var(--fx-space-4);
+  text-align: start;
+  vertical-align: middle;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text-muted);
+  border-bottom: 1px solid var(--fx-color-border);
+  white-space: nowrap;
+}
+
+.fx-table-th[data-align='end'] {
+  text-align: end;
+}
+.fx-table-th[data-align='center'] {
+  text-align: center;
+}
+
+.fx-table-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.fx-table-sort-btn:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+.fx-table-sort-btn:hover {
+  color: var(--fx-color-text);
+}
+
+/* Sort indicator: a rotating chevron drawn from borders (token colours). */
+.fx-table-sort-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: transform var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-table-sort-icon::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.fx-table-sort-btn[data-dir='ascending'] .fx-table-sort-icon,
+.fx-table-sort-btn[data-dir='descending'] .fx-table-sort-icon {
+  opacity: 1;
+  color: var(--fx-color-primary);
+}
+
+.fx-table-sort-btn[data-dir='ascending'] .fx-table-sort-icon {
+  transform: rotate(180deg);
+}
+
+/* Body rows. */
+.fx-table-td {
+  padding: var(--fx-space-3) var(--fx-space-4);
+  vertical-align: middle;
+  border-bottom: 1px solid var(--fx-color-border);
+}
+
+.fx-table-td[data-align='end'] {
+  text-align: end;
+}
+.fx-table-td[data-align='center'] {
+  text-align: center;
+}
+
+.fx-table-select {
+  width: 44px;
+  padding: 0 var(--fx-space-3);
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--fx-color-border);
+}
+
+.fx-table-row:hover {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-table-row[data-clickable] {
+  cursor: pointer;
+}
+
+.fx-table-row[data-selected] {
+  background: var(--fx-color-primary-soft);
+}
+
+/* Hover on a selected row deepens the soft tint one notch (12% → 16%). */
+.fx-table-row[data-selected]:hover {
+  background: color-mix(in srgb, var(--fx-color-primary) 16%, var(--fx-color-surface));
+}
+
+/* Compact density. */
+.fx-table-container[data-density='compact'] .fx-table-th,
+.fx-table-container[data-density='compact'] .fx-table-td {
+  padding: var(--fx-space-2) var(--fx-space-3);
+}
+
+/* Sticky columns. */
+.fx-table-th[data-sticky='start'],
+.fx-table-td[data-sticky='start'] {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--fx-color-surface);
+}
+.fx-table-th[data-sticky='end'],
+.fx-table-td[data-sticky='end'] {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  background: var(--fx-color-surface);
+}
+
+/* Footer. */
+.fx-table-foot td {
+  padding: var(--fx-space-3) var(--fx-space-4);
+  border-top: 1px solid var(--fx-color-border);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+/* Empty state. */
+.fx-table-empty {
+  padding: var(--fx-space-4);
+  display: flex;
+  justify-content: center;
+}
+
+/* Loading overlay (subsequent loads). */
+.fx-table-overlay {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--fx-color-surface) 60%, transparent);
+  pointer-events: none;
+}
+
+.fx-table-shimmer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.fx-table-shimmer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--fx-color-surface-alt) 70%, transparent),
+    transparent
+  );
+  animation: fx-table-shimmer var(--fx-motion-duration-loop) linear infinite;
+}
+
+@keyframes fx-table-shimmer {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(400%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-table-shimmer::before {
+    animation: none;
+  }
+}
+
+.fx-table-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.fx-table-pagination {
+  position: sticky;
+  bottom: 0;
+  padding: var(--fx-space-3) var(--fx-space-4);
+  background: var(--fx-color-surface);
+  border-top: 1px solid var(--fx-color-border);
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "wizard-layout",
+  "tagline": "A distraction-free shell for multi-step flows with a Save & exit affordance.",
+  "whenToUse": "Wizard Layout is the focused, chrome-free shell that hosts a Form Wizard: a minimal header with a logo and a Save & exit button, and a centered column. Use it for onboarding and create-mode editors where the sidebar and top nav would be distractions. The host confirms unsaved changes on exit."
+}

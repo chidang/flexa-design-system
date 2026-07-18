@@ -1,0 +1,5 @@
+{
+  "slug": "shipping-timeline",
+  "tagline": "A shipment's journey — carrier/tracking header above an event timeline.",
+  "whenToUse": "Shipping Timeline traces a parcel's progress: a carrier/tracking header (with a copy-tracking-number button and an external Track link) sits above a vertical Timeline of scan events, and a known ETA projects a trailing estimated item. Reach for it on an order or fulfilment detail page to show buyers and sellers exactly where a shipment is. Use Escrow Timeline for the funds-held flow, or the base Timeline directly when you have a generic sequence of events without carrier metadata."
+}

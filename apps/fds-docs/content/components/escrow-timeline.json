@@ -1,0 +1,5 @@
+{
+  "slug": "escrow-timeline",
+  "tagline": "Held-funds escrow flow — one item per stage with perspective-scoped actions.",
+  "whenToUse": "Escrow Timeline shows the state of funds held in escrow: a held-amount header with a release-conditions note above a Timeline with one item per stage, where the current stage expands into the actions the viewer's perspective may take (buyer approves or disputes, seller reminds, admin releases or refunds). Reach for it on marketplace order detail where money is held between delivery and release. Use Shipping Timeline for the physical delivery journey, and route destructive actions (dispute, refund) through a Confirmation Dialog rather than firing them directly."
+}

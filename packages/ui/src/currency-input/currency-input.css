@@ -1,0 +1,86 @@
+/* FxCurrencyInput — token-only. Same wrapper contract as FxInput/FxNumberInput
+   with a leading currency-symbol affix. Digits are tabular for alignment. */
+.fx-currency-input {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--fx-space-3);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  transition: border-color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard), box-shadow var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-currency-input[data-size='sm'] {
+  height: 32px;
+  padding: 0 var(--fx-space-2);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-currency-input[data-size='lg'] {
+  height: 48px;
+  padding: 0 var(--fx-space-4);
+}
+
+.fx-currency-input:hover:not([data-disabled]):not([data-readonly]) {
+  border-color: var(--fx-color-border-strong);
+}
+
+.fx-currency-input[data-focused] {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-currency-input[data-invalid] {
+  border-color: var(--fx-color-danger);
+}
+
+.fx-currency-input[data-disabled] {
+  background: var(--fx-color-surface-alt);
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-currency-input[data-readonly] {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-currency-input-affix {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+  white-space: nowrap;
+}
+
+.fx-currency-input-control {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.fx-currency-input-control:focus {
+  outline: none;
+}
+
+.fx-currency-input-control::placeholder {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-currency-input-control:disabled {
+  color: var(--fx-color-text-subtle);
+  cursor: not-allowed;
+}

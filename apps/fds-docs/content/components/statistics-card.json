@@ -1,0 +1,5 @@
+{
+  "slug": "statistics-card",
+  "tagline": "Multi-metric analytical block — a row of Metric Cards + optional chart.",
+  "whenToUse": "Statistics Card is the multi-metric analytical block: a titled Card holding one to four Metric Cards, an optional chart, a breakdown list, and a range control. Reach for it when several metrics belong together under one heading and time range; use a single Metric Card when there is only one KPI, or Charts Container when the visualization is the primary content."
+}

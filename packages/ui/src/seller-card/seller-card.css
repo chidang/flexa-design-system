@@ -1,0 +1,94 @@
+/* FxSellerCard — token-only. A seller trust panel inside FxCard chrome: an
+   avatar + name link + verification badge header, a stat row (rating · sales ·
+   response time) built from FxStatisticBlocks, a member-since line, and an
+   actions slot. The compact variant is an inline byline (no Card chrome). */
+.fx-seller-card .fx-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4);
+}
+
+.fx-seller-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-3);
+}
+
+.fx-seller-card-identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  min-inline-size: 0;
+}
+
+.fx-seller-card-name-row,
+.fx-seller-card-byline-name {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  flex-wrap: wrap;
+}
+
+.fx-seller-card-name {
+  font-family: var(--fx-font-family-heading);
+  font-size: var(--fx-text-heading-sm-size);
+  font-weight: var(--fx-text-heading-sm-weight);
+  line-height: var(--fx-text-heading-sm-line-height);
+  color: var(--fx-color-text);
+  text-decoration: none;
+}
+.fx-seller-card-name:hover {
+  text-decoration: underline;
+}
+.fx-seller-card-name:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-seller-card-badge {
+  flex: none;
+}
+
+.fx-seller-card-member {
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-text-body-sm-weight);
+  line-height: var(--fx-text-body-sm-line-height);
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-seller-card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-5);
+}
+
+.fx-seller-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+
+/* Compact byline (Listing Detail sidebar) — no Card chrome. */
+.fx-seller-card.is-compact {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-3);
+}
+
+.fx-seller-card.is-compact .fx-seller-card-byline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  min-inline-size: 0;
+  flex: 1 1 auto;
+}
+
+.fx-seller-card.is-compact .fx-seller-card-name {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-text-label-weight);
+  line-height: var(--fx-text-label-line-height);
+}
+
+.fx-seller-card.is-compact .fx-seller-card-actions {
+  margin-inline-start: auto;
+}

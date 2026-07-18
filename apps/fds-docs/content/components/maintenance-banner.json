@@ -1,0 +1,5 @@
+{
+  "slug": "maintenance-banner",
+  "tagline": "Ambient scheduled-maintenance notice — announced politely, not as an alert.",
+  "whenToUse": "Maintenance Banner is the Warning Banner's calmer sibling: a full-width sticky bar that tells everyone a maintenance window is coming or in progress. Its tone is info for an upcoming window and warning while the window is active; either way the root carries role=\"status\" so screen readers announce it once, politely, rather than interrupting like an alert. Pass scheduledFor as an ISO timestamp and it is rendered locale-formatted on its own muted line. Unlike the Warning Banner it is not dismissible while the active window holds — the notice must stay put. The title defaults to \"Scheduled maintenance\" and, like every banner here, meaning is carried by the icon and text, never colour alone."
+}

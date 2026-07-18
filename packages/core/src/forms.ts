@@ -14,7 +14,14 @@ export const FORM_TYPE = 'flexa/form';
 /** Tên hidden field honeypot trong template form (08 §3.4). */
 export const FORM_HONEYPOT_NAME = '_fx_hp';
 
-export type FormFieldKind = 'text' | 'email' | 'textarea' | 'select' | 'checkbox' | 'radio';
+export type FormFieldKind =
+  | 'text'
+  | 'email'
+  | 'textarea'
+  | 'select'
+  | 'checkbox'
+  | 'radio'
+  | 'file';
 
 /**
  * Bảng ĐÓNG `node.type → validation kind` — pack test khóa hai chiều với
@@ -32,6 +39,14 @@ export const FORM_FIELD_TYPES: Record<string, FormFieldKind> = {
   'flexa/form-date': 'text',
   'flexa/form-time': 'text',
   'flexa/form-number': 'text',
+  // Contact inputs (E12): tel/url validate as generic text server-side; the HTML
+  // input type is client UX only (keyboard hint + native format check).
+  'flexa/form-tel': 'text',
+  'flexa/form-url': 'text',
+  // File upload: core only registers the field + a required-on-presence check
+  // (the adapter injects the uploaded filename as the marker). MIME/size are
+  // validated on the actual bytes by the adapter — pure core never reads files.
+  'flexa/form-file': 'file',
 };
 
 export interface FormFieldSpec {
@@ -42,6 +57,10 @@ export interface FormFieldSpec {
   minLength?: number;
   maxLength?: number;
   options?: string[];
+  /** File fields only: native picker filter (comma list), re-checked adapter-side. */
+  accept?: string;
+  /** File fields only: max size in MB (0 = no limit). Enforced by adapters, not core. */
+  maxSize?: number;
 }
 
 export interface FormSpec {
@@ -52,7 +71,17 @@ export interface FormSpec {
   fields: FormFieldSpec[];
 }
 
-export type FormErrorCode = 'required' | 'email' | 'minLength' | 'maxLength' | 'option' | 'spam';
+export type FormErrorCode =
+  | 'required'
+  | 'email'
+  | 'minLength'
+  | 'maxLength'
+  | 'option'
+  | 'spam'
+  // Emitted by adapters (byte-level file checks), never by pure `validateSubmission`
+  // — part of the shared error union so the Next adapter stays type-safe.
+  | 'file-type'
+  | 'file-size';
 
 export interface FormValidationResult {
   ok: boolean;
@@ -73,6 +102,11 @@ function bool(v: Json | undefined, fallback: boolean): boolean {
 /** Length setting: chỉ nhận số nguyên DƯƠNG — 0/thiếu nghĩa là "không giới hạn". */
 function lengthOf(v: Json | undefined): number | undefined {
   return typeof v === 'number' && Number.isInteger(v) && v > 0 ? v : undefined;
+}
+
+/** Non-negative integer (file maxSize MB); anything else → 0 (no limit). */
+function nonNegInt(v: Json | undefined): number {
+  return typeof v === 'number' && Number.isInteger(v) && v >= 0 ? v : 0;
 }
 
 /** Repeater `{label, value}` → danh sách value (entry không phải object bị bỏ). */
@@ -128,6 +162,10 @@ export function collectFormFields(tree: FlexaNode, formNodeId: string): FormSpec
         if (maxLength !== undefined) field.maxLength = maxLength;
         if (kind === 'select' || kind === 'radio') {
           field.options = optionValues(node.settings['options']);
+        }
+        if (kind === 'file') {
+          field.accept = str(node.settings['accept'], '');
+          field.maxSize = nonNegInt(node.settings['maxSize']);
         }
         fields.push(field);
       }

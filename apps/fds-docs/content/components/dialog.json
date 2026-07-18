@@ -1,0 +1,5 @@
+{
+  "slug": "dialog",
+  "tagline": "The modal surface — trapped focus, a scrim, and one open at a time.",
+  "whenToUse": "Use a dialog for focused, self-contained tasks that must interrupt the page — a short form, a review step, a modal editor. Only one dialog is open at a time; stacking beyond confirmation-over-modal is a contract violation."
+}

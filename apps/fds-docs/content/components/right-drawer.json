@@ -1,0 +1,5 @@
+{
+  "slug": "right-drawer",
+  "tagline": "A slide-in panel for detail or edit context without leaving the page.",
+  "whenToUse": "Use a drawer for detail views and edit forms that keep the list behind them for context. Modal mode traps focus like a dialog; non-modal mode keeps the page interactive as a complementary panel (filters, inspectors)."
+}

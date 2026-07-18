@@ -1,0 +1,5 @@
+{
+  "slug": "badge",
+  "tagline": "A small status descriptor — colour paired with a label, dot, or icon.",
+  "whenToUse": "Use a badge to label a record's status inline (Active, Refunded, 3 unread). Always pair the tone colour with text or an icon; for a filter link use a Tag, and for a dismissible input token use a Chip."
+}

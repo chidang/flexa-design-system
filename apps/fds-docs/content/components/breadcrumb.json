@@ -1,0 +1,5 @@
+{
+  "slug": "breadcrumb",
+  "tagline": "A hierarchy trail from section root to the current page.",
+  "whenToUse": "Use a breadcrumb on screens two or more levels deep to show the path and allow one-click ascent. It mirrors the IA and URL — not browsing history — and hides on mobile in favour of a back link."
+}

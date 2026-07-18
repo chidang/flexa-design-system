@@ -1,0 +1,116 @@
+/* FxPromptInput — token-only. Composes FxTextarea + attach/stop icon buttons +
+   send FxButton. AI accent = info family. Enter submits, Shift+Enter newline;
+   the hint row states that law. Examples fill the empty input. */
+.fx-prompt-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-prompt-input-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+
+.fx-prompt-input-row {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-2);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface);
+}
+.fx-prompt-input[data-status='generating'] .fx-prompt-input-row {
+  border-color: var(--fx-color-info);
+}
+
+.fx-prompt-input-field {
+  flex: 1;
+  min-width: 0;
+}
+.fx-prompt-input-field .fx-textarea {
+  border: 0;
+}
+
+.fx-prompt-input-attach,
+.fx-prompt-input-stop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  padding: 0;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-prompt-input-attach:hover:not(:disabled),
+.fx-prompt-input-stop:hover:not(:disabled) {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-prompt-input-attach:focus-visible,
+.fx-prompt-input-stop:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+.fx-prompt-input-attach:disabled,
+.fx-prompt-input-stop:disabled {
+  cursor: not-allowed;
+  opacity: var(--fx-opacity-disabled);
+}
+.fx-prompt-input-stop {
+  color: var(--fx-color-danger);
+  border-color: var(--fx-color-danger);
+}
+
+.fx-prompt-input-row > .fx-button {
+  flex: none;
+}
+
+.fx-prompt-input-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-2);
+  padding-inline: var(--fx-space-1);
+}
+.fx-prompt-input-hint {
+  font-size: var(--fx-text-caption-size);
+  color: var(--fx-color-text-subtle);
+}
+.fx-prompt-input-reason {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-danger);
+}
+.fx-prompt-input-counter {
+  font-size: var(--fx-text-caption-size);
+  color: var(--fx-color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* bar variant: single compact line, tighter framing. */
+.fx-prompt-input[data-variant='bar'] .fx-prompt-input-row {
+  border-radius: var(--fx-radius-full);
+  padding: var(--fx-space-1) var(--fx-space-2);
+}
+
+/* hero variant: larger, centred, capped width. */
+.fx-prompt-input[data-variant='hero'] {
+  max-width: 768px;
+  width: 100%;
+  gap: var(--fx-space-3);
+}
+.fx-prompt-input[data-variant='hero'] .fx-prompt-input-row {
+  padding: var(--fx-space-3);
+}
+
+.fx-prompt-input[data-disabled] .fx-prompt-input-row {
+  background: var(--fx-color-surface-alt);
+}

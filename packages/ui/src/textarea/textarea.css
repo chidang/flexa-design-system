@@ -1,0 +1,79 @@
+/* FxTextarea — token-only, mirrors FxInput chrome for one consistent field
+   instrument (doc 02 forms § field anatomy). Scheme/dark mode by construction. */
+.fx-textarea {
+  display: flex;
+  width: 100%;
+  padding: var(--fx-space-2) var(--fx-space-3);
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  transition: border-color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard), box-shadow var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-textarea[data-size='sm'] {
+  padding: var(--fx-space-1) var(--fx-space-2);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-textarea[data-size='lg'] {
+  padding: var(--fx-space-3) var(--fx-space-4);
+}
+
+.fx-textarea:hover:not([data-disabled]):not([data-readonly]) {
+  border-color: var(--fx-color-border-strong);
+}
+
+.fx-textarea[data-focused] {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-textarea[data-invalid] {
+  border-color: var(--fx-color-danger);
+}
+
+.fx-textarea[data-disabled] {
+  background: var(--fx-color-surface-alt);
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-textarea[data-readonly] {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-textarea-control {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: calc(3em * var(--fx-line-height-normal, 1.5));
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: var(--fx-line-height-normal, 1.5);
+}
+
+.fx-textarea[data-resize='none'] .fx-textarea-control {
+  resize: none;
+}
+
+.fx-textarea[data-resize='vertical'] .fx-textarea-control {
+  resize: vertical;
+}
+
+.fx-textarea-control:focus {
+  outline: none;
+}
+
+.fx-textarea-control::placeholder {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-textarea-control:disabled {
+  color: var(--fx-color-text-subtle);
+  cursor: not-allowed;
+}

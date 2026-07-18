@@ -1,0 +1,185 @@
+/* FxCommandPalette — token-only. Top-anchored modal surface over a scrim; the
+   active option highlights with surface-alt and a leading primary bar. */
+.fx-command-palette-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--fx-z-modal);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 15vh var(--fx-space-4) var(--fx-space-4);
+  background: var(--fx-color-scrim);
+}
+
+.fx-command-palette {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 640px;
+  max-height: 70vh;
+  background: var(--fx-color-surface);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-xl);
+  box-shadow: var(--fx-shadow-xl);
+  font-family: var(--fx-font-family-base);
+  overflow: hidden;
+  animation: fx-command-palette-in var(--fx-motion-duration-normal) var(--fx-motion-easing-out);
+}
+
+@keyframes fx-command-palette-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fx-command-palette-field {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-3);
+  padding: 0 var(--fx-space-4);
+  height: 56px;
+  border-bottom: 1px solid var(--fx-color-border);
+}
+
+.fx-command-palette-search-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-command-palette-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-text);
+  font: inherit;
+  font-size: var(--fx-text-body-size);
+}
+
+.fx-command-palette-input:focus {
+  outline: none;
+}
+
+.fx-command-palette-input::placeholder {
+  color: var(--fx-color-text-subtle);
+}
+
+.fx-command-palette-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0;
+  padding: var(--fx-space-2);
+  list-style: none;
+  overflow-y: auto;
+}
+
+.fx-command-palette-group + .fx-command-palette-group {
+  margin-block-start: var(--fx-space-2);
+}
+
+.fx-command-palette-group-label {
+  padding: var(--fx-space-1) var(--fx-space-2);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--fx-font-tracking-wide);
+}
+
+.fx-command-palette-group-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fx-command-palette-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  min-height: 40px;
+  padding: 0 var(--fx-space-3);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-sm-size);
+  cursor: pointer;
+}
+
+.fx-command-palette-item[data-active] {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-command-palette-item[data-active]::before {
+  content: '';
+  position: absolute;
+  inset-block: var(--fx-space-2);
+  inset-inline-start: 0;
+  width: 2px;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-primary);
+}
+
+.fx-command-palette-item[aria-disabled] {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-command-palette-item-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--fx-color-text-muted);
+}
+
+.fx-command-palette-item-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fx-command-palette-item-hint {
+  flex: 0 0 auto;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-command-palette-item-kbd {
+  flex: 0 0 auto;
+  padding: 0 var(--fx-space-1);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-sm);
+  color: var(--fx-color-text-subtle);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-command-palette-empty {
+  margin: 0;
+  padding: var(--fx-space-8) var(--fx-space-4);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+  text-align: center;
+}
+
+.fx-command-palette-footer {
+  display: flex;
+  gap: var(--fx-space-4);
+  padding: var(--fx-space-2) var(--fx-space-4);
+  border-top: 1px solid var(--fx-color-border);
+  color: var(--fx-color-text-subtle);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-command-palette {
+    animation: none;
+  }
+}

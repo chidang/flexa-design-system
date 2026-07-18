@@ -1,0 +1,5 @@
+{
+  "slug": "number-input",
+  "tagline": "Numeric entry with a stepper group and spinbutton semantics.",
+  "whenToUse": "Use for bounded or free numeric values a user types or nudges — quantities, ratings, thresholds. When the number carries money use the Currency Input, and for a compact cart-style ± control use the Stepper."
+}

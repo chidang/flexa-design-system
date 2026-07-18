@@ -1,0 +1,99 @@
+/* FxVersionHistory — token-only. A version FxList (+ optional side-by-side diff
+   slot) with per-item Preview / Restore actions. Composes List/Avatar/Badge —
+   styles only the version-specific row contents + the diff layout. */
+.fx-version-history {
+  font-family: var(--fx-font-family-base);
+}
+
+/* Two-column layout when a diff slot is present. */
+.fx-version-history[data-has-diff] {
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  gap: var(--fx-space-4);
+  align-items: start;
+}
+
+.fx-version-history-list {
+  min-width: 0;
+}
+
+.fx-version-history-avatar {
+  flex: none;
+  display: inline-flex;
+}
+
+.fx-version-history-headline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+.fx-version-history-version {
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text);
+}
+
+.fx-version-history-sub {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--fx-space-1);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+.fx-version-history-author {
+  color: var(--fx-color-text);
+}
+.fx-version-history-dot {
+  color: var(--fx-color-text-subtle);
+}
+.fx-version-history-time {
+  white-space: nowrap;
+}
+.fx-version-history-summary {
+  flex-basis: 100%;
+  color: var(--fx-color-text-muted);
+}
+
+.fx-version-history-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+}
+.fx-version-history-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  padding: var(--fx-space-1) var(--fx-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  font-family: inherit;
+  cursor: pointer;
+}
+.fx-version-history-action:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-version-history-action:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-version-history-diff {
+  min-width: 0;
+  padding: var(--fx-space-3);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface);
+}
+
+.fx-version-history-empty {
+  padding: var(--fx-space-6) var(--fx-space-3);
+  text-align: center;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}

@@ -1,0 +1,5 @@
+{
+  "slug": "sidebar",
+  "tagline": "The persistent vertical navigation backbone of an app shell.",
+  "whenToUse": "Use a sidebar for five or more grouped, badged destinations on productivity surfaces. It collapses to an icon rail and becomes an off-canvas drawer on mobile. Don't use it for page-level actions or as a filter panel."
+}

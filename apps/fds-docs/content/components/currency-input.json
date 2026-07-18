@@ -1,0 +1,5 @@
+{
+  "slug": "currency-input",
+  "tagline": "Money entry that stores integer minor units and owns the display conversion.",
+  "whenToUse": "Use whenever a field captures money — prices, budgets, payouts — so the stored value is an unambiguous integer minor-unit amount. For a plain unit-less number reach for the Number Input instead."
+}

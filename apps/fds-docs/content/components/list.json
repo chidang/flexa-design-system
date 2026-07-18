@@ -1,0 +1,5 @@
+{
+  "slug": "list",
+  "tagline": "Vertical item list — plain, divided, or a single/multi listbox.",
+  "whenToUse": "Use List for a vertical run of like records — folders, people, settings, notifications — where each row shares a shape (media, title, description, meta). Leave it plain (role=list) when rows are links or carry their own actions; switch to selectable single/multi (role=listbox) when the user picks rows. For a two-dimensional grid of columns use Table, and for a small set of mutually-exclusive facet switches use Tabs."
+}

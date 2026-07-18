@@ -1,0 +1,5 @@
+{
+  "slug": "kanban-board",
+  "tagline": "A board of columns holding draggable cards with a full keyboard drag protocol.",
+  "whenToUse": "Use a Kanban Board to move work items through a small set of ordered stages (to do → in progress → done) where position within and across columns is meaningful. Keep it controlled: `columns`/`cards` are the source of truth and `onCardMove` commits every move, including keyboard drags (Space to lift, arrows to move, Space to drop, Esc to cancel). Reach for a Data Table or List when items are read-mostly or the ordering does not carry status, and for WIP ceilings set a column `limit` so the over-limit count flags in danger."
+}

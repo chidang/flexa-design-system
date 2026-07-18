@@ -1,0 +1,78 @@
+/* FxQuickLinks — token-only. A Card holding a list of icon + label + trailing
+   chevron navigation rows, in a 1- or 2-column grid. Row hover surface-alt; icon
+   primary; label text.body; chevron text-muted. */
+.fx-quick-links-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--fx-space-1);
+}
+
+.fx-quick-links-list[data-columns='2'] {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  .fx-quick-links-list[data-columns='2'] {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.fx-quick-links-item {
+  min-width: 0;
+}
+
+.fx-quick-links-link {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-2) var(--fx-space-3);
+  border-radius: var(--fx-radius-md);
+  color: var(--fx-color-text);
+  text-decoration: none;
+  transition: background var(--fx-motion-duration-fast) ease;
+}
+
+.fx-quick-links-link:hover {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-quick-links-link:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-quick-links-icon {
+  flex: none;
+  display: inline-flex;
+  color: var(--fx-color-primary);
+}
+
+.fx-quick-links-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-text-body-weight);
+  line-height: var(--fx-text-body-line-height);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fx-quick-links-trailing {
+  flex: none;
+  display: inline-flex;
+  color: var(--fx-color-text-muted);
+}
+
+/* Visually-hidden "(opens in new tab)" for external links. */
+.fx-quick-links-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+}

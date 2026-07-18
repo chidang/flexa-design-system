@@ -1,0 +1,5 @@
+{
+  "slug": "statistic-block",
+  "tagline": "Unstyled inline stat primitive — value + label (+ delta) as one phrase.",
+  "whenToUse": "Use Statistic Block for a bare value + label (and optional trend delta) that sits inside another surface — a stat row in a Seller Card (\"98% positive · 1.2k sales\"), a page header, or a summary strip. It is the primitive Metric Card wraps in a Card: reach for Metric Card when you want the full KPI card chrome (border, padding, sparkline, drill-down); reach for Statistic Block when you only need the inline number and its own container already provides the framing."
+}

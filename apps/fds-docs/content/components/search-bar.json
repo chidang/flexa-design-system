@@ -1,0 +1,5 @@
+{
+  "slug": "search-bar",
+  "tagline": "Query entry for list filtering and global search.",
+  "whenToUse": "Use a search bar for free-text lookup — global in the app-shell top bar, or scoped above a collection over ~20 items. For structured criteria use Advanced Filters, and for destinations/actions use the Command Palette."
+}

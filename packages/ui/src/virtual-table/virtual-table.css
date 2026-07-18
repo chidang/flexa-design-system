@@ -1,0 +1,166 @@
+/* FxVirtualTable — token-only. Flexbox rows (not native <table>) so the
+   virtualized window + spacers keep the scrollbar honest. Fixed row height per
+   density. Selected row = primary tint (§1.9). */
+.fx-virtual-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface);
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-size);
+  color: var(--fx-color-text);
+  overflow: hidden;
+}
+
+.fx-virtual-table-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Header. */
+.fx-virtual-table-head {
+  position: sticky;
+  top: 0;
+  z-index: var(--fx-z-sticky);
+  background: var(--fx-color-surface);
+  border-bottom: 1px solid var(--fx-color-border);
+}
+
+.fx-virtual-table-hrow,
+.fx-virtual-table-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.fx-virtual-table-th,
+.fx-virtual-table-cell {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0 var(--fx-space-4);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fx-virtual-table-th {
+  padding-block: var(--fx-space-3);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  color: var(--fx-color-text-muted);
+}
+
+.fx-virtual-table-th[data-align='end'],
+.fx-virtual-table-cell[data-align='end'] {
+  justify-content: flex-end;
+  text-align: end;
+}
+.fx-virtual-table-th[data-align='center'],
+.fx-virtual-table-cell[data-align='center'] {
+  justify-content: center;
+  text-align: center;
+}
+
+.fx-virtual-table-select {
+  flex: 0 0 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fx-virtual-table-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.fx-virtual-table-sort-btn:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+.fx-virtual-table-sort-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: transform var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-virtual-table-sort-icon::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.fx-virtual-table-sort-btn[data-dir='ascending'] .fx-virtual-table-sort-icon,
+.fx-virtual-table-sort-btn[data-dir='descending'] .fx-virtual-table-sort-icon {
+  opacity: 1;
+  color: var(--fx-color-primary);
+}
+.fx-virtual-table-sort-btn[data-dir='ascending'] .fx-virtual-table-sort-icon {
+  transform: rotate(180deg);
+}
+
+/* Viewport (virtualized scroll). */
+.fx-virtual-table-viewport {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.fx-virtual-table-viewport:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--fx-color-focus-ring);
+}
+
+.fx-virtual-table-row {
+  border-bottom: 1px solid var(--fx-color-border);
+  box-sizing: border-box;
+}
+
+.fx-virtual-table-row:hover {
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-virtual-table-row[data-clickable] {
+  cursor: pointer;
+}
+
+.fx-virtual-table-row[data-selected] {
+  background: var(--fx-color-primary-soft);
+}
+/* Hover on a selected row deepens the soft tint one notch (12% → 16%). */
+.fx-virtual-table-row[data-selected]:hover {
+  background: color-mix(in srgb, var(--fx-color-primary) 16%, var(--fx-color-surface));
+}
+
+/* Compact density paddings (row height is set inline per density). */
+.fx-virtual-table[data-density='compact'] .fx-virtual-table-th,
+.fx-virtual-table[data-density='compact'] .fx-virtual-table-cell {
+  padding-inline: var(--fx-space-3);
+}
+
+.fx-virtual-table-empty {
+  padding: var(--fx-space-4);
+  display: flex;
+  justify-content: center;
+}

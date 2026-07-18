@@ -67,14 +67,40 @@ export interface EmitToken {
 }
 
 /**
+ * Typography composites have no single CSS value, but each part IS one: emit
+ * `--fx-text-<name>-{size,weight,line-height}` per composite (FDS 2.10, ui-kit
+ * doc 14 R2) so components can bind type roles per-property. Family is NOT
+ * emitted — components bind `--fx-font-family-base/heading` directly. Fixed
+ * suffix order; a missing/invalid part is skipped, not emitted empty.
+ */
+const TYPOGRAPHY_LONGHANDS: readonly (readonly [string, string])[] = [
+  ['fontSize', 'size'],
+  ['fontWeight', 'weight'],
+  ['lineHeight', 'line-height'],
+];
+
+/**
  * Serialize a token set to `cssVar:value;…` declarations (no wrapping rule).
  * Declaration order follows the input order (registry order is id-sorted, so the
- * default theme is deterministic). Tokens with no single CSS value (typography)
- * are omitted. Shared by `emitThemeRoot` and `emitTheme`. Mirror: Tokens::emitDecls.
+ * default theme is deterministic). Typography composites expand to per-property
+ * declarations (FDS 2.10). Shared by `emitThemeRoot` and `emitTheme`.
+ * Mirror: Tokens::emitDecls.
  */
 function emitDecls(tokens: readonly EmitToken[]): string {
   const decls: string[] = [];
   for (const t of tokens) {
+    if (t.type === 'typography') {
+      if (!isRecord(t.value)) continue;
+      for (const [prop, suffix] of TYPOGRAPHY_LONGHANDS) {
+        const part = t.value[prop];
+        if (typeof part === 'string') {
+          decls.push(`${t.cssVar}-${suffix}:${resolveTokenRefs(part) as string}`);
+        } else if (typeof part === 'number') {
+          decls.push(`${t.cssVar}-${suffix}:${scalarToCss(part)}`);
+        }
+      }
+      continue;
+    }
     const value = emitTokenValue(t.type, t.value);
     if (value !== null) decls.push(`${t.cssVar}:${value}`);
   }
@@ -83,7 +109,8 @@ function emitDecls(tokens: readonly EmitToken[]): string {
 
 /**
  * Emit a set of tokens as a single `:root{…}` rule — the theme stylesheet.
- * Mirror: Tokens::emitThemeRoot. (Slice 1 contract — output unchanged.)
+ * Mirror: Tokens::emitThemeRoot. (Slice 1 contract; FDS 2.10 adds the
+ * typography per-property expansion — additive declarations only.)
  */
 export function emitThemeRoot(tokens: readonly EmitToken[]): string {
   return `:root{${emitDecls(tokens)}}`;

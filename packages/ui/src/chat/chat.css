@@ -1,0 +1,296 @@
+/* FxChat — token-only. Header + scrolling message log + composer. The shell
+   carries one container treatment (card pattern: transparent border slot +
+   shadow); interior seams are single dividers, not boxes. */
+.fx-chat {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  border: 1px solid transparent;
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface);
+  box-shadow: var(--fx-shadow-sm);
+  font-family: var(--fx-font-family-base);
+  position: relative;
+}
+
+/* Header: counterparty avatar + name + context link. */
+.fx-chat-header {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-3);
+  border-block-end: 1px solid var(--fx-color-border);
+}
+.fx-chat-header-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.fx-chat-peer-name {
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-size);
+  font-weight: var(--fx-font-weight-semibold);
+  text-decoration: none;
+}
+a.fx-chat-peer-name:hover {
+  text-decoration: underline;
+}
+.fx-chat-context {
+  color: var(--fx-color-primary);
+  font-size: var(--fx-text-body-sm-size);
+  text-decoration: none;
+}
+.fx-chat-context:hover {
+  text-decoration: underline;
+}
+
+/* Scrolling message log. */
+.fx-chat-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-4);
+}
+
+.fx-chat-day {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+}
+
+/* Day separator. */
+.fx-chat-day-sep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block: var(--fx-space-1);
+}
+.fx-chat-day-label {
+  padding-inline: var(--fx-space-3);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+}
+
+/* System event card — centered, no bubble, no receipt. */
+.fx-chat-system {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  max-width: 80%;
+  padding: var(--fx-space-1) var(--fx-space-3);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+  text-align: center;
+}
+.fx-chat-system-time {
+  color: var(--fx-color-text-subtle);
+}
+
+/* A message row: avatar (other only) + bubble stack. */
+.fx-chat-message {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--fx-space-2);
+  max-width: 80%;
+  align-self: flex-start;
+}
+.fx-chat-message[data-self] {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.fx-chat-bubble-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  min-width: 0;
+}
+.fx-chat-message[data-self] .fx-chat-bubble-wrap {
+  align-items: flex-end;
+}
+
+.fx-chat-bubble {
+  padding: var(--fx-space-2) var(--fx-space-3);
+  border-radius: var(--fx-radius-lg);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-chat-message[data-self] .fx-chat-bubble {
+  background: var(--fx-color-primary);
+  color: var(--fx-color-on-primary);
+}
+.fx-chat-bubble[data-failed] {
+  border: 1px solid var(--fx-color-danger);
+}
+
+.fx-chat-body {
+  margin: 0;
+  font-size: var(--fx-text-body-size);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Attachment cards inside a bubble. */
+.fx-chat-attachments {
+  list-style: none;
+  margin: var(--fx-space-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+}
+.fx-chat-attachment {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-1) var(--fx-space-2);
+  border-radius: var(--fx-radius-md);
+  background: color-mix(in srgb, var(--fx-color-surface) 60%, transparent);
+}
+.fx-chat-attachment-name {
+  color: inherit;
+  font-size: var(--fx-text-body-sm-size);
+  text-decoration: underline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Meta row under a bubble: time + read receipt / status / retry. */
+.fx-chat-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+}
+.fx-chat-time {
+  color: var(--fx-color-text-subtle);
+}
+.fx-chat-receipt {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+}
+.fx-chat-receipt[data-status='read'] {
+  color: var(--fx-color-primary);
+}
+.fx-chat-failed {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+.fx-chat-failed-label {
+  color: var(--fx-color-danger);
+}
+.fx-chat-retry {
+  border: 0;
+  background: transparent;
+  color: var(--fx-color-primary);
+  font: inherit;
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-medium);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+.fx-chat-retry:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Typing indicator. */
+.fx-chat-typing {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+.fx-chat-typing-dots {
+  display: inline-flex;
+  gap: var(--fx-space-1);
+}
+.fx-chat-typing-dots span {
+  width: 3px;
+  height: 3px;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-text-muted);
+}
+
+/* Jump-to-bottom button (shown when scrolled up). */
+.fx-chat-jump {
+  position: absolute;
+  inset-block-end: 64px;
+  inset-inline-end: var(--fx-space-4);
+  padding: var(--fx-space-1) var(--fx-space-3);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface);
+  color: var(--fx-color-text);
+  font: inherit;
+  font-size: var(--fx-text-body-sm-size);
+  box-shadow: var(--fx-shadow-md);
+  cursor: pointer;
+}
+.fx-chat-jump:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Composer. */
+.fx-chat-composer {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-3);
+  border-block-start: 1px solid var(--fx-color-border);
+}
+.fx-chat-composer .fx-chat-input {
+  flex: 1;
+  min-width: 0;
+}
+.fx-chat-attach {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--fx-radius-md);
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-chat-attach:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-chat-attach:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Locked-conversation banner (replaces the composer). */
+.fx-chat-locked {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-3);
+  border-block-start: 1px solid var(--fx-color-border);
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+.fx-chat-locked-icon {
+  flex: none;
+}

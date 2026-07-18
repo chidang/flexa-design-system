@@ -1,0 +1,5 @@
+{
+  "slug": "blank-state-layout",
+  "tagline": "A full-content-area first-run surface centered on a large empty state.",
+  "whenToUse": "Blank State Layout is the first-run screen shown before any data exists — no listings yet, no orders yet — centered on a large Empty State with a primary call to action and an optional Learn more link. Use it at the page level; use the Empty State component directly for smaller inline or in-table empties."
+}

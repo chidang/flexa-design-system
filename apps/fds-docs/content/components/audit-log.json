@@ -1,0 +1,5 @@
+{
+  "slug": "audit-log",
+  "tagline": "Read-only, immutable audit trail with a before → after change drawer.",
+  "whenToUse": "Audit Log is the tamper-evident record of who did what: an FxTable specialization whose columns are the event time (absolute UTC with a relative-time tooltip), the actor (an avatar + name for a user, or \"System\" / the API-key name otherwise), a dot-verb-noun action code as a Tag, the target link, the originating IP, and a details expander. Opening a row's Details slides in a Right Drawer that lists each changed field as a before → after pair. By contract the log is immutable — it never offers edit or delete affordances, only viewing and host-driven export — which is exactly why it is trustworthy. Sort and pagination are server-driven and pass straight through to the underlying Table, so it scales to very large datasets."
+}

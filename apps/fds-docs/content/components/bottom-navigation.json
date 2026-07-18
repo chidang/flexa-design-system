@@ -1,0 +1,5 @@
+{
+  "slug": "bottom-navigation",
+  "tagline": "A fixed mobile tab bar of 3–5 destinations; hidden once the sidebar takes over.",
+  "whenToUse": "Bottom Navigation is the mobile-only tab bar for a handful (3–5) of top-level destinations, fixed to the bottom edge inside the thumb zone. It hides at the tablet breakpoint where the Sidebar takes over, so pair the two rather than choosing between them. Keep labels visible unless you have four or more items and product has signed off on icon-only."
+}

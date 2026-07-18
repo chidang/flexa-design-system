@@ -1,0 +1,70 @@
+/* Components-section chrome (the frame around each demo). Site chrome, so it
+   uses page tokens like the rest of the shell — NOT part of any component's
+   proven output. The demo stage itself carries [data-fx-theme="components"]. */
+.cx-index-groups { display: flex; flex-direction: column; gap: var(--fx-space-7); }
+.cx-cat-title { margin-bottom: var(--fx-space-1); }
+.cx-cat-blurb { color: var(--fx-color-text-muted); margin-top: 0; }
+.cx-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--fx-space-4);
+}
+.cx-card {
+  display: block;
+  padding: var(--fx-space-4);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  text-decoration: none;
+  color: inherit;
+  background: var(--fx-color-bg);
+}
+.cx-card:hover { border-color: var(--fx-color-primary); }
+.cx-card h3 { margin: 0 0 var(--fx-space-1); }
+.cx-card p { margin: 0; color: var(--fx-color-text-muted); font-size: 0.9rem; }
+.cx-card-meta { margin-top: var(--fx-space-2); font-size: 0.75rem; color: var(--fx-color-text-muted); }
+
+.cx-lead { font-size: 1.1rem; }
+.cx-meta { display: flex; flex-wrap: wrap; gap: var(--fx-space-3); align-items: center; color: var(--fx-color-text-muted); }
+.cx-stub-tag { color: var(--fx-color-warning); }
+
+.cx-demo {
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  overflow: hidden;
+  margin: var(--fx-space-5) 0;
+}
+.cx-toolbar {
+  display: flex;
+  gap: var(--fx-space-5);
+  padding: var(--fx-space-3) var(--fx-space-4);
+  background: var(--fx-color-surface);
+  border-bottom: 1px solid var(--fx-color-border);
+}
+.cx-toolbar label { display: flex; align-items: center; gap: var(--fx-space-2); font-size: 0.85rem; }
+.cx-stage { padding: var(--fx-space-6); background: var(--fx-color-bg); }
+
+.cx-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--fx-space-4);
+}
+.cx-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-4);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+}
+.cx-instance { display: flex; align-items: center; justify-content: center; min-height: 48px; }
+.cx-cell-label, .cx-cell-note { font-size: 0.78rem; color: var(--fx-color-text-muted); text-align: center; }
+
+.cx-enum { display: flex; flex-wrap: wrap; align-items: center; gap: var(--fx-space-2); }
+.cx-chip {
+  padding: 0.1rem 0.5rem;
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-color-surface-alt);
+  font-size: 0.8rem;
+  font-family: var(--fx-font-family-mono, monospace);
+}

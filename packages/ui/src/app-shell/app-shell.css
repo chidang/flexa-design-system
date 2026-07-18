@@ -1,0 +1,111 @@
+/* FxAppShell — token-only. A grid: the sidebar spans the full height on the start
+   edge; an optional topbar banner sits above the content; the single main scrolls.
+   The content column centres at the wide breakpoint, capped by a container token.
+   The skip link is visually hidden until focused, then it's the first tab stop. */
+.fx-app-shell {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'sidebar topbar'
+    'sidebar content';
+  min-height: 100vh;
+  background: var(--fx-color-bg);
+  color: var(--fx-color-text);
+  font-family: var(--fx-font-family-base);
+}
+
+/* When there is no topbar, the content simply fills its row. */
+.fx-app-shell-sidebar {
+  grid-area: sidebar;
+  min-height: 0;
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+}
+
+.fx-app-shell-topbar {
+  grid-area: topbar;
+  min-width: 0;
+}
+
+.fx-app-shell-content {
+  grid-area: content;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+}
+
+.fx-app-shell-content:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  /* Inset ring: full-bleed scroll region — an offset ring would fall offscreen at viewport edges. */
+  outline-offset: 0;
+}
+
+.fx-app-shell-content-inner {
+  min-width: 0;
+  padding: var(--fx-space-6);
+}
+
+.fx-app-shell[data-density='compact'] .fx-app-shell-content-inner {
+  padding: var(--fx-space-4);
+}
+
+/* Centre the content column once there's room to spare (wide breakpoint). */
+@media (min-width: 1280px) {
+  .fx-app-shell-content-inner {
+    max-width: var(--fx-size-container-xl);
+    margin-inline: auto;
+  }
+}
+
+.fx-app-shell-toast-region {
+  grid-area: content;
+  align-self: end;
+  justify-self: end;
+  pointer-events: none;
+}
+
+/* Skip link: off-screen until focused, then a real, visible first tab stop. */
+.fx-app-shell-skip {
+  position: absolute;
+  inset-inline-start: var(--fx-space-2);
+  top: var(--fx-space-2);
+  z-index: var(--fx-z-modal);
+  padding: var(--fx-space-2) var(--fx-space-3);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-primary);
+  color: var(--fx-color-on-primary);
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-app-shell-skip:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Mobile: sidebar leaves the grid flow; content spans full width. */
+@media (max-width: 768px) {
+  .fx-app-shell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'topbar'
+      'content';
+  }
+
+  .fx-app-shell-sidebar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-app-shell-skip {
+    transition: none;
+  }
+}

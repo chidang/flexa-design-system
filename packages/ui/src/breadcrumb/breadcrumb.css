@@ -1,0 +1,75 @@
+/* FxBreadcrumb — token-only. Trail of muted links resolving to a solid current
+   page; separators are decorative glyphs. */
+.fx-breadcrumb {
+  font-family: var(--fx-font-family-base);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+.fx-breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--fx-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fx-breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  min-width: 0;
+}
+
+.fx-breadcrumb-link,
+.fx-breadcrumb-current,
+.fx-breadcrumb-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  min-width: 0;
+}
+
+.fx-breadcrumb-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 24ch;
+}
+
+.fx-breadcrumb-link {
+  color: var(--fx-color-text-muted);
+  text-decoration: none;
+  border-radius: var(--fx-radius-sm);
+  transition: color var(--fx-motion-duration-fast) var(--fx-motion-easing-standard);
+}
+
+.fx-breadcrumb-link:hover {
+  color: var(--fx-color-text);
+  text-decoration: underline;
+}
+
+.fx-breadcrumb-link:active {
+  color: var(--fx-color-text);
+  background: var(--fx-color-surface-alt);
+}
+
+.fx-breadcrumb-link:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-breadcrumb-current {
+  color: var(--fx-color-text);
+  font-weight: var(--fx-font-weight-semibold);
+}
+
+.fx-breadcrumb-ellipsis {
+  color: var(--fx-color-text-muted);
+}
+
+.fx-breadcrumb-separator {
+  color: var(--fx-color-text-subtle);
+  user-select: none;
+}

@@ -1,0 +1,131 @@
+/* FxSlider — token-only. Track carries a thin rail; the fill spans between
+   thumb positions (single = min→value, range = start→end). Thumbs are absolutely
+   positioned by percentage set inline from TSX. */
+.fx-slider {
+  position: relative;
+  width: 100%;
+  padding: var(--fx-space-3) 0;
+}
+
+.fx-slider[data-orientation='vertical'] {
+  width: auto;
+  height: 240px;
+  padding: 0 var(--fx-space-3);
+}
+
+.fx-slider[data-disabled] {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fx-slider-track {
+  position: relative;
+  height: 0.25rem;
+  width: 100%;
+  background: var(--fx-color-surface-alt);
+  border-radius: var(--fx-radius-full);
+  cursor: pointer;
+  touch-action: none;
+}
+
+.fx-slider[data-orientation='vertical'] .fx-slider-track {
+  height: 100%;
+  width: 0.25rem;
+}
+
+.fx-slider[data-disabled] .fx-slider-track {
+  cursor: not-allowed;
+}
+
+.fx-slider-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--fx-color-primary);
+  border-radius: var(--fx-radius-full);
+}
+
+.fx-slider[data-orientation='vertical'] .fx-slider-fill {
+  left: 0;
+  right: 0;
+  top: auto;
+  bottom: auto;
+}
+
+.fx-slider-thumb {
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  background: var(--fx-color-surface);
+  border: 2px solid var(--fx-color-primary);
+  border-radius: var(--fx-radius-full);
+  box-shadow: var(--fx-shadow-sm);
+  cursor: grab;
+  touch-action: none;
+}
+
+.fx-slider[data-size='sm'] .fx-slider-thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.fx-slider[data-size='lg'] .fx-slider-thumb {
+  width: 24px;
+  height: 24px;
+}
+
+.fx-slider[data-orientation='vertical'] .fx-slider-thumb {
+  top: auto;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
+
+.fx-slider-thumb:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-slider-thumb:active {
+  cursor: grabbing;
+}
+
+.fx-slider[data-disabled] .fx-slider-thumb {
+  cursor: not-allowed;
+}
+
+.fx-slider-tooltip {
+  position: absolute;
+  bottom: calc(100% + var(--fx-space-2));
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--fx-space-1) var(--fx-space-2);
+  background: var(--fx-color-text);
+  color: var(--fx-color-surface);
+  border-radius: var(--fx-radius-sm);
+  font-size: var(--fx-text-body-sm-size);
+  white-space: nowrap;
+  z-index: var(--fx-z-tooltip);
+  pointer-events: none;
+}
+
+.fx-slider-marks {
+  position: relative;
+  width: 100%;
+  height: var(--fx-space-5);
+  margin-top: var(--fx-space-2);
+}
+
+.fx-slider-mark {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.fx-slider-mark-label {
+  display: block;
+  color: var(--fx-color-text-subtle);
+  font-size: var(--fx-text-body-sm-size);
+  white-space: nowrap;
+}

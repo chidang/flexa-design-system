@@ -1,0 +1,143 @@
+/* FxAlert — token-only. Subtle = tone soft tint (FDS soft tokens; neutral has
+   no soft token and falls back to a color-mix on its fill) + a leading tone
+   bar; solid = tone fill + on-tone content. Scheme-agnostic. */
+.fx-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-4);
+  border-radius: var(--fx-radius-md);
+  border-inline-start: 3px solid var(--fx-alert-accent);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-alert-icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--fx-alert-accent);
+}
+
+.fx-alert-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.fx-alert-title {
+  font-size: var(--fx-text-label-size);
+  font-weight: var(--fx-font-weight-semibold);
+  line-height: var(--fx-line-height-normal);
+}
+
+.fx-alert-description {
+  font-size: var(--fx-text-body-size);
+  line-height: var(--fx-line-height-normal);
+}
+.fx-alert-title + .fx-alert-description {
+  margin-top: var(--fx-space-1);
+}
+
+.fx-alert-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+  margin-top: var(--fx-space-3);
+}
+
+/* Dismiss follows the kit close-button spec: 24px, transparent rest, tint
+   hover, border-token pressed. Solid appearance re-tints with on-tone mixes. */
+.fx-alert-dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--fx-radius-sm);
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+}
+.fx-alert-dismiss:hover {
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+}
+.fx-alert-dismiss:active {
+  background: var(--fx-color-border);
+}
+.fx-alert-dismiss:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+.fx-alert[data-appearance='solid'] .fx-alert-dismiss {
+  color: var(--fx-alert-on);
+}
+.fx-alert[data-appearance='solid'] .fx-alert-dismiss:hover {
+  background: color-mix(in srgb, var(--fx-alert-on) 12%, var(--fx-alert-fill));
+  color: var(--fx-alert-on);
+}
+.fx-alert[data-appearance='solid'] .fx-alert-dismiss:active {
+  background: color-mix(in srgb, var(--fx-alert-on) 20%, var(--fx-alert-fill));
+}
+
+/* ── Tone accent + tinted subtle surface ─────────────────────────────────── */
+.fx-alert[data-tone='neutral'] {
+  --fx-alert-accent: var(--fx-color-border-strong);
+  --fx-alert-fill: var(--fx-color-surface-alt);
+  --fx-alert-on: var(--fx-color-text);
+}
+.fx-alert[data-tone='info'] {
+  --fx-alert-accent: var(--fx-color-info);
+  --fx-alert-fill: var(--fx-color-info);
+  --fx-alert-soft: var(--fx-color-info-soft);
+  --fx-alert-on: var(--fx-color-on-info);
+}
+.fx-alert[data-tone='success'] {
+  --fx-alert-accent: var(--fx-color-success);
+  --fx-alert-fill: var(--fx-color-success);
+  --fx-alert-soft: var(--fx-color-success-soft);
+  --fx-alert-on: var(--fx-color-on-success);
+}
+.fx-alert[data-tone='warning'] {
+  --fx-alert-accent: var(--fx-color-warning);
+  --fx-alert-fill: var(--fx-color-warning);
+  --fx-alert-soft: var(--fx-color-warning-soft);
+  --fx-alert-on: var(--fx-color-on-warning);
+}
+.fx-alert[data-tone='danger'] {
+  --fx-alert-accent: var(--fx-color-danger);
+  --fx-alert-fill: var(--fx-color-danger);
+  --fx-alert-soft: var(--fx-color-danger-soft);
+  --fx-alert-on: var(--fx-color-on-danger);
+}
+
+.fx-alert[data-appearance='subtle'] {
+  background: var(--fx-alert-soft, color-mix(in srgb, var(--fx-alert-fill) 12%, var(--fx-color-surface)));
+  color: var(--fx-color-text);
+}
+
+.fx-alert[data-appearance='solid'] {
+  background: var(--fx-alert-fill);
+  border-inline-start-color: var(--fx-alert-fill);
+  color: var(--fx-alert-on);
+}
+.fx-alert[data-appearance='solid'] .fx-alert-icon {
+  color: var(--fx-alert-on);
+}
+
+/* Tap target — see checkbox.css. */
+@media (pointer: coarse) {
+  .fx-alert-dismiss {
+    position: relative;
+  }
+  .fx-alert-dismiss::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: max(100%, var(--fx-size-tap));
+    height: max(100%, var(--fx-size-tap));
+  }
+}
