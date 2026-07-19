@@ -354,7 +354,9 @@ export function ListingDetail() {
                 {outOfStock ? 'Out of stock' : 'Add to cart'}
               </FxButton>
 
-              <FxButton variant="ghost" onClick={() => navigate('/screens/search')}>
+              {/* U13-E: "Contact seller" deep-links into the Messages inbox
+                  (flow B5 entry). Only link-only edit this track owns here. */}
+              <FxButton variant="ghost" onClick={() => navigate('/screens/messages')}>
                 Message seller
               </FxButton>
             </div>

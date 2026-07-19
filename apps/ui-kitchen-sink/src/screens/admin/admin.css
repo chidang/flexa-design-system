@@ -1,0 +1,26 @@
+/* U13-D admin-track HARNESS scaffolding — layout-only utilities built from FDS
+   tokens (doc 15 §4: a new framing utility goes in the track's own .css, never
+   in the shared screens.css). These frame the admin page; every visual element
+   is a flexa-ui component. Component appearance never appears here. */
+
+/* KPI / stat-card row — auto-fit metric cards. */
+.ks-admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--fx-space-4, 1rem);
+}
+
+/* Evidence Split View panes (Dispute Detail) — two stacked evidence blocks. */
+.ks-admin-evidence {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-4, 1rem);
+  padding: var(--fx-space-4, 1rem);
+}
+
+/* A quick-link card row (Admin Dashboard queue shortcuts). */
+.ks-admin-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--fx-space-4, 1rem);
+}

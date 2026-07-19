@@ -256,3 +256,31 @@ Resist adding: elevation/z/overlay/opacity/motion-duration groups (exist — the
 
 Sequencing rule: R1 first and alone (it moves the most pixels); R2 before R5/R6 (they write
 typography values); R3/R4 parallel-safe after R1.
+
+## 11. U13 screen-composition gaps (consolidated from the marketplace-screens build)
+
+> Source: the `GAPS:` blocks in `apps/ui-kitchen-sink/src/screens/{buyer,seller,admin,messages}/routes.tsx`
+> + PR descriptions #289–#292 (doc 15 §6 protocol: closest component used, never a
+> CSS patch or fork). These are candidate component slices — each row is additive
+> API surface, none blocks the shipped screens.
+
+| # | Component | Gap (screen / spec) | Suggested resolution |
+|---|---|---|---|
+| G1 | FxOrderCard | Footer action is the fixed status×perspective mapping — no per-row action slot, so the §3.6 inline "Approve" shortcut and the §3.8 "Write a review" CTA can't surface on a card | Optional `action` slot (overrides the mapped default) |
+| G2 | Notification Center | FxNotificationCenter is the App-Shell bell popover only; no full-page list component (§3.7) — screen composed FxList + day groups + FxTabs | Extract a `FxNotificationList` (rows + day grouping) both surfaces share |
+| G3 | Reviews | No "reviewable order" card (§3.8 asks Order Card slim + Write-review button) | Covered by G1's action slot |
+| G4 | FxImageGalleryUpload | Requires real File objects (upload/reorder/cover) — a deterministic mock harness can't drive it; Listing Editor media step used Textarea + Alert placeholder (§2.9) | Accept pre-seeded `items` without File backing (fixture mode) |
+| G5 | Data Management Toolbar | No tabs region — Moderation's "Pending / Reported / All" (§2.14) rendered as ordering + count Badge instead | Optional `tabs` slot between toolbar and table |
+| G6 | Split View | No queue-walk affordance (J/K next/prev, §2.14 interaction 2) | Keyboard nav hook or `onNavigate` prop on the queue pane |
+| G7 | Confirmation Dialog | No `confirmDisabled`, takes no children — partial-refund flow (amount input + gated confirm, §2.13) fell back to FxDialog | Add `confirmDisabled?` + content slot |
+| G8 | Escrow Timeline | No inline admin-action slot on stage nodes (§2.13) — resolution Card owns the actions instead | Acceptable composition; only revisit if more surfaces need it |
+| G9 | FxSegmentedControl | Missing — Messages "View as: Buyer / Seller" used FxTabs `contained` with empty panels (§2.7) | New small component: label + N options, no panel semantics |
+| G10 | FxChat | `kind:'system'` rows render plain text — no `linkTo`/href for a clickable event card (§2.7); deep-link surfaced via header context link | Optional `link` on system messages |
+| G11 | FxChat composer | No attachment picker in v1 (`onAttach` expects a host picker); attachment cards render from fixtures only | Defer until a media-backed harness exists (pairs with G4) |
+
+Closed during U13-Z: the seller→admin→search ripple (approved listings now surface
+in core `/v1/search`, derived from the shared moderation store; the
+`sellerApprovedSearchCards()` seam in `handlers.seller.ts` remains for third-party
+composition). Cross-persona behavior is drift-locked by
+`packages/ui/mocks/integration.spec.ts` (3 ripple loops, msw setupServer over the
+real handler array).

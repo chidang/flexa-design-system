@@ -1,0 +1,48 @@
+/*
+ * U13-E Messages page-framing utilities (doc 15 §4). OWNED by the messages
+ * track: `screens.css` is shared, so any new framing utility this track needs
+ * lives here and is imported from `routes.tsx`. Token-based only (`var(--fx-*)`),
+ * no hex/px literals — these lay out the Split View (list pane 360px / chat pane
+ * flexible, doc 08 §2.7); every visual inside them is a flexa-ui component.
+ */
+
+/* The two-pane Split View: a fixed-width list rail + a flexible chat pane. */
+.ks-messages-split {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: var(--fx-space-4, 1rem);
+  align-items: start;
+}
+
+/* Both panes share a card-like frame height so the log scrolls, not the page. */
+.ks-messages-pane {
+  min-height: 0;
+  height: calc(100vh - 220px);
+  min-height: 28rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The chat pane's inner component fills the pane height. */
+.ks-messages-pane > .fx-chat {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.ks-messages-pane > .fx-conversation-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+/* Mobile / narrow: the panes stack (doc 08 §2.7 responsive delta). */
+@media (max-width: 48rem) {
+  .ks-messages-split {
+    grid-template-columns: 1fr;
+  }
+
+  .ks-messages-pane {
+    height: auto;
+    min-height: 20rem;
+  }
+}

@@ -477,7 +477,9 @@ export function OrderDetail() {
           {(stage === 'approved' || stage === 'released') && (
             <div className="ks-row">
               <span className="ks-muted">This order is complete.</span>
-              <Link to={`/screens/orders/${order.id}`}>
+              {/* U13-B link-only edit (doc 15 §4): the review CTA points to the
+                  buyer Reviews screen (write/manage), flow B4. */}
+              <Link to="/screens/buyer/reviews">
                 <FxButton variant="secondary" size="sm">
                   Leave a review
                 </FxButton>
