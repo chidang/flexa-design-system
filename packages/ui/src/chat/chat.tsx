@@ -15,6 +15,14 @@
  * a retry. When `disabled`, the composer is replaced by a locked-conversation
  * reason banner. Self bubble bg `color.primary`/`color.on-primary`; other bubble
  * `color.surface-alt`/`color.text`; radius `radius.lg`.
+ *
+ * G10 (doc 14 §11): a `kind:'system'` message may carry `link: {href, label}` —
+ * the system event card then renders a deep-link anchor after the body.
+ * G11 (doc 14 §11): `attachmentOptions` turns the attach button into a
+ * fixture-safe picker — a popover listing pre-seeded attachments (no real File
+ * objects); chosen ones stage as removable chips above the composer and ride
+ * `onSend`'s `payload.attachments`. Without it, the attach button keeps the v1
+ * `onAttach` host-picker seam unchanged.
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
@@ -48,6 +56,8 @@ export interface ChatMessage {
   /** Delivery state — only meaningful on the sender's own messages. */
   status?: ChatMessageStatus;
   attachments?: ChatAttachment[];
+  /** Deep-link on a `kind:'system'` event card (e.g. the order it announces). */
+  link?: { href: string; label: string };
 }
 
 /** Baked-in strings — every one a prop, with English defaults (§i18n). */
@@ -64,6 +74,10 @@ export interface ChatLabels {
   placeholder: string;
   /** Accessible name for the messages log. */
   log: string;
+  /** Accessible name for the attachment-picker popover (G11). */
+  attachPicker: string;
+  /** Remove a staged attachment — `{name}` substituted with the file name. */
+  removeAttachment: string;
 }
 
 export const DEFAULT_CHAT_LABELS: ChatLabels = {
@@ -77,6 +91,8 @@ export const DEFAULT_CHAT_LABELS: ChatLabels = {
   sending: 'Sending…',
   placeholder: 'Write a message…',
   log: 'Conversation',
+  attachPicker: 'Choose an attachment',
+  removeAttachment: 'Remove {name}',
 };
 
 /** What the composer emits on send. */
@@ -106,6 +122,13 @@ export interface FxChatProps {
   typing?: PartyRef[];
   /** Attach button pressed — the host opens a file picker; v1 has no built-in input. */
   onAttach?: () => void;
+  /**
+   * Fixture-safe attachment picker (G11): pre-seeded attachments the attach
+   * button offers in a popover — no real File objects. Chosen ones stage as
+   * removable chips and ride `onSend`'s `payload.attachments`. When set, the
+   * picker takes over the attach button (`onAttach` is not called).
+   */
+  attachmentOptions?: ChatAttachment[];
   /** When set, the composer is replaced by a locked-conversation reason banner. */
   disabled?: string | false;
   /** Enter sends (Shift+Enter always newlines). Defaults to `true`. */
@@ -167,6 +190,7 @@ export function FxChat({
   hasOlder = false,
   typing = [],
   onAttach,
+  attachmentOptions,
   disabled = false,
   sendOnEnter = true,
   labels,
@@ -177,7 +201,11 @@ export function FxChat({
   const [draft, setDraft] = useState('');
   const [sending, setSending] = useState(false);
   const [pinned, setPinned] = useState(true);
+  // G11 fixture-safe picker state: staged attachments + popover visibility.
+  const [staged, setStaged] = useState<ChatAttachment[]>([]);
+  const [pickerOpen, setPickerOpen] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const attachRef = useRef<HTMLButtonElement>(null);
 
   // Pin to the bottom when new messages arrive and the user hasn't scrolled up.
   useEffect(() => {
@@ -202,13 +230,26 @@ export function FxChat({
 
   const submit = () => {
     const body = draft.trim();
-    if (body === '' || sending) return;
-    const result = onSend?.({ body, attachments: [] });
+    if ((body === '' && staged.length === 0) || sending) return;
+    const result = onSend?.({ body, attachments: staged });
     setDraft('');
+    setStaged([]);
     if (result instanceof Promise) {
       setSending(true);
       void result.finally(() => setSending(false));
     }
+  };
+
+  /** G11 picker: stage a pre-seeded attachment and close the popover. */
+  const stageAttachment = (a: ChatAttachment) => {
+    setStaged((prev) => (prev.some((s) => s.id === a.id) ? prev : [...prev, a]));
+    setPickerOpen(false);
+    attachRef.current?.focus();
+  };
+
+  const onAttachPress = () => {
+    if (attachmentOptions != null) setPickerOpen((open) => !open);
+    else onAttach?.();
   };
 
   const onKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -272,6 +313,11 @@ export function FxChat({
                 return (
                   <div key={m.id} className="fx-chat-system" role="note">
                     <span className="fx-chat-system-body">{m.body}</span>
+                    {m.link != null && (
+                      <a className="fx-chat-system-link" href={m.link.href}>
+                        {m.link.label}
+                      </a>
+                    )}
                     <span className="fx-chat-system-time">{timeLabel(m.at, locale)}</span>
                   </div>
                 );
@@ -358,34 +404,88 @@ export function FxChat({
           <span>{disabled}</span>
         </div>
       ) : (
-        <div className="fx-chat-composer">
-          <button
-            type="button"
-            className="fx-chat-attach"
-            aria-label={l.attach}
-            onClick={() => onAttach?.()}
-          >
-            <FxIcon name="paperclip" size={20} />
-          </button>
-          <FxTextarea
-            className="fx-chat-input"
-            value={draft}
-            rows={1}
-            maxRows={6}
-            aria-label={l.placeholder}
-            placeholder={l.placeholder}
-            onChange={(v) => setDraft(v)}
-            onKeyDown={onKeyDown}
-          />
-          <FxButton
-            variant="primary"
-            loading={sending}
-            disabled={draft.trim() === ''}
-            iconStart={<FxIcon name="send" size={16} />}
-            onClick={submit}
-          >
-            {l.send}
-          </FxButton>
+        <div className="fx-chat-composer-area">
+          {staged.length > 0 && (
+            <ul className="fx-chat-staged">
+              {staged.map((a) => (
+                <li key={a.id} className="fx-chat-staged-item">
+                  <span className="fx-chat-staged-icon" aria-hidden="true">
+                    <FxIcon name={attachmentIcon(a.kind)} size={16} />
+                  </span>
+                  <span className="fx-chat-staged-name">{a.name}</span>
+                  <button
+                    type="button"
+                    className="fx-chat-staged-remove"
+                    aria-label={l.removeAttachment.replace('{name}', a.name)}
+                    onClick={() => setStaged((prev) => prev.filter((s) => s.id !== a.id))}
+                  >
+                    <FxIcon name="close" size={16} />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="fx-chat-composer">
+            <div className="fx-chat-attach-wrap">
+              <button
+                ref={attachRef}
+                type="button"
+                className="fx-chat-attach"
+                aria-label={l.attach}
+                aria-expanded={attachmentOptions != null ? pickerOpen : undefined}
+                onClick={onAttachPress}
+              >
+                <FxIcon name="paperclip" size={20} />
+              </button>
+              {pickerOpen && attachmentOptions != null && (
+                <div
+                  className="fx-chat-attach-menu"
+                  role="group"
+                  aria-label={l.attachPicker}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') {
+                      setPickerOpen(false);
+                      attachRef.current?.focus();
+                    }
+                  }}
+                >
+                  {attachmentOptions.map((a) => (
+                    <button
+                      key={a.id}
+                      type="button"
+                      className="fx-chat-attach-option"
+                      disabled={staged.some((s) => s.id === a.id)}
+                      onClick={() => stageAttachment(a)}
+                    >
+                      <span className="fx-chat-attach-option-icon" aria-hidden="true">
+                        <FxIcon name={attachmentIcon(a.kind)} size={16} />
+                      </span>
+                      <span className="fx-chat-attach-option-name">{a.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <FxTextarea
+              className="fx-chat-input"
+              value={draft}
+              rows={1}
+              maxRows={6}
+              aria-label={l.placeholder}
+              placeholder={l.placeholder}
+              onChange={(v) => setDraft(v)}
+              onKeyDown={onKeyDown}
+            />
+            <FxButton
+              variant="primary"
+              loading={sending}
+              disabled={draft.trim() === '' && staged.length === 0}
+              iconStart={<FxIcon name="send" size={16} />}
+              onClick={submit}
+            >
+              {l.send}
+            </FxButton>
+          </div>
         </div>
       )}
     </section>

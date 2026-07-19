@@ -16,6 +16,11 @@
   line-height: var(--fx-line-height-normal);
 }
 
+/* Custom body content (G7) — fields/previews below the description. */
+.fx-confirmation-dialog-content {
+  margin-top: var(--fx-space-4);
+}
+
 .fx-confirmation-dialog-field {
   display: block;
   margin-top: var(--fx-space-4);

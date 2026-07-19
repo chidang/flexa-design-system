@@ -2,10 +2,12 @@
  * U13-B Reviews — write/manage (doc 08 §3.8, flow B4). Tabs: To review |
  * Published. "To review" lists completed orders without a review (`GET
  * /me/reviewables`, derived from the shared `db.orders` — approving an order
- * elsewhere in the session makes it appear here) each with a *Write a review*
- * button opening a Dialog (Rating required, Textarea, anonymous Checkbox →
- * `POST /reviews`). "Published" lists own reviews as Review Cards with an
- * edit/delete Context Menu (edit within the 30-day window).
+ * elsewhere in the session makes it appear here) as the §3.8 "reviewable order"
+ * cards (G3 closed — ui-kit doc 14 §11): FxOrderCard whose `actions` slot (G1)
+ * carries the *Write a review* CTA, opening a Dialog (Rating required,
+ * Textarea, anonymous Checkbox → `POST /reviews`). "Published" lists own
+ * reviews as Review Cards with an edit/delete Context Menu (edit within the
+ * 30-day window).
  *
  * ZERO one-off component CSS: composed from flexa-ui; framing via `ks-*` +
  * `buyer.css`.
@@ -13,7 +15,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   FxButton,
-  FxCard,
   FxCheckbox,
   FxConfirmationDialog,
   FxContextMenu,
@@ -22,6 +23,7 @@ import {
   FxFieldGroup,
   FxIcon,
   FxInlineError,
+  FxOrderCard,
   FxRating,
   FxReviewCard,
   FxSkeletonLoader,
@@ -29,6 +31,7 @@ import {
   FxTextarea,
   FxValidationMessage,
   useToast,
+  type OrderSummary,
   type Review as CardReview,
   type TabItem,
 } from 'flexa-ui-kit';
@@ -37,6 +40,26 @@ import { api, ApiRequestError } from '../api';
 import { daysUntil, formatDate } from './format';
 
 /* ------------------------------------------------------------------ mappers */
+
+/** mock Order → FxOrderCard's OrderSummary (reviewable-order card, G3). */
+function toOrderSummary(order: Order): OrderSummary {
+  return {
+    id: order.id,
+    number: order.number,
+    href: `#/screens/orders/${order.id}`,
+    status: order.status,
+    total: order.total,
+    placedAt: formatDate(order.createdAt),
+    itemCount: order.items.reduce((n, it) => n + it.quantity, 0),
+    items: order.items.map((it) => ({
+      id: it.listingId,
+      title: it.title,
+      imageUrl: it.coverUrl,
+      quantity: it.quantity,
+    })),
+    seller: { id: order.sellerId, name: order.sellerName },
+  };
+}
 
 /** mock OwnReview → FxReviewCard's Review (buyer as author). */
 function toCardReview(r: OwnReview): CardReview {
@@ -174,24 +197,18 @@ export function Reviews() {
     return (
       <div className="ks-stack" style={{ ['--ks-gap' as string]: 'var(--fx-space-3)' }}>
         {rows.map((o) => (
-          <FxCard key={o.id} padding="md">
-            <div className="ks-row ks-row-between">
-              <div className="ks-row" style={{ ['--ks-gap' as string]: 'var(--fx-space-3)' }}>
-                {o.items[0]?.coverUrl && (
-                  <img className="bx-thumb" src={o.items[0].coverUrl} alt="" width={48} height={48} />
-                )}
-                <div className="ks-stack" style={{ ['--ks-gap' as string]: 'var(--fx-space-1)' }}>
-                  <strong>{o.items[0]?.title ?? o.number}</strong>
-                  <span className="ks-muted">
-                    {o.sellerName} · order {o.number}
-                  </span>
-                </div>
-              </div>
+          // G3 closed: the §3.8 reviewable-order card is FxOrderCard with the
+          // Write-a-review CTA in its `actions` slot (G1).
+          <FxOrderCard
+            key={o.id}
+            order={toOrderSummary(o)}
+            perspective="buyer"
+            actions={
               <FxButton variant="primary" size="sm" onClick={() => openWrite(o)}>
                 Write a review
               </FxButton>
-            </div>
-          </FxCard>
+            }
+          />
         ))}
       </div>
     );

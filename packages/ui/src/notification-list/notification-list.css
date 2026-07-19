@@ -1,0 +1,103 @@
+/* FxNotificationList — token-only. Full-page feed: day-group sections (heading
+   + divided FxList). Tone tints reuse the §1.9 semantic soft tokens, mirroring
+   the FxNotificationCenter rows so both surfaces read as one family. */
+.fx-notification-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-5);
+  font-family: var(--fx-font-family-base);
+}
+
+.fx-notification-list-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-2);
+}
+
+.fx-notification-list-heading {
+  margin: 0;
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-font-weight-semibold);
+  color: var(--fx-color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--fx-font-tracking-wide);
+}
+
+/* Row leading tone icon. */
+.fx-notification-list-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text-muted);
+}
+.fx-notification-list-icon[data-tone='info'] {
+  background: var(--fx-color-info-soft);
+  color: var(--fx-color-info);
+}
+.fx-notification-list-icon[data-tone='success'] {
+  background: var(--fx-color-success-soft);
+  color: var(--fx-color-success);
+}
+.fx-notification-list-icon[data-tone='warning'] {
+  background: var(--fx-color-warning-soft);
+  color: var(--fx-color-warning);
+}
+.fx-notification-list-icon[data-tone='danger'] {
+  background: var(--fx-color-danger-soft);
+  color: var(--fx-color-danger);
+}
+
+/* Trailing meta: timestamp + unread dot. */
+.fx-notification-list-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+}
+.fx-notification-list-time {
+  font-size: var(--fx-text-body-sm-size);
+  color: var(--fx-color-text-muted);
+  white-space: nowrap;
+}
+.fx-notification-list-dot {
+  flex: none;
+  width: var(--fx-space-2);
+  height: var(--fx-space-2);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-primary);
+}
+.fx-notification-list-dot[data-tone='info'] {
+  background: var(--fx-color-info);
+}
+.fx-notification-list-dot[data-tone='success'] {
+  background: var(--fx-color-success);
+}
+.fx-notification-list-dot[data-tone='warning'] {
+  background: var(--fx-color-warning);
+}
+.fx-notification-list-dot[data-tone='danger'] {
+  background: var(--fx-color-danger);
+}
+
+.fx-notification-list-empty {
+  padding: var(--fx-space-6) var(--fx-space-3);
+  text-align: center;
+  color: var(--fx-color-text-muted);
+  font-size: var(--fx-text-body-sm-size);
+}
+
+/* Visually-hidden state word (state-in-text, never colour alone). */
+.fx-notification-list-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

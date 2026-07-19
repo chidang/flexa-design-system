@@ -2,8 +2,24 @@
  * FxConfirmationDialog showcase — blocking decision. Demos render open so the
  * docs island shows the surface; keep them self-contained.
  */
+import { createElement } from 'react';
 import type { ShowcaseSpec } from '../showcase-types';
 import { FxConfirmationDialog } from './confirmation-dialog';
+
+/** G7 custom body — a field the host validates; confirm stays gated meanwhile. */
+const refundBody = createElement(
+  'label',
+  { className: 'fx-confirmation-dialog-field' },
+  createElement('span', { key: 'l', className: 'fx-confirmation-dialog-field-label' }, 'Refund amount'),
+  createElement('input', {
+    key: 'i',
+    className: 'fx-confirmation-dialog-input',
+    type: 'text',
+    inputMode: 'decimal',
+    placeholder: '0.00',
+    defaultValue: '',
+  }),
+);
 
 export const confirmationDialogShowcase: ShowcaseSpec = {
   name: 'FxConfirmationDialog',
@@ -46,6 +62,18 @@ export const confirmationDialogShowcase: ShowcaseSpec = {
         requireInputLabel: 'Type “acme” to confirm',
       },
     },
+    {
+      label: 'custom body + gated confirm',
+      props: {
+        defaultOpen: true,
+        title: 'Partial refund',
+        description: 'Refund part of the order; the remainder is released to the seller.',
+        confirmLabel: 'Issue partial refund',
+        confirmDisabled: true,
+        children: refundBody,
+      },
+      note: 'children render below the description (G7); confirmDisabled keeps Confirm gated until the host validates the input.',
+    },
   ],
   props: [
     { name: 'open / onOpenChange', type: '§1.5', required: true, description: 'Controlled open state.' },
@@ -54,6 +82,8 @@ export const confirmationDialogShowcase: ShowcaseSpec = {
     { name: 'tone', type: "'default' | 'danger'", default: "'default'", description: 'danger ⇒ confirm variant="danger" + icon.' },
     { name: 'confirmLabel / cancelLabel', type: 'string', default: "'Confirm' / 'Cancel'", description: 'i18n. Never Yes/No.' },
     { name: 'requireInput', type: 'string', description: 'Type-to-confirm; confirm disabled until exact match.' },
+    { name: 'confirmDisabled', type: 'boolean', default: 'false', description: 'Externally gate the confirm button (e.g. until a valid amount is entered).' },
+    { name: 'children', type: 'ReactNode', description: 'Custom body content below the description — fields/previews the decision needs.' },
   ],
   events: [
     { name: 'onConfirm', payload: '() => void | Promise<void>', description: 'Async: confirm loads, dialog stays open until resolve; reject keeps it open.' },

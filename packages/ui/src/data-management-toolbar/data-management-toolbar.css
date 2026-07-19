@@ -97,6 +97,13 @@
   gap: var(--fx-space-2);
 }
 
+/* Tabs region (G5) — its own line under the command row; scrolls sideways on
+   narrow screens instead of wrapping the tablist. */
+.fx-data-toolbar-tabs {
+  min-width: 0;
+  overflow-x: auto;
+}
+
 /* Result-count line. */
 .fx-data-toolbar-count {
   margin: 0;

@@ -278,6 +278,18 @@ typography values); R3/R4 parallel-safe after R1.
 | G10 | FxChat | `kind:'system'` rows render plain text — no `linkTo`/href for a clickable event card (§2.7); deep-link surfaced via header context link | Optional `link` on system messages |
 | G11 | FxChat composer | No attachment picker in v1 (`onAttach` expects a host picker); attachment cards render from fixtures only | Defer until a media-backed harness exists (pairs with G4) |
 
+**Status: ALL CLOSED (professionalization wave 1, doc 16 — PRs #298 P-E1 / #300 P-E3 /
+#302 P-E2, 2026-07-19).** As built: G1 `FxOrderCard.actions` slot (absent → byte-identical
+footer) · G2 new `FxNotificationList` (shares `NotificationItem` with the bell popover;
+grouping stays host-side) · G3 per its own resolution — G1's slot + "Write a review" CTA,
+no new component · G4 `fixtureAdd` on FxImageGalleryUpload (URL-backed items, no `File`) ·
+G5 `tabs` region on the toolbar · G6 `onQueuePrev/Next` + J/K on FxSplitView · G7
+`confirmDisabled` + `children` on FxConfirmationDialog · G8 `stageActions` per-stage slot
+(the separate Resolution card stays — rationale reads best next to its own actions) · G9
+new `FxSegmentedControl` (WAI-ARIA radiogroup over native radios, not tablist) · G10
+`ChatMessage.link?` on system rows · G11 `attachmentOptions` fixture picker riding the
+`onAttach` seam. The `GAPS:` blocks in the four `routes.tsx` files mark each closure.
+
 Closed during U13-Z: the seller→admin→search ripple (approved listings now surface
 in core `/v1/search`, derived from the shared moderation store; the
 `sellerApprovedSearchCards()` seam in `handlers.seller.ts` remains for third-party

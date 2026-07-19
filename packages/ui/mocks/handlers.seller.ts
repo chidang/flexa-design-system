@@ -328,7 +328,18 @@ export const sellerHandlers: HttpHandler[] = [
         (body.trackingNumber ?? '').trim() || `FP${order.number.replace(/[^0-9]/g, '')}`,
       shippedAt: at,
     });
-    return HttpResponse.json({ ...next, tracking: tracking.get(next.id) });
+    // Same fulfil-view shape as the GET — SellerOrderDetail re-renders from this
+    // response, so payoutPreview must ride along (P-D e2e finding, doc 16).
+    const shippedPreview = {
+      gross: next.total,
+      fee: next.fees,
+      net: usd(next.total.amount - next.fees.amount),
+    };
+    return HttpResponse.json({
+      ...next,
+      payoutPreview: shippedPreview,
+      tracking: tracking.get(next.id),
+    });
   }),
 
   /* ---- Mark delivered: → delivered (doc 09 §2.10, flow S3 step 4) ------ */
@@ -355,7 +366,17 @@ export const sellerHandlers: HttpHandler[] = [
     };
     db.orders.set(next.id, next);
     recomputeBalances();
-    return HttpResponse.json({ ...next, tracking: tracking.get(next.id) ?? null });
+    // Fulfil-view shape, as the GET (P-D e2e finding, doc 16).
+    const deliveredPreview = {
+      gross: next.total,
+      fee: next.fees,
+      net: usd(next.total.amount - next.fees.amount),
+    };
+    return HttpResponse.json({
+      ...next,
+      payoutPreview: deliveredPreview,
+      tracking: tracking.get(next.id) ?? null,
+    });
   }),
 
   /* ---- Balance snapshot (doc 09 §2.11) --------------------------------- */

@@ -5,19 +5,16 @@
  * `/screens/messages/*` — route paths are relative.
  *
  * GAPS (doc 15 §6 — closest component used, no CSS patch, no fork):
- * - "View as: Buyer / Seller" segmented control: the kit has no
- *   FxSegmentedControl. Used FxTabs (`variant="contained"`, `size="sm"`, empty
- *   `content`) as the closest control — it renders a segmented pill group and
- *   drives selection. GAP: a dedicated FxSegmentedControl (label + N options,
- *   no panel) would fit the "toggle, not tabbed panels" intent better.
- * - FxChat has no built-in system-event deep-LINK: `kind:'system'` rows render
- *   a plain centered body string (no anchor). We surface the order/listing
- *   deep-link via the chat header `context` link (every thread carries one) and
- *   keep the milestone text in the system card body. GAP: FxChat could accept
- *   an optional `href`/`link` on a system message for a clickable event card.
- * - FxChat composer has no attachment picker in v1 (`onAttach` opens a host
- *   picker; none here). Attachment CARDS still render from fixtures on seeded
- *   messages, which is what the screen needs to demo. No workaround needed.
+ * All three messages-track gaps closed by the P-E3 professionalization slice
+ * (doc 14 §11 / doc 16):
+ * - G9 CLOSED: "View as: Buyer / Seller" now uses the dedicated
+ *   FxSegmentedControl (label + N options, radiogroup semantics, no panels) —
+ *   the FxTabs `contained` empty-panel workaround is gone.
+ * - G10 CLOSED: `kind:'system'` messages carry `link: {href, label}` — event
+ *   cards deep-link to the real order/listing screen (fixtures' `linkTo`).
+ * - G11 CLOSED: the composer attach button surfaces the fixture-safe
+ *   attachment picker (`attachmentOptions`, no real File objects); staged
+ *   picks ride the send payload and render as attachment cards.
  */
 import { Route, Routes } from 'react-router-dom';
 import { ScreenNotFound, type ScreenLink } from '../shared';

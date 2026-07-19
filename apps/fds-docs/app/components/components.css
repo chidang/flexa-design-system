@@ -144,3 +144,44 @@
   font-size: 0.8rem;
   font-family: var(--fx-font-family-mono, monospace);
 }
+
+/* ── Generated API sections (props table, example source) ─────────────────── */
+.cx-api-note { color: var(--fx-color-text-muted); font-size: 0.85rem; }
+.cx-required {
+  margin-left: var(--fx-space-2);
+  padding: 0.05rem 0.4rem;
+  border-radius: var(--fx-radius-sm);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-danger);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+.cx-code {
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-lg);
+  overflow: hidden;
+  margin: var(--fx-space-4) 0;
+}
+.cx-code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--fx-space-3);
+  padding: var(--fx-space-2) var(--fx-space-4);
+  background: var(--fx-color-surface);
+  border-bottom: 1px solid var(--fx-color-border);
+  font-size: 0.85rem;
+  color: var(--fx-color-text-muted);
+  font-family: var(--fx-font-family-mono, monospace);
+}
+.cx-code-head .rx-copy {
+  cursor: pointer;
+  color: var(--fx-color-on-primary);
+  background: var(--fx-color-primary);
+  border: none;
+  border-radius: var(--fx-radius-md);
+  padding: var(--fx-space-1) var(--fx-space-4);
+  font-family: var(--fx-font-family-base);
+}
+.cx-code-head .rx-copy:hover { background: var(--fx-color-primary-hover); }
+.cx-code pre { margin: 0; border-radius: 0; max-height: 32rem; overflow: auto; }

@@ -140,6 +140,41 @@
   display: none;
 }
 
+/* Fixture add-tile (G4) — a plain button standing in for the dropzone so
+   deterministic fixtures can append pre-seeded items. Mirrors the zone look. */
+.fx-image-gallery-upload-fixture {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--fx-space-1);
+  inline-size: 100%;
+  block-size: 100%;
+  padding: var(--fx-space-3);
+  border: 1px dashed var(--fx-color-border-strong);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text-muted);
+  font-family: inherit;
+  font-size: var(--fx-text-body-sm-size);
+  cursor: pointer;
+}
+
+.fx-image-gallery-upload-fixture:hover:not(:disabled) {
+  border-color: var(--fx-color-primary);
+  color: var(--fx-color-primary);
+}
+
+.fx-image-gallery-upload-fixture:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.fx-image-gallery-upload-fixture:disabled {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+
 .fx-image-gallery-upload-sr {
   position: absolute;
   width: 1px;

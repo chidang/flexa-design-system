@@ -12,6 +12,7 @@
  * `role="status"` region, and colour is never the only signal — the stage word
  * is always spelled (§1.7.7).
  */
+import type { ReactNode } from 'react';
 import { FxTimeline, type TimelineItem, type TimelineState } from '../timeline/timeline';
 import { FxButton } from '../button/button';
 import { statusTone, formatStatusLabel } from '../status-tone';
@@ -80,6 +81,15 @@ export interface FxEscrowTimelineProps {
   sellerCanRelease?: boolean;
   /** Release-conditions note shown under the held amount. */
   releaseNote?: string;
+  /**
+   * Inline actions slot for the current stage (doc 14 §11 G8). When provided,
+   * it REPLACES the derived perspective buttons on the current stage's item —
+   * e.g. an admin dispute view renders its real resolve actions (wired to the
+   * host's confirm flow) inline instead of the generic release/refund pair.
+   * Pass `null` to suppress the action row entirely (e.g. once resolved).
+   * Additive: omit to keep the derived action set.
+   */
+  stageActions?: ReactNode;
   /** Locale for `Money` formatting. Defaults to the runtime env locale. */
   locale?: string;
   labels?: Partial<EscrowTimelineLabels>;
@@ -117,6 +127,7 @@ export function FxEscrowTimeline({
   disputed,
   sellerCanRelease = false,
   releaseNote,
+  stageActions,
   locale,
   labels,
   className,
@@ -129,9 +140,14 @@ export function FxEscrowTimeline({
   const currentEvent = byStage.get(stage);
   const actions = actionsFor(perspective, sellerCanRelease);
 
-  // The action slot lives on the current stage's timeline item.
-  const actionSlot =
-    actions.length > 0 ? (
+  // The action slot lives on the current stage's timeline item. A provided
+  // stageActions slot (G8) replaces the derived perspective buttons; an
+  // explicit null suppresses the action row.
+  const actionSlot = stageActions !== undefined ? (
+    stageActions === null ? undefined : (
+      <div className="fx-escrow-timeline-actions">{stageActions}</div>
+    )
+  ) : actions.length > 0 ? (
       <div className="fx-escrow-timeline-actions">
         {actions.map((action) => (
           <FxButton

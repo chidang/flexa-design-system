@@ -31,6 +31,13 @@ export { FxCheckbox } from './checkbox/checkbox';
 export type { FxCheckboxProps, CheckboxChangeMeta } from './checkbox/checkbox';
 export { FxRadioGroup } from './radio-group/radio-group';
 export type { FxRadioGroupProps, RadioOption, RadioChangeMeta } from './radio-group/radio-group';
+export { FxSegmentedControl } from './segmented-control/segmented-control';
+export type {
+  FxSegmentedControlProps,
+  SegmentedOption,
+  SegmentedChangeMeta,
+  SegmentedSize,
+} from './segmented-control/segmented-control';
 export { FxSwitch } from './switch/switch';
 export type { FxSwitchProps, SwitchChangeMeta } from './switch/switch';
 export { FxFieldGroup } from './field-group/field-group';
@@ -475,6 +482,12 @@ export type {
   NotificationItem,
   NotificationCenterLabels,
 } from './notification-center/notification-center';
+export { FxNotificationList, DEFAULT_NOTIFICATION_LIST_LABELS } from './notification-list/notification-list';
+export type {
+  FxNotificationListProps,
+  NotificationGroup,
+  NotificationListLabels,
+} from './notification-list/notification-list';
 export { FxActivityTimeline, DEFAULT_ACTIVITY_TIMELINE_LABELS } from './activity-timeline/activity-timeline';
 export type {
   FxActivityTimelineProps,

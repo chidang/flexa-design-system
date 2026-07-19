@@ -1,26 +1,26 @@
 /**
  * U13-B Notifications (doc 08 §3.7, flow B2 entry). The full-page Notification
- * Center (the bell popover is a separate component per §3.7): a single-column
- * List grouped by day, filtered by Tabs (All / Unread / Orders / Messages /
- * System). Rows carry a tone Badge, title, snippet, time and an unread dot;
- * clicking a row marks it read (`POST /notifications/mark-read`, mutating the
- * buyer track state) then deep-links to its target. "Mark all as read" clears
- * the feed.
+ * Center (the bell popover is a separate component per §3.7): day-grouped
+ * FxNotificationList (G2 closed — ui-kit doc 14 §11), filtered by Tabs (All /
+ * Unread / Orders / Messages / System). Rows carry a tone icon, title, snippet,
+ * time and an unread dot; clicking a row marks it read (`POST
+ * /notifications/mark-read`, mutating the buyer track state) then deep-links to
+ * its target. "Mark all as read" clears the feed.
  *
  * ZERO one-off component CSS: composed from flexa-ui; framing via `ks-*` +
  * `buyer.css`.
  */
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
-  FxBadge,
   FxButton,
   FxEmptyState,
   FxInlineError,
-  FxList,
+  FxNotificationList,
   FxSkeletonLoader,
   FxTabs,
   statusTone,
-  type ListItem,
+  type NotificationGroup,
+  type NotificationItem,
   type TabItem,
   type Tone,
 } from 'flexa-ui-kit';
@@ -118,16 +118,27 @@ export function Notifications() {
     [items, tab],
   );
 
-  /** Group the filtered feed into day sections, newest day first. */
-  const groups = useMemo(() => {
-    const byDay = new Map<string, BuyerNotification[]>();
+  /** mock BuyerNotification → the kit's shared NotificationItem (G2). */
+  const toItem = (n: BuyerNotification): NotificationItem => ({
+    id: n.id,
+    kind: n.type,
+    title: n.title,
+    body: n.body,
+    at: n.createdAt,
+    read: n.readAt != null,
+    tone: toneFor(n.type),
+  });
+
+  /** Day sections for FxNotificationList, newest day first (host bucketing). */
+  const groups = useMemo<NotificationGroup[]>(() => {
+    const byDay = new Map<string, NotificationItem[]>();
     for (const n of filtered) {
       const day = dayOf(n.createdAt);
       const bucket = byDay.get(day);
-      if (bucket) bucket.push(n);
-      else byDay.set(day, [n]);
+      if (bucket) bucket.push(toItem(n));
+      else byDay.set(day, [toItem(n)]);
     }
-    return [...byDay.entries()];
+    return [...byDay.entries()].map(([label, dayItems]) => ({ label, items: dayItems }));
   }, [filtered]);
 
   const unreadCount = (items ?? []).filter((n) => n.readAt == null).length;
@@ -162,38 +173,14 @@ export function Notifications() {
       );
     }
     return (
-      <div className="ks-stack" style={{ ['--ks-gap' as string]: 'var(--fx-space-4)' }}>
-        {groups.map(([day, rows]) => {
-          const listItems: ListItem[] = rows.map((n) => ({
-            key: n.id,
-            title: n.title,
-            description: n.body,
-            media: <FxBadge tone={toneFor(n.type)} dot appearance="subtle" srLabel={n.type} />,
-            meta: (
-              <span className="bx-notif-meta">
-                {n.readAt == null && (
-                  <FxBadge tone="info" size="sm" appearance="solid" srLabel="Unread" />
-                )}
-                <span className="ks-muted">{timeOf(n.createdAt)}</span>
-              </span>
-            ),
-          }));
-          return (
-            <section key={day} className="ks-stack" style={{ ['--ks-gap' as string]: 'var(--fx-space-2)' }}>
-              <h2 className="ks-group-title">{day}</h2>
-              <FxList
-                items={listItems}
-                divided
-                aria-label={`Notifications from ${day}`}
-                onSelect={(item) => {
-                  const n = rows.find((r) => r.id === item.key);
-                  if (n) openItem(n);
-                }}
-              />
-            </section>
-          );
-        })}
-      </div>
+      <FxNotificationList
+        groups={groups}
+        formatTime={timeOf}
+        onItemClick={(item) => {
+          const n = (items ?? []).find((r) => r.id === item.id);
+          if (n) openItem(n);
+        }}
+      />
     );
   })();
 

@@ -1,8 +1,10 @@
 # Flexa UI
 
-[![npm](https://img.shields.io/npm/v/flexa-ui-kit.svg)](https://www.npmjs.com/package/flexa-ui-kit)
+[![npm](https://img.shields.io/npm/v/flexa-ui-kit.svg?label=flexa-ui-kit)](https://www.npmjs.com/package/flexa-ui-kit)
+[![npm](https://img.shields.io/npm/v/flexa-design-system.svg?label=flexa-design-system)](https://www.npmjs.com/package/flexa-design-system)
 [![downloads](https://img.shields.io/npm/dm/flexa-ui-kit.svg)](https://www.npmjs.com/package/flexa-ui-kit)
-[![license](https://img.shields.io/npm/l/flexa-ui-kit.svg)](./LICENSE)
+[![CI](https://github.com/chidang/flexa-design-system/actions/workflows/ci.yml/badge.svg)](https://github.com/chidang/flexa-design-system/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 📖 **[Design system, token reference & live playground → fds.sitebefy.com](https://fds.sitebefy.com)**
 

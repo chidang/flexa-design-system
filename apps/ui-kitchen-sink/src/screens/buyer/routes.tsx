@@ -4,21 +4,13 @@
  * the buyer track (doc 15 §5): only this track edits this file and this
  * directory. Mounted at `/screens/buyer/*` — route paths here are relative.
  *
- * GAPS (doc 15 §6 — closest component used, never a CSS patch/fork):
- *  1. FxOrderCard — no per-row action slot for a stage-specific "Approve"
- *     shortcut. Its buyer action for a `delivered` order is the documented
- *     "Review" (status × perspective mapping), so the inline Approve shortcut
- *     doc 08 §3.6 asks for cannot be surfaced without a fork. Used instead: the
- *     card navigates to Order Detail (§2.5), which owns the Approve flow.
- *  2. Notifications — there is no full-page "Notification Center list" component
- *     (FxNotificationCenter is the App-Shell bell popover per doc 08 §3.7). Used
- *     instead: FxList rows (tone Badge + unread dot + time) grouped by day under
- *     FxTabs — the documented full-screen composition.
- *  3. Reviews "To review" — no dedicated "reviewable order" card (doc 08 §3.8
- *     asks for an "Order Card slim + Write a review button"). FxOrderCard's
- *     footer action is the fixed status action, not a "Write a review" CTA for a
- *     reviewable order. Used instead: FxCard with a thumbnail + title + a
- *     primary Write-a-review button.
+ * GAPS (doc 15 §6 protocol) — ALL CLOSED by P-E1 (ui-kit doc 16 §1, doc 14 §11):
+ *  1. G1 CLOSED — FxOrderCard grew an `actions` slot; OrdersList surfaces the
+ *     §3.6 inline "Approve" shortcut on delivered rows (shared §2.5 dialog).
+ *  2. G2 CLOSED — new FxNotificationList (day-group headings + tone-icon rows,
+ *     shared NotificationItem shape); Notifications composes it under FxTabs.
+ *  3. G3 CLOSED — the §3.8 reviewable-order card is FxOrderCard with a
+ *     "Write a review" CTA in the G1 `actions` slot (doc 14 §11's resolution).
  */
 import { Route, Routes } from 'react-router-dom';
 import { ScreenNotFound, type ScreenLink } from '../shared';

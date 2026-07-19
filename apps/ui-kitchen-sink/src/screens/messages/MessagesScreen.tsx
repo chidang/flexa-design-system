@@ -5,15 +5,19 @@
  * FxConversationList (left) + FxChat (right), over the doc 09 §2.14
  * conversation/message endpoints.
  *
- * The kicker (doc 15 §4): a "View as: Buyer / Seller" segmented control flips
- * which party is `data-self` on the SAME conversation — the two-sides-of-one-
- * thread demo. The choice lives in component state only. Conversation fixtures
- * reference real order/listing/store ids so `kind:'system'` event cards deep-
- * link to real screens (`/screens/orders/:id`, `/screens/listings/:id`).
+ * The kicker (doc 15 §4): a "View as: Buyer / Seller" FxSegmentedControl (G9)
+ * flips which party is `data-self` on the SAME conversation — the two-sides-of-
+ * one-thread demo. The choice lives in component state only. Conversation
+ * fixtures reference real order/listing/store ids and `kind:'system'` event
+ * cards carry `link` (G10), deep-linking to real screens
+ * (`/screens/orders/:id`, `/screens/listings/:id`).
  *
  * Composer sends append to the module-scoped conversation store (POST
- * `/v1/conversations/:id/messages`); the thread on the seeded disputed order is
- * locked, so FxChat renders its locked-conversation banner instead of a composer.
+ * `/v1/conversations/:id/messages`); pre-seeded `attachmentOptions` drive the
+ * fixture-safe attachment picker (G11) — staged picks ride the send payload and
+ * render as attachment cards on the appended row. The thread on the seeded
+ * disputed order is locked, so FxChat renders its locked-conversation banner
+ * instead of a composer.
  *
  * ZERO one-off component CSS: every visual is a flexa-ui component; the two-pane
  * frame is the `ks-messages-*` utilities in messages.css and the shared `ks-*`
@@ -28,14 +32,15 @@ import {
   FxEmptyState,
   FxErrorPage,
   FxInlineError,
+  FxSegmentedControl,
   FxSkeletonLoader,
-  FxTabs,
   useToast,
+  type ChatAttachment,
   type ChatMessage,
   type ChatSendPayload,
   type ConversationSummary,
   type PartyRef,
-  type TabItem,
+  type SegmentedOption,
 } from 'flexa-ui-kit';
 import type { Collection } from 'flexa-ui-kit/mocks';
 import type { ConversationRecord, MessageRecord } from 'flexa-ui-kit/mocks';
@@ -67,6 +72,23 @@ function subjectHref(subject: ConversationRecord['subject']): string {
     : `#/screens/listings/${subject.id}`;
 }
 
+/** Resolve a system-event `linkTo` fixture to an in-app deep-link href. */
+function linkToHref(linkTo: NonNullable<MessageRecord['linkTo']>): string {
+  return linkTo.kind === 'order'
+    ? `#/screens/orders/${linkTo.id}`
+    : `#/screens/listings/${linkTo.id}`;
+}
+
+/**
+ * Pre-seeded composer attachments (G11 fixture-safe picker) — no real File
+ * objects; the picker stages these and they ride `onSend`'s payload.
+ */
+const ATTACHMENT_FIXTURES: ChatAttachment[] = [
+  { id: 'fx-att-photo', name: 'damage-photo.jpg', url: '#/screens/messages', kind: 'image' },
+  { id: 'fx-att-receipt', name: 'order-receipt.pdf', url: '#/screens/messages', kind: 'file' },
+  { id: 'fx-att-label', name: 'return-label.pdf', url: '#/screens/messages', kind: 'file' },
+];
+
 /** The author id for a message under the current View-as party set. */
 function authorFor(
   message: MessageRecord,
@@ -79,9 +101,10 @@ function authorFor(
 
 /**
  * Project the mock message log onto FxChat's ChatMessage[]. `system` rows keep
- * their kind (centered event cards); their deep-link is appended as a plain link
- * in the body so the card stays a single string surface. Regular rows carry the
- * real author, so FxChat resolves `data-self` against the `self` id we pass in.
+ * their kind (centered event cards); their `linkTo` fixture becomes the card's
+ * `link` deep-link to the real order/listing screen (G10). Regular rows carry
+ * the real author, so FxChat resolves `data-self` against the `self` id we pass
+ * in.
  */
 function toChatMessages(
   records: MessageRecord[],
@@ -94,6 +117,7 @@ function toChatMessages(
     at: m.createdAt,
     kind: m.sender === 'system' ? 'system' : 'message',
     status: m.sender === 'system' ? undefined : 'read',
+    link: m.linkTo != null ? { href: linkToHref(m.linkTo), label: m.linkTo.label } : undefined,
     attachments: m.attachments?.map((a) => ({
       id: a.id,
       name: a.fileName,
@@ -119,9 +143,9 @@ function toConversationSummary(
   };
 }
 
-const VIEW_AS_TABS: TabItem[] = [
-  { id: 'buyer', label: 'Buyer', content: null },
-  { id: 'seller', label: 'Seller', content: null },
+const VIEW_AS_OPTIONS: SegmentedOption[] = [
+  { value: 'buyer', label: 'Buyer' },
+  { value: 'seller', label: 'Seller' },
 ];
 
 /* -------------------------------------------------------------------- root */
@@ -200,7 +224,12 @@ export function MessagesScreen() {
     [navigate, viewAs],
   );
 
-  /** Send from the composer → append to the thread (POST /messages). */
+  /**
+   * Send from the composer → append to the thread (POST /messages). Staged
+   * picker attachments (G11) ride the payload; the mock POST persists the body
+   * only, so they merge onto the appended row client-side — the thread cache is
+   * client state either way, and the cards render from the same fixtures.
+   */
   const onSend = useCallback(
     async (payload: ChatSendPayload) => {
       if (active == null) return;
@@ -209,9 +238,21 @@ export function MessagesScreen() {
           `/v1/conversations/${active.id}/messages`,
           { body: payload.body, sender: viewAs },
         );
+        const appended: MessageRecord =
+          payload.attachments.length > 0
+            ? {
+                ...created,
+                attachments: payload.attachments.map((a) => ({
+                  id: a.id,
+                  fileName: a.name,
+                  url: a.url,
+                  kind: a.kind === 'image' ? 'image' : 'file',
+                })),
+              }
+            : created;
         setThreads((prev) => ({
           ...prev,
-          [active.id]: [...(prev[active.id] ?? []), created],
+          [active.id]: [...(prev[active.id] ?? []), appended],
         }));
         setConversations((prev) =>
           prev.map((c) => (c.id === active.id ? { ...c, updatedAt: created.createdAt } : c)),
@@ -266,22 +307,12 @@ export function MessagesScreen() {
           </span>
         </div>
         {/* View-as flips `data-self` on the SAME conversation (doc 15 §4). */}
-        <div
-          className="ks-stack"
-          style={{ ['--ks-gap' as string]: 'var(--fx-space-1)' }}
-          aria-label="View as"
-        >
-          <span className="ks-muted" style={{ fontSize: '0.8rem' }}>
-            View as
-          </span>
-          <FxTabs
-            items={VIEW_AS_TABS}
-            variant="contained"
-            size="sm"
-            value={viewAs}
-            onChange={(id) => setViewAs(id as ViewAs)}
-          />
-        </div>
+        <FxSegmentedControl
+          label="View as"
+          options={VIEW_AS_OPTIONS}
+          value={viewAs}
+          onChange={(value) => setViewAs(value as ViewAs)}
+        />
       </div>
 
       <div className="ks-messages-split">
@@ -342,6 +373,7 @@ export function MessagesScreen() {
               peer={peer}
               context={context}
               onSend={onSend}
+              attachmentOptions={ATTACHMENT_FIXTURES}
               disabled={active.locked ?? false}
             />
           )}

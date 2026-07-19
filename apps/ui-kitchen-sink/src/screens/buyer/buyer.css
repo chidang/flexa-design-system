@@ -15,26 +15,11 @@
   width: min(22rem, 100%);
 }
 
-/* Trailing meta cluster on notification rows (unread dot + time). */
-.bx-notif-meta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--fx-space-2, 0.5rem);
-}
-
 /* Trailing meta cluster on payment-method rows (default badge + menu). */
 .bx-method-meta {
   display: inline-flex;
   align-items: center;
   gap: var(--fx-space-2, 0.5rem);
-}
-
-/* Small square listing thumbnail in the "to review" cards (size via the img's
-   width/height attributes; this only rounds + crops). */
-.bx-thumb {
-  border-radius: var(--fx-radius-md, 0.375rem);
-  object-fit: cover;
-  flex: none;
 }
 
 /* Inline link inside a Table cell (wallet order column). */

@@ -12,6 +12,7 @@
 @import './textarea/textarea.css';
 @import './checkbox/checkbox.css';
 @import './radio-group/radio-group.css';
+@import './segmented-control/segmented-control.css';
 @import './switch/switch.css';
 @import './field-group/field-group.css';
 @import './validation-message/validation-message.css';
@@ -160,3 +161,6 @@
 @import './ai-diff-viewer/ai-diff-viewer.css';
 @import './approve-reject-panel/approve-reject-panel.css';
 @import './ai-activity-history/ai-activity-history.css';
+
+/* P-E1 — buyer-domain gaps (doc 16 §1) */
+@import './notification-list/notification-list.css';
