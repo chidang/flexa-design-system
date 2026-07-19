@@ -1,0 +1,53 @@
+/* U13-B buyer-track HARNESS utilities (doc 15 §4). Layout-only, token-based
+   (var(--fx-*)) framing for the buyer screens — never component appearance
+   (every visual is a flexa-ui component). Owned by the buyer track; imported
+   from buyer/routes.tsx. Mirrors the discipline of screens/screens.css. */
+
+/* Dashboard metric row — 3-up, collapsing to a single column when narrow. */
+.bx-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--fx-space-4, 1rem);
+}
+
+/* Header search box — caps the SearchBar width beside a page title. */
+.bx-search {
+  width: min(22rem, 100%);
+}
+
+/* Trailing meta cluster on notification rows (unread dot + time). */
+.bx-notif-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2, 0.5rem);
+}
+
+/* Trailing meta cluster on payment-method rows (default badge + menu). */
+.bx-method-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-2, 0.5rem);
+}
+
+/* Small square listing thumbnail in the "to review" cards (size via the img's
+   width/height attributes; this only rounds + crops). */
+.bx-thumb {
+  border-radius: var(--fx-radius-md, 0.375rem);
+  object-fit: cover;
+  flex: none;
+}
+
+/* Inline link inside a Table cell (wallet order column). */
+.bx-link {
+  color: var(--fx-color-primary, #4f46e5);
+  text-decoration: none;
+}
+.bx-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .bx-metrics {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

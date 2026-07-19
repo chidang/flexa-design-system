@@ -1,0 +1,45 @@
+/* U13-C seller-track HARNESS scaffolding (doc 15 §4) — layout-only utilities
+   the seller screens need beyond the shared ks-* set in screens.css. Same rules:
+   these frame the page, never a flexa-ui component's appearance; token-based
+   (var(--fx-*)) only, no hex/px literals. Prefixed `sl-` to avoid clashing with
+   the shared `ks-` utilities. Imported once from seller/routes.tsx. */
+
+/* Metric / statistic row — auto-fitting equal columns that wrap on narrow. */
+.sl-metric-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--fx-space-4, 1rem);
+  align-items: stretch;
+}
+
+/* Three-up balance row for Earnings (keeps the Withdraw card first). */
+.sl-balance-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--fx-space-4, 1rem);
+  align-items: stretch;
+}
+
+/* Fulfilment content + meta rail (seller Order Detail) — reuses ks-cols ratios
+   but keeps its own name so future tweaks don't touch the shared file. */
+.sl-fulfil-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--fx-space-6, 2rem);
+  align-items: start;
+}
+
+/* Editor form + live-preview rail. */
+.sl-editor-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: var(--fx-space-6, 2rem);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .sl-fulfil-cols,
+  .sl-editor-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
