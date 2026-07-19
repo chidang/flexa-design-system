@@ -29,7 +29,7 @@
  *      seller-orders endpoint with pagination/filters is deferred.
  */
 import { Route, Routes } from 'react-router-dom';
-import type { ScreenLink } from '../shared';
+import { ScreenNotFound, type ScreenLink } from '../shared';
 import { SellerDashboard } from './SellerDashboard';
 import { SellerListings } from './SellerListings';
 import { ListingEditor } from './ListingEditor';
@@ -55,6 +55,7 @@ export function SellerRoutes() {
       <Route path="orders" element={<SellerOrders />} />
       <Route path="orders/:id" element={<SellerOrderDetail />} />
       <Route path="earnings" element={<SellerEarnings />} />
+      <Route path="*" element={<ScreenNotFound />} />
     </Routes>
   );
 }

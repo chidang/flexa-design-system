@@ -45,8 +45,12 @@ export function FxEmptyState({
           {media}
         </div>
       )}
-      <p className="fx-empty-state-title">{title}</p>
-      {description != null && <p className="fx-empty-state-description">{description}</p>}
+      {/* div, not p: title/description accept block content (FxErrorPage passes
+          its own <h1>), and an element inside <p> is invalid nesting — the
+          browser force-closes the <p>, breaking the DOM. Styling is class-based
+          so the element swap is invisible. */}
+      <div className="fx-empty-state-title">{title}</div>
+      {description != null && <div className="fx-empty-state-description">{description}</div>}
       {actions != null && <div className="fx-empty-state-actions">{actions}</div>}
     </div>
   );

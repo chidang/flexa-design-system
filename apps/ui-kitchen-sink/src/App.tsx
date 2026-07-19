@@ -23,6 +23,7 @@ import { SearchResults } from './screens/SearchResults';
 import { ListingDetail } from './screens/ListingDetail';
 import { Checkout } from './screens/Checkout';
 import { OrderDetail } from './screens/OrderDetail';
+import { ScreenNotFound } from './screens/shared';
 import { BuyerRoutes } from './screens/buyer/routes';
 import { SellerRoutes } from './screens/seller/routes';
 import { AdminRoutes } from './screens/admin/routes';
@@ -86,6 +87,8 @@ export function App() {
                   <Route path="seller/*" element={<SellerRoutes />} />
                   <Route path="admin/*" element={<AdminRoutes />} />
                   <Route path="messages/*" element={<MessagesRoutes />} />
+                  {/* Unknown /screens paths → a real 404 screen, not a blank. */}
+                  <Route path="*" element={<ScreenNotFound />} />
                 </Routes>
               </FxToastRegion>
             </div>

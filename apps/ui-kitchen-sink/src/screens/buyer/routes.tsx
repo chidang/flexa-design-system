@@ -21,7 +21,7 @@
  *     primary Write-a-review button.
  */
 import { Route, Routes } from 'react-router-dom';
-import type { ScreenLink } from '../shared';
+import { ScreenNotFound, type ScreenLink } from '../shared';
 import { BuyerDashboard } from './BuyerDashboard';
 import { OrdersList } from './OrdersList';
 import { Notifications } from './Notifications';
@@ -70,6 +70,7 @@ export function BuyerRoutes() {
       <Route path="notifications" element={<Notifications />} />
       <Route path="wallet" element={<Wallet />} />
       <Route path="reviews" element={<Reviews />} />
+      <Route path="*" element={<ScreenNotFound />} />
     </Routes>
   );
 }
