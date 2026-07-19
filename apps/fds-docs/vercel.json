@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/kitchen-sink/screens/:path*",
+      "destination": "/kitchen-sink/#/screens/:path*",
+      "permanent": false
+    }
+  ]
+}

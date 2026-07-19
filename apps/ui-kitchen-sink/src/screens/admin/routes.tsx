@@ -26,7 +26,7 @@
  *    wasn't needed for this track's screens.
  */
 import { Route, Routes } from 'react-router-dom';
-import type { ScreenLink } from '../shared';
+import { ScreenNotFound, type ScreenLink } from '../shared';
 import { AdminDashboard } from './AdminDashboard';
 import { ListingsModeration } from './ListingsModeration';
 import { DisputesQueue } from './DisputesQueue';
@@ -46,6 +46,7 @@ export function AdminRoutes() {
       <Route path="moderation" element={<ListingsModeration />} />
       <Route path="disputes" element={<DisputesQueue />} />
       <Route path="disputes/:id" element={<DisputeDetail />} />
+      <Route path="*" element={<ScreenNotFound />} />
     </Routes>
   );
 }

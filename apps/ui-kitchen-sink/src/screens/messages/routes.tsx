@@ -20,7 +20,7 @@
  *   messages, which is what the screen needs to demo. No workaround needed.
  */
 import { Route, Routes } from 'react-router-dom';
-import type { ScreenLink } from '../shared';
+import { ScreenNotFound, type ScreenLink } from '../shared';
 import { MessagesScreen } from './MessagesScreen';
 import './messages.css';
 
@@ -39,6 +39,7 @@ export function MessagesRoutes() {
     <Routes>
       <Route index element={<MessagesScreen />} />
       <Route path=":conversationId" element={<MessagesScreen />} />
+      <Route path="*" element={<ScreenNotFound />} />
     </Routes>
   );
 }
