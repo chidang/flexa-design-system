@@ -13,6 +13,11 @@
  * 'detail'`); when the detail pane is showing on mobile, a back button surfaces
  * to return to the list. The separator carries the full range ARIA
  * (`aria-valuenow/min/max`), so assistive tech reads the current width.
+ *
+ * Queue-walk (doc 14 §11 G6): pass `onQueuePrev` / `onQueueNext` to walk a
+ * review queue — `J` / `K` step next/prev while focus is inside the split view
+ * (never from editable controls), and a visible Previous / Next button pair at
+ * the top of the detail pane makes the affordance discoverable.
  */
 import { useCallback, useRef, useState } from 'react';
 import type { KeyboardEvent, PointerEvent, ReactNode } from 'react';
@@ -44,6 +49,21 @@ export interface FxSplitViewProps {
   backLabel?: string;
   /** Fired when the mobile back button is pressed (return to list). */
   onBack?: () => void;
+  /**
+   * Queue-walk (doc 14 §11 G6): step to the previous queue item. When either
+   * queue handler is set, a visible Previous / Next button pair renders at the
+   * top of the detail pane and `K` / `J` (outside editable controls) walk the
+   * queue. Omit at the queue edge to disable that direction.
+   */
+  onQueuePrev?: () => void;
+  /** Queue-walk (G6): step to the next queue item. See `onQueuePrev`. */
+  onQueueNext?: () => void;
+  /** Accessible name for the queue-walk button group. Defaults to `'Queue'`. */
+  queueNavLabel?: string;
+  /** Queue-walk previous button label. Defaults to `'Previous'`. */
+  queuePrevLabel?: string;
+  /** Queue-walk next button label. Defaults to `'Next'`. */
+  queueNextLabel?: string;
   className?: string;
 }
 
@@ -51,6 +71,11 @@ export interface FxSplitViewProps {
 const STEP = 16;
 
 const clamp = (n: number, lo: number, hi: number): number => Math.max(lo, Math.min(hi, n));
+
+/** J/K must never steal keys from a control the user is typing/choosing in. */
+const isEditableTarget = (t: EventTarget | null): boolean =>
+  t instanceof HTMLElement &&
+  t.closest('input, textarea, select, [contenteditable], [role="combobox"], [role="textbox"]') !== null;
 
 export function FxSplitView({
   list,
@@ -64,6 +89,11 @@ export function FxSplitView({
   separatorLabel = 'Resize panes',
   backLabel = 'Back',
   onBack,
+  onQueuePrev,
+  onQueueNext,
+  queueNavLabel = 'Queue',
+  queuePrevLabel = 'Previous',
+  queueNextLabel = 'Next',
   className,
 }: FxSplitViewProps) {
   const controlled = listWidth !== undefined;
@@ -128,11 +158,33 @@ export function FxSplitView({
   const showDetail = collapsed !== 'list';
   const showSeparator = collapsed === 'none';
 
+  // Queue-walk (G6): J = next, K = prev, anywhere inside the split view except
+  // editable controls. The visible button pair carries the same handlers.
+  const queueEnabled = onQueuePrev !== undefined || onQueueNext !== undefined;
+
+  const onQueueKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLDivElement>) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const key = e.key.toLowerCase();
+      if (key !== 'j' && key !== 'k') return;
+      if (isEditableTarget(e.target)) return;
+      if (key === 'j' && onQueueNext) {
+        e.preventDefault();
+        onQueueNext();
+      } else if (key === 'k' && onQueuePrev) {
+        e.preventDefault();
+        onQueuePrev();
+      }
+    },
+    [onQueueNext, onQueuePrev],
+  );
+
   return (
     <div
       ref={rootRef}
       className={className ? `fx-split-view ${className}` : 'fx-split-view'}
       data-collapsed={collapsed !== 'none' ? collapsed : undefined}
+      onKeyDown={queueEnabled ? onQueueKeyDown : undefined}
     >
       {showList && (
         <div className="fx-split-view-list" style={{ width: `${width}px` }}>
@@ -164,6 +216,28 @@ export function FxSplitView({
               <FxIcon name="back" size={16} />
               <span>{backLabel}</span>
             </button>
+          )}
+          {queueEnabled && (
+            <div className="fx-split-view-nav" role="group" aria-label={queueNavLabel}>
+              <button
+                type="button"
+                className="fx-split-view-nav-btn"
+                disabled={!onQueuePrev}
+                onClick={onQueuePrev}
+              >
+                <span>{queuePrevLabel}</span>
+                <kbd className="fx-split-view-nav-kbd" aria-hidden="true">K</kbd>
+              </button>
+              <button
+                type="button"
+                className="fx-split-view-nav-btn"
+                disabled={!onQueueNext}
+                onClick={onQueueNext}
+              >
+                <span>{queueNextLabel}</span>
+                <kbd className="fx-split-view-nav-kbd" aria-hidden="true">J</kbd>
+              </button>
+            </div>
           )}
           {detail}
         </div>

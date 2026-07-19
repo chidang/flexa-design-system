@@ -6,8 +6,10 @@
  * `EscrowPerspective`/`EscrowAction`/`PartyRef` are component-local shapes
  * documented in `props`.
  */
+import { createElement } from 'react';
 import type { ShowcaseSpec } from '../showcase-types';
 import { ESCROW_STAGES, type EscrowStage } from '../enums';
+import { FxButton } from '../button/button';
 import { FxEscrowTimeline, type EscrowEvent, type EscrowPerspective } from './escrow-timeline';
 
 const PERSPECTIVES: EscrowPerspective[] = ['buyer', 'seller', 'admin'];
@@ -79,6 +81,22 @@ export const escrowTimelineShowcase: ShowcaseSpec = {
       },
       note: 'Seller gets Release only when sellerCanRelease is set.',
     },
+    {
+      label: 'admin · inline stage actions',
+      props: {
+        events: eventsUpTo('disputed'),
+        stage: 'disputed',
+        amount,
+        perspective: 'admin',
+        disputed: true,
+        stageActions: [
+          createElement(FxButton, { key: 'refund', variant: 'primary', size: 'sm' }, 'Refund buyer'),
+          createElement(FxButton, { key: 'release', variant: 'secondary', size: 'sm' }, 'Release to seller'),
+          createElement(FxButton, { key: 'partial', variant: 'ghost', size: 'sm' }, 'Partial refund…'),
+        ],
+      },
+      note: 'stageActions (G8) replaces the derived buttons on the current stage — the host wires its real resolve flow inline.',
+    },
   ],
   props: [
     { name: 'events', type: 'EscrowEvent[]', required: true, description: 'Recorded steps ({ id, stage, status, actor?, at?, note? }).' },
@@ -89,6 +107,7 @@ export const escrowTimelineShowcase: ShowcaseSpec = {
     { name: 'disputed', type: 'boolean', description: 'Force disputed styling (also implied by stage === "disputed").' },
     { name: 'sellerCanRelease', type: 'boolean', default: 'false', description: 'Whether the seller may release directly.' },
     { name: 'releaseNote', type: 'string', description: 'Release-conditions note under the held amount.' },
+    { name: 'stageActions', type: 'ReactNode', description: 'Inline actions for the current stage — replaces the derived perspective buttons when provided (G8).' },
     { name: 'locale', type: 'string', description: 'Locale for Money formatting.' },
     { name: 'labels', type: '{ approve; release; dispute; refund; remind; heldAmount }', description: 'i18n copy overrides.' },
   ],

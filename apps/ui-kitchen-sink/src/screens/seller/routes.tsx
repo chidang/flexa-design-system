@@ -15,11 +15,11 @@
  *      search handler now derives approved cards straight from the moderation
  *      store (`approvedModerationCards` in handlers.core.ts), so the seam
  *      functions above are unused-but-kept for third-party composition.
- *   2. FxImageGalleryUpload needs real File objects (upload/reorder/cover). The
- *      Listing Editor media step uses a Description Textarea + a placeholder
- *      cover in the live preview instead, so fixtures stay deterministic (no
- *      binary assets). CLOSEST used: FxTextarea + FxAlert; the gallery upload is
- *      noted for a future media-backed harness.
+ *   2. FxImageGalleryUpload needs real File objects (upload/reorder/cover).
+ *      CLOSED by P-E2 (G4): the gallery grew a `fixtureAdd` fixture mode
+ *      (URL-based items, no File backing) and the Listing Editor media step now
+ *      hosts it — deterministic SVG data-URI photos, drag/keyboard reorder,
+ *      first-photo cover driving the live preview.
  *   3. Order fulfil "Respond to dispute" links back to this order rather than a
  *      seller dispute evidence view (that lives in the Admin track's Dispute
  *      Detail, §2.13). CLOSEST: an FxAlert with a link; the seller evidence pane

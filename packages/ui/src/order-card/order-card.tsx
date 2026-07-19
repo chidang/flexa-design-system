@@ -15,7 +15,13 @@
  *   delivered, completed→ Review (seller: View)
  *   else               → View
  * The chosen action id is passed to `onAction`.
+ *
+ * `actions` (ui-kit doc 14 §11 G1/G3, additive) replaces the mapped default
+ * with host-provided footer content, so a stage-specific shortcut ("Approve" on
+ * a delivered row, "Write a review" on a completed one) can render inline.
+ * When the prop is absent the footer is byte-identical to the mapped default.
  */
+import type { ReactNode } from 'react';
 import type { OrderStatus, Tone } from '../enums';
 import type { Money } from '../currency-input/currency-input';
 import { statusTone, formatStatusLabel } from '../status-tone';
@@ -85,6 +91,12 @@ export interface FxOrderCardProps {
   perspective?: OrderPerspective;
   /** Fired with the resolved action id and the order. */
   onAction?: (action: string, order: OrderSummary) => void;
+  /**
+   * Overrides the status-derived footer action with host content (G1) — e.g. an
+   * inline "Approve" shortcut on a delivered row, or a "Write a review" CTA on
+   * a reviewable order (G3). The mapped default (and `onAction`) is skipped.
+   */
+  actions?: ReactNode;
   /** Baked-in strings. Merged over the English defaults. */
   labels?: Partial<OrderCardLabels>;
   /** Locale for Money formatting. Defaults to the runtime env locale. */
@@ -127,6 +139,7 @@ export function FxOrderCard({
   order,
   perspective = 'buyer',
   onAction,
+  actions,
   labels,
   locale,
   className,
@@ -160,13 +173,15 @@ export function FxOrderCard({
   const footer = (
     <div className="fx-order-card-footer">
       <div className="fx-order-card-total">{formatMoney(order.total, locale)}</div>
-      <FxButton
-        variant={action.id === 'pay' ? 'primary' : 'secondary'}
-        size="sm"
-        onClick={() => onAction?.(action.id, order)}
-      >
-        {action.label}
-      </FxButton>
+      {actions ?? (
+        <FxButton
+          variant={action.id === 'pay' ? 'primary' : 'secondary'}
+          size="sm"
+          onClick={() => onAction?.(action.id, order)}
+        >
+          {action.label}
+        </FxButton>
+      )}
     </div>
   );
 

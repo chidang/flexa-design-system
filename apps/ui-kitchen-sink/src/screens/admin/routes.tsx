@@ -5,22 +5,21 @@
  * this directory. Mounted at `/screens/admin/*` — route paths are relative.
  *
  * GAPS (doc 15 §6 — closest component + what we did instead):
- *  • Data Management Toolbar — has no `tabs` region, so the Listings Moderation
- *    "Pending / Reported / All" Tabs (doc 08 §2.14) aren't rendered; the queue
- *    shows pending-first ordering with decided items appended, plus a header
- *    pending-count Badge. Reported-review moderation is out of this track's
- *    fixtures (no review-report shape in the shared mock).
- *  • Right Drawer for review (doc 08 §2.14 wireframe) — used Split View instead
- *    (a persistent right pane, which the §2.14 Desktop/Wide delta itself calls
- *    for). Split View has no "queue-walk J/K next/prev" affordance, so keyboard
- *    queue momentum (doc 08 §2.14 interaction 2) isn't wired.
- *  • Confirmation Dialog — has no `confirmDisabled` prop and takes no children,
- *    so the Partial-refund flow (amount input + split preview + gated confirm,
- *    doc 08 §2.13 interaction 1) uses FxDialog with a manually-disabled confirm
- *    button; full refund / release still use Confirmation Dialog.
- *  • Escrow Timeline — `perspective="admin"` renders the stages but exposes no
- *    admin resolve actions inline; the resolution Card owns those buttons
- *    instead (matches the §2.13 wireframe's separate Resolution region).
+ *  • Data Management Toolbar `tabs` region — CLOSED by P-E2 (G5): the toolbar
+ *    grew a `tabs` slot and Listings Moderation renders Pending / All view
+ *    tabs in it. Reported-review moderation stays out — no review-report shape
+ *    exists in the shared fixtures.
+ *  • Split View queue-walk — CLOSED by P-E2 (G6): `onQueuePrev`/`onQueueNext`
+ *    add J/K keyboard momentum + a visible Previous/Next pair; Listings
+ *    Moderation walks its queue with them (doc 08 §2.14 interaction 2).
+ *  • Confirmation Dialog — CLOSED by P-E2 (G7): `confirmDisabled` + children
+ *    landed; the Partial-refund flow (amount input + split preview + gated
+ *    confirm, doc 08 §2.13 interaction 1) now uses Confirmation Dialog.
+ *  • Escrow Timeline inline admin actions — CLOSED by P-E2 (G8): `stageActions`
+ *    slot replaces the derived (previously inert) admin buttons; Dispute Detail
+ *    renders its real resolve actions inline on the disputed stage. The
+ *    separate Resolution region is KEPT — the mandatory rationale reads better
+ *    next to its own action row (§2.13 wireframe).
  *  • Audit Log vs. Audit Timeline — the dashboard "recent activity" uses Audit
  *    Timeline (compact, entity-agnostic); a full sortable Audit Log table
  *    wasn't needed for this track's screens.

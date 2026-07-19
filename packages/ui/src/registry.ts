@@ -12,6 +12,7 @@ import { inputShowcase } from './input/input.showcase';
 import { textareaShowcase } from './textarea/textarea.showcase';
 import { checkboxShowcase } from './checkbox/checkbox.showcase';
 import { radioGroupShowcase } from './radio-group/radio-group.showcase';
+import { segmentedControlShowcase } from './segmented-control/segmented-control.showcase';
 import { switchShowcase } from './switch/switch.showcase';
 import { fieldGroupShowcase } from './field-group/field-group.showcase';
 import { validationMessageShowcase } from './validation-message/validation-message.showcase';
@@ -150,6 +151,8 @@ import { aiConfidenceIndicatorShowcase } from './ai-confidence-indicator/ai-conf
 import { aiDiffViewerShowcase } from './ai-diff-viewer/ai-diff-viewer.showcase';
 import { approveRejectPanelShowcase } from './approve-reject-panel/approve-reject-panel.showcase';
 import { aiActivityHistoryShowcase } from './ai-activity-history/ai-activity-history.showcase';
+// P-E1 — buyer-domain gaps (ui-kit doc 16 §1, doc 14 §11 G2)
+import { notificationListShowcase } from './notification-list/notification-list.showcase';
 
 /** The 10 inventory sections (README), in display order. Empty ones hide. */
 export const UI_CATEGORIES: UiCategory[] = [
@@ -173,6 +176,7 @@ export const FLEXA_UI_COMPONENTS: ShowcaseSpec[] = [
   textareaShowcase,
   checkboxShowcase,
   radioGroupShowcase,
+  segmentedControlShowcase,
   switchShowcase,
   fieldGroupShowcase,
   validationMessageShowcase,
@@ -311,6 +315,8 @@ export const FLEXA_UI_COMPONENTS: ShowcaseSpec[] = [
   aiDiffViewerShowcase,
   approveRejectPanelShowcase,
   aiActivityHistoryShowcase,
+  // P-E1 — buyer-domain gaps (doc 16 §1)
+  notificationListShowcase,
 ];
 
 /** All component slugs (for `generateStaticParams` / route generation). */

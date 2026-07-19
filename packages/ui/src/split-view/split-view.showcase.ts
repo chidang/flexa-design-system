@@ -38,6 +38,11 @@ export const splitViewShowcase: ShowcaseSpec = {
     { label: 'narrow list', props: { list, detail, defaultListWidth: 280 } },
     { label: 'collapsed to list (mobile)', props: { list, detail, collapsed: 'list' } },
     { label: 'collapsed to detail (back button)', props: { list, detail, collapsed: 'detail' } },
+    {
+      label: 'queue walk (J/K + buttons)',
+      props: { list, detail, onQueuePrev: () => undefined, onQueueNext: () => undefined },
+      note: 'onQueuePrev/onQueueNext surface a Previous/Next pair in the detail pane; J/K walk the queue (G6). Omit a handler at the queue edge to disable that direction.',
+    },
   ],
   props: [
     { name: 'list', type: 'ReactNode', required: true, description: 'Master pane content.' },
@@ -58,15 +63,19 @@ export const splitViewShowcase: ShowcaseSpec = {
     },
     { name: 'separatorLabel', type: 'string', default: "'Resize panes'", description: 'Accessible name for the separator.' },
     { name: 'backLabel', type: 'string', default: "'Back'", description: 'Detail-pane back button label (collapsed).' },
+    { name: 'queueNavLabel', type: 'string', default: "'Queue'", description: 'Accessible name for the queue-walk button group (G6).' },
+    { name: 'queuePrevLabel / queueNextLabel', type: 'string', default: "'Previous' / 'Next'", description: 'Queue-walk button labels.' },
   ],
   events: [
     { name: 'onListWidthChange', payload: '(width: number)', description: 'Fired on every drag/keyboard resize.' },
     { name: 'onBack', payload: '()', description: 'Mobile back button pressed / Enter on the separator.' },
+    { name: 'onQueuePrev / onQueueNext', payload: '()', description: 'Queue-walk step (K/J or the visible buttons); either enables the affordance, omit one to disable that direction.' },
   ],
   keyboard: [
     { keys: 'Tab', action: 'Focus the resize separator' },
     { keys: '← / →', action: 'Resize the list pane in 16px steps' },
     { keys: 'Enter', action: 'Toggle the collapsed pane (surfaces via onBack)' },
+    { keys: 'J / K', action: 'Next / previous queue item (when queue-walk handlers are set; never from editable controls)' },
   ],
   aria: [
     { attr: 'role', value: 'separator', note: 'On the resize handle.' },

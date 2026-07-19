@@ -367,10 +367,31 @@ export const adminHandlers: HttpHandler[] = [
       ],
     });
 
+    // Full dispute case, same shape as the GET — DisputeDetail re-renders its
+    // header (amount, names) from this response (P-D e2e finding, doc 16).
+    // Runtime disputes without a seeded case synthesize the GET's minimal case.
+    const base: DisputeCase = found ?? {
+      id,
+      orderId: order.id,
+      orderNumber: order.number,
+      buyerName: order.shippingAddress.recipient,
+      sellerName: order.sellerName,
+      sellerId: order.sellerId,
+      reason: 'other',
+      status: 'open',
+      amount: order.total,
+      slaDueAt: addHours(order.updatedAt, 72),
+      buyerStatement: 'A dispute was opened for this order.',
+      sellerStatement: null,
+      buyerEvidence: [],
+      sellerEvidence: [],
+      resolution: null,
+      openedAt: order.updatedAt,
+      resolvedAt: null,
+    };
     return HttpResponse.json({
       dispute: {
-        id,
-        orderId: order.id,
+        ...base,
         status: 'resolved',
         resolution: {
           outcome,

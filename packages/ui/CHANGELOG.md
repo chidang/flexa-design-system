@@ -8,7 +8,11 @@ tracking the Flexa Design System major it targets.
 ## [0.1.0] — 2026-07-18
 
 Initial release. 133 accessible, token-only React components built on
-`flexa-design-system@^2`, delivered across the U1→U11 slices.
+`flexa-design-system@^2`, delivered across the U0→U13 build slices (skeleton +
+CI gates → component categories → reference screens → publish readiness) plus
+an R1–R7 refinement pass (typography repair + semantic type tier,
+pressed/spinner/disabled interaction states, focus rings/contrast/tap targets,
+calm surfaces, micro-consistency + motion-token gate).
 
 ### Added
 
@@ -34,6 +38,10 @@ Initial release. 133 accessible, token-only React components built on
   for building reference screens. `msw` is an optional peer.
 - **Build artifacts** — ESM + `.d.ts` (`dist/`), a bundled `dist/styles.css`, and
   compiled mocks (`dist/mocks/`).
+- **Reference screens** — 18 marketplace workflow screens (buyer, seller, admin,
+  messages personas over one shared mock db) composed in the `ui-kitchen-sink`
+  workbench as living proof the kit builds real product screens with zero
+  one-off CSS. The screens are a repo workbench, not part of the npm package.
 
 ### Notes
 

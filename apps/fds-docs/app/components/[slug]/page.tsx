@@ -17,6 +17,12 @@ import {
   PropsTable,
 } from '../../../src/componentTables';
 import { Blocks } from '../../../src/blocks';
+import { loadComponentApi } from '../../../src/componentApi';
+import {
+  ApiOverview,
+  ExampleSource,
+  GeneratedPropsTable,
+} from '../../../src/componentApiTables';
 
 interface Params {
   slug: string;
@@ -37,6 +43,9 @@ export default function ComponentPage({ params }: { params: Params }) {
   if (!spec) notFound();
   const prose = loadProse(spec.slug);
   const url = contractUrl(spec);
+  // Generated at build time from packages/ui sources (scripts/generate-component-api.mjs);
+  // absent in a dev server started before the first generation → curated fallback.
+  const api = loadComponentApi(spec.slug);
 
   return (
     <>
@@ -61,11 +70,16 @@ export default function ComponentPage({ params }: { params: Params }) {
 
       {prose?.blocks ? <Blocks blocks={prose.blocks} /> : null}
 
+      {api ? <ApiOverview api={api} /> : null}
+
       <EnumChips spec={spec} />
-      <PropsTable spec={spec} />
+      {/* Props extracted from the TypeScript types; curated table is the fallback. */}
+      {api && api.props.length > 0 ? <GeneratedPropsTable api={api} /> : <PropsTable spec={spec} />}
       <EventsTable spec={spec} />
       <KeyboardTable spec={spec} />
       <AriaTable spec={spec} />
+
+      {api ? <ExampleSource api={api} /> : null}
     </>
   );
 }

@@ -1,11 +1,12 @@
 /**
  * U13-D Listings Moderation (doc 08 §2.14, flow A1) — keep the catalog clean.
  * Composes flexa-ui end to end against the MSW mock backend: a Data Management
- * Toolbar (search + column density + result count) over a queue Table of
- * `pending` listings from the SHARED `moderation.ts` store (the seller track
- * submits into it; this track consumes it). Selecting a row opens it for review
- * and exposes the Approve-Reject Panel (reject requires a reason); each decision
- * appends an audit entry server-side.
+ * Toolbar (search + density + result count + Pending/All view tabs, G5) over a
+ * queue Table of listings from the SHARED `moderation.ts` store (the seller
+ * track submits into it; this track consumes it). Selecting a row opens it for
+ * review and exposes the Approve-Reject Panel (reject requires a reason); each
+ * decision appends an audit entry server-side. J/K (and the Split View's
+ * Previous/Next pair, G6) walk the queue without leaving the review pane.
  *
  * States trio (doc 15 §4): skeleton while loading, Inline Error + retry on
  * failure, Empty State when the queue is clear.
@@ -26,10 +27,12 @@ import {
   FxSkeletonLoader,
   FxSplitView,
   FxTable,
+  FxTabs,
   FxTag,
   useToast,
   type Density,
   type OptionItem,
+  type TabItem,
   type TableColumn,
   type Tone,
 } from 'flexa-ui-kit';
@@ -67,6 +70,9 @@ export function ListingsModeration() {
 
   const [search, setSearch] = useState('');
   const [density, setDensity] = useState<Density>('comfortable');
+  // View-scoping tabs (G5): the shared fixtures carry no review reports, so the
+  // queue renders the views the mock supports — Pending / All.
+  const [view, setView] = useState<'pending' | 'all'>('pending');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [reasonCode, setReasonCode] = useState<string>(REASON_OPTIONS[0]!.value);
   const [busy, setBusy] = useState(false);
@@ -99,13 +105,27 @@ export function ListingsModeration() {
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return rows;
-    return rows.filter(
+    const scoped = view === 'pending' ? rows.filter((r) => r.status === 'pending') : rows;
+    if (!q) return scoped;
+    return scoped.filter(
       (r) => r.title.toLowerCase().includes(q) || r.sellerName.toLowerCase().includes(q),
     );
-  }, [rows, search]);
+  }, [rows, search, view]);
 
   const selected = useMemo(() => rows.find((r) => r.id === selectedId) ?? null, [rows, selectedId]);
+
+  // Queue-walk (G6): J/K + the Split View's Previous/Next pair step the
+  // selection through the visible queue; a handler is absent at each edge.
+  const selectedIndex = useMemo(
+    () => (selectedId ? filtered.findIndex((r) => r.id === selectedId) : -1),
+    [filtered, selectedId],
+  );
+  const queuePrev =
+    selectedIndex > 0 ? () => setSelectedId(filtered[selectedIndex - 1]!.id) : undefined;
+  const queueNext =
+    filtered.length > 0 && selectedIndex < filtered.length - 1
+      ? () => setSelectedId(filtered[selectedIndex + 1]!.id)
+      : undefined;
 
   const decide = useCallback(
     async (action: 'approve' | 'reject', reason?: string) => {
@@ -183,6 +203,13 @@ export function ListingsModeration() {
     );
   }
 
+  // Toolbar tabs slot (G5) — Pending / All view tabs; the table below is the
+  // effective panel, so the items carry no panel content.
+  const viewTabs: TabItem[] = [
+    { id: 'pending', label: 'Pending', badge: pending.length, content: null },
+    { id: 'all', label: 'All', badge: rows.length, content: null },
+  ];
+
   const queueTable = (
     <div className="ks-stack">
       <FxDataManagementToolbar
@@ -193,6 +220,13 @@ export function ListingsModeration() {
         onDensityChange={setDensity}
         onRefresh={() => setReloadKey((k) => k + 1)}
         resultCount={filtered.length}
+        tabs={
+          <FxTabs
+            items={viewTabs}
+            value={view}
+            onChange={(id) => setView(id as 'pending' | 'all')}
+          />
+        }
       />
       <FxTable
         columns={columns}
@@ -285,7 +319,14 @@ export function ListingsModeration() {
       {loading && rows.length === 0 ? (
         <FxSkeletonLoader shape="rect" height="20rem" />
       ) : (
-        <FxSplitView list={queueTable} detail={reviewPane} defaultListWidth={560} />
+        <FxSplitView
+          list={queueTable}
+          detail={reviewPane}
+          defaultListWidth={560}
+          onQueuePrev={queuePrev}
+          onQueueNext={queueNext}
+          queueNavLabel="Moderation queue"
+        />
       )}
     </div>
   );

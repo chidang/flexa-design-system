@@ -18,6 +18,16 @@ const uploading: UploadFile[] = [
   { id: '2', name: 'wip.jpg', size: 1_400_000, type: 'image/jpeg', status: 'uploading', progress: 45 },
 ];
 
+/** Fixture mode (G4): the add-tile appends a deterministic pre-seeded item. */
+const fixtureAdd = (index: number): UploadFile => ({
+  id: `fx-${index + 1}`,
+  name: `photo-${index + 1}.jpg`,
+  size: 500_000,
+  type: 'image/jpeg',
+  status: 'success',
+  url: `https://example.com/photo-${index + 1}.jpg`,
+});
+
 export const imageGalleryUploadShowcase: ShowcaseSpec = {
   name: 'ImageGalleryUpload',
   slug: 'image-gallery-upload',
@@ -34,6 +44,11 @@ export const imageGalleryUploadShowcase: ShowcaseSpec = {
     { label: 'not reorderable', props: { value: gallery, reorderable: false } },
     { label: 'custom cover label', props: { value: gallery, galleryLabels: { coverBadge: 'Main' } } },
     { label: 'disabled', props: { value: gallery, disabled: true } },
+    {
+      label: 'fixture mode (no File backing)',
+      props: { defaultValue: gallery.slice(0, 2), fixtureAdd, addLabel: 'Add photo' },
+      note: 'fixtureAdd turns the add-tile into a plain button appending pre-seeded items — deterministic mocks demo add/reorder/cover without the OS picker.',
+    },
   ],
   props: [
     { name: 'value / defaultValue', type: 'UploadFile[]', default: '— / []', description: 'Controlled / uncontrolled list; index 0 = cover.' },
@@ -42,6 +57,7 @@ export const imageGalleryUploadShowcase: ShowcaseSpec = {
     { name: 'reorderable', type: 'boolean', default: 'true', description: 'Enable the drag handle + keyboard reorder.' },
     { name: 'onReorder', type: '(ids: string[]) => void', description: 'New id order after a reorder settles.' },
     { name: 'galleryLabels', type: '{ remove; reorder; coverBadge; moved; lifted; dropped; cancelled }', default: 'English set', description: 'i18n; move templates take {name}/{n}/{total}.' },
+    { name: 'fixtureAdd', type: '(index: number) => UploadFile | null', description: 'Fixture mode: the add-tile appends the returned URL-based item (no File backing); null ignores the press.' },
     { name: 'status (per item)', type: "'queued' | 'uploading' | 'success' | 'error'", description: 'Item state → data-status.' },
   ],
   events: [

@@ -4,10 +4,12 @@
  * → case + order snapshot; `POST /v1/admin/disputes/:id/resolve` → decision).
  *
  * Layout: a case header (Breadcrumb + status Badge + SLA Alert + Escrow
- * Timeline, admin perspective), a Split View of buyer vs. seller evidence
+ * Timeline, admin perspective, with the resolve actions inline on the disputed
+ * stage via `stageActions`, G8), a Split View of buyer vs. seller evidence
  * (statement + Media Grid), an order + escrow Description List, and a resolution
  * Card with three money-moving actions — Refund buyer / Release to seller /
- * Partial refund (Currency Input, validated 0 < x < total). A resolution is
+ * Partial refund (Currency Input, validated 0 < x < total, inside a
+ * Confirmation Dialog with a custom body + gated confirm, G7). A resolution is
  * terminal: it mutates the SHARED order's escrow + payment to a LEGAL final pair
  * (doc 07 §0.3) so the buyer's Order Detail reflects the outcome; an audit entry
  * is appended server-side. Every outcome requires a mandatory note and a
@@ -29,7 +31,6 @@ import {
   FxConfirmationDialog,
   FxCurrencyInput,
   FxDescriptionList,
-  FxDialog,
   FxEmptyState,
   FxEscrowTimeline,
   FxFieldGroup,
@@ -285,12 +286,32 @@ export function DisputeDetail() {
         />
       )}
 
+      {/* Inline stage actions (G8): the disputed stage carries the real resolve
+          actions (same handlers + note gate as the Resolution region below) —
+          they replace the derived admin release/refund pair, which had nothing
+          to call here. The separate Resolution region stays: the mandatory
+          rationale reads better next to its own action row. */}
       <FxEscrowTimeline
         events={timelineEvents(order)}
         stage={order.escrow.stage}
         amount={dispute.amount}
         perspective="admin"
         disputed={order.escrow.stage === 'disputed'}
+        stageActions={
+          resolved ? null : (
+            <>
+              <FxButton size="sm" variant="primary" disabled={!note.trim() || busy} onClick={() => setConfirm('refund')}>
+                Refund buyer
+              </FxButton>
+              <FxButton size="sm" variant="secondary" disabled={!note.trim() || busy} onClick={() => setConfirm('release')}>
+                Release to seller
+              </FxButton>
+              <FxButton size="sm" variant="ghost" disabled={!note.trim() || busy} onClick={() => setPartialOpen(true)}>
+                Partial refund…
+              </FxButton>
+            </>
+          )
+        }
       />
 
       {/* Evidence split view. */}
@@ -378,33 +399,20 @@ export function DisputeDetail() {
         }}
       />
 
-      {/* Partial refund dialog with split preview. */}
-      <FxDialog
+      {/* Partial refund — Confirmation Dialog with a custom body (amount +
+          split preview) and a confirm gated on a valid amount (G7). */}
+      <FxConfirmationDialog
         open={partialOpen}
         onOpenChange={(o) => setPartialOpen(o)}
         title="Partial refund"
-        footer={
-          <>
-            <FxButton variant="secondary" onClick={() => setPartialOpen(false)} disabled={busy}>
-              Cancel
-            </FxButton>
-            <FxButton
-              variant="primary"
-              disabled={!partialValid}
-              loading={busy}
-              onClick={() => {
-                if (partialAmount) void resolve('partial', partialAmount).catch(() => {});
-              }}
-            >
-              Issue partial refund
-            </FxButton>
-          </>
-        }
+        description="Refund part of the order to the buyer; the remainder is released to the seller."
+        confirmLabel="Issue partial refund"
+        confirmDisabled={!partialValid}
+        onConfirm={async () => {
+          if (partialAmount) await resolve('partial', partialAmount);
+        }}
       >
         <div className="ks-stack" style={{ ['--ks-gap' as string]: 'var(--fx-space-4)' }}>
-          <p className="ks-muted" style={{ margin: 0 }}>
-            Refund part of the order to the buyer; the remainder is released to the seller.
-          </p>
           <FxFieldGroup label="Refund amount" help={`Between $0.01 and ${formatMoney(dispute.amount)}.`}>
             <FxCurrencyInput
               currency={dispute.amount.currency}
@@ -424,7 +432,7 @@ export function DisputeDetail() {
             />
           )}
         </div>
-      </FxDialog>
+      </FxConfirmationDialog>
     </div>
   );
 }

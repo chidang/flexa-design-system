@@ -5,24 +5,25 @@
  * each row is an Order Card that opens Order Detail (buyer view §2.5), where the
  * stage-gated Approve / dispute actions live.
  *
- * GAP (doc 15 §6): doc 08 §3.6 wants an inline Approve shortcut on `delivered`
- * rows sharing §2.5's Confirmation Dialog, but FxOrderCard's buyer action for a
- * delivered order is the documented "Review" (status × perspective mapping) and
- * there is no per-row action slot to inject an "Approve" button without a fork.
- * Closest fit: the card navigates to Order Detail, which owns Approve. Logged in
- * routes.tsx GAPS + PR.
+ * Inline Approve (doc 08 §3.6, G1 closed — ui-kit doc 14 §11): `delivered` rows
+ * override the card footer via FxOrderCard's `actions` slot with an "Approve"
+ * shortcut sharing §2.5's Confirmation Dialog copy (`POST /orders/:id/approve`,
+ * optimistic list update + toast). Other rows keep the mapped default action.
  *
  * ZERO one-off component CSS: composed from flexa-ui; framing via `ks-*` +
  * `buyer.css`.
  */
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
+  FxButton,
+  FxConfirmationDialog,
   FxEmptyState,
   FxInlineError,
   FxOrderCard,
   FxSearchBar,
   FxSkeletonLoader,
   FxTabs,
+  useToast,
   type OrderSummary,
   type TabItem,
 } from 'flexa-ui-kit';
@@ -67,12 +68,15 @@ function toOrderSummary(order: Order): OrderSummary {
 /* -------------------------------------------------------------------- root */
 
 export function OrdersList() {
+  const toast = useToast();
   const [orders, setOrders] = useState<Order[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ApiRequestError | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
   const [query, setQuery] = useState('');
   const [tab, setTab] = useState<StageTab>('all');
+  /** Order awaiting confirmation of the inline Approve shortcut (§3.6 / G1). */
+  const [approveTarget, setApproveTarget] = useState<Order | null>(null);
 
   useEffect(() => {
     let live = true;
@@ -90,6 +94,37 @@ export function OrdersList() {
       live = false;
     };
   }, [reloadKey]);
+
+  /** Inline Approve (shares §2.5's confirmation copy; mirrors Order Detail). */
+  const approve = useCallback(async () => {
+    if (!approveTarget) return;
+    try {
+      const next = await api.post<Order>(
+        `/v1/orders/${approveTarget.id}/approve`,
+        {},
+        `approve-${approveTarget.id}`,
+      );
+      setOrders((prev) => (prev ?? []).map((o) => (o.id === next.id ? next : o)));
+      toast.show({
+        tone: 'success',
+        title: 'Delivery approved',
+        description: 'Funds have been released to the seller.',
+      });
+    } catch (e) {
+      const code = e instanceof ApiRequestError ? e.body?.code : undefined;
+      toast.show({
+        tone: 'danger',
+        title: 'Could not approve delivery',
+        description:
+          code === 'state_conflict'
+            ? 'This order is no longer awaiting your approval. We refreshed the list.'
+            : 'Something went wrong. Please try again in a moment.',
+      });
+      // Resync so the list reflects the true stage after a conflict.
+      if (code === 'state_conflict') setReloadKey((k) => k + 1);
+      throw e; // keep the confirmation dialog from resolving as success
+    }
+  }, [approveTarget, toast]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -142,7 +177,20 @@ export function OrdersList() {
     return (
       <div className="ks-stack" style={{ ['--ks-gap' as string]: 'var(--fx-space-3)' }}>
         {filtered.map((o) => (
-          <FxOrderCard key={o.id} order={toOrderSummary(o)} perspective="buyer" />
+          <FxOrderCard
+            key={o.id}
+            order={toOrderSummary(o)}
+            perspective="buyer"
+            // G1 closed: delivered rows surface the §3.6 inline Approve shortcut
+            // through the card's `actions` slot; others keep the mapped default.
+            actions={
+              o.escrow.stage === 'delivered' ? (
+                <FxButton variant="primary" size="sm" onClick={() => setApproveTarget(o)}>
+                  Approve
+                </FxButton>
+              ) : undefined
+            }
+          />
         ))}
       </div>
     );
@@ -169,6 +217,17 @@ export function OrdersList() {
         </div>
       </div>
       <FxTabs items={tabs} value={tab} onChange={(id) => setTab(id as StageTab)} />
+
+      {/* Approve confirmation — same copy as Order Detail (§2.5). */}
+      <FxConfirmationDialog
+        open={approveTarget != null}
+        onOpenChange={(o) => !o && setApproveTarget(null)}
+        tone="default"
+        title="Approve delivery?"
+        description="Funds will be released to the seller. This cannot be undone."
+        confirmLabel="Approve & release"
+        onConfirm={approve}
+      />
     </div>
   );
 }

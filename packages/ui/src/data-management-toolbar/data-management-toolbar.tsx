@@ -82,6 +82,13 @@ export interface FxDataManagementToolbarProps {
   resultCount?: number;
   /** Primary create Button slot (rightmost; at most one). */
   actions?: ReactNode;
+  /**
+   * Tabs region (doc 14 §11 G5) — view-scoping tabs (e.g. Pending / All)
+   * rendered on their own line between the toolbar row and the result-count
+   * line. Pass an `FxTabs` (or any tablist) — the toolbar only owns placement,
+   * so roving toolbar focus and the tablist keep separate keyboard models.
+   */
+  tabs?: ReactNode;
   /** Baked-in strings. Merged over the English defaults. */
   labels?: Partial<DataManagementToolbarLabels>;
   className?: string;
@@ -107,6 +114,7 @@ export function FxDataManagementToolbar({
   onRefresh,
   resultCount,
   actions,
+  tabs,
   labels,
   className,
 }: FxDataManagementToolbarProps) {
@@ -235,6 +243,8 @@ export function FxDataManagementToolbar({
 
         {actions != null && <div className="fx-data-toolbar-actions">{actions}</div>}
       </div>
+
+      {tabs != null && <div className="fx-data-toolbar-tabs">{tabs}</div>}
 
       {resultCount != null && (
         <p className="fx-data-toolbar-count" aria-live="polite">

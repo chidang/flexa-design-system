@@ -93,6 +93,22 @@ a.fx-chat-peer-name:hover {
 .fx-chat-system-time {
   color: var(--fx-color-text-subtle);
 }
+/* G10: optional deep-link on a system event card. */
+.fx-chat-system-link {
+  color: var(--fx-color-primary);
+  font-size: var(--fx-text-body-sm-size);
+  font-weight: var(--fx-font-weight-medium);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.fx-chat-system-link:hover {
+  text-decoration: underline;
+}
+.fx-chat-system-link:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
 
 /* A message row: avatar (other only) + bubble stack. */
 .fx-chat-message {
@@ -247,13 +263,119 @@ a.fx-chat-peer-name:hover {
   outline-offset: 2px;
 }
 
-/* Composer. */
+/* Composer area: staged-attachment chips (G11) + the composer row. The single
+   top divider moved from .fx-chat-composer to the area wrapper. */
+.fx-chat-composer-area {
+  border-block-start: 1px solid var(--fx-color-border);
+}
+.fx-chat-staged {
+  list-style: none;
+  margin: 0;
+  padding: var(--fx-space-2) var(--fx-space-3) 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fx-space-2);
+}
+.fx-chat-staged-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fx-space-1);
+  padding: var(--fx-space-1) var(--fx-space-2);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-full);
+  background: var(--fx-color-surface-alt);
+  color: var(--fx-color-text);
+  font-size: var(--fx-text-body-sm-size);
+}
+.fx-chat-staged-icon {
+  display: inline-flex;
+  color: var(--fx-color-text-muted);
+}
+.fx-chat-staged-name {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fx-chat-staged-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--fx-color-text-muted);
+  cursor: pointer;
+  border-radius: var(--fx-radius-full);
+}
+.fx-chat-staged-remove:hover {
+  color: var(--fx-color-danger);
+}
+.fx-chat-staged-remove:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: 2px;
+}
+
 .fx-chat-composer {
   display: flex;
   align-items: flex-end;
   gap: var(--fx-space-2);
   padding: var(--fx-space-3);
-  border-block-start: 1px solid var(--fx-color-border);
+}
+
+/* G11 fixture-safe attachment picker — a popover above the attach button. */
+.fx-chat-attach-wrap {
+  position: relative;
+  flex: none;
+}
+.fx-chat-attach-menu {
+  position: absolute;
+  inset-block-end: 48px;
+  inset-inline-start: 0;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fx-space-1);
+  padding: var(--fx-space-1);
+  border: 1px solid var(--fx-color-border);
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-color-surface);
+  box-shadow: var(--fx-shadow-md);
+  z-index: var(--fx-z-dropdown);
+}
+.fx-chat-attach-option {
+  display: flex;
+  align-items: center;
+  gap: var(--fx-space-2);
+  padding: var(--fx-space-2);
+  border: 0;
+  border-radius: var(--fx-radius-sm);
+  background: transparent;
+  color: var(--fx-color-text);
+  font: inherit;
+  font-size: var(--fx-text-body-sm-size);
+  text-align: start;
+  cursor: pointer;
+}
+.fx-chat-attach-option:hover:not(:disabled) {
+  background: var(--fx-color-surface-alt);
+}
+.fx-chat-attach-option:focus-visible {
+  outline: 2px solid var(--fx-color-focus-ring);
+  outline-offset: -2px;
+}
+.fx-chat-attach-option:disabled {
+  opacity: var(--fx-opacity-disabled);
+  cursor: not-allowed;
+}
+.fx-chat-attach-option-icon {
+  display: inline-flex;
+  color: var(--fx-color-text-muted);
+}
+.fx-chat-attach-option-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .fx-chat-composer .fx-chat-input {
   flex: 1;

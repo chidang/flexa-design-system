@@ -27,6 +27,18 @@ export interface FxConfirmationDialogProps {
   requireInput?: string;
   /** Placeholder + label for the type-to-confirm field. */
   requireInputLabel?: string;
+  /**
+   * Externally gate the confirm button (doc 14 §11 G7) — e.g. keep it disabled
+   * until a valid refund amount is entered in `children`. Combines with the
+   * `requireInput` gate (either blocks confirm).
+   */
+  confirmDisabled?: boolean;
+  /**
+   * Custom body content (G7) rendered below the description — form fields,
+   * previews, anything the decision needs. Lives inside the described-by
+   * region, so keep it focused on the decision at hand.
+   */
+  children?: ReactNode;
   /** Async ⇒ confirm button shows loading; dialog stays open until settle. */
   onConfirm?: () => void | Promise<void>;
   onCancel?: () => void;
@@ -45,6 +57,8 @@ export function FxConfirmationDialog({
   closeLabel = 'Close',
   requireInput,
   requireInputLabel = 'Type to confirm',
+  confirmDisabled = false,
+  children,
   onConfirm,
   onCancel,
   testId,
@@ -62,7 +76,9 @@ export function FxConfirmationDialog({
     const buttons = surface?.querySelectorAll<HTMLButtonElement>('.fx-confirmation-dialog-actions button');
     if (!buttons || buttons.length === 0) return;
     const target = tone === 'danger' ? buttons[0] : buttons[buttons.length - 1];
-    target?.focus();
+    // A gated confirm (requireInput / confirmDisabled) can't take focus — fall
+    // back to Cancel so initial focus never lands nowhere.
+    (target && !target.disabled ? target : buttons[0])?.focus();
   }, [modal.open, modal.mounted, tone, modal.surfaceRef]);
 
   if (!modal.open || !modal.mounted) return null;
@@ -131,6 +147,7 @@ export function FxConfirmationDialog({
         </div>
         <div id={modal.descId} className="fx-dialog-body">
           <p className="fx-confirmation-dialog-description">{description}</p>
+          {children != null && <div className="fx-confirmation-dialog-content">{children}</div>}
           {requireInput !== undefined && (
             <label className="fx-confirmation-dialog-field">
               <span className="fx-confirmation-dialog-field-label">{requireInputLabel}</span>
@@ -152,7 +169,7 @@ export function FxConfirmationDialog({
             variant={tone === 'danger' ? 'danger' : 'primary'}
             onClick={confirm}
             loading={busy}
-            disabled={gated}
+            disabled={gated || confirmDisabled}
           >
             {confirmLabel}
           </FxButton>

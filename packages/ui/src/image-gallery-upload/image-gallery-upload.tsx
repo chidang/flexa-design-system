@@ -52,6 +52,16 @@ export interface FxImageGalleryUploadProps
   galleryLabels?: Partial<ImageGalleryUploadLabels>;
   /** Accessible name for the add-tile dropzone. */
   addLabel?: string;
+  /**
+   * Fixture mode (doc 14 §11 G4). When set, the add-tile becomes a plain
+   * button that appends the returned pre-seeded item — URL-based `UploadFile`s
+   * with no `File` backing — so deterministic fixtures/mocks can demo the full
+   * add → reorder → cover flow without the OS file picker or binary assets.
+   * Called with the current item count; return `null` to ignore the press
+   * (e.g. the fixture source is exhausted). Additive: omit for the real
+   * Drag & Drop picker.
+   */
+  fixtureAdd?: (index: number) => UploadFile | null;
 }
 
 function fill(template: string, vars: Record<string, string | number>): string {
@@ -68,6 +78,7 @@ export function FxImageGalleryUpload({
   onReorder,
   galleryLabels,
   addLabel,
+  fixtureAdd,
   disabled = false,
   className,
   ...rest
@@ -201,20 +212,38 @@ export function FxImageGalleryUpload({
 
         {!atMax && (
           <li className="fx-image-gallery-upload-add">
-            <FxDragDropUpload
-              {...rest}
-              accept={accept}
-              multiple
-              maxFiles={maxFiles}
-              disabled={disabled}
-              zoneLabel={addLabel ?? 'Add images'}
-              value={files}
-              hideList
-              onChange={(next, meta) => {
-                setFiles(next);
-                onChange?.(next, meta);
-              }}
-            />
+            {fixtureAdd ? (
+              <button
+                type="button"
+                className="fx-image-gallery-upload-fixture"
+                disabled={disabled}
+                onClick={() => {
+                  const item = fixtureAdd(files.length);
+                  if (!item) return;
+                  const next = [...files, item];
+                  setFiles(next);
+                  onChange?.(next, { source: 'add' });
+                }}
+              >
+                <FxIcon name="plus" size={24} />
+                <span className="fx-image-gallery-upload-fixture-label">{addLabel ?? 'Add images'}</span>
+              </button>
+            ) : (
+              <FxDragDropUpload
+                {...rest}
+                accept={accept}
+                multiple
+                maxFiles={maxFiles}
+                disabled={disabled}
+                zoneLabel={addLabel ?? 'Add images'}
+                value={files}
+                hideList
+                onChange={(next, meta) => {
+                  setFiles(next);
+                  onChange?.(next, meta);
+                }}
+              />
+            )}
           </li>
         )}
       </ul>

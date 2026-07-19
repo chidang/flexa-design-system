@@ -12,6 +12,7 @@ import {
 } from './data-management-toolbar';
 import { FxButton } from '../button/button';
 import { FxIcon } from '../icon/FxIcon';
+import { FxTabs } from '../tabs/tabs';
 import type { FilterField, FilterValue } from '../advanced-filters/advanced-filters';
 import type { SavedFilter } from '../saved-filters/saved-filters';
 
@@ -50,6 +51,16 @@ const createAction = createElement(
   { variant: 'primary', size: 'sm', iconStart: createElement(FxIcon, { name: 'plus', size: 16 }) },
   'Add user',
 );
+
+/** G5 tabs slot — view-scoping tabs on their own line (the collection below is
+ *  the effective panel, so the items carry no panel content). */
+const queueTabs = createElement(FxTabs, {
+  items: [
+    { id: 'pending', label: 'Pending', badge: 4, content: null },
+    { id: 'all', label: 'All', badge: 128, content: null },
+  ],
+  defaultValue: 'pending',
+});
 
 export const dataManagementToolbarShowcase: ShowcaseSpec = {
   name: 'DataManagementToolbar',
@@ -113,6 +124,17 @@ export const dataManagementToolbarShowcase: ShowcaseSpec = {
       label: 'search only',
       props: { searchPlaceholder: 'Search…', onSearch: noop },
     },
+    {
+      label: 'with tabs region',
+      props: {
+        searchPlaceholder: 'Search queue…',
+        onSearch: noop,
+        onRefresh: noop,
+        tabs: queueTabs,
+        resultCount: 4,
+      },
+      note: 'The tabs slot (G5) scopes the collection view — e.g. a moderation queue’s Pending / All.',
+    },
   ],
   props: [
     { name: 'search / onSearch', type: 'string / (q) => void', description: 'Controlled query + handler, passed to FxSearchBar (debounced server query).' },
@@ -124,6 +146,7 @@ export const dataManagementToolbarShowcase: ShowcaseSpec = {
     { name: 'onExport / onRefresh', type: '() => void', description: 'Export current (filtered) results / refetch.' },
     { name: 'resultCount', type: 'number', description: 'Result total for the count line (omit to hide).' },
     { name: 'actions', type: 'ReactNode', description: 'Primary create Button slot (rightmost; at most one).' },
+    { name: 'tabs', type: 'ReactNode', description: 'View-scoping tabs region rendered between the toolbar row and the count line (G5); pass an FxTabs.' },
     { name: 'labels', type: 'Partial<DataManagementToolbarLabels>', description: 'i18n overrides (toolbar name, Columns, Density, Export…).' },
   ],
   events: [

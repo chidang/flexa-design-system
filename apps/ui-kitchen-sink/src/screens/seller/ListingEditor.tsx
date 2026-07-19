@@ -3,6 +3,9 @@
  * FxFormWizard (details → media → pricing & shipping → review) with a persistent
  * live-preview rail (Listing Card) and a publish checklist (Progress Summary).
  * Composes flexa-ui end to end against the mock backend (`flexa-ui-kit/mocks`).
+ * The media step hosts an Image Gallery Upload in fixture mode (G4): the add
+ * tile appends deterministic SVG data-URI photos — no File objects or binary
+ * assets — and the first photo is the cover driving the live preview.
  *
  * Submitting on the review step POSTs `/v1/seller/listings`, whose handler calls
  * the shared moderation store's `submitListing(...)` — so the new listing lands
@@ -16,7 +19,7 @@
  * ZERO one-off component CSS: framing is `ks-*` + seller `sl-*` utilities; every
  * visual is a flexa-ui component.
  */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   FxAlert,
@@ -24,6 +27,7 @@ import {
   FxCurrencyInput,
   FxFieldGroup,
   FxFormWizard,
+  FxImageGalleryUpload,
   FxInput,
   FxListingCard,
   FxNumberInput,
@@ -36,6 +40,7 @@ import {
   FxWizardLayout,
   type ListingSummary,
   type ProgressSummaryItem,
+  type UploadFile,
   type ValidationResult,
   type WizardStep,
 } from 'flexa-ui-kit';
@@ -63,15 +68,23 @@ const HANDLING_OPTIONS = [
   { value: '5', label: 'Ships in 5 business days' },
 ];
 
-/** A tiny inline SVG cover so the live preview renders offline. */
-const PREVIEW_COVER =
-  'data:image/svg+xml;utf8,' +
-  encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'>` +
-      `<rect width='400' height='300' fill='hsl(215 45% 88%)'/>` +
-      `<text x='50%' y='50%' font-family='sans-serif' font-size='18' fill='hsl(215 40% 35%)' ` +
-      `text-anchor='middle' dominant-baseline='middle'>Listing preview</text></svg>`,
+/** A tiny inline SVG placeholder so previews render offline (no binary assets). */
+function svgCover(label: string, hue: number): string {
+  return (
+    'data:image/svg+xml;utf8,' +
+    encodeURIComponent(
+      `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'>` +
+        `<rect width='400' height='300' fill='hsl(${hue} 45% 88%)'/>` +
+        `<text x='50%' y='50%' font-family='sans-serif' font-size='18' fill='hsl(${hue} 40% 35%)' ` +
+        `text-anchor='middle' dominant-baseline='middle'>${label}</text></svg>`,
+    )
   );
+}
+
+const PREVIEW_COVER = svgCover('Listing preview', 215);
+
+/** Deterministic photo hues — the gallery's fixture add-tile cycles these. */
+const PHOTO_HUES = [215, 25, 145, 275, 350, 85];
 
 interface Draft {
   title: string;
@@ -79,6 +92,7 @@ interface Draft {
   categoryId: string;
   tags: string[];
   condition: string;
+  photos: UploadFile[];
   price: Money | null;
   stock: number | null;
   shippingProfile: string;
@@ -91,6 +105,7 @@ const EMPTY_DRAFT: Draft = {
   categoryId: '',
   tags: [],
   condition: 'new',
+  photos: [],
   price: null,
   stock: 1,
   shippingProfile: 'flat',
@@ -118,6 +133,22 @@ export function ListingEditor() {
     setDraft((d) => ({ ...d, [key]: value }));
   }, []);
 
+  /* ---- photos (G4 — gallery fixture mode, no File objects) --------------- */
+  // Monotonic counter keeps ids unique across add → remove → add.
+  const photoSeq = useRef(0);
+  const addFixturePhoto = useCallback((): UploadFile => {
+    const n = ++photoSeq.current;
+    const hue = PHOTO_HUES[(n - 1) % PHOTO_HUES.length]!;
+    return {
+      id: `photo-${n}`,
+      name: `photo-${n}.jpg`,
+      size: 480_000 + n * 12_000,
+      type: 'image/jpeg',
+      status: 'success',
+      url: svgCover(`Photo ${n}`, hue),
+    };
+  }, []);
+
   /* ---- publish checklist (hard requirements, §2.9 interaction 3) --------- */
   const checklist: ProgressSummaryItem[] = useMemo(
     () => [
@@ -132,18 +163,19 @@ export function ListingEditor() {
   const readyToPublish = checklist.every((c) => c.value === 1);
 
   /* ---- live preview card ------------------------------------------------- */
+  // The first gallery photo is the cover (G4) — it drives the live preview.
   const previewListing: ListingSummary = useMemo(
     () => ({
       id: 'preview',
       title: draft.title.trim() || 'Your listing title',
       href: '#',
-      imageUrl: PREVIEW_COVER,
+      imageUrl: draft.photos[0]?.url ?? PREVIEW_COVER,
       imageAlt: 'Listing preview cover',
       price: draft.price ?? { amount: 0, currency: 'USD' },
       status: 'draft',
       updatedAt: '2026-07-18T11:00:00.000Z',
     }),
-    [draft.title, draft.price],
+    [draft.title, draft.price, draft.photos],
   );
 
   /* ---- validation gates -------------------------------------------------- */
@@ -265,11 +297,18 @@ export function ListingEditor() {
               placeholder="Tell buyers about your item…"
             />
           </FxFieldGroup>
-          <FxAlert
-            tone="info"
-            title="Photos"
-            description="Image upload is stubbed in this reference — the live preview uses a placeholder cover. In production, an Image Gallery Upload sits here with drag-to-reorder and a cover star."
-          />
+          <FxFieldGroup
+            label="Photos"
+            help="The first photo is the cover — reorder with the drag handle (Space + arrows). The add tile appends a deterministic sample photo (fixture mode, G4)."
+          >
+            <FxImageGalleryUpload
+              value={draft.photos}
+              onChange={(files) => set('photos', files)}
+              maxFiles={6}
+              addLabel="Add photo"
+              fixtureAdd={addFixturePhoto}
+            />
+          </FxFieldGroup>
         </div>
       ),
     },

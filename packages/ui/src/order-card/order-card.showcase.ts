@@ -2,10 +2,13 @@
  * FxOrderCard showcase spec. `status` is the shared `OrderStatus` union
  * (doc 04 §5) → `enums: { status: ORDER_STATUSES }`. Variants sweep every
  * status × buyer/seller perspective so the different footer actions
- * (Pay / Track / Review / View / Fulfil) are all covered.
+ * (Pay / Track / Review / View / Fulfil) are all covered. The `actions` slot
+ * variants show the G1/G3 overrides (inline Approve · Write-a-review CTA).
  */
+import { createElement } from 'react';
 import type { ShowcaseSpec } from '../showcase-types';
 import { ORDER_STATUSES, type OrderStatus } from '../enums';
+import { FxButton } from '../button/button';
 import { FxOrderCard } from './order-card';
 
 const usd = (amount: number) => ({ amount, currency: 'USD' });
@@ -59,11 +62,30 @@ export const orderCardShowcase: ShowcaseSpec = {
       label: 'few items (no overflow)',
       props: { order: order('paid', { items: items.slice(0, 2), itemCount: 2 }), perspective: 'buyer', onAction: noop },
     },
+    {
+      label: 'actions slot · inline Approve (G1)',
+      props: {
+        order: order('delivered'),
+        perspective: 'buyer',
+        actions: createElement(FxButton, { variant: 'primary', size: 'sm', onClick: noop }, 'Approve'),
+      },
+      note: 'Host overrides the mapped default with a stage-specific shortcut.',
+    },
+    {
+      label: 'actions slot · Write-a-review CTA (G3)',
+      props: {
+        order: order('completed'),
+        perspective: 'buyer',
+        actions: createElement(FxButton, { variant: 'primary', size: 'sm', onClick: noop }, 'Write a review'),
+      },
+      note: 'A reviewable completed order surfaces its review CTA on the card.',
+    },
   ],
   props: [
     { name: 'order', type: 'OrderSummary', required: true, description: 'OrderSummary = { id; number; href; status: OrderStatus; total: Money; placedAt; itemCount; items[]; buyer?; seller? }.' },
     { name: 'perspective', type: "'buyer' | 'seller'", default: "'buyer'", description: 'Flips the action set + which counterparty is shown.' },
     { name: 'onAction', type: '(action: string, order: OrderSummary) => void', description: 'Fired with the resolved action id (pay/track/review/view/fulfil).' },
+    { name: 'actions', type: 'ReactNode', description: 'Overrides the status-derived footer action with host content (e.g. an inline Approve shortcut or a Write-a-review CTA). The mapped default is skipped when set.' },
     { name: 'labels', type: 'Partial<OrderCardLabels>', description: 'i18n overrides for action + date strings.' },
     { name: 'locale', type: 'string', description: 'Locale for Money formatting.' },
   ],

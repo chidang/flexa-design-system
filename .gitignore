@@ -8,3 +8,6 @@ dist/
 out/
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated component API (prebuild step: apps/fds-docs/scripts/generate-component-api.mjs)
+apps/fds-docs/content/generated/
